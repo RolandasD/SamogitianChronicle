@@ -1,0 +1,54 @@
+site_name: The Chronicle of [Your Nation]
+site_description: A living record of rulers, wars, culture, and faith.
+site_url: https://YOUR_USERNAME.github.io/YOUR_REPO/
+repo_url: https://github.com/YOUR_USERNAME/YOUR_REPO
+theme:
+  name: material
+  features:
+    - navigation.expand
+    - navigation.top
+    - navigation.tracking
+    - toc.integrate
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+  palette:
+    - scheme: default
+      primary: blue
+      accent: deep purple
+    - scheme: slate
+      primary: blue
+      accent: deep purple
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences
+  - pymdownx.tilde
+  - toc:
+      permalink: true
+nav:
+  - Home: index.md
+  - Prologue:
+      - Origins: prologue/origins.md
+      - Geography: prologue/geography.md
+  - Chronicle of the Kings:
+      - The First Ruler: chronicle/01-first-ruler.md
+      - The Second Ruler: chronicle/02-second-ruler.md
+  - Culture & Society:
+      - Religion: culture/religion.md
+      - Military: culture/military.md
+      - Economy: culture/economy.md
+      - Society: culture/society.md
+      - Arts: culture/arts.md
+  - Appendices:
+      - Rulers List: appendices/rulers-list.md
+      - Timelines: appendices/timelines.md
+      - Symbols: appendices/symbols.md
+      - Maps: appendices/maps.md
