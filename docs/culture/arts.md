@@ -1,2 +1,2 @@
 # Arts, Architecture, and Letters
-Court songs, wood‑carved shrines, and chronicles of Varniai.
+Wood‑carved shrines, court songs, illuminated chronicles of Varniai.

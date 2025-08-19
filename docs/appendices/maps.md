@@ -1,2 +1,2 @@
 # Maps
-![Heartlands](../images/heartlands.png)
+![Heartlands](../images/heartlands.png){ width="800" }

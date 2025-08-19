@@ -1,6 +1,6 @@
 
 site_name: The Chronicle of Samogitia
-site_description: A living, monumental chronicle of Samogitia — rulers, wars, faith, and the soul of a people.
+site_description: A monumental chronicle of Samogitia — rulers, wars, faith, and the forest-born strength of a people.
 site_url: https://YOUR_USERNAME.github.io/YOUR_REPO/
 repo_url: https://github.com/YOUR_USERNAME/YOUR_REPO
 
@@ -11,27 +11,27 @@ theme:
   features:
     - navigation.instant
     - navigation.expand
-    - navigation.top
     - navigation.tracking
     - toc.follow
     - toc.integrate
     - search.suggest
     - search.highlight
     - content.code.copy
-    - content.tooltips
   palette:
     - scheme: default
-      primary: deep orange
+      primary: brown
       accent: amber
     - scheme: slate
-      primary: deep orange
+      primary: brown
       accent: amber
       toggle:
         icon: material/weather-night
-        name: Switch to dark mode
-
+        name: Switch to night reading
 extra_css:
-  - stylesheets/extra.css
+  - stylesheets/epic.css
+extra_javascript:
+  - https://unpkg.com/mermaid@10/dist/mermaid.min.js
+  - js/init.js
 
 markdown_extensions:
   - admonition
@@ -44,15 +44,14 @@ markdown_extensions:
       permalink: true
   - pymdownx.details
   - pymdownx.superfences
-  - pymdownx.tilde
 
 nav:
-  - Home: index.md
+  - Title Page: index.md
   - Prologue:
       - Origins: prologue/origins.md
       - Geography: prologue/geography.md
   - Chronicle of the Kings:
-      - The First Ruler: chronicle/01-first-ruler.md
+      - Duke Rolandas Drungilas: chronicle/01-first-ruler.md
       - The Second Ruler: chronicle/02-second-ruler.md
   - Culture & Society:
       - Religion: culture/religion.md
@@ -61,7 +60,7 @@ nav:
       - Society: culture/society.md
       - Arts: culture/arts.md
   - Appendices:
-      - Rulers List: appendices/rulers-list.md
+      - Roll of Kings: appendices/rulers-list.md
       - Timelines: appendices/timelines.md
-      - Symbols: appendices/symbols.md
+      - Symbols & Arms: appendices/symbols.md
       - Maps: appendices/maps.md

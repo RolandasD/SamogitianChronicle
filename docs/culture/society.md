@@ -1,2 +1,2 @@
 # Society & Estates
-Council of elders; nobility, clergy, burghers, and free farmers.
+Council of elders balances ducal power; nobility, clergy, burghers, and free farmers.
