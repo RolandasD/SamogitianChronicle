@@ -1,4 +1,2 @@
 # Religion & Holy Sites
-- State faith:
-- Clergy & influence:
-- Pilgrimage sites, relics:
+_To be expanded with clergy, relics, and rites._

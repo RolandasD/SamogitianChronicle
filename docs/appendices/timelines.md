@@ -1,3 +1,2 @@
 # Timelines
-- 1444–1450:
-- 1451–1460:
+- **1444** — Coronation of Rolandas in Varniai.

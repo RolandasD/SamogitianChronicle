@@ -1,2 +1,2 @@
 # The Second Ruler (…–…)
-(Structure like the first ruler’s page.)
+_To be written._

@@ -1,3 +1,4 @@
 # Symbols, Banners, and Arms
-![Royal Banner](../images/royal-banner.png)
-_Describe heraldry, motto, colors._
+![Coat of Arms](../images/coat-of-arms.png){ width="280" }
+
+**Motto:** *Ex Silva, Virtus* — From the Forest, Strength.

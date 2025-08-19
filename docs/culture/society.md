@@ -1,3 +1,2 @@
 # Society & Estates
-- Nobility / Burghers / Clergy / Tribes:
-- Laws & customs:
+Council of elders; nobility, clergy, burghers, and free farmers.

@@ -1,3 +1,2 @@
 # Arts, Architecture, and Letters
-- Court culture:
-- Monuments & heraldry:
+Court songs, wood‑carved shrines, and chronicles of Varniai.
