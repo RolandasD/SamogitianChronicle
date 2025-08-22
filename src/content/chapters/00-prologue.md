@@ -2,7 +2,7 @@
 title: Prologue — A Candle Against the Wind
 subtitle: The Birth of Samogitia’s Chronicle
 order: 0
-date: 1444-11-11
+date: "1444-11-11"
 ---
 
 > From the fractured body of Lithuania there rose a lone spark: the Duchy of Samogitia, bound to its single land, Zemaitija. Though small in coin and soil, it chose its own destiny and stepped, by God’s grace, into the perilous assembly of nations. Its very existence was an act of defiance: a boy’s realm surrounded by giants, a candle against the wind that might yet burn bright enough to sear the heavens.
