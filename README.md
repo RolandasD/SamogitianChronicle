@@ -1,17 +1,13 @@
-# Samogitian Chronicle
+# Samogitian Chronicle (Patched)
 
-Monumental, ongoing history book. Authoring in Markdown/MDX under `src/content`.
+This version includes:
+- ✅ Fixed workflow that installs deps with or without a lockfile.
+- ✅ Timeline collection corrected to "content" to match markdown entries.
 
 ## Develop
 - Node 20+
-- `npm ci`
+- `npm install`
 - `npm run dev`
 
-## Content model
-- `src/content/chapters`: `title`, `subtitle?`, `order?`, `date?`
-- `src/content/people`: `name`, `role`, `birth?`, `death?`
-- `src/content/timeline`: `{ date, title, link? }`
-
 ## Publish
-Push to `main` → GitHub Pages deploys automatically.
-Use `staging` branch for drafts/testing (workflow duplicate can be added).
+Push to `main` → GitHub Actions builds & deploys to GitHub Pages.

@@ -21,8 +21,9 @@ const people = defineCollection({
   })
 });
 
+// Timeline uses markdown content entries for simplicity
 const timeline = defineCollection({
-  type: 'data',
+  type: 'content',
   schema: z.object({
     date: z.string(),
     title: z.string(),

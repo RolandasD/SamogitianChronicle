@@ -20,34 +20,34 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      # Ensure Node & npm are available
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: npm
 
-      # Sanity checks to catch "command not found" early
       - name: Show tool versions
         run: |
           node -v
           npm -v
 
-      # Install using your committed lock file (proper fix)
-      - name: Install deps
-        run: npm ci
+      - name: Install deps (ci if lockfile, else install)
+        run: |
+          if [ -f package-lock.json ]; then
+            echo "Lockfile found → npm ci"
+            npm ci
+          else
+            echo "No lockfile → npm install"
+            npm install --no-audit --no-fund
+          fi
 
-      # Verify Astro is installed and on PATH
       - name: Check Astro
         run: npx astro --version
 
-      # Build site
       - name: Build
         run: npm run build
 
-      # Prepare for GitHub Pages
       - uses: actions/configure-pages@v5
 
-      # Upload artifact from Astro's dist/
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist
