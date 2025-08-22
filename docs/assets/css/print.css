@@ -1,0 +1,7 @@
+
+@media print {
+  @page { margin: 18mm; }
+  .topnav, .sidebar, .toc, .site-footer { display:none !important; }
+  #content { max-width: none; padding: 0; }
+  a[href^="http"]::after { content: " (" attr(href) ")"; font-size: 10pt; }
+}

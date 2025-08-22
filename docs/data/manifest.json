@@ -1,0 +1,36 @@
+{
+  "pages": [
+    {
+      "title": "Title Page",
+      "url": "index.html"
+    },
+    {
+      "title": "Preface",
+      "url": "preface.html"
+    },
+    {
+      "title": "Prologue",
+      "url": "prologue.html"
+    },
+    {
+      "title": "Chronicle \u2014 Overview",
+      "url": "chronicle/index.html"
+    },
+    {
+      "title": "1444 \u00b7 Rolandas Drungilas",
+      "url": "chronicle/1444-rolandas.html"
+    },
+    {
+      "title": "Symbols & Heraldry",
+      "url": "symbols.html"
+    },
+    {
+      "title": "Maps",
+      "url": "maps.html"
+    },
+    {
+      "title": "Timeline",
+      "url": "timeline.html"
+    }
+  ]
+}
