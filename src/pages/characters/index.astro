@@ -1,0 +1,21 @@
+---
+import BookLayout from "../../layouts/BookLayout.astro";
+import { getCollection } from 'astro:content';
+const people = await getCollection('people');
+---
+<BookLayout title="Characters">
+  <h1>Notable Figures</h1>
+  <ul>
+    {people.map(p => <li><a href={`#${p.slug}`}>{p.data.name}</a> — {p.data.role}</li>)}
+  </ul>
+  <hr/>
+  {people.map(p => (
+    <section id={p.slug}>
+      <h2>{p.data.name}</h2>
+      <p style="color:var(--muted)">{p.data.role}</p>
+      <p><strong>Born:</strong> {p.data.birth ?? "—"} · <strong>Died:</strong> {p.data.death ?? "—"}</p>
+      <p><p.Component /></p>
+      <hr/>
+    </section>
+  ))}
+</BookLayout>

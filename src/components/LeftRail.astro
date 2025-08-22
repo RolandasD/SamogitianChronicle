@@ -1,0 +1,13 @@
+---
+import { getCollection } from 'astro:content';
+const chapters = await getCollection('chapters');
+const sorted = chapters.sort((a,b)=> (a.data.order ?? 999) - (b.data.order ?? 999));
+---
+<nav style="position:sticky; top:1rem;">
+  <h3 style="margin:.25rem 0 1rem 0;">Book</h3>
+  <ol style="list-style:none; padding:0; margin:0; display:grid; gap:.25rem;">
+    {sorted.map(c => (
+      <li><a href={`/read/#${c.slug}`}>{c.data.title}</a></li>
+    ))}
+  </ol>
+</nav>
