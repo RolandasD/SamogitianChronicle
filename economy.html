@@ -19,7 +19,21 @@
   </script>
   <main class="container">
     <h1>Treasury & Economy</h1>
-    <p>This page is under construction.</p>
+    <section>
+      <h2>Yearly Finances</h2>
+      <table id="economy-table">
+        <thead>
+          <tr><th>Year</th><th>Income</th><th>Expenses</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Income vs Expenses</h2>
+      <canvas id="economy-chart"></canvas>
+    </section>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script type="module" src="assets/js/economyPage.js"></script>
 </body>
 </html>
