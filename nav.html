@@ -20,6 +20,13 @@
         a.classList.add("active");
       }
     });
+  })();
+</script>
+<script>
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/service-worker.js');
+  }
+</script>
     })();
   </script>
   <script src="assets/js/theme.js" defer></script>
