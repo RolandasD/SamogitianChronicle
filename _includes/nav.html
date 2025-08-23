@@ -1,0 +1,39 @@
+<nav class="site-nav">
+  <div class="nav-wrap">
+    <a class="brand" href="{{ '/index.html' | relative_url }}">Chronicle</a>
+    <ul class="links">
+      <li><a href="{{ '/index.html'     | relative_url }}">Home</a></li>
+      <li><a href="{{ '/powers.html'    | relative_url }}">Great Powers</a></li>
+      <li><a href="{{ '/samogitia.html' | relative_url }}">Samogitia Evolution</a></li>
+      <li><a href="{{ '/armies.html'    | relative_url }}">Armies</a></li>
+      <li><a href="{{ '/navies.html'    | relative_url }}">Royal Navy</a></li>
+      <li><a href="{{ '/rulers.html'    | relative_url }}">Rulers & Advisors</a></li>
+      <li><a href="{{ '/economy.html'   | relative_url }}">Economy</a></li>
+      <li><a href="{{ '/maps.html'      | relative_url }}">Atlas</a></li>
+    </ul>
+  </div>
+</nav>
+
+<style>
+.site-nav{position:sticky; top:0; z-index:999; background:#fff; border-bottom:1px solid #e6e6e6}
+.site-nav .nav-wrap{max-width:1200px; margin:0 auto; padding:.6rem 1rem; display:flex; align-items:center; gap:1rem}
+.site-nav .brand{font-weight:800; text-decoration:none; color:#8b0000; letter-spacing:.2px}
+.site-nav .links{list-style:none; margin:0; padding:0; display:flex; gap:.8rem; flex-wrap:wrap}
+.site-nav .links a{display:block; padding:.35rem .6rem; text-decoration:none; color:#333; border-radius:.45rem}
+.site-nav .links a:hover{background:#f6f6f6}
+.site-nav .links a.active{background:#8b0000; color:#fff}
+@media (max-width:720px){ .site-nav .links{gap:.4rem} }
+</style>
+
+<script>
+  // Highlight the active link
+  (function(){
+    const here = location.pathname.replace(/\/+$/,'');
+    document.querySelectorAll('.site-nav .links a').forEach(a=>{
+      const link = a.getAttribute('href').replace(/\/+$/,'');
+      if (link && (here.endsWith(link) || (here.endsWith('/SamogitianChronicle') && link.endsWith('/index.html')))) {
+        a.classList.add('active');
+      }
+    });
+  })();
+</script>
