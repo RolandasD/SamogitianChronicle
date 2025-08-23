@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Great Powers – Armies, Navies & Evolution</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8">
+  <title>Powers of 1444</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <style>
     :root{--ink:#222;--muted:#666;--accent:#8b0000;--card:#fff;--bg:#f7f7f7;--line:#e6e6e6}
     html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.6}
@@ -11,187 +11,225 @@
     .banner h1{margin:0;font-family:Georgia,serif;font-size:1.9rem}
     .banner p{margin:.4rem 0 0;color:#f0f0f0}
 
-    .container{max-width:1100px;margin:2rem auto;padding:0 1rem}
-    .country{margin-bottom:2.5rem}
-    .country h2{font-family:Georgia,serif;color:var(--accent);margin:.2rem 0 1rem}
-    .grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem}
-    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+    .container{max-width:1200px;margin:2rem auto;padding:0 1rem}
+    .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+    @media(max-width:940px){.grid{grid-template-columns:1fr}}
 
     .card{background:var(--card);border:1px solid var(--line);border-radius:.6rem;box-shadow:0 1px 4px rgba(0,0,0,.05);padding:1rem}
-    h3{margin:.2rem 0 .6rem;font-size:1.05rem;color:var(--accent)}
+    h2{font-family:Georgia,serif;color:var(--accent);font-size:1.2rem;margin:.2rem 0 1rem}
 
-    table{width:100%;border-collapse:collapse;font-size:.9rem;background:#fcfcfc;border:1px solid var(--line);border-radius:.4rem;overflow:hidden;margin-bottom:.8rem}
-    th,td{padding:.4rem .6rem;border-bottom:1px solid var(--line)}
-    th{background:#f2e6e6;color:#4b0000;text-align:left}
+    table{width:100%;border-collapse:collapse;background:#fcfcfc;border:1px solid var(--line);border-radius:.4rem;overflow:hidden;font-size:.95rem}
+    th,td{padding:.5rem .6rem;border-bottom:1px solid var(--line);text-align:left;white-space:nowrap}
+    th{background:#f2e6e6;color:#4b0000}
     tr:last-child td{border-bottom:0}
+    .muted{color:var(--muted);font-size:.9rem}
 
-    canvas{width:100%;max-width:100%;height:200px;border:1px solid var(--line);border-radius:.4rem;background:#fff;margin-top:.5rem}
-    .legend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.3rem;font-size:.8rem}
-    .key{display:inline-flex;align-items:center;gap:.3rem;color:#444}
-    .box{width:12px;height:12px;border-radius:2px}
-
+    canvas{width:100%!important;max-width:100%;height:480px!important;background:#fff;border:1px solid var(--line);border-radius:.4rem}
     .back{display:inline-block;margin:1.5rem 0 0;text-decoration:none;color:var(--accent);font-weight:700}
     .back:hover{text-decoration:underline}
+
+    /* toolbar */
+    .toolbar{display:flex;gap:.5rem;align-items:center;margin:.25rem 0 1rem}
+    .toolbar button{
+      border:1px solid var(--line);background:#fff;border-radius:.5rem;
+      padding:.45rem .8rem;cursor:pointer;font-weight:600
+    }
+    .toolbar button:hover{background:#f6f6f6}
   </style>
 </head>
 <body>
   <header class="banner">
-    <h1>Great Powers – Military, Navies & Evolution</h1>
-    <p>Comparative data on the strongest countries of the age</p>
+    <h1>Powers of 1444</h1>
+    <p>Army and Navy compositions at the dawn of the age</p>
   </header>
 
   <main class="container">
+    <section class="grid">
+      <!-- Army Table -->
+      <article class="card">
+        <h2>Army Composition (Infantry / Cavalry / Artillery)</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Total</th>
+              <th>Inf</th>
+              <th>Cav</th>
+              <th>Art</th>
+            </tr>
+          </thead>
+          <tbody id="army-rows"></tbody>
+        </table>
+        <p class="muted">Totals = Infantry + Cavalry + Artillery</p>
+      </article>
 
-    <!-- ================= COUNTRY BLOCK TEMPLATE ================= -->
-    <section class="country" id="teutonic">
-      <h2>Teutonic Order</h2>
-      <div class="grid">
-        <!-- Army -->
-        <article class="card">
-          <h3>Military</h3>
-          <table>
-            <thead><tr><th>Year</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr></thead>
-            <tbody id="army-rows-teutonic"></tbody>
-          </table>
-          <canvas id="armyChart-teutonic" width="600" height="200"></canvas>
-        </article>
-
-        <!-- Navy -->
-        <article class="card">
-          <h3>Navy</h3>
-          <table>
-            <thead><tr><th>Year</th><th>Hvy</th><th>Lgt</th><th>Gal</th><th>Trn</th><th>Total</th></tr></thead>
-            <tbody id="navy-rows-teutonic"></tbody>
-          </table>
-          <canvas id="navyChart-teutonic" width="600" height="200"></canvas>
-        </article>
-      </div>
-      <div class="card">
-        <h3>Evolution Over Time</h3>
-        <canvas id="evoChart-teutonic" width="980" height="240"></canvas>
-        <div class="legend">
-          <span class="key"><span class="box" style="background:#8b0000"></span> Army</span>
-          <span class="key"><span class="box" style="background:#b22222"></span> Forcelimit</span>
-          <span class="key"><span class="box" style="background:#3366cc"></span> Manpower</span>
-        </div>
-      </div>
+      <!-- Navy Table -->
+      <article class="card">
+        <h2>Navy Composition (Heavy / Light / Galley / Transport)</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Country</th>
+              <th>Total</th>
+              <th>Heavy</th>
+              <th>Light</th>
+              <th>Galley</th>
+              <th>Transport</th>
+            </tr>
+          </thead>
+          <tbody id="navy-rows"></tbody>
+        </table>
+        <p class="muted">Totals = Heavy + Light + Galleys + Transports</p>
+      </article>
     </section>
 
-    <!-- ========== Add more countries below by duplicating this block ========== -->
-    <!-- Example: Livonian Order, Poland, Lithuania, etc. -->
+    <!-- Interactive Chart -->
+    <section class="card" style="margin-top:2rem;">
+      <h2>Evolution of Armies & Navies</h2>
+
+      <!-- NEW: Toggle all -->
+      <div class="toolbar">
+        <button id="toggleAllBtn" type="button">Show all</button>
+      </div>
+
+      <canvas id="evolutionChart"></canvas>
+      <p class="muted">Interactive: Hover for values, click legend to toggle individual countries, or use “Toggle all”.</p>
+    </section>
 
     <a class="back" href="index.html">← Back to Chronicle Index</a>
   </main>
 
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // =================== DATA ===================
-    const DATA = {
-      teutonic: {
-        army: [
-          { year: 1444, total: 12000, inf: 9000, cav: 3000, art: 0 },
-          { year: 1450, total: 14000, inf: 10000, cav: 3500, art: 500 },
-          { year: 1456, total: 17500, inf: 12000, cav: 4200, art: 1300 }
-        ],
-        navy: [
-          { year: 1444, heavy: 0, light: 0, galleys: 0, transports: 0 },
-          { year: 1450, heavy: 2, light: 6, galleys: 4, transports: 3 },
-          { year: 1456, heavy: 3, light: 8, galleys: 6, transports: 4 }
-        ],
-        evo: {
-          years: [1444, 1450, 1456],
-          army: [12000, 14000, 17500],
-          forcelimit: [13000, 15500, 18500],
-          manpower: [18000, 21000, 24000]
-        }
+    // ===== Armies =====
+    const RAW_ARMIES_1444 = [
+      { name:"Mamluks",inf:11000,cav:4000,art:0 },
+      { name:"Muscovy",inf:11000,cav:4000,art:0 },
+      { name:"Lithuania",inf:11000,cav:4000,art:0 },
+      { name:"Aragon",inf:7000,cav:2000,art:3000 },
+      { name:"Ottomans",inf:9000,cav:3000,art:0 },
+      { name:"France",inf:8000,cav:3000,art:0 },
+      { name:"Poland",inf:8000,cav:3000,art:0 },
+      { name:"Uzbek",inf:8000,cav:2000,art:0 },
+      { name:"Morocco",inf:7000,cav:3000,art:0 },
+      { name:"Castille",inf:8000,cav:2000,art:0 },
+      { name:"Bohemia",inf:8000,cav:2000,art:0 },
+      { name:"England",inf:8000,cav:2000,art:0 },
+      { name:"Kazan",inf:7000,cav:2000,art:0 },
+      { name:"Venice",inf:7000,cav:2000,art:0 },
+      { name:"Burgundy",inf:7000,cav:2000,art:0 },
+      { name:"Hungary",inf:7000,cav:2000,art:0 },
+      { name:"Austria",inf:6000,cav:2000,art:0 },
+      { name:"Samogitia",inf:5000,cav:1000,art:0 }
+    ];
+    const ARMIES_1444 = RAW_ARMIES_1444.map(r=>({...r,total:r.inf+r.cav+r.art}));
+
+    // ===== Navies =====
+    const RAW_NAVIES_1444 = [
+      { name:"England",heavy:4,light:6,galley:0,trans:7 },
+      { name:"Ragusa",heavy:0,light:7,galley:5,trans:4 },
+      { name:"Venice",heavy:0,light:5,galley:3,trans:7 },
+      { name:"Gotland",heavy:0,light:7,galley:5,trans:3 },
+      { name:"Lubeck",heavy:0,light:6,galley:4,trans:4 },
+      { name:"Denmark",heavy:0,light:2,galley:6,trans:6 },
+      { name:"Mamluks",heavy:0,light:2,galley:4,trans:7 },
+      { name:"Novgorod",heavy:3,light:5,galley:0,trans:5 },
+      { name:"Aragon",heavy:0,light:2,galley:5,trans:6 },
+      { name:"Ottomans",heavy:0,light:2,galley:4,trans:7 },
+      { name:"Tunis",heavy:0,light:2,galley:4,trans:6 },
+      { name:"Genoa",heavy:0,light:5,galley:3,trans:4 },
+      { name:"Portugal",heavy:3,light:4,galley:0,trans:5 },
+      { name:"Castile",heavy:2,light:3,galley:0,trans:7 },
+      { name:"Teutonic Order",heavy:0,light:2,galley:5,trans:5 },
+      { name:"Livonian Order",heavy:0,light:2,galley:6,trans:4 },
+      { name:"Samogitia",heavy:0,light:0,galley:0,trans:0 }
+    ];
+    const NAVIES_1444 = RAW_NAVIES_1444.map(r=>({...r,total:r.heavy+r.light+r.galley+r.trans}));
+
+    // === Populate tables ===
+    function fillTable(data,tbodyId,cols){
+      const tbody=document.getElementById(tbodyId);
+      data.forEach(r=>{
+        const tr=document.createElement("tr");
+        tr.innerHTML = `<td>${r.name}</td>
+          <td>${r.total}</td>` + cols.map(c=>`<td>${r[c]}</td>`).join("");
+        tbody.appendChild(tr);
+      });
+    }
+    fillTable(ARMIES_1444,"army-rows",["inf","cav","art"]);
+    fillTable(NAVIES_1444,"navy-rows",["heavy","light","galley","trans"]);
+
+       // === Interactive chart (timeline-ready) ===
+    const YEARS=["1444"]; // add more years later: ["1444","1447","1450",...]
+
+    // helper: generate distinct colors
+    function hslColor(i,total,sat=70,light=45){
+      const hue=(i*360/total)%360;
+      return `hsl(${hue},${sat}%,${light}%)`;
+    }
+
+    const datasets=[];
+    let armyIndex=0;
+    let navyIndex=0;
+
+    // Armies datasets (warm colors)
+    ARMIES_1444.forEach((r,i)=>{
+      const color=hslColor(armyIndex++,ARMIES_1444.length,70,40);
+      datasets.push({
+        label:`${r.name} Army`,
+        data:[r.total],
+        borderColor:color,
+        backgroundColor:color.replace("40%)","70%)"), // lighter fill
+        hidden:true
+      });
+    });
+
+    // Navies datasets (shift hue by 180° to get cool colors)
+    NAVIES_1444.forEach((r,i)=>{
+      const color=hslColor(navyIndex++,NAVIES_1444.length,65,35);
+      datasets.push({
+        label:`${r.name} Navy`,
+        data:[r.total],
+        borderColor:color,
+        backgroundColor:color.replace("35%)","65%)"),
+        hidden:true
+      });
+    });
+
+    const ctx=document.getElementById("evolutionChart").getContext("2d");
+    const evoChart=new Chart(ctx,{
+      type:"line",
+      data:{labels:YEARS,datasets},
+      options:{
+        responsive:true,
+        interaction:{mode:"nearest",intersect:false},
+        plugins:{legend:{display:true}},
+        scales:{y:{beginAtZero:true}}
       }
-    };
-    // ============================================
+    });
 
-    // ===== Helpers =====
-    function drawArmy(country, id){
-      const rows = document.getElementById(`army-rows-${id}`);
-      DATA[id].army.forEach(r=>{
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${r.year}</td><td>${r.total}</td><td>${r.inf}</td><td>${r.cav}</td><td>${r.art}</td>`;
-        rows.appendChild(tr);
-      });
-      const ctx = document.getElementById(`armyChart-${id}`).getContext('2d');
-      drawLineChart(ctx, DATA[id].army.map(r=>r.year), [DATA[id].army.map(r=>r.total)], ['#8b0000']);
+
+    // ===== Toggle All logic =====
+    const toggleBtn=document.getElementById("toggleAllBtn");
+
+    function isAllHidden(){
+      // treat undefined as visible-by-default (which we don't use), so explicitly check for hidden !== false
+      return evoChart.data.datasets.every(ds => ds.hidden === true);
+    }
+    function setAllHidden(hidden){
+      evoChart.data.datasets.forEach(ds => { ds.hidden = hidden; });
+      evoChart.update();
+      toggleBtn.textContent = hidden ? "Show all" : "Hide all";
+    }
+    function toggleAll(){
+      const shouldShow = isAllHidden(); // if all hidden -> show all, else hide all
+      setAllHidden(!shouldShow ? true : false);
     }
 
-    function drawNavy(country, id){
-      const rows = document.getElementById(`navy-rows-${id}`);
-      DATA[id].navy.forEach(r=>{
-        const total = r.heavy+r.light+r.galleys+r.transports;
-        const tr = document.createElement('tr');
-        tr.innerHTML = `<td>${r.year}</td><td>${r.heavy}</td><td>${r.light}</td><td>${r.galleys}</td><td>${r.transports}</td><td>${total}</td>`;
-        rows.appendChild(tr);
-      });
-      const ctx = document.getElementById(`navyChart-${id}`).getContext('2d');
-      drawStackedBars(ctx, DATA[id].navy);
-    }
-
-    function drawEvolution(country, id){
-      const ctx = document.getElementById(`evoChart-${id}`).getContext('2d');
-      drawLineChart(ctx, DATA[id].evo.years, 
-        [DATA[id].evo.army, DATA[id].evo.forcelimit, DATA[id].evo.manpower],
-        ['#8b0000','#b22222','#3366cc']);
-    }
-
-    // ===== Simple chart functions =====
-    function drawLineChart(ctx, labels, datasets, colors){
-      const W = ctx.canvas.width, H = ctx.canvas.height;
-      ctx.clearRect(0,0,W,H);
-      const pad = {l:40,r:10,t:10,b:25};
-      const w = W - pad.l - pad.r, h = H - pad.t - pad.b;
-      const maxY = Math.max(...datasets.flat())*1.1;
-      const x = (i)=> pad.l + i/(labels.length-1)*w;
-      const y = (v)=> pad.t + h - (v/maxY)*h;
-      // axes
-      ctx.strokeStyle='#ccc';ctx.beginPath();
-      ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,pad.t+h);ctx.lineTo(pad.l+w,pad.t+h);ctx.stroke();
-      ctx.fillStyle='#666';ctx.font='11px Arial';
-      labels.forEach((l,i)=> ctx.fillText(l,x(i)-10,pad.t+h+15));
-      // lines
-      datasets.forEach((ds,di)=>{
-        ctx.strokeStyle=colors[di];ctx.beginPath();
-        ds.forEach((v,i)=>{if(i==0)ctx.moveTo(x(i),y(v));else ctx.lineTo(x(i),y(v));});
-        ctx.stroke();
-        ctx.fillStyle=colors[di];
-        ds.forEach((v,i)=>{ctx.beginPath();ctx.arc(x(i),y(v),3,0,Math.PI*2);ctx.fill();});
-      });
-    }
-
-    function drawStackedBars(ctx, navyData){
-      const W = ctx.canvas.width, H = ctx.canvas.height;
-      ctx.clearRect(0,0,W,H);
-      const pad={l:40,r:10,t:10,b:25};
-      const w=W-pad.l-pad.r, h=H-pad.t-pad.b;
-      const maxY=Math.max(...navyData.map(r=>r.heavy+r.light+r.galleys+r.transports))||1;
-      const groupW=w/navyData.length;
-      const colors=['#8b0000','#b22222','#555','#999'];
-      const series=['heavy','light','galleys','transports'];
-      // axes
-      ctx.strokeStyle='#ccc';ctx.beginPath();
-      ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,pad.t+h);ctx.lineTo(pad.l+w,pad.t+h);ctx.stroke();
-      ctx.fillStyle='#666';ctx.font='11px Arial';
-      navyData.forEach((r,i)=> ctx.fillText(r.year,pad.l+i*groupW+groupW/2-12,pad.t+h+15));
-      // bars
-      navyData.forEach((r,i)=>{
-        let bottom=pad.t+h;
-        series.forEach((s,si)=>{
-          const val=r[s], barH=(val/maxY)*h;
-          ctx.fillStyle=colors[si];
-          ctx.fillRect(pad.l+i*groupW+groupW*0.2, bottom-barH, groupW*0.6, barH);
-          bottom-=barH;
-        });
-      });
-    }
-
-    // ===== Run for each country =====
-    drawArmy("Teutonic","teutonic");
-    drawNavy("Teutonic","teutonic");
-    drawEvolution("Teutonic","teutonic");
+    // initial label
+    toggleBtn.textContent = "Show all";
+    toggleBtn.addEventListener("click", toggleAll);
   </script>
 </body>
 </html>
