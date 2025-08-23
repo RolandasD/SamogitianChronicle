@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chapter I – The Dawn of Samogitia</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <style>
+    :root{
+      --ink:#222;
+      --muted:#666;
+      --accent:#8b0000;
+      --card:#ffffff;
+      --bg:#f7f7f7;
+      --line:#e6e6e6;
+    }
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.6}
+    /* Banner */
+    .banner{background:linear-gradient(90deg,var(--accent),#b22222);color:#fff;text-align:center;padding:2rem 1rem}
+    .banner h1{margin:0;font-family:Georgia,serif;font-size:2rem}
+    .banner p{margin:.4rem 0 0;font-style:italic;color:#f2f2f2}
+
+    /* Layout */
+    .container{max-width:1100px;margin:2rem auto;padding:0 1rem}
+    .layout{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem}
+    @media (max-width: 900px){.layout{grid-template-columns:1fr}}
+    .card{background:var(--card);border:1px solid var(--line);border-radius:.6rem;box-shadow:0 1px 4px rgba(0,0,0,.05);padding:1rem}
+    .card h2{font-family:Georgia,serif;font-size:1.15rem;color:var(--accent);margin:0 0 .75rem}
+    .card p{margin:.6rem 0}
+
+    /* Compact definition grid for facts */
+    .facts{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;font-size:.95rem}
+    .facts dt{color:var(--muted)}
+    .facts dd{margin:0;font-weight:600}
+    @media (max-width: 640px){.facts{grid-template-columns:1fr}}
+
+    /* Small table style */
+    table{width:100%;border-collapse:collapse;font-size:.95rem;background:#fcfcfc;border:1px solid var(--line);border-radius:.4rem;overflow:hidden}
+    th,td{padding:.5rem .6rem;border-bottom:1px solid var(--line)}
+    th{background:#f2e6e6;color:#4b0000;text-align:left;font-weight:700}
+    tr:last-child td{border-bottom:0}
+
+    /* Labels / chips */
+    .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
+    .chip{border:1px solid var(--line);padding:.2rem .5rem;border-radius:999px;font-size:.85rem;background:#fff}
+    .chip--danger{background:#fde7e7;border-color:#f3c9c9;color:#680000}
+
+    /* Sidebar maps */
+    .sidebar{position:sticky;top:1rem;align-self:start}
+    .map{margin:0 0 .8rem}
+    .map a{display:block;text-decoration:none;color:inherit}
+    .map img{width:100%;height:auto;display:block;border-radius:.5rem;border:1px solid var(--line);box-shadow:0 1px 4px rgba(0,0,0,.06)}
+    .map small{display:block;margin-top:.35rem;color:var(--muted)}
+    /* Lists */
+    .tight ul{margin:.2rem 0;padding-left:1.1rem}
+    .tight li{margin:.25rem 0}
+
+    /* Back link */
+    .back{display:inline-block;margin:1rem 0 0;text-decoration:none;color:var(--accent);font-weight:700}
+    .back:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <header class="banner">
+    <h1>Chapter I – The Dawn of Samogitia</h1>
+    <p>Prologue: a candle flame defying the winds of empires.</p>
+  </header>
+
+  <main class="container">
+    <section class="layout">
+      <!-- MAIN COLUMN -->
+      <div class="main">
+        <article class="card">
+          <h2>Prologue</h2>
+          <p>
+            In 1444, the <strong>Duchy of Samogitia</strong> stepped out from the shadow of Lithuania with
+            one lonely province—<em>Žemaitija</em>—and a history written against crusaders and orders.
+            On 11 November, a fifteen‑year‑old duke, <strong>Rolandas Drungilas</strong>, raised a fragile light of sovereignty
+            amidst storms of greater powers. What followed would test resolve, law, and coin alike.
+          </p>
+        </article>
+
+        <article class="card">
+          <h2>Core Details</h2>
+          <dl class="facts">
+            <dt>Country</dt>   <dd>Duchy of Samogitia</dd>
+            <dt>Capital</dt>   <dd>Žemaitija</dd>
+            <dt>Ruler</dt>     <dd>Duke Rolandas Drungilas (age 15)</dd>
+            <dt>Dynasty</dt>   <dd>House Drungilas (founded 1444)</dd>
+            <dt>Traits</dt>    <dd>Just; Entrepreneur</dd>
+            <dt>Stats</dt>     <dd><strong>100 / 100 / 100</strong></dd>
+          </dl>
+        </article>
+
+        <article class="card">
+          <h2>Military & Diplomacy (1444)</h2>
+          <table>
+            <thead>
+              <tr>
+                <th>Army</th>
+                <th>Composition</th>
+                <th>Commander</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>6,000</td>
+                <td>5,000 Infantry · 1,000 Cavalry</td>
+                <td>Daugvilas Tyzenhaus</td>
+              </tr>
+            </tbody>
+          </table>
+
+          <div class="chips">
+            <span class="chip"><strong>Navy:</strong> none (no port)</span>
+            <span class="chip chip--danger"><strong>Rivals:</strong> Teutonic Order</span>
+            <span class="chip chip--danger"><strong>Rivals:</strong> Livonian Order</span>
+            <span class="chip"><strong>Allies:</strong> none</span>
+          </div>
+        </article>
+
+        <article class="card tight">
+          <h2>Origins of the Realm</h2>
+          <ul>
+            <li><strong>Borderland Identity:</strong> Samogitia’s marches weathered crusading wars and shifting overlords, shaping a hard, communal resilience.</li>
+            <li><strong>Break from Lithuania:</strong> A political fracture in 1444 left a small but determined duchy under a new house.</li>
+            <li><strong>A Young Founder:</strong> Rolandas Drungilas, though untested, governs with a reputation for fairness and a keen sense for trade.</li>
+            <li><strong>Perilous Neighbors:</strong> The Teutonic and Livonian Orders eye the Baltic border, while Lithuania watches the new duchy’s first steps.</li>
+          </ul>
+        </article>
+
+        <a class="back" href="index.html">← Back to Chronicle Index</a>
+      </div>
+
+      <!-- SIDEBAR -->
+      <aside class="sidebar">
+        <div class="card">
+          <h2>Maps</h2>
+          <figure class="map">
+            <a href="maps/heartland.png" target="_blank">
+              <img src="maps/heartland.png" alt="Heartland map: Žemaitija" />
+              <small>Heartland: Žemaitija (the sole province).</small>
+            </a>
+          </figure>
+          <figure class="map">
+            <a href="maps/region.png" target="_blank">
+              <img src="maps/region.png" alt="Regional neighbors" />
+              <small>Neighbors: Lithuania, Teutonic Order, Livonian Order.</small>
+            </a>
+          </figure>
+          <figure class="map">
+            <a href="maps/world.png" target="_blank">
+              <img src="maps/world.png" alt="Europe 1444" />
+              <small>Europe, 1444: Ottomans rising; HRE fragmented.</small>
+            </a>
+          </figure>
+        </div>
+      </aside>
+    </section>
+  </main>
+</body>
+</html>

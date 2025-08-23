@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Great Powers – Armies, Navies & Evolution</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root{--ink:#222;--muted:#666;--accent:#8b0000;--card:#fff;--bg:#f7f7f7;--line:#e6e6e6}
+    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Arial,sans-serif;line-height:1.6}
+    .banner{background:linear-gradient(90deg,var(--accent),#b22222);color:#fff;text-align:center;padding:2rem 1rem}
+    .banner h1{margin:0;font-family:Georgia,serif;font-size:1.9rem}
+    .banner p{margin:.4rem 0 0;color:#f0f0f0}
+
+    .container{max-width:1100px;margin:2rem auto;padding:0 1rem}
+    .country{margin-bottom:2.5rem}
+    .country h2{font-family:Georgia,serif;color:var(--accent);margin:.2rem 0 1rem}
+    .grid{display:grid;grid-template-columns:2fr 1fr;gap:1rem}
+    @media(max-width:900px){.grid{grid-template-columns:1fr}}
+
+    .card{background:var(--card);border:1px solid var(--line);border-radius:.6rem;box-shadow:0 1px 4px rgba(0,0,0,.05);padding:1rem}
+    h3{margin:.2rem 0 .6rem;font-size:1.05rem;color:var(--accent)}
+
+    table{width:100%;border-collapse:collapse;font-size:.9rem;background:#fcfcfc;border:1px solid var(--line);border-radius:.4rem;overflow:hidden;margin-bottom:.8rem}
+    th,td{padding:.4rem .6rem;border-bottom:1px solid var(--line)}
+    th{background:#f2e6e6;color:#4b0000;text-align:left}
+    tr:last-child td{border-bottom:0}
+
+    canvas{width:100%;max-width:100%;height:200px;border:1px solid var(--line);border-radius:.4rem;background:#fff;margin-top:.5rem}
+    .legend{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:.3rem;font-size:.8rem}
+    .key{display:inline-flex;align-items:center;gap:.3rem;color:#444}
+    .box{width:12px;height:12px;border-radius:2px}
+
+    .back{display:inline-block;margin:1.5rem 0 0;text-decoration:none;color:var(--accent);font-weight:700}
+    .back:hover{text-decoration:underline}
+  </style>
+</head>
+<body>
+  <header class="banner">
+    <h1>Great Powers – Military, Navies & Evolution</h1>
+    <p>Comparative data on the strongest countries of the age</p>
+  </header>
+
+  <main class="container">
+
+    <!-- ================= COUNTRY BLOCK TEMPLATE ================= -->
+    <section class="country" id="teutonic">
+      <h2>Teutonic Order</h2>
+      <div class="grid">
+        <!-- Army -->
+        <article class="card">
+          <h3>Military</h3>
+          <table>
+            <thead><tr><th>Year</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr></thead>
+            <tbody id="army-rows-teutonic"></tbody>
+          </table>
+          <canvas id="armyChart-teutonic" width="600" height="200"></canvas>
+        </article>
+
+        <!-- Navy -->
+        <article class="card">
+          <h3>Navy</h3>
+          <table>
+            <thead><tr><th>Year</th><th>Hvy</th><th>Lgt</th><th>Gal</th><th>Trn</th><th>Total</th></tr></thead>
+            <tbody id="navy-rows-teutonic"></tbody>
+          </table>
+          <canvas id="navyChart-teutonic" width="600" height="200"></canvas>
+        </article>
+      </div>
+      <div class="card">
+        <h3>Evolution Over Time</h3>
+        <canvas id="evoChart-teutonic" width="980" height="240"></canvas>
+        <div class="legend">
+          <span class="key"><span class="box" style="background:#8b0000"></span> Army</span>
+          <span class="key"><span class="box" style="background:#b22222"></span> Forcelimit</span>
+          <span class="key"><span class="box" style="background:#3366cc"></span> Manpower</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========== Add more countries below by duplicating this block ========== -->
+    <!-- Example: Livonian Order, Poland, Lithuania, etc. -->
+
+    <a class="back" href="index.html">← Back to Chronicle Index</a>
+  </main>
+
+  <script>
+    // =================== DATA ===================
+    const DATA = {
+      teutonic: {
+        army: [
+          { year: 1444, total: 12000, inf: 9000, cav: 3000, art: 0 },
+          { year: 1450, total: 14000, inf: 10000, cav: 3500, art: 500 },
+          { year: 1456, total: 17500, inf: 12000, cav: 4200, art: 1300 }
+        ],
+        navy: [
+          { year: 1444, heavy: 0, light: 0, galleys: 0, transports: 0 },
+          { year: 1450, heavy: 2, light: 6, galleys: 4, transports: 3 },
+          { year: 1456, heavy: 3, light: 8, galleys: 6, transports: 4 }
+        ],
+        evo: {
+          years: [1444, 1450, 1456],
+          army: [12000, 14000, 17500],
+          forcelimit: [13000, 15500, 18500],
+          manpower: [18000, 21000, 24000]
+        }
+      }
+    };
+    // ============================================
+
+    // ===== Helpers =====
+    function drawArmy(country, id){
+      const rows = document.getElementById(`army-rows-${id}`);
+      DATA[id].army.forEach(r=>{
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${r.year}</td><td>${r.total}</td><td>${r.inf}</td><td>${r.cav}</td><td>${r.art}</td>`;
+        rows.appendChild(tr);
+      });
+      const ctx = document.getElementById(`armyChart-${id}`).getContext('2d');
+      drawLineChart(ctx, DATA[id].army.map(r=>r.year), [DATA[id].army.map(r=>r.total)], ['#8b0000']);
+    }
+
+    function drawNavy(country, id){
+      const rows = document.getElementById(`navy-rows-${id}`);
+      DATA[id].navy.forEach(r=>{
+        const total = r.heavy+r.light+r.galleys+r.transports;
+        const tr = document.createElement('tr');
+        tr.innerHTML = `<td>${r.year}</td><td>${r.heavy}</td><td>${r.light}</td><td>${r.galleys}</td><td>${r.transports}</td><td>${total}</td>`;
+        rows.appendChild(tr);
+      });
+      const ctx = document.getElementById(`navyChart-${id}`).getContext('2d');
+      drawStackedBars(ctx, DATA[id].navy);
+    }
+
+    function drawEvolution(country, id){
+      const ctx = document.getElementById(`evoChart-${id}`).getContext('2d');
+      drawLineChart(ctx, DATA[id].evo.years, 
+        [DATA[id].evo.army, DATA[id].evo.forcelimit, DATA[id].evo.manpower],
+        ['#8b0000','#b22222','#3366cc']);
+    }
+
+    // ===== Simple chart functions =====
+    function drawLineChart(ctx, labels, datasets, colors){
+      const W = ctx.canvas.width, H = ctx.canvas.height;
+      ctx.clearRect(0,0,W,H);
+      const pad = {l:40,r:10,t:10,b:25};
+      const w = W - pad.l - pad.r, h = H - pad.t - pad.b;
+      const maxY = Math.max(...datasets.flat())*1.1;
+      const x = (i)=> pad.l + i/(labels.length-1)*w;
+      const y = (v)=> pad.t + h - (v/maxY)*h;
+      // axes
+      ctx.strokeStyle='#ccc';ctx.beginPath();
+      ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,pad.t+h);ctx.lineTo(pad.l+w,pad.t+h);ctx.stroke();
+      ctx.fillStyle='#666';ctx.font='11px Arial';
+      labels.forEach((l,i)=> ctx.fillText(l,x(i)-10,pad.t+h+15));
+      // lines
+      datasets.forEach((ds,di)=>{
+        ctx.strokeStyle=colors[di];ctx.beginPath();
+        ds.forEach((v,i)=>{if(i==0)ctx.moveTo(x(i),y(v));else ctx.lineTo(x(i),y(v));});
+        ctx.stroke();
+        ctx.fillStyle=colors[di];
+        ds.forEach((v,i)=>{ctx.beginPath();ctx.arc(x(i),y(v),3,0,Math.PI*2);ctx.fill();});
+      });
+    }
+
+    function drawStackedBars(ctx, navyData){
+      const W = ctx.canvas.width, H = ctx.canvas.height;
+      ctx.clearRect(0,0,W,H);
+      const pad={l:40,r:10,t:10,b:25};
+      const w=W-pad.l-pad.r, h=H-pad.t-pad.b;
+      const maxY=Math.max(...navyData.map(r=>r.heavy+r.light+r.galleys+r.transports))||1;
+      const groupW=w/navyData.length;
+      const colors=['#8b0000','#b22222','#555','#999'];
+      const series=['heavy','light','galleys','transports'];
+      // axes
+      ctx.strokeStyle='#ccc';ctx.beginPath();
+      ctx.moveTo(pad.l,pad.t);ctx.lineTo(pad.l,pad.t+h);ctx.lineTo(pad.l+w,pad.t+h);ctx.stroke();
+      ctx.fillStyle='#666';ctx.font='11px Arial';
+      navyData.forEach((r,i)=> ctx.fillText(r.year,pad.l+i*groupW+groupW/2-12,pad.t+h+15));
+      // bars
+      navyData.forEach((r,i)=>{
+        let bottom=pad.t+h;
+        series.forEach((s,si)=>{
+          const val=r[s], barH=(val/maxY)*h;
+          ctx.fillStyle=colors[si];
+          ctx.fillRect(pad.l+i*groupW+groupW*0.2, bottom-barH, groupW*0.6, barH);
+          bottom-=barH;
+        });
+      });
+    }
+
+    // ===== Run for each country =====
+    drawArmy("Teutonic","teutonic");
+    drawNavy("Teutonic","teutonic");
+    drawEvolution("Teutonic","teutonic");
+  </script>
+</body>
+</html>
