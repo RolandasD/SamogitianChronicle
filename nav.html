@@ -1,15 +1,15 @@
 <nav class="site-nav">
   <div class="nav-wrap">
-    <a class="brand" href="{{ '/index.html' | relative_url }}">Chronicle</a>
+    <a class="brand" href="index.html">Chronicle</a>
     <ul class="links">
-      <li><a href="{{ '/index.html'     | relative_url }}">Home</a></li>
-      <li><a href="{{ '/powers.html'    | relative_url }}">Great Powers</a></li>
-      <li><a href="{{ '/samogitia.html' | relative_url }}">Samogitia Evolution</a></li>
-      <li><a href="{{ '/armies.html'    | relative_url }}">Armies</a></li>
-      <li><a href="{{ '/navies.html'    | relative_url }}">Royal Navy</a></li>
-      <li><a href="{{ '/rulers.html'    | relative_url }}">Rulers & Advisors</a></li>
-      <li><a href="{{ '/economy.html'   | relative_url }}">Economy</a></li>
-      <li><a href="{{ '/maps.html'      | relative_url }}">Atlas</a></li>
+      <li><a href="index.html">Home</a></li>
+      <li><a href="powers.html">Great Powers</a></li>
+      <li><a href="samogitia.html">Samogitia Evolution</a></li>
+      <li><a href="armies.html">Armies</a></li>
+      <li><a href="navies.html">Royal Navy</a></li>
+      <li><a href="rulers.html">Rulers & Advisors</a></li>
+      <li><a href="economy.html">Economy</a></li>
+      <li><a href="maps.html">Atlas</a></li>
     </ul>
   </div>
 </nav>
@@ -22,17 +22,15 @@
 .site-nav .links a{display:block; padding:.35rem .6rem; text-decoration:none; color:#333; border-radius:.45rem}
 .site-nav .links a:hover{background:#f6f6f6}
 .site-nav .links a.active{background:#8b0000; color:#fff}
-@media (max-width:720px){ .site-nav .links{gap:.4rem} }
 </style>
 
 <script>
-  // Highlight the active link
+  // highlight active link
   (function(){
-    const here = location.pathname.replace(/\/+$/,'');
+    const here = location.pathname.split("/").pop() || "index.html";
     document.querySelectorAll('.site-nav .links a').forEach(a=>{
-      const link = a.getAttribute('href').replace(/\/+$/,'');
-      if (link && (here.endsWith(link) || (here.endsWith('/SamogitianChronicle') && link.endsWith('/index.html')))) {
-        a.classList.add('active');
+      if(a.getAttribute("href") === here){
+        a.classList.add("active");
       }
     });
   })();

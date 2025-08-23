@@ -39,8 +39,15 @@
 </head>
 <body>
 <body>
-  {% include nav.html %}
-  <!-- the rest of your page follows -->
+  <body>
+  <div id="nav-placeholder"></div>
+  <script>
+    fetch("nav.html")
+      .then(r => r.text())
+      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
+  </script>
+
+  <!-- your page content follows -->
 
   <header class="banner">
     <h1>Powers of 1444</h1>
