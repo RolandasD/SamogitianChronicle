@@ -4,6 +4,17 @@
   <meta charset="UTF-8">
   <title>Atlas of Eastern Europe</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-sA+4pskD2UvSTAnFOWkUIJJd3jmS4ypuIJcM26/0+t8="
+    crossorigin=""
+  />
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-o9N1jI/hotPSdJUdHc9Ejo4kKDAdAm8X1sC59y1bF0k="
+    crossorigin=""
+  ></script>
   <style>
     body{margin:0;background:#f9f9f9;color:#222;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.7}
     .container{max-width:900px;margin:3em auto;padding:0 2em}
@@ -19,7 +30,8 @@
   </script>
   <main class="container">
     <h1>Atlas of Eastern Europe</h1>
-    <p>This page is under construction.</p>
+    <div id="map" style="height: 500px;"></div>
   </main>
+  <script src="assets/js/maps.js"></script>
 </body>
 </html>
