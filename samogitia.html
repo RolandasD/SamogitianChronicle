@@ -1,26 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Samogitia — Military & Navy Evolution</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <style>
+---
+layout: default
+title: Samogitia — Military & Navy Evolution
+---
+
+<style>
     /* Page-specific styles for Samogitia evolution */
     .container{max-width:1000px;}
     .card{margin-bottom:1.5rem;}
     canvas{height:420px!important;}
   </style>
-</head>
-<body>
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("nav.html")
-      .then(r => r.text())
-      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
-  </script>
-
-  <header class="banner">
+    <header class="banner">
     <h1>Samogitia — Military & Navy Evolution</h1>
     <p>The first standing forces of Samogitia</p>
   </header>
@@ -240,5 +229,3 @@
       options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
     });
   </script>
-</body>
-</html>

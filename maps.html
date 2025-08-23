@@ -1,25 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Atlas of Eastern Europe</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <style>
-    body{margin:0;background:#f9f9f9;color:#222;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.7}
-    .container{max-width:900px;margin:3em auto;padding:0 2em}
-    h1{font-family:Georgia,serif;color:#8b0000}
-  </style>
-</head>
-<body>
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("nav.html")
-      .then(r => r.text())
-      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
-  </script>
-  <main class="container">
-    <h1>Atlas of Eastern Europe</h1>
-    <p>This page is under construction.</p>
-  </main>
-</body>
-</html>
+---
+layout: default
+title: Atlas of Eastern Europe
+---
+
+<style>
+  body{margin:0;background:#f9f9f9;color:#222;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.7}
+  .container{max-width:900px;margin:3em auto;padding:0 2em}
+  h1{font-family:Georgia,serif;color:#8b0000}
+</style>
+
+<main class="container">
+  <h1>Atlas of Eastern Europe</h1>
+  <p>This page is under construction.</p>
+</main>

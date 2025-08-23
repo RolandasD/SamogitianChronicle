@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Powers of 1444</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <style>
+---
+layout: default
+title: Powers of 1444
+---
+
+<style>
     /* Page-specific styles for Powers */
     .container{max-width:1200px;}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
@@ -17,16 +15,7 @@
     .highlight{background:#fffbdd;}
     th.sortable{cursor:pointer;}
   </style>
-</head>
-<body>
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("nav.html")
-      .then(r => r.text())
-      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
-  </script>
-
-  <header class="banner">
+    <header class="banner">
     <h1>Powers of 1444</h1>
     <p>Army and Navy compositions at the dawn of the age</p>
   </header>
@@ -232,5 +221,3 @@
     toggleBtn.textContent='Show all';
     toggleBtn.addEventListener('click',toggleAll);
   </script>
-</body>
-</html>

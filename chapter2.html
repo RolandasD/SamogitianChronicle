@@ -1,17 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Chapter II — Expansion & The First War (1445–1446) | Chronicle of Samogitia</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Chapter II details Samogitia’s early expansion and pre-war build-up, including the Iron Wolf and Black Death armies, and succession events in 1446." />
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <style>
+---
+layout: default
+title: Chapter II — Expansion & The First War (1445–1446) | Chronicle of Samogitia
+---
+
+<style>
     /* Page-specific styles for Chapter II */
-    nav#site-nav .fallback{display:flex;flex-wrap:wrap;gap:.8rem;padding:.6rem 1rem;list-style:none;margin:0;}
-    nav#site-nav .fallback a{color:#333;text-decoration:none;padding:.2rem .45rem;border-radius:8px;}
-    nav#site-nav .fallback a[aria-current="page"]{background:#f4eaea;}
-    nav#site-nav .fallback a:hover{background:#f0f0f0;}
     .wrap{max-width:1100px;margin:0 auto;padding:1.25rem;}
     main{display:grid;grid-template-columns:1fr 320px;gap:1.25rem;}
     @media (max-width:980px){main{grid-template-columns:1fr;}}
@@ -31,22 +24,8 @@
     footer{color:var(--muted);font-size:.95rem;padding:2rem 0;}
     code.inline{background:#f3f3f3;border:1px solid #e5e5e5;padding:.05rem .35rem;border-radius:5px;}
   </style>
-</head>
-<body>
-
   <!-- Shared navigation include (client-side). -->
-  <nav id="site-nav" data-src="/partials/nav.html">
-    <ul class="fallback">
-      <li><a href="index.html">Index</a></li>
-      <li><a href="chapter1.html">Chapter I</a></li>
-      <li><a href="chapter2.html" aria-current="page"><strong>Chapter II</strong></a></li>
-      <li><a href="military-records.html">Military Records</a></li>
-      <li><a href="military-graph.html">Military Graph</a></li>
-      <li><a href="data.html">Data</a></li>
-    </ul>
-  </nav>
-
-  <header class="banner">
+    <header class="banner">
     <h1>Chapter II — Expansion & The First War (1445–1446)</h1>
     <p class="muted">From cautious growth to open conflict: armies named and succession secured.</p>
   </header>
@@ -127,23 +106,3 @@
       <p class="muted">Chronicle of Samogitia — Living Edition.</p>
     </footer>
   </div>
-
-  <script>
-    // Client-side include for shared navigation: replace fallback with /partials/nav.html if found.
-    (async () => {
-      const nav = document.getElementById('site-nav');
-      if (!nav) return;
-      const src = nav.getAttribute('data-src');
-      if (!src) return;
-      try{
-        const res = await fetch(src, { cache: "no-cache" });
-        if(res.ok){
-          nav.innerHTML = await res.text();
-        }
-      }catch(e){
-        // keep fallback
-      }
-    })();
-  </script>
-</body>
-</html>

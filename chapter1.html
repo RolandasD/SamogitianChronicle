@@ -1,11 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Chapter I – The Dawn of Samogitia (1444)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <style>
+---
+layout: default
+title: Chapter I – The Dawn of Samogitia (1444)
+---
+
+<style>
     /* Page-specific styles for Chapter I */
     .layout{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem;}
     @media (max-width:900px){.layout{grid-template-columns:1fr;}}
@@ -32,16 +30,7 @@
     .timeline time{font-weight:700;color:#4b0000;margin-right:.4rem;}
   </style>
 </head>
-<body>
-  <!-- Shared static nav -->
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("nav.html").then(r=>r.text()).then(html=>{
-      document.getElementById("nav-placeholder").innerHTML = html;
-    });
-  </script>
-
-  <header class="banner">
+<body>  <header class="banner">
     <h1>Chapter I – The Dawn of Samogitia</h1>
     <p>Year 1444 — a candle flame defying the winds of empires.</p>
   </header>
@@ -197,5 +186,3 @@
       </aside>
     </section>
   </main>
-</body>
-</html>
