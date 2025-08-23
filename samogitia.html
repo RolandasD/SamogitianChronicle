@@ -25,14 +25,12 @@
     th{background:#f2e6e6;color:#4b0000}
     tr:last-child td{border-bottom:0}
     .muted{color:var(--muted);font-size:.9rem}
-    .back{display:inline-block;margin:1.5rem 0 0;text-decoration:none;color:var(--accent);font-weight:700}
+    .back{display:inline-block;margin:1.5rem 0 0;text-decoration:none;color:#f00; color:var(--accent);font-weight:700}
     .back:hover{text-decoration:underline}
     canvas{width:100%!important;max-width:100%;height:420px!important;background:#fff;border:1px solid var(--line);border-radius:.4rem}
   </style>
 </head>
 <body>
-<body>
-  <body>
   <div id="nav-placeholder"></div>
   <script>
     fetch("nav.html")
@@ -40,15 +38,14 @@
       .then(html => document.getElementById("nav-placeholder").innerHTML = html);
   </script>
 
-  <!-- your page content follows -->
-
   <header class="banner">
     <h1>Samogitia — Military & Navy Evolution</h1>
-    <p>The first standing force of Samogitia</p>
+    <p>The first standing forces of Samogitia</p>
   </header>
 
   <main class="container">
 
+    <!-- 1444 baseline -->
     <section class="card">
       <h2>Armies of 1444</h2>
       <table>
@@ -64,7 +61,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>Iron Wolf</td>
+            <td>Field Army (later “Iron Wolf”)</td>
             <td>Daugvilas Tyzenhaus</td>
             <td>6,000</td>
             <td>5,000</td>
@@ -73,7 +70,53 @@
           </tr>
         </tbody>
       </table>
-      <p class="muted">The Iron Wolf was the first organized Samogitian army, formed in 1444.</p>
+      <p class="muted">A structured field army existed in 1444; it was formally named <em>Iron Wolf</em> in June 1445.</p>
+    </section>
+
+    <!-- 1445–1446 named armies -->
+    <section class="card">
+      <h2>Armies of 1445–1446</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Year</th>
+            <th>Army</th>
+            <th>Commander</th>
+            <th>Total</th>
+            <th>Inf</th>
+            <th>Cav</th>
+            <th>Art</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1445 (June)</td>
+            <td>Iron Wolf</td>
+            <td>Daugvilas Tyzenhaus</td>
+            <td>10,000</td>
+            <td>5,000</td>
+            <td>3,000</td>
+            <td>2,000</td>
+          </tr>
+          <tr>
+            <td>1446 (Jan)</td>
+            <td>Black Death</td>
+            <td>Kantibutas Giedraiciai</td>
+            <td>10,000</td>
+            <td>5,000</td>
+            <td>3,000</td>
+            <td>2,000</td>
+          </tr>
+          <tr>
+            <td colspan="3"><strong>1446 Combined Active Forces</strong></td>
+            <td><strong>20,000</strong></td>
+            <td><strong>10,000</strong></td>
+            <td><strong>6,000</strong></td>
+            <td><strong>4,000</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted">Combined totals assume both Iron Wolf and Black Death were fielded simultaneously in 1446.</p>
     </section>
 
     <section class="card">
@@ -81,10 +124,32 @@
       <p class="muted">Samogitia had no navy in 1444.</p>
     </section>
 
+    <!-- NEW: Army totals chart -->
     <section class="card">
-      <h2>Evolution Timeline</h2>
-      <canvas id="samogitiaChart"></canvas>
-      <p class="muted">Interactive: hover for totals. More years will appear as records are added.</p>
+      <h2>Army Evolution — Total</h2>
+      <canvas id="armyTotalsChart"></canvas>
+      <p class="muted">Hover for yearly totals.</p>
+    </section>
+
+    <!-- NEW: Navy totals chart -->
+    <section class="card">
+      <h2>Navy Evolution — Total</h2>
+      <canvas id="navyTotalsChart"></canvas>
+      <p class="muted">Add 1451+ once ships are commissioned.</p>
+    </section>
+
+    <!-- Army breakdown chart -->
+    <section class="card">
+      <h2>Army Breakdown — Infantry / Cavalry / Artillery</h2>
+      <canvas id="armyBreakdownChart"></canvas>
+      <p class="muted">Shows branch composition per year.</p>
+    </section>
+
+    <!-- Navy breakdown chart -->
+    <section class="card">
+      <h2>Navy Breakdown — Heavy / Light / Galley / Transport</h2>
+      <canvas id="navyBreakdownChart"></canvas>
+      <p class="muted">Currently zero through 1446; extend when ships are commissioned (e.g., 1451+).</p>
     </section>
 
     <a class="back" href="index.html">← Back to Chronicle Index</a>
@@ -92,42 +157,108 @@
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // Years available (for now just 1444)
-    const YEARS = ["1444"];
+    // Years available
+    const YEARS = ["1444","1445","1446"];
 
-    // Totals for army and navy
-    const ARMY_TOTALS = [6000]; // Iron Wolf 5000 + 1000
-    const NAVY_TOTALS = [0];    // no navy yet
+    // === Army totals per year (combined active forces) ===
+    // 1444: 5k/1k/0 = 6,000
+    // 1445: Iron Wolf 5k/3k/2k = 10,000
+    // 1446: Iron Wolf + Black Death = (10k + 10k) = 20,000
+    const ARMY_TOTALS = [6000, 10000, 20000];
 
-    const ctx = document.getElementById("samogitiaChart").getContext("2d");
-    new Chart(ctx,{
+    // === Navy totals per year (still zero here) ===
+    const NAVY_TOTALS = [0, 0, 0];
+
+    // === Army breakdown (Inf/Cav/Art per year; 1446 is combined of both armies) ===
+    const ARMY_INF = [5000, 5000, 10000];
+    const ARMY_CAV = [1000, 3000, 6000];
+    const ARMY_ART = [   0, 2000, 4000];
+
+    // === Navy breakdown (Heavy/Light/Galley/Transport per year) ===
+    // Update these when your navy appears (e.g., 1451+: heavy=10, light=10, galley=26, transport=10)
+    const NAVY_HEAVY =    [0, 0, 0];
+    const NAVY_LIGHT =    [0, 0, 0];
+    const NAVY_GALLEY =   [0, 0, 0];
+    const NAVY_TRANSPORT =[0, 0, 0];
+
+    // Helper colors
+    const col = {
+      armyTotal: "hsl(5,75%,45%)",
+      navyTotal: "hsl(210,70%,40%)",
+      inf: "hsl(10,70%,45%)",
+      cav: "hsl(35,70%,45%)",
+      art: "hsl(345,70%,45%)",
+      heavy: "hsl(210,65%,40%)",
+      light: "hsl(200,65%,42%)",
+      galley: "hsl(220,65%,38%)",
+      transport: "hsl(190,65%,44%)"
+    };
+
+    // Army totals chart
+    const ctxArmyTotals = document.getElementById("armyTotalsChart").getContext("2d");
+    new Chart(ctxArmyTotals,{
+      type:"line",
+      data:{
+        labels:YEARS,
+        datasets:[{
+          label:"Army (total)",
+          data:ARMY_TOTALS,
+          borderColor:col.armyTotal,
+          backgroundColor:"hsla(5,75%,70%,0.25)",
+          tension:0.25,
+          pointRadius:4
+        }]
+      },
+      options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
+    });
+
+    // Navy totals chart
+    const ctxNavyTotals = document.getElementById("navyTotalsChart").getContext("2d");
+    new Chart(ctxNavyTotals,{
+      type:"line",
+      data:{
+        labels:YEARS,
+        datasets:[{
+          label:"Navy (total ships)",
+          data:NAVY_TOTALS,
+          borderColor:col.navyTotal,
+          backgroundColor:"hsla(210,70%,68%,0.25)",
+          tension:0.25,
+          pointRadius:4
+        }]
+      },
+      options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
+    });
+
+    // Army breakdown chart
+    const ctxArmy = document.getElementById("armyBreakdownChart").getContext("2d");
+    new Chart(ctxArmy,{
       type:"line",
       data:{
         labels:YEARS,
         datasets:[
-          {
-            label:"Army (total)",
-            data:ARMY_TOTALS,
-            borderColor:"hsl(5,75%,45%)",
-            backgroundColor:"hsla(5,75%,70%,0.25)",
-            tension:0.25,
-            pointRadius:4
-          },
-          {
-            label:"Navy (total ships)",
-            data:NAVY_TOTALS,
-            borderColor:"hsl(210,70%,40%)",
-            backgroundColor:"hsla(210,70%,68%,0.25)",
-            tension:0.25,
-            pointRadius:4
-          }
+          { label:"Infantry",  data:ARMY_INF, borderColor:col.inf,  backgroundColor:"hsla(10,70%,70%,0.25)", tension:0.25, pointRadius:4 },
+          { label:"Cavalry",   data:ARMY_CAV, borderColor:col.cav,  backgroundColor:"hsla(35,70%,70%,0.25)", tension:0.25, pointRadius:4 },
+          { label:"Artillery", data:ARMY_ART, borderColor:col.art,  backgroundColor:"hsla(345,70%,70%,0.25)", tension:0.25, pointRadius:4 }
         ]
       },
-      options:{
-        responsive:true,
-        plugins:{legend:{display:true}},
-        scales:{y:{beginAtZero:true}}
-      }
+      options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
+    });
+
+    // Navy breakdown chart
+    const ctxNavy = document.getElementById("navyBreakdownChart").getContext("2d");
+    new Chart(ctxNavy,{
+      type:"line",
+      data:{
+        labels:YEARS,
+        datasets:[
+          { label:"Heavy",     data:NAVY_HEAVY,     borderColor:col.heavy,     backgroundColor:"hsla(210,65%,70%,0.25)", tension:0.25, pointRadius:4 },
+          { label:"Light",     data:NAVY_LIGHT,     borderColor:col.light,     backgroundColor:"hsla(200,65%,70%,0.25)", tension:0.25, pointRadius:4 },
+          { label:"Galley",    data:NAVY_GALLEY,    borderColor:col.galley,    backgroundColor:"hsla(220,65%,70%,0.25)", tension:0.25, pointRadius:4 },
+          { label:"Transport", data:NAVY_TRANSPORT, borderColor:col.transport, backgroundColor:"hsla(190,65%,70%,0.25)", tension:0.25, pointRadius:4 }
+        ]
+      },
+      options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
     });
   </script>
 </body>

@@ -38,16 +38,12 @@
   </style>
 </head>
 <body>
-<body>
-  <body>
   <div id="nav-placeholder"></div>
   <script>
     fetch("nav.html")
       .then(r => r.text())
       .then(html => document.getElementById("nav-placeholder").innerHTML = html);
   </script>
-
-  <!-- your page content follows -->
 
   <header class="banner">
     <h1>Powers of 1444</h1>
@@ -94,11 +90,43 @@
       </article>
     </section>
 
+    <!-- Samogitia named armies (optional helper table) -->
+    <section class="card" style="margin-top:1rem;">
+      <h2>Samogitia Armies (1444–1446)</h2>
+      <table>
+        <thead>
+          <tr><th>Year</th><th>Name</th><th>Commander</th><th>Inf</th><th>Cav</th><th>Art</th><th>Total</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1444</td><td><em>—</em></td><td><em>—</em></td>
+            <td>5,000</td><td>1,000</td><td>0</td><td>6,000</td>
+          </tr>
+          <tr>
+            <td>1445</td><td>Iron Wolf</td><td>Daugvilas Tyzenhaus</td>
+            <td>5,000</td><td>3,000</td><td>2,000</td><td>10,000</td>
+          </tr>
+          <tr>
+            <td>1446</td><td>Black Death</td><td>Kantibutas Giedraiciai</td>
+            <td>5,000</td><td>3,000</td><td>2,000</td><td>10,000</td>
+          </tr>
+          <tr>
+            <td colspan="3"><strong>1446 Combined</strong></td>
+            <td><strong>10,000</strong></td>
+            <td><strong>6,000</strong></td>
+            <td><strong>4,000</strong></td>
+            <td><strong>20,000</strong></td>
+          </tr>
+        </tbody>
+      </table>
+      <p class="muted">Combined totals assume both armies are active in 1446.</p>
+    </section>
+
     <!-- Interactive Chart -->
     <section class="card" style="margin-top:2rem;">
       <h2>Evolution of Armies & Navies</h2>
 
-      <!-- NEW: Toggle all -->
+      <!-- Toggle all -->
       <div class="toolbar">
         <button id="toggleAllBtn" type="button">Show all</button>
       </div>
@@ -113,7 +141,7 @@
   <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   <script>
-    // ===== Armies =====
+    // ===== Armies (1444 snapshot) =====
     const RAW_ARMIES_1444 = [
       { name:"Mamluks",inf:11000,cav:4000,art:0 },
       { name:"Muscovy",inf:11000,cav:4000,art:0 },
@@ -136,7 +164,7 @@
     ];
     const ARMIES_1444 = RAW_ARMIES_1444.map(r=>({...r,total:r.inf+r.cav+r.art}));
 
-    // ===== Navies =====
+    // ===== Navies (1444 snapshot) =====
     const RAW_NAVIES_1444 = [
       { name:"England",heavy:4,light:6,galley:0,trans:7 },
       { name:"Ragusa",heavy:0,light:7,galley:5,trans:4 },
@@ -158,6 +186,14 @@
     ];
     const NAVIES_1444 = RAW_NAVIES_1444.map(r=>({...r,total:r.heavy+r.light+r.galley+r.trans}));
 
+    // === Samogitia multi-year data (armies) ===
+    // 1445: Iron Wolf (5k/3k/2k), 1446 adds Black Death (5k/3k/2k) -> combined totals shown in chart
+    const SAMOGITIA_BY_YEAR = {
+      "1444": { inf: 5000, cav: 1000, art: 0 },          // baseline
+      "1445": { inf: 5000, cav: 3000, art: 2000 },       // Iron Wolf
+      "1446": { inf: 10000, cav: 6000, art: 4000 }       // Iron Wolf + Black Death (combined)
+    };
+
     // === Populate tables ===
     function fillTable(data,tbodyId,cols){
       const tbody=document.getElementById(tbodyId);
@@ -171,8 +207,8 @@
     fillTable(ARMIES_1444,"army-rows",["inf","cav","art"]);
     fillTable(NAVIES_1444,"navy-rows",["heavy","light","galley","trans"]);
 
-       // === Interactive chart (timeline-ready) ===
-    const YEARS=["1444"]; // add more years later: ["1444","1447","1450",...]
+    // === Interactive chart (timeline-ready) ===
+    const YEARS=["1444","1445","1446"]; // extend later as needed
 
     // helper: generate distinct colors
     function hslColor(i,total,sat=70,light=45){
@@ -184,26 +220,34 @@
     let armyIndex=0;
     let navyIndex=0;
 
-    // Armies datasets (warm colors)
-    ARMIES_1444.forEach((r,i)=>{
-      const color=hslColor(armyIndex++,ARMIES_1444.length,70,40);
+    // Armies datasets (warm colors) — Samogitia has multi-year values, others 1444-only
+    ARMIES_1444.forEach((r)=>{
+      const color = hslColor(armyIndex++, ARMIES_1444.length, 70, 40);
+      const series = YEARS.map(y => {
+        if (r.name === "Samogitia") {
+          const v = SAMOGITIA_BY_YEAR[y];
+          return v ? (v.inf + v.cav + v.art) : null;
+        }
+        return y === "1444" ? r.total : null;
+      });
+
       datasets.push({
         label:`${r.name} Army`,
-        data:[r.total],
+        data:series,
         borderColor:color,
-        backgroundColor:color.replace("40%)","70%)"), // lighter fill
+        backgroundColor:color,
         hidden:true
       });
     });
 
-    // Navies datasets (shift hue by 180° to get cool colors)
-    NAVIES_1444.forEach((r,i)=>{
+    // Navies datasets (cool colors) — all 1444-only for now
+    NAVIES_1444.forEach((r)=>{
       const color=hslColor(navyIndex++,NAVIES_1444.length,65,35);
       datasets.push({
         label:`${r.name} Navy`,
-        data:[r.total],
+        data:[r.total, null, null],
         borderColor:color,
-        backgroundColor:color.replace("35%)","65%)"),
+        backgroundColor:color,
         hidden:true
       });
     });
@@ -216,16 +260,15 @@
         responsive:true,
         interaction:{mode:"nearest",intersect:false},
         plugins:{legend:{display:true}},
+        elements:{line:{tension:0.25}},
         scales:{y:{beginAtZero:true}}
       }
     });
-
 
     // ===== Toggle All logic =====
     const toggleBtn=document.getElementById("toggleAllBtn");
 
     function isAllHidden(){
-      // treat undefined as visible-by-default (which we don't use), so explicitly check for hidden !== false
       return evoChart.data.datasets.every(ds => ds.hidden === true);
     }
     function setAllHidden(hidden){
@@ -234,7 +277,7 @@
       toggleBtn.textContent = hidden ? "Show all" : "Hide all";
     }
     function toggleAll(){
-      const shouldShow = isAllHidden(); // if all hidden -> show all, else hide all
+      const shouldShow = isAllHidden();
       setAllHidden(!shouldShow ? true : false);
     }
 
