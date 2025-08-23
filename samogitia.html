@@ -138,30 +138,27 @@
   </main>
 
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    // Years available
-    const YEARS = ["1444","1445","1446"];
+  <script type="module">
+    import { SAMOGITIA_BY_YEAR, SAMOGITIA_NAVY_BY_YEAR } from './assets/js/militaryData.js';
+    const YEARS = Object.keys(SAMOGITIA_BY_YEAR);
 
-    // === Army totals per year (combined active forces) ===
-    // 1444: 5k/1k/0 = 6,000
-    // 1445: Iron Wolf 5k/3k/2k = 10,000
-    // 1446: Iron Wolf + Black Death = (10k + 10k) = 20,000
-    const ARMY_TOTALS = [6000, 10000, 20000];
+    const ARMY_TOTALS = YEARS.map(y => {
+      const d = SAMOGITIA_BY_YEAR[y];
+      return d.inf + d.cav + d.art;
+    });
+    const NAVY_TOTALS = YEARS.map(y => {
+      const d = SAMOGITIA_NAVY_BY_YEAR[y];
+      return d.heavy + d.light + d.galley + d.trans;
+    });
 
-    // === Navy totals per year (still zero here) ===
-    const NAVY_TOTALS = [0, 0, 0];
+    const ARMY_INF = YEARS.map(y => SAMOGITIA_BY_YEAR[y].inf);
+    const ARMY_CAV = YEARS.map(y => SAMOGITIA_BY_YEAR[y].cav);
+    const ARMY_ART = YEARS.map(y => SAMOGITIA_BY_YEAR[y].art);
 
-    // === Army breakdown (Inf/Cav/Art per year; 1446 is combined of both armies) ===
-    const ARMY_INF = [5000, 5000, 10000];
-    const ARMY_CAV = [1000, 3000, 6000];
-    const ARMY_ART = [   0, 2000, 4000];
-
-    // === Navy breakdown (Heavy/Light/Galley/Transport per year) ===
-    // Update these when your navy appears (e.g., 1451+: heavy=10, light=10, galley=26, transport=10)
-    const NAVY_HEAVY =    [0, 0, 0];
-    const NAVY_LIGHT =    [0, 0, 0];
-    const NAVY_GALLEY =   [0, 0, 0];
-    const NAVY_TRANSPORT =[0, 0, 0];
+    const NAVY_HEAVY = YEARS.map(y => SAMOGITIA_NAVY_BY_YEAR[y].heavy);
+    const NAVY_LIGHT = YEARS.map(y => SAMOGITIA_NAVY_BY_YEAR[y].light);
+    const NAVY_GALLEY = YEARS.map(y => SAMOGITIA_NAVY_BY_YEAR[y].galley);
+    const NAVY_TRANSPORT = YEARS.map(y => SAMOGITIA_NAVY_BY_YEAR[y].trans);
 
     // Helper colors
     const col = {

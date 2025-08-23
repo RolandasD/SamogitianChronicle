@@ -14,6 +14,8 @@
     .toolbar{display:flex;gap:.5rem;align-items:center;margin:.25rem 0 1rem;}
     .toolbar button{border:1px solid var(--line);background:#fff;border-radius:.5rem;padding:.45rem .8rem;cursor:pointer;font-weight:600;}
     .toolbar button:hover{background:#f6f6f6;}
+    .highlight{background:#fffbdd;}
+    th.sortable{cursor:pointer;}
   </style>
 </head>
 <body>
@@ -34,7 +36,10 @@
       <!-- Army Table -->
       <article class="card">
         <h2>Army Composition (Infantry / Cavalry / Artillery)</h2>
-        <table>
+        <div class="toolbar">
+          <button id="highlightArmy" type="button">Top Army</button>
+        </div>
+        <table id="army-table">
           <thead>
             <tr>
               <th>Country</th>
@@ -52,7 +57,10 @@
       <!-- Navy Table -->
       <article class="card">
         <h2>Navy Composition (Heavy / Light / Galley / Transport)</h2>
-        <table>
+        <div class="toolbar">
+          <button id="highlightNavy" type="button">Top Navy</button>
+        </div>
+        <table id="navy-table">
           <thead>
             <tr>
               <th>Country</th>
@@ -118,78 +126,56 @@
   </main>
 
   <!-- Chart.js -->
+  <!-- Chart.js -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script>
-    // ===== Armies (1444 snapshot) =====
-    const RAW_ARMIES_1444 = [
-      { name:"Mamluks",inf:11000,cav:4000,art:0 },
-      { name:"Muscovy",inf:11000,cav:4000,art:0 },
-      { name:"Lithuania",inf:11000,cav:4000,art:0 },
-      { name:"Aragon",inf:7000,cav:2000,art:3000 },
-      { name:"Ottomans",inf:9000,cav:3000,art:0 },
-      { name:"France",inf:8000,cav:3000,art:0 },
-      { name:"Poland",inf:8000,cav:3000,art:0 },
-      { name:"Uzbek",inf:8000,cav:2000,art:0 },
-      { name:"Morocco",inf:7000,cav:3000,art:0 },
-      { name:"Castille",inf:8000,cav:2000,art:0 },
-      { name:"Bohemia",inf:8000,cav:2000,art:0 },
-      { name:"England",inf:8000,cav:2000,art:0 },
-      { name:"Kazan",inf:7000,cav:2000,art:0 },
-      { name:"Venice",inf:7000,cav:2000,art:0 },
-      { name:"Burgundy",inf:7000,cav:2000,art:0 },
-      { name:"Hungary",inf:7000,cav:2000,art:0 },
-      { name:"Austria",inf:6000,cav:2000,art:0 },
-      { name:"Samogitia",inf:5000,cav:1000,art:0 }
-    ];
-    const ARMIES_1444 = RAW_ARMIES_1444.map(r=>({...r,total:r.inf+r.cav+r.art}));
+  <script type="module">
+    import { ARMIES_1444, NAVIES_1444, SAMOGITIA_BY_YEAR } from './assets/js/militaryData.js';
 
-    // ===== Navies (1444 snapshot) =====
-    const RAW_NAVIES_1444 = [
-      { name:"England",heavy:4,light:6,galley:0,trans:7 },
-      { name:"Ragusa",heavy:0,light:7,galley:5,trans:4 },
-      { name:"Venice",heavy:0,light:5,galley:3,trans:7 },
-      { name:"Gotland",heavy:0,light:7,galley:5,trans:3 },
-      { name:"Lubeck",heavy:0,light:6,galley:4,trans:4 },
-      { name:"Denmark",heavy:0,light:2,galley:6,trans:6 },
-      { name:"Mamluks",heavy:0,light:2,galley:4,trans:7 },
-      { name:"Novgorod",heavy:3,light:5,galley:0,trans:5 },
-      { name:"Aragon",heavy:0,light:2,galley:5,trans:6 },
-      { name:"Ottomans",heavy:0,light:2,galley:4,trans:7 },
-      { name:"Tunis",heavy:0,light:2,galley:4,trans:6 },
-      { name:"Genoa",heavy:0,light:5,galley:3,trans:4 },
-      { name:"Portugal",heavy:3,light:4,galley:0,trans:5 },
-      { name:"Castile",heavy:2,light:3,galley:0,trans:7 },
-      { name:"Teutonic Order",heavy:0,light:2,galley:5,trans:5 },
-      { name:"Livonian Order",heavy:0,light:2,galley:6,trans:4 },
-      { name:"Samogitia",heavy:0,light:0,galley:0,trans:0 }
-    ];
-    const NAVIES_1444 = RAW_NAVIES_1444.map(r=>({...r,total:r.heavy+r.light+r.galley+r.trans}));
-
-    // === Samogitia multi-year data (armies) ===
-    // 1445: Iron Wolf (5k/3k/2k), 1446 adds Black Death (5k/3k/2k) -> combined totals shown in chart
-    const SAMOGITIA_BY_YEAR = {
-      "1444": { inf: 5000, cav: 1000, art: 0 },          // baseline
-      "1445": { inf: 5000, cav: 3000, art: 2000 },       // Iron Wolf
-      "1446": { inf: 10000, cav: 6000, art: 4000 }       // Iron Wolf + Black Death (combined)
-    };
-
-    // === Populate tables ===
-    function fillTable(data,tbodyId,cols){
+    function renderTable(data,tbodyId,cols){
       const tbody=document.getElementById(tbodyId);
+      tbody.innerHTML='';
       data.forEach(r=>{
-        const tr=document.createElement("tr");
-        tr.innerHTML = `<td>${r.name}</td>
-          <td>${r.total}</td>` + cols.map(c=>`<td>${r[c]}</td>`).join("");
+        const tr=document.createElement('tr');
+        tr.innerHTML=`<td>${r.name}</td><td>${r.total}</td>`+cols.map(c=>`<td>${r[c]}</td>`).join('');
         tbody.appendChild(tr);
       });
     }
-    fillTable(ARMIES_1444,"army-rows",["inf","cav","art"]);
-    fillTable(NAVIES_1444,"navy-rows",["heavy","light","galley","trans"]);
 
-    // === Interactive chart (timeline-ready) ===
-    const YEARS=["1444","1445","1446"]; // extend later as needed
+    function makeSortable(tableId,tbodyId,data,cols){
+      const table=document.getElementById(tableId);
+      table.querySelectorAll('th').forEach((th,i)=>{
+        th.classList.add('sortable');
+        let asc=true;
+        th.addEventListener('click',()=>{
+          const key=i===0?'name':i===1?'total':cols[i-2];
+          data.sort((a,b)=>{
+            if(a[key]<b[key]) return asc?-1:1;
+            if(a[key]>b[key]) return asc?1:-1;
+            return 0;
+          });
+          asc=!asc;
+          renderTable(data,tbodyId,cols);
+        });
+      });
+    }
 
-    // helper: generate distinct colors
+    function highlightTop(data,tbodyId){
+      const max=Math.max(...data.map(r=>r.total));
+      const rows=document.getElementById(tbodyId).rows;
+      Array.from(rows).forEach(row=>{
+        row.classList.toggle('highlight',parseInt(row.cells[1].textContent)===max);
+      });
+    }
+
+    renderTable(ARMIES_1444,'army-rows',['inf','cav','art']);
+    renderTable(NAVIES_1444,'navy-rows',['heavy','light','galley','trans']);
+    makeSortable('army-table','army-rows',ARMIES_1444,['inf','cav','art']);
+    makeSortable('navy-table','navy-rows',NAVIES_1444,['heavy','light','galley','trans']);
+    document.getElementById('highlightArmy').addEventListener('click',()=>highlightTop(ARMIES_1444,'army-rows'));
+    document.getElementById('highlightNavy').addEventListener('click',()=>highlightTop(NAVIES_1444,'navy-rows'));
+
+    const YEARS=Object.keys(SAMOGITIA_BY_YEAR);
+
     function hslColor(i,total,sat=70,light=45){
       const hue=(i*360/total)%360;
       return `hsl(${hue},${sat}%,${light}%)`;
@@ -199,70 +185,52 @@
     let armyIndex=0;
     let navyIndex=0;
 
-    // Armies datasets (warm colors) — Samogitia has multi-year values, others 1444-only
-    ARMIES_1444.forEach((r)=>{
-      const color = hslColor(armyIndex++, ARMIES_1444.length, 70, 40);
-      const series = YEARS.map(y => {
-        if (r.name === "Samogitia") {
-          const v = SAMOGITIA_BY_YEAR[y];
-          return v ? (v.inf + v.cav + v.art) : null;
+    ARMIES_1444.forEach(r=>{
+      const color=hslColor(armyIndex++,ARMIES_1444.length,70,40);
+      const series=YEARS.map(y=>{
+        if(r.name==='Samogitia'){
+          const v=SAMOGITIA_BY_YEAR[y];
+          return v?(v.inf+v.cav+v.art):null;
         }
-        return y === "1444" ? r.total : null;
+        return y===YEARS[0]?r.total:null;
       });
-
-      datasets.push({
-        label:`${r.name} Army`,
-        data:series,
-        borderColor:color,
-        backgroundColor:color,
-        hidden:true
-      });
+      datasets.push({label:`${r.name} Army`,data:series,borderColor:color,backgroundColor:color,hidden:true});
     });
 
-    // Navies datasets (cool colors) — all 1444-only for now
-    NAVIES_1444.forEach((r)=>{
+    NAVIES_1444.forEach(r=>{
       const color=hslColor(navyIndex++,NAVIES_1444.length,65,35);
-      datasets.push({
-        label:`${r.name} Navy`,
-        data:[r.total, null, null],
-        borderColor:color,
-        backgroundColor:color,
-        hidden:true
-      });
+      datasets.push({label:`${r.name} Navy`,data:[r.total,...YEARS.slice(1).map(()=>null)],borderColor:color,backgroundColor:color,hidden:true});
     });
 
-    const ctx=document.getElementById("evolutionChart").getContext("2d");
+    const ctx=document.getElementById('evolutionChart').getContext('2d');
     const evoChart=new Chart(ctx,{
-      type:"line",
+      type:'line',
       data:{labels:YEARS,datasets},
       options:{
         responsive:true,
-        interaction:{mode:"nearest",intersect:false},
+        interaction:{mode:'nearest',intersect:false},
         plugins:{legend:{display:true}},
         elements:{line:{tension:0.25}},
         scales:{y:{beginAtZero:true}}
       }
     });
 
-    // ===== Toggle All logic =====
-    const toggleBtn=document.getElementById("toggleAllBtn");
+    const toggleBtn=document.getElementById('toggleAllBtn');
 
     function isAllHidden(){
-      return evoChart.data.datasets.every(ds => ds.hidden === true);
+      return evoChart.data.datasets.every(ds=>ds.hidden===true);
     }
     function setAllHidden(hidden){
-      evoChart.data.datasets.forEach(ds => { ds.hidden = hidden; });
+      evoChart.data.datasets.forEach(ds=>{ds.hidden=hidden;});
       evoChart.update();
-      toggleBtn.textContent = hidden ? "Show all" : "Hide all";
+      toggleBtn.textContent=hidden?'Show all':'Hide all';
     }
     function toggleAll(){
-      const shouldShow = isAllHidden();
-      setAllHidden(!shouldShow ? true : false);
+      const shouldShow=isAllHidden();
+      setAllHidden(!shouldShow?true:false);
     }
-
-    // initial label
-    toggleBtn.textContent = "Show all";
-    toggleBtn.addEventListener("click", toggleAll);
+    toggleBtn.textContent='Show all';
+    toggleBtn.addEventListener('click',toggleAll);
   </script>
 </body>
 </html>
