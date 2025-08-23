@@ -4,65 +4,32 @@
   <meta charset="UTF-8" />
   <title>Chapter I – The Dawn of Samogitia (1444)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <link rel="stylesheet" href="assets/css/styles.css">
   <style>
-    :root{
-      --ink:#222; --muted:#666; --accent:#8b0000;
-      --card:#ffffff; --bg:#f7f7f7; --line:#e6e6e6;
-    }
-    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.6}
-
-    /* Banner */
-    .banner{background:linear-gradient(90deg,var(--accent),#b22222);color:#fff;text-align:center;padding:2rem 1rem}
-    .banner h1{margin:0;font-family:Georgia,serif;font-size:2rem}
-    .banner p{margin:.4rem 0 0;font-style:italic;color:#f2f2f2}
-
-    /* Layout */
-    .container{max-width:1100px;margin:2rem auto;padding:0 1rem}
-    .layout{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem}
-    @media (max-width: 900px){.layout{grid-template-columns:1fr}}
-
-    .card{background:var(--card);border:1px solid var(--line);border-radius:.6rem;box-shadow:0 1px 4px rgba(0,0,0,.05);padding:1rem}
-    .card h2{font-family:Georgia,serif;font-size:1.15rem;color:var(--accent);margin:0 0 .75rem}
-    .card p{margin:.6rem 0}
-
-    /* Facts grid */
-    .facts{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;font-size:.95rem}
-    .facts dt{color:var(--muted)}
-    .facts dd{margin:0;font-weight:600}
-    @media (max-width: 640px){.facts{grid-template-columns:1fr}}
-
-    /* Table */
-    table{width:100%;border-collapse:collapse;font-size:.95rem;background:#fcfcfc;border:1px solid var(--line);border-radius:.4rem;overflow:hidden}
-    th,td{padding:.5rem .6rem;border-bottom:1px solid var(--line)}
-    th{background:#f2e6e6;color:#4b0000;text-align:left;font-weight:700}
-    tr:last-child td{border-bottom:0}
-
-    /* Chips / labels */
-    .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
-    .chip{border:1px solid var(--line);padding:.2rem .5rem;border-radius:999px;font-size:.85rem;background:#fff}
-    .chip--danger{background:#fde7e7;border-color:#f3c9c9;color:#680000}
-
-    /* Sidebar */
-    .sidebar{position:sticky;top:1rem;align-self:start}
-    .map{margin:0 0 .8rem}
-    .map a{display:block;text-decoration:none;color:inherit}
-    .map img{width:100%;height:auto;display:block;border-radius:.5rem;border:1px solid var(--line);box-shadow:0 1px 4px rgba(0,0,0,.06)}
-    .map small{display:block;margin-top:.35rem;color:var(--muted)}
-
-    /* TOC */
-    .toc{list-style:none;margin:0;padding:0}
-    .toc li{margin:.25rem 0}
-    .toc a{text-decoration:none;color:#333}
-    .toc a:hover{text-decoration:underline}
-
-    /* Timeline list */
-    .timeline{list-style:none;padding:0;margin:0}
-    .timeline li{padding:.5rem .6rem;border-left:3px solid #e6e6e6;margin:.4rem 0 .4rem .3rem}
-    .timeline time{font-weight:700;color:#4b0000;margin-right:.4rem}
-
-    /* Back link */
-    .back{display:inline-block;margin:1rem 0 0;text-decoration:none;color:var(--accent);font-weight:700}
-    .back:hover{text-decoration:underline}
+    /* Page-specific styles for Chapter I */
+    .layout{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem;}
+    @media (max-width:900px){.layout{grid-template-columns:1fr;}}
+    .card h2{font-size:1.15rem;margin:0 0 .75rem;}
+    .card p{margin:.6rem 0;}
+    .facts{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;font-size:.95rem;}
+    .facts dt{color:var(--muted);}
+    .facts dd{margin:0;font-weight:600;}
+    @media (max-width:640px){.facts{grid-template-columns:1fr;}}
+    .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0;}
+    .chip{border:1px solid var(--line);padding:.2rem .5rem;border-radius:999px;font-size:.85rem;background:#fff;}
+    .chip--danger{background:#fde7e7;border-color:#f3c9c9;color:#680000;}
+    .sidebar{position:sticky;top:1rem;align-self:start;}
+    .map{margin:0 0 .8rem;}
+    .map a{display:block;text-decoration:none;color:inherit;}
+    .map img{width:100%;height:auto;display:block;border-radius:.5rem;border:1px solid var(--line);box-shadow:0 1px 4px rgba(0,0,0,.06);}
+    .map small{display:block;margin-top:.35rem;color:var(--muted);}
+    .toc{list-style:none;margin:0;padding:0;}
+    .toc li{margin:.25rem 0;}
+    .toc a{text-decoration:none;color:#333;}
+    .toc a:hover{text-decoration:underline;}
+    .timeline{list-style:none;padding:0;margin:0;}
+    .timeline li{padding:.5rem .6rem;border-left:3px solid #e6e6e6;margin:.4rem 0 .4rem .3rem;}
+    .timeline time{font-weight:700;color:#4b0000;margin-right:.4rem;}
   </style>
 </head>
 <body>
