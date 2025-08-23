@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+  {% if page.description or site.description %}
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  {% endif %}
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  {% if page.image or site.image %}
+  <meta property="og:image" content="{{ page.image | default: site.image | absolute_url }}">
+  {% endif %}
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+</head>
+<body>
+  <div id="nav-placeholder"></div>
+  <script>
+    fetch("{{ '/nav.html' | relative_url }}")
+      .then(r => r.text())
+      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
+  </script>
+  {{ content }}
+</body>
+</html>
