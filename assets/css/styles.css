@@ -6,6 +6,12 @@
   --bg:#f7f7f7;
   --line:#e6e6e6;
 }
+:root[data-theme='dark']{
+  --ink:#eee;
+  --bg:#121212;
+  --card:#1e1e1e;
+  --line:#333;
+}
 html,body{
   margin:0;
   background:var(--bg);
