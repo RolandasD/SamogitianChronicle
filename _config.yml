@@ -1,3 +1,5 @@
 title: Samogitian Chronicle
 url: https://rolandasd.github.io
 baseurl: /SamogitianChronicle
+include:
+  - service-worker.js

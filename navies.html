@@ -4,6 +4,10 @@
   <meta charset="UTF-8">
   <title>Royal Navy</title>
   <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="description" content="Information on the Royal Navy of Samogitia.">
+  <meta property="og:title" content="Royal Navy">
+  <meta property="og:description" content="Information on the Royal Navy of Samogitia.">
+  <meta property="og:url" content="https://rolandasd.github.io/SamogitianChronicle/navies.html">
   <style>
     body{margin:0;background:#f9f9f9;color:#222;font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.7}
     .container{max-width:900px;margin:3em auto;padding:0 2em}
@@ -19,7 +23,21 @@
   </script>
   <main class="container">
     <h1>Royal Navy</h1>
-    <p>This page is under construction.</p>
+    <section>
+      <h2>Navies of the World 1444</h2>
+      <table id="navies-table">
+        <thead>
+          <tr><th>Nation</th><th>Heavy</th><th>Light</th><th>Galley</th><th>Transport</th><th>Total</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </section>
+    <section>
+      <h2>Samogitian Navy Over Time</h2>
+      <canvas id="navies-chart"></canvas>
+    </section>
   </main>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+  <script type="module" src="assets/js/naviesPage.js"></script>
 </body>
 </html>
