@@ -12,20 +12,41 @@
       <li><a href="{{ '/maps.html'      | relative_url }}">Atlas</a></li>
       <li><a href="{{ '/timeline.html'  | relative_url }}">Timeline</a></li>
     </ul>
+    <input id="searchBox" type="text" placeholder="Search...">
     <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">Toggle Theme</button>
   </div>
 </nav>
 
 <script>
-  // Highlight the active link
   (function(){
-    const here = location.pathname.replace(/\/+$/,'');
-    document.querySelectorAll('.site-nav .links a').forEach(a=>{
-      const link = a.getAttribute('href').replace(/\/+$/,'');
-      if (link && (here.endsWith(link) || (here.endsWith('/SamogitianChronicle') && link.endsWith('/index.html')))) {
+    const here = location.pathname.replace(/\/+(?:index\.html)?$/, '').split('/').pop() || 'index.html';
+    document.querySelectorAll('.site-nav .links a').forEach(a => {
+      const link = a.getAttribute('href').replace(/\/+(?:index\.html)?$/, '').split('/').pop();
+      if(link === here){
         a.classList.add('active');
       }
     });
+
+    if(document.getElementById('themeToggle')){
+      const themeScript = document.createElement('script');
+      themeScript.src = "{{ '/assets/js/theme.js' | relative_url }}";
+      themeScript.defer = true;
+      document.head.appendChild(themeScript);
+    }
+
+    if(document.getElementById('searchBox')){
+      const lunrScript = document.createElement('script');
+      lunrScript.src = 'https://cdn.jsdelivr.net/npm/lunr/lunr.min.js';
+      lunrScript.onload = () => {
+        const searchScript = document.createElement('script');
+        searchScript.src = "{{ '/assets/js/search.js' | relative_url }}";
+        document.head.appendChild(searchScript);
+      };
+      document.head.appendChild(lunrScript);
+    }
+
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('{{ '/service-worker.js' | relative_url }}');
+    }
   })();
 </script>
-<script src="{{ '/assets/js/theme.js' | relative_url }}" defer></script>

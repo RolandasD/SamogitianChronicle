@@ -5,37 +5,48 @@
       <li><a href="index.html">Home</a></li>
       <li><a href="powers.html">Great Powers</a></li>
       <li><a href="samogitia.html">Samogitia Evolution</a></li>
+      <li><a href="armies.html">Armies</a></li>
+      <li><a href="navies.html">Royal Navy</a></li>
+      <li><a href="rulers.html">Rulers &amp; Advisors</a></li>
+      <li><a href="economy.html">Economy</a></li>
+      <li><a href="maps.html">Atlas</a></li>
+      <li><a href="timeline.html">Timeline</a></li>
     </ul>
     <input id="searchBox" type="text" placeholder="Search...">
+    <button id="themeToggle" class="theme-toggle" aria-label="Toggle theme">Toggle Theme</button>
   </div>
-      <ul class="links">
-        <li><a href="index.html">Home</a></li>
-        <li><a href="powers.html">Great Powers</a></li>
-        <li><a href="samogitia.html">Samogitia Evolution</a></li>
-      </ul>
-      <button id="themeToggle" aria-label="Toggle theme">Toggle Theme</button>
-    </div>
+</nav>
 
-  </nav>
-
-<script src="https://cdn.jsdelivr.net/npm/lunr/lunr.min.js"></script>
-<script src="assets/js/search.js"></script>
 <script>
-  // highlight active link
   (function(){
-    const here = location.pathname.split("/").pop() || "index.html";
-    document.querySelectorAll('.site-nav .links a').forEach(a=>{
-      if(a.getAttribute("href") === here){
-        a.classList.add("active");
+    const here = location.pathname.replace(/\/+(?:index\.html)?$/, '').split('/').pop() || 'index.html';
+    document.querySelectorAll('.site-nav .links a').forEach(a => {
+      const link = a.getAttribute('href').replace(/\/+(?:index\.html)?$/, '').split('/').pop();
+      if(link === here){
+        a.classList.add('active');
       }
     });
+
+    if(document.getElementById('themeToggle')){
+      const themeScript = document.createElement('script');
+      themeScript.src = 'assets/js/theme.js';
+      themeScript.defer = true;
+      document.head.appendChild(themeScript);
+    }
+
+    if(document.getElementById('searchBox')){
+      const lunrScript = document.createElement('script');
+      lunrScript.src = 'https://cdn.jsdelivr.net/npm/lunr/lunr.min.js';
+      lunrScript.onload = () => {
+        const searchScript = document.createElement('script');
+        searchScript.src = 'assets/js/search.js';
+        document.head.appendChild(searchScript);
+      };
+      document.head.appendChild(lunrScript);
+    }
+
+    if('serviceWorker' in navigator){
+      navigator.serviceWorker.register('/service-worker.js');
+    }
   })();
 </script>
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js');
-  }
-</script>
-    })();
-  </script>
-  <script src="assets/js/theme.js" defer></script>
