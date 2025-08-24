@@ -47,6 +47,7 @@ const ASSETS_TO_CACHE = [
   '/timeline.html',
   '/assets/css/styles.css',
   '/assets/js/militaryData.js',
+  '/offline.html',
   '/maps/heartland.png',
   '/maps/world.png',
   '/maps/region.png',
@@ -71,7 +72,13 @@ self.addEventListener('activate', event => {
 
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request).then(response => response || fetch(event.request))
+    caches
+      .match(event.request)
+      .then(
+        response =>
+          response ||
+          fetch(event.request).catch(() => caches.match('offline.html'))
+      )
   );
 });
 
