@@ -9,18 +9,8 @@ description: "1444 — The first formations"
   .chapter-header{margin:1.25rem 0 1.25rem}
   .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
   .chapter-header .subtitle{color:var(--muted,#666)}
-
-  /* Two columns; collapse only on small screens */
-  .chapter-grid{
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
-    gap:1.5rem;align-items:start
-  }
-  @media (max-width:780px){
-    .chapter-grid{grid-template-columns:1fr}
-    .chapter-aside{position:static}
-  }
-
+  .chapter-grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
+  @media (max-width:780px){.chapter-grid{grid-template-columns:1fr}.chapter-aside{position:static}}
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
@@ -33,17 +23,13 @@ description: "1444 — The first formations"
   .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
   .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
   .prose code{background:#f6f6f6;border:1px solid #eee;border-radius:.25rem;padding:.1rem .3rem}
-
   .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
   .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
   .aside-card h3{margin:0 0 .5rem;font-size:1rem}
   .aside-card img{width:100%;height:auto;border-radius:.5rem}
   .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
-  .facts dt{color:var(--muted,#666)}
-  .facts dd{margin:0;font-weight:600}
-  .aside-list{padding-left:1.1rem;margin:.25rem 0}
-  .aside-list li{margin:.25rem 0}
-
+  .facts dt{color:var(--muted,#666)} .facts dd{margin:0;font-weight:600}
+  .aside-list{padding-left:1.1rem;margin:.25rem 0} .aside-list li{margin:.25rem 0}
   @media (prefers-color-scheme: dark){
     .prose code{background:#1f1f1f;border-color:#2a2a2a}
     .prose blockquote{background:rgba(255,255,255,.04)}
@@ -82,14 +68,9 @@ description: "1444 — The first formations"
       </div>
 
       <h2>Position &amp; Priorities</h2>
-      <p>
-        Hemmed in by larger neighbors, Samogitia’s first priorities are simple:
-        defend the heartland, stabilize the coast, and cultivate ties with Lithuania.
-      </p>
+      <p>Hemmed in by larger neighbors, early priorities: defend the heartland, stabilize the coast, and cultivate ties with Lithuania.</p>
 
-      <blockquote>
-        “A spine of infantry, a sting of horse — and patience.”
-      </blockquote>
+      <blockquote>“A spine of infantry, a sting of horse — and patience.”</blockquote>
 
       <h3>Constraints</h3>
       <ul>
