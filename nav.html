@@ -19,12 +19,6 @@
 
 <script>
   (function(){
-    const here = location.pathname.replace(/\/+(?:index\.html)?$/, '').split('/').pop() || 'index.html';
-    document.querySelectorAll('.site-nav .links a').forEach(a => {
-      const link = a.getAttribute('href').replace(/\/+(?:index\.html)?$/, '').split('/').pop();
-      if(link === here){
-  // Highlight the active link
-  (function(){
     const here = location.pathname.replace(/\/+$/,'');
     document.querySelectorAll('.site-nav .links a').forEach(a=>{
       const link = a.getAttribute('href').replace(/\/+$/,'');
@@ -56,11 +50,4 @@
     }
   })();
 </script>
-=======
-<script>
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js');
-  }
-</script>
-<script src="assets/js/theme.js" defer></script>
 
