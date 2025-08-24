@@ -1,7 +1,8 @@
 <nav class="site-nav">
   <div class="nav-wrap">
     <a class="brand" href="{{ '/index.html' | relative_url }}">Chronicle</a>
-    <ul class="links">
+    <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-links">&#9776;</button>
+    <ul class="links" id="nav-links">
       <li><a href="{{ '/index.html'     | relative_url }}">Home</a></li>
       <li><a href="{{ '/powers.html'    | relative_url }}">Great Powers</a></li>
       <li><a href="{{ '/samogitia.html' | relative_url }}">Samogitia Evolution</a></li>
@@ -44,6 +45,11 @@
       };
       document.head.appendChild(lunrScript);
     }
+
+    const navToggleScript = document.createElement('script');
+    navToggleScript.src = "{{ '/assets/js/navToggle.js' | relative_url }}";
+    navToggleScript.defer = true;
+    document.head.appendChild(navToggleScript);
 
     if('serviceWorker' in navigator){
       navigator.serviceWorker.register('{{ '/service-worker.js' | relative_url }}');
