@@ -1,159 +1,84 @@
 ---
 layout: default
 title: "Chapter 3: Lion of the North"
-description: "1449–1453 — Swedish Independence, Baltic wars, and the Imperial Crown"
+description: "1449–1456 — Swedish Independence, Renaissance, the Royal Navy, and the Imperial Crown"
 ---
 
 <style>
-  :root{
-    --accent:#8b0000;
-    --gold1:#c8a94d; --gold2:#e7d387; --gold3:#b08a2e;
-    --ink:#1b1b1b; --parch:#f7f3ea;
-  }
-
   .page{max-width:1200px;margin:0 auto;padding:0 1rem 2.5rem}
-
-  /* Header + badge */
-  .hdr{margin:1.25rem 0;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
-  .hdr h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .1rem}
-  .hdr .sub{color:var(--muted,#666);margin:0}
-  .chapter-badge{
-    display:inline-flex;align-items:center;justify-content:center;
-    width:40px;height:40px;border-radius:999px;
-    background:radial-gradient(120% 120% at 30% 30%, var(--gold2), var(--gold1) 60%, var(--gold3));
-    box-shadow:0 2px 6px rgba(0,0,0,.15), inset 0 1px 2px rgba(255,255,255,.4);
-    border:1px solid rgba(0,0,0,.15)
-  }
-  .chapter-badge svg{width:24px;height:24px;fill:#4b2d0f;filter:drop-shadow(0 1px 0 rgba(255,255,255,.25))}
-
-  /* Two-column grid */
+  .hdr{margin:1.25rem 0}
+  .hdr h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
+  .hdr .sub{color:var(--muted,#666)}
   .grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
   @media (max-width:780px){.grid{grid-template-columns:1fr}.aside{position:static}}
 
-  /* Prose & ornaments */
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
-  .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem}
+  .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
   .prose p{margin:.8rem 0}
+  .prose blockquote{margin:1rem 0;padding:.75rem 1rem;border-left:3px solid var(--line,#ddd);background:linear-gradient(90deg,#fafafa,transparent)}
   .muted{color:var(--muted,#666)}
   .table-container{overflow:auto}
   table{border-collapse:collapse;width:100%;margin:1rem 0}
   th,td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left;white-space:nowrap}
 
-  /* Pull-quote */
-  .pull-quote{
-    margin:1.2rem 0;padding:1rem 1.25rem;border:1px solid var(--line,#e5e5e5);
-    border-radius:.75rem;background:linear-gradient(180deg,rgba(139,0,0,.06),transparent);
-    position:relative;font-style:italic
-  }
-  .pull-quote:before{
-    content:"“"; position:absolute; left:.5rem; top:-.35rem;
-    font-size:2.75rem; line-height:1; color:var(--accent); opacity:.2; font-family:ui-serif,Georgia,serif;
-  }
-
-  /* Illuminated drop cap */
-  .prose .illuminated:first-letter{
-    float:left;font-size:3.2em;line-height:.92;margin:.02em .18em 0 0;font-weight:700;
-    font-family:ui-serif,Georgia,"Times New Roman",serif;color:#3a2a14;
-    padding:.08em .18em .02em .18em;border:1px solid rgba(0,0,0,.15);border-radius:.15rem;
-    background:linear-gradient(140deg,var(--gold2),var(--gold1) 50%,var(--gold3)),
-              repeating-linear-gradient(45deg, rgba(255,255,255,.15) 0 2px, rgba(255,255,255,0) 2px 4px);
-    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -1px 0 rgba(0,0,0,.06);
-  }
-
-  /* Prologue parchment */
-  .prologue{
-    border:1px solid rgba(0,0,0,.12);border-radius:.75rem;padding:1rem;
-    background:
-      linear-gradient(180deg, rgba(120,84,34,.08), rgba(255,255,255,.55)),
-      url('{{ "/assets/textures/parchment.jpg" | relative_url }}');
-    background-size:cover;background-position:center;
-    box-shadow:0 3px 12px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.6);
-    color:var(--ink)
-  }
-  .prologue h2{font-size:1.05rem;margin:0 0 .35rem;color:#5a4931;letter-spacing:.02em;text-transform:uppercase}
-  .prologue p{margin:.65rem 0}
-  .prologue .sig{margin-top:.5rem;color:#6b5a3a;font-style:italic}
-
-  /* Chips */
   .chip{display:inline-flex;gap:.35rem;align-items:center;border:1px solid var(--line,#e5e5e5);border-radius:999px;padding:.2rem .55rem;font-size:.85rem}
   .stat{font-weight:700}
 
-  /* Aside cards */
   .aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
   .card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
   .card h3{margin:0 0 .5rem;font-size:1rem}
   .card img{width:100%;height:auto;border-radius:.5rem}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
+  .facts dt{color:var(--muted,#666)} .facts dd{margin:0;font-weight:600}
 
-  /* Figure (small peace image) */
   .figure-sm{max-width:520px;margin:0 auto 1rem}
   .figure-sm img{width:100%;height:auto;border-radius:.5rem}
   .figure-sm figcaption{font-size:.9rem;color:var(--muted,#666);text-align:center;margin-top:.35rem}
 
   @media (prefers-color-scheme: dark){
+    .prose blockquote{background:rgba(255,255,255,.04)}
     .card{background:#101010;border-color:#2a2a2a}
-    .prologue{background:
-      linear-gradient(180deg, rgba(139,0,0,.18), rgba(0,0,0,.45)),
-      url('{{ "/assets/textures/parchment.jpg" | relative_url }}'); background-blend-mode:overlay;
-    }
   }
 </style>
 
 <main class="page">
   <header class="hdr">
-    <span class="chapter-badge" aria-hidden="true">
-      <!-- Heraldic wolf badge -->
-      <svg viewBox="0 0 24 24" role="img" aria-label="Wolf">
-        <path d="M3 12c4-1 6-5 6-5s3 3 6 3c2 0 4-1 6-3-1 4-3 7-6 8l1 3-3-2-3 2 1-3c-3-1-6-3-8-5Z"/>
-      </svg>
-    </span>
-    <div>
-      <h1>Chapter 3: Lion of the North</h1>
-      <p class="sub">1449–1453 — Swedish Independence, Baltic wars, Renaissance, and the Imperial Crown</p>
-    </div>
+    <h1>Chapter 3: Lion of the North</h1>
+    <p class="sub">1449–1456 — Swedish Independence, Renaissance, the Royal Navy, and the Imperial Crown</p>
   </header>
 
   <section class="grid">
     <article class="prose">
 
-      <!-- Prologue -->
-      <section class="prologue">
-        <h2>Prologue: Letters from the Baltic, Winter 1449</h2>
-        <p>The sea was iron that month—hard light on harder water. In Stockholm’s halls they spoke the word “freedom” softly, as if it might shatter; in Varniai, we spoke “honor” as if it were a whetstone. The messengers crossed on frozen roads and unfrozen purpose.</p>
-        <p>“If Sweden calls,” said Tyzenhaus, “then the North has remembered our name.”</p>
-        <p class="sig">— From a clerk’s diary kept at Varniai, later copied into the <em>Book of Campfires</em></p>
-      </section>
-
-      <!-- Main narrative with illuminated drop cap -->
-      <p class="illuminated">
-        On <strong>15 November 1449</strong> Sweden asked our standard to stand beside theirs. We agreed.
-        On <strong>1 December 1449</strong>, Samogitia marched into the <em>War of Swedish Independence</em>—a quiet oath made loud by boots on frozen bridges.
+      <h2>1449 — A Promise to Sweden</h2>
+      <p>
+        On <strong>15 November 1449</strong> a messenger from Stockholm reached the court at dusk. Sweden sought friends
+        for a bid at freedom; Samogitia answered before the wax had cooled on the seal. By <strong>1 December 1449</strong>,
+        our banners moved with theirs in the <em>War of Swedish Independence</em>.
       </p>
-
-      <div class="pull-quote">
-        “A promise at the edge of winter is a promise meant to be kept in steel.”
-        <div class="muted">— Daugvilas Tyzenhaus</div>
-      </div>
+      <blockquote>“Let the Baltic learn that we are not merely watchers of storms. We are the wind.” — Attributed to
+      a court orator in Medininkai, winter 1449</blockquote>
 
       <h2>1450 — Three New Standards</h2>
       <p>
-        By <strong>January 1450</strong> our host broadened from three to six regiments, each
-        <span class="chip"><span class="stat">5k</span>/<span class="stat">3k</span>/<span class="stat">2k</span></span>:
+        The realm did not prepare with speeches alone. By <strong>January 1450</strong> three new regiments joined the line,
+        each mustering <span class="chip"><span class="stat">5k</span>/<span class="stat">3k</span>/<span class="stat">2k</span></span>:
       </p>
-      <div class="table-container" aria-label="New regiments roster (1450)">
-        <table>
-          <thead><tr><th>Regiment</th><th>Commander</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr></thead>
-          <tbody>
-            <tr><td>Royal Force</td><td>Gintautas Tyzenhaus</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
-            <tr><td>Pagan Fear</td><td>Tarvydas Korybut</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
-            <tr><td>Iron Legion</td><td>Lingvenis Olshanski</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
-          </tbody>
-        </table>
-      </div>
-      <p>They joined the veteran triad—<em>Iron Wolf</em>, <em>Black Death</em>, <em>Green Legion</em>—and for the first time our banners could fight as a true corps-of-corps.</p>
+      <ul>
+        <li><strong>Royal Force</strong> — <em>Gintautas Tyzenhaus</em></li>
+        <li><strong>Pagan Fear</strong> — <em>Tarvydas Korybut</em></li>
+        <li><strong>Iron Legion</strong> — <em>Lingvenis Olshanski</em></li>
+      </ul>
+      <p>
+        With <em>Iron Wolf</em>, <em>Black Death</em>, and <em>Green Legion</em> already blooded, Samogitia now carried a true
+        army of maneuver—six standards, one purpose.
+      </p>
 
       <h2>1452 — Winter Campaigns in the North</h2>
-      <p>Across snows and straits, three battles set the tone for the northern war:</p>
+      <p>
+        The ice did not blunt us. Three winter battles against the Kalmar belligerents set the tone for the war:
+      </p>
       <div class="table-container">
         <table>
           <thead>
@@ -171,51 +96,107 @@ description: "1449–1453 — Swedish Independence, Baltic wars, and the Imperia
           </tbody>
         </table>
       </div>
-      <p>Officers wrote that muskets misfired in sleet and horse lungs steamed like kettles; the ledger wrote something simpler: <em>discipline</em> spends fewer lives than courage alone.</p>
+      <blockquote>
+        “They marched where swans froze mid-flight.” — Captain’s letter from the Øresund front
+      </blockquote>
 
       <h2>1453 — Peace, Renaissance, and a Crown</h2>
       <p>
-        <strong>17 February 1453:</strong> Denmark yielded and signed—war reparations and gold to the Samogitian treasury.
+        <strong>17 February 1453:</strong> Denmark yielded: ten years of reparations and <strong>345</strong> ducats;
+        Samogitia gained <strong>+2.0</strong> prestige (Denmark <strong>−2.0</strong>).
       </p>
 
       <figure class="figure-sm">
         <a href="{{ "/assets/images/peace-denmark-1453.png" | relative_url }}">
           <img src="{{ "/assets/images/peace-denmark-1453.png" | relative_url }}" alt="Peace with Denmark, 17 February 1453" loading="lazy">
         </a>
-        <figcaption>Peace instrument from Denmark, 17 Feb 1453 — the North heeds the Lion.</figcaption>
+        <figcaption>Peace instrument from Denmark, 17 Feb 1453 — gold and amends for the new Baltic power.</figcaption>
       </figure>
 
       <p>
-        <strong>1 March 1453:</strong> the court embraced the <strong>Renaissance</strong>.<br>
-        <strong>9 March 1453:</strong> noble privileges were <em>curtailed</em>, drawing authority back to the crown.<br>
-        <strong>14 April 1453:</strong> amid bells and drums, the sovereigns were crowned
-        <strong>Emperor and Empress of Samogitia</strong>.
+        <strong>1 March 1453:</strong> the court embraced the <strong>Renaissance</strong>, drawing scholars and
+        surveyors to the capital. <strong>9 March 1453:</strong> noble privileges were <em>curtailed</em>, and the
+        crown’s hand steadied upon the tiller. <strong>14 April 1453:</strong> the bells out-rang the gulls as our
+        sovereigns were crowned <strong>Emperor and Empress of Samogitia</strong>.
       </p>
 
       <h3>Armies Recast — August 1453</h3>
       <p>
-        On <strong>18 August 1453</strong>, the veteran triad—<em>Iron Wolf</em>, <em>Black Death</em>, and
-        <em>Green Legion</em>—each expanded to
-        <span class="chip"><span class="stat">10k</span>/<span class="stat">6k</span>/<span class="stat">4k</span></span>.
-        With <em>Royal Force</em>, <em>Pagan Fear</em>, and <em>Iron Legion</em> still at
-        <span class="chip"><span class="stat">5k</span>/<span class="stat">3k</span>/<span class="stat">2k</span></span>,
-        field strength by year’s end: <strong>45,000 infantry, 27,000 cavalry, 18,000 artillery</strong>.
+        The veteran corps—<em>Iron Wolf</em>, <em>Black Death</em>, and <em>Green Legion</em>—each expanded to
+        <span class="chip"><span class="stat">10k</span>/<span class="stat">6k</span>/<span class="stat">4k</span></span>
+        on <strong>18 August</strong>, the heartbeat of a new imperial field army.
       </p>
 
-      <div class="pull-quote">
-        “An army is a road we lay through time. The wise widen it before the caravan grows.”
-        <div class="muted">— Guildmaster Stasys, on the 1453 expansions</div>
+      <h2>1454 — The Sea Opens</h2>
+      <p>
+        On <strong>January 1454</strong> mass training began across all banners—the old drill made new with
+        Renaissance methods. Then, on <strong>8 May</strong>, masts rose in Klaipėda:
+        <strong>twelve heavy ships</strong> crewed up under <em>Mindaugas Olshanski</em>, and the
+        <strong>Royal Navy</strong> was born.
+      </p>
+      <p>
+        The fleet grew with startling speed. Where we had been a land power pressed to the shore, by year’s end
+        the quays counted not just heavies but screens and oar-fleets. Below, the naval ledger tracks every step:
+      </p>
+
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Date</th><th>Heavy</th><th>Light</th><th>Galley</th><th>Transport</th><th>Note</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr><td>8 May 1454</td><td>12</td><td>0</td><td>0</td><td>0</td><td>Royal Navy formed at Klaipėda (Olshanski)</td></tr>
+            <tr><td>11 Oct 1454</td><td>12</td><td>24</td><td>0</td><td>0</td><td>Light screen established</td></tr>
+            <tr><td>1 Dec 1454</td><td>12</td><td>25</td><td>11</td><td>0</td><td>Galleys commissioned for coastal war</td></tr>
+
+            <tr><td>25 Feb 1455</td><td>12</td><td>25</td><td>23</td><td>0</td><td>Second oar squadron</td></tr>
+            <tr><td>1 May 1455</td><td>12</td><td>25</td><td>35</td><td>0</td><td>Third oar squadron</td></tr>
+            <tr><td>31 Jul 1455</td><td>12</td><td>25</td><td>36</td><td>11</td><td>First transports (11)</td></tr>
+            <tr><td>27 Sep 1455</td><td>12</td><td>28</td><td>36</td><td>20</td><td>Light screen reinforced; transports to 20</td></tr>
+            <tr><td>21 Dec 1455</td><td>12</td><td>28</td><td>48</td><td>20</td><td>Year’s end fleet — 12/28/48/20</td></tr>
+
+            <tr><td>20 Jan 1456</td><td colspan="4">—</td><td><em>Pagan Fear</em> commander Tarvydas Korybut dies; replaced by Daugvilas Jogailaitis</td></tr>
+            <tr><td>9 Feb 1456</td><td>12</td><td>30</td><td>48</td><td>20</td><td>Light screen grows</td></tr>
+            <tr><td>31 Mar 1456</td><td>12</td><td>30</td><td>50</td><td>20</td><td>Galley arm strengthened</td></tr>
+            <tr><td>4 May 1456</td><td>15</td><td>30</td><td>50</td><td>20</td><td>Heavy line reinforced</td></tr>
+            <tr><td>21 May 1456</td><td colspan="4">—</td><td><em>Royal Force</em> (G. Tyzenhaus) expands to <span class="chip">10k/6k/4k</span></td></tr>
+            <tr><td>1 Aug 1456</td><td colspan="4">—</td><td><em>Iron Legion</em> (L. Olshanski) expands to <span class="chip">10k/6k/4k</span></td></tr>
+            <tr><td>5 Sep 1456</td><td>16</td><td>31</td><td>51</td><td>20</td><td>Three flagships commissioned: <em>HMS Death</em> (Heavy), <em>HMS Fear</em> (Light), <em>HMS Agony</em> (Galley)</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <h3>Shifting Thrones</h3>
+      <h3>What the Navy Changed</h3>
       <p>
-        <strong>1 January 1453:</strong> Lithuania broke from the Polish union; the throne passed to
-        <strong>Zygimantas I Mantigirdaitis</strong>. Another weight moved on the Baltic scales.
+        The first twelve heavies gave us a mailed fist; the screens made it swift. Galleys bit into shallows and
+        channels the heavies dared not. And with transports came reach: a promise that Samogitia’s armies would no
+        longer be bounded by bridges.
+      </p>
+      <blockquote>“A crown is safest when it floats.” — Admiral Mindaugas Olshanski, to the dockyard guilds</blockquote>
+
+      <h2>1456 — Steel and Oath Renewed</h2>
+      <p>
+        The deaths of captains often write the margins of history. On <strong>20 January 1456</strong>,
+        <em>Tarvydas Korybut</em> fell from the rolls; <em>Daugvilas Jogailaitis</em> took command of
+        <em>Pagan Fear</em>. The same year, <em>Royal Force</em> and <em>Iron Legion</em> swelled to
+        <span class="chip"><span class="stat">10k</span>/<span class="stat">6k</span>/<span class="stat">4k</span></span>,
+        aligning with the great triad of 1453. By autumn the fleet carried three flagships—<em>Death</em>, <em>Fear</em>, and
+        <em>Agony</em>—names to make a harbor quiet.
+      </p>
+      <p class="muted">
+        End-of-year tallies: Army <strong>55,000 / 33,000 / 22,000</strong>. Navy <strong>16 / 31 / 51 / 20</strong>
+        (heavy / light / galley / transport).
       </p>
 
       <hr>
       <p class="muted">
-        <strong>Summary:</strong> 1449—backed Swedish Independence (15 Nov), joined war (1 Dec). 1450—raised Royal Force, Pagan Fear, Iron Legion (each 5k/3k/2k). 1452—three winter victories vs Norway & Denmark. 1453—peace with Denmark (17 Feb); embraced Renaissance (1 Mar); curtailed noble privileges (9 Mar); Imperial coronation (14 Apr); veteran triad expanded to 10k/6k/4k (18 Aug).
+        <strong>Summary:</strong> Backed Swedish Independence (1449); winter victories vs Norway & Denmark (1452);
+        peace with Denmark (17 Feb 1453); embraced Renaissance (1 Mar 1453); curtailed noble privileges (9 Mar 1453);
+        Imperial coronation (14 Apr 1453); veteran corps expanded (18 Aug 1453). Navy founded (8 May 1454) and rapidly
+        expanded through 1455–1456; commander change in Pagan Fear (20 Jan 1456); Royal Force & Iron Legion upgraded; three
+        flagships commissioned (5 Sep 1456).
       </p>
     </article>
 
@@ -226,38 +207,52 @@ description: "1449–1453 — Swedish Independence, Baltic wars, and the Imperia
         <a href="{{ "/assets/maps/region1448.png" | relative_url }}">
           <img src="{{ "/assets/maps/region1448.png" | relative_url }}" alt="Region after 1448 conquests">
         </a>
-        <p class="muted">The stage upon which the Swedish war and the northern settlements were fought.</p>
+        <p class="muted">The stage for Swedish Independence and the Baltic naval build-up.</p>
       </div>
 
-      <!-- Court & Chronicle quick facts -->
       <div class="card">
-        <h3>Court &amp; Chronicle (1453)</h3>
+        <h3>Royal Navy — Klaipėda</h3>
+        <dl class="facts">
+          <dt>Admiral</dt><dd>Mindaugas Olshanski</dd>
+          <dt>Founded</dt><dd>8 May 1454 (12 heavies)</dd>
+          <dt>Flagships</dt><dd>HMS Death • HMS Fear • HMS Agony</dd>
+          <dt>Base</dt><dd>Klaipėda Roads</dd>
+        </dl>
+      </div>
+
+      <div class="card">
+        <h3>Fleet Totals (End of Year)</h3>
         <table>
+          <thead><tr><th>Year</th><th>H</th><th>L</th><th>G</th><th>T</th></tr></thead>
           <tbody>
-            <tr><th style="white-space:normal">Renaissance</th><td>Embraced on 1 Mar 1453</td></tr>
-            <tr><th style="white-space:normal">Nobility</th><td>Privileges curtailed on 9 Mar 1453</td></tr>
-            <tr><th style="white-space:normal">Coronation</th><td>Emperor &amp; Empress crowned on 14 Apr 1453</td></tr>
-            <tr><th style="white-space:normal">Lithuania</th><td>Breaks PU; Zygimantas I Mantigirdaitis crowned (1 Jan 1453)</td></tr>
+            <tr><td>1454</td><td>12</td><td>25</td><td>11</td><td>0</td></tr>
+            <tr><td>1455</td><td>12</td><td>28</td><td>48</td><td>20</td></tr>
+            <tr><td>1456</td><td>16</td><td>31</td><td>51</td><td>20</td></tr>
           </tbody>
         </table>
       </div>
 
-      <!-- Army ledger -->
       <div class="card">
-        <h3>Army Totals by late 1453</h3>
-        <table>
-          <thead><tr><th>Corps</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr></thead>
-          <tbody>
-            <tr><td>Iron Wolf</td><td>20,000</td><td>10,000</td><td>6,000</td><td>4,000</td></tr>
-            <tr><td>Black Death</td><td>20,000</td><td>10,000</td><td>6,000</td><td>4,000</td></tr>
-            <tr><td>Green Legion</td><td>20,000</td><td>10,000</td><td>6,000</td><td>4,000</td></tr>
-            <tr><td>Royal Force</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
-            <tr><td>Pagan Fear</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
-            <tr><td>Iron Legion</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
-            <tr><th>Total</th><th>90,000</th><th>45,000</th><th>27,000</th><th>18,000</th></tr>
-          </tbody>
-        </table>
-        <p class="muted" style="margin:.35rem 0 0">Totals reflect expansions on 18 Aug 1453 for the veteran triad.</p>
+        <h3>Key Command & Changes</h3>
+        <dl class="facts">
+          <dt>Field Armies</dt><dd>Iron Wolf • Black Death • Green Legion</dd>
+          <dt>Added (1450)</dt><dd>Royal Force • Pagan Fear • Iron Legion</dd>
+          <dt>Upgrades</dt><dd>Triad to 10k/6k/4k (Aug 1453)</dd>
+          <dt>1456</dt><dd>Royal Force & Iron Legion to 10k/6k/4k</dd>
+          <dt>Pagan Fear</dt><dd>Jogailaitis replaces Korybut (20 Jan 1456)</dd>
+        </dl>
+      </div>
+
+      <div class="card">
+        <h3>Named Armies (1456)</h3>
+        <ul style="padding-left:1.1rem;margin:.25rem 0">
+          <li>Iron Wolf — 10k / 6k / 4k</li>
+          <li>Black Death — 10k / 6k / 4k</li>
+          <li>Green Legion — 10k / 6k / 4k</li>
+          <li>Royal Force — 10k / 6k / 4k</li>
+          <li>Pagan Fear — 5k / 3k / 2k (Jogailaitis)</li>
+          <li>Iron Legion — 10k / 6k / 4k</li>
+        </ul>
       </div>
     </aside>
   </section>
