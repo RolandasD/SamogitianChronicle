@@ -96,6 +96,8 @@ canvas{
 .site-nav .links a{display:block;padding:.35rem .6rem;text-decoration:none;color:#333;border-radius:.45rem;}
 .site-nav .links a:hover{background:#f6f6f6;}
 .site-nav .links a.active{background:var(--accent);color:#fff;}
+.site-nav #themeToggle{margin-left:auto;background:var(--card);border:1px solid var(--line);border-radius:.45rem;padding:.35rem .6rem;cursor:pointer;color:var(--ink);}
+.site-nav #themeToggle:hover{background:var(--line);}
 @media (max-width:720px){.site-nav .links{gap:.4rem;}}
 
 h2{font-family:Georgia,serif;color:var(--accent);}
