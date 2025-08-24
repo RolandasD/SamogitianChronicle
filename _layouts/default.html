@@ -17,6 +17,16 @@
   <meta property="og:site_name" content="{{ site.title }}">
   <meta property="og:type" content="website">
   <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+  {% if page.chapter_css %}
+  <link rel="stylesheet" href="{{ ('/assets/css/chapters/' | append: page.chapter_css) | relative_url }}">
+  {% endif %}
+  {% if page.include_chapter_styles %}
+  {% assign chapters = site.pages | where_exp:"p","p.path contains 'chapter'" | sort:"path" %}
+  {% for chapter in chapters %}
+  {% assign css = chapter.path | replace: '.html','' | split:'/' | last | prepend: '/assets/css/chapters/' | append: '.css' %}
+  <link rel="stylesheet" href="{{ css | relative_url }}">
+  {% endfor %}
+  {% endif %}
 </head>
 <body>
   {% include nav.html %}
