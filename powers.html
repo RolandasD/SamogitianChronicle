@@ -5,16 +5,17 @@ description: Army and navy compositions of major powers in 1444.
 ---
 
 <style>
-    /* Page-specific styles for Powers */
-    .container{max-width:1200px;}
-    .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
-    @media(max-width:940px){.grid{grid-template-columns:1fr;}}
-    canvas{height:480px!important;}
-    .toolbar{display:flex;gap:.5rem;align-items:center;margin:.25rem 0 1rem;}
-    .toolbar button{border:1px solid var(--line);background:#fff;border-radius:.5rem;padding:.45rem .8rem;cursor:pointer;font-weight:600;}
-    .toolbar button:hover{background:#f6f6f6;}
-    .highlight{background:#fffbdd;}
-    th.sortable{cursor:pointer;}
+  /* Page-specific styles for Powers */
+  .container{max-width:1200px;}
+  canvas{height:480px!important;}
+  .toolbar{display:flex;gap:.5rem;align-items:center;margin:.25rem 0 1rem;}
+  .toolbar button{border:1px solid var(--line);background:#fff;border-radius:.5rem;padding:.45rem .8rem;cursor:pointer;font-weight:600;}
+  .toolbar button:hover{background:#f6f6f6;}
+  .highlight{background:#fffbdd;}
+  th.sortable{cursor:pointer;}
+  .tabs{display:flex;gap:.5rem;flex-wrap:wrap;margin:.5rem 0 1rem;}
+  .tabs button{border:1px solid var(--line);background:#fff;border-radius:.5rem;padding:.45rem .8rem;font-weight:700;cursor:pointer;}
+  .tabs button.active{background:var(--accent,#8b0000);border-color:var(--accent,#8b0000);color:#fff;}
 </style>
 
 <header class="banner">
@@ -23,54 +24,58 @@ description: Army and navy compositions of major powers in 1444.
 </header>
 
 <main class="container">
-  <section class="grid">
-    <!-- Army Table -->
-    <article class="card">
-      <h2>Army Composition (Infantry / Cavalry / Artillery)</h2>
-      <div class="toolbar">
-        <button id="highlightArmy" type="button">Top Army</button>
-      </div>
-      <div class="table-container">
-        <table id="army-table">
-          <thead>
-            <tr>
-              <th>Country</th>
-              <th>Total</th>
-              <th>Inf</th>
-              <th>Cav</th>
-              <th>Art</th>
-            </tr>
-          </thead>
-          <tbody id="army-rows"></tbody>
-        </table>
-      </div>
-      <p class="muted">Totals = Infantry + Cavalry + Artillery</p>
-    </article>
+  <!-- Tabs -->
+  <div class="tabs">
+    <button class="active" data-tab="armies">Armies (1444)</button>
+    <button data-tab="navies">Navies (1444)</button>
+  </div>
 
-    <!-- Navy Table -->
-    <article class="card">
-      <h2>Navy Composition (Heavy / Light / Galley / Transport)</h2>
-      <div class="toolbar">
-        <button id="highlightNavy" type="button">Top Navy</button>
-      </div>
-      <div class="table-container">
-        <table id="navy-table">
-          <thead>
-            <tr>
-              <th>Country</th>
-              <th>Total</th>
-              <th>Heavy</th>
-              <th>Light</th>
-              <th>Galley</th>
-              <th>Transport</th>
-            </tr>
-          </thead>
-          <tbody id="navy-rows"></tbody>
-        </table>
-      </div>
-      <p class="muted">Totals = Heavy + Light + Galleys + Transports</p>
-    </article>
-  </section>
+  <!-- Armies Tab -->
+  <article id="tab-armies" class="card">
+    <h2>Army Composition (Infantry / Cavalry / Artillery)</h2>
+    <div class="toolbar">
+      <button id="highlightArmy" type="button">Top Army</button>
+    </div>
+    <div class="table-container">
+      <table id="army-table">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Total</th>
+            <th>Inf</th>
+            <th>Cav</th>
+            <th>Art</th>
+          </tr>
+        </thead>
+        <tbody id="army-rows"></tbody>
+      </table>
+    </div>
+    <p class="muted">Totals = Infantry + Cavalry + Artillery</p>
+  </article>
+
+  <!-- Navies Tab -->
+  <article id="tab-navies" class="card" hidden>
+    <h2>Navy Composition (Heavy / Light / Galley / Transport)</h2>
+    <div class="toolbar">
+      <button id="highlightNavy" type="button">Top Navy</button>
+    </div>
+    <div class="table-container">
+      <table id="navy-table">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Total</th>
+            <th>Heavy</th>
+            <th>Light</th>
+            <th>Galley</th>
+            <th>Transport</th>
+          </tr>
+        </thead>
+        <tbody id="navy-rows"></tbody>
+      </table>
+    </div>
+    <p class="muted">Totals = Heavy + Light + Galleys + Transports</p>
+  </article>
 
   <!-- Samogitia named armies (optional helper table) -->
   <section class="card" style="margin-top:1rem;">
@@ -109,12 +114,9 @@ description: Army and navy compositions of major powers in 1444.
   <!-- Interactive Chart -->
   <section class="card" style="margin-top:2rem;">
     <h2>Evolution of Armies &amp; Navies</h2>
-
-    <!-- Toggle all -->
     <div class="toolbar">
       <button id="toggleAllBtn" type="button">Show all</button>
     </div>
-
     <canvas id="evolutionChart"></canvas>
     <p class="muted">Interactive: Hover for values, click legend to toggle individual countries, or use “Toggle all”.</p>
   </section>
@@ -127,26 +129,27 @@ description: Army and navy compositions of major powers in 1444.
 <script type="module">
   import { ARMIES_1444, NAVIES_1444, SAMOGITIA_BY_YEAR } from './assets/js/militaryData.js';
 
-  function renderTable(data,tbodyId,cols){
-    const tbody=document.getElementById(tbodyId);
-    tbody.innerHTML='';
+  // ---------- Render helpers ----------
+  function renderTable(data, tbodyId, cols){
+    const tbody = document.getElementById(tbodyId);
+    tbody.innerHTML = '';
     data.forEach(r=>{
       const tr=document.createElement('tr');
-      tr.innerHTML=`<td>${r.name}</td><td>${r.total}</td>`+cols.map(c=>`<td>${r[c]}</td>`).join('');
+      tr.innerHTML = `<td>${r.name}</td><td>${r.total}</td>` + cols.map(c=>`<td>${r[c]}</td>`).join('');
       tbody.appendChild(tr);
     });
   }
 
-  function makeSortable(tableId,tbodyId,data,cols){
+  function makeSortable(tableId, tbodyId, data, cols){
     const table=document.getElementById(tableId);
     table.querySelectorAll('th').forEach((th,i)=>{
       th.classList.add('sortable');
       let asc=true;
       th.addEventListener('click',()=>{
-        const key=i===0?'name':i===1?'total':cols[i-2];
+        const key = i===0 ? 'name' : i===1 ? 'total' : cols[i-2];
         data.sort((a,b)=>{
-          if(a[key]<b[key]) return asc?-1:1;
-          if(a[key]>b[key]) return asc?1:-1;
+          if(a[key] < b[key]) return asc ? -1 : 1;
+          if(a[key] > b[key]) return asc ? 1 : -1;
           return 0;
         });
         asc=!asc;
@@ -155,14 +158,15 @@ description: Army and navy compositions of major powers in 1444.
     });
   }
 
-  function highlightTop(data,tbodyId){
-    const max=Math.max(...data.map(r=>r.total));
-    const rows=document.getElementById(tbodyId).rows;
+  function highlightTop(data, tbodyId){
+    const max = Math.max(...data.map(r=>r.total));
+    const rows = document.getElementById(tbodyId).rows;
     Array.from(rows).forEach(row=>{
-      row.classList.toggle('highlight',parseInt(row.cells[1].textContent)===max);
+      row.classList.toggle('highlight', parseInt(row.cells[1].textContent,10)===max);
     });
   }
 
+  // ---------- Tables ----------
   renderTable(ARMIES_1444,'army-rows',['inf','cav','art']);
   renderTable(NAVIES_1444,'navy-rows',['heavy','light','galley','trans']);
   makeSortable('army-table','army-rows',ARMIES_1444,['inf','cav','art']);
@@ -170,7 +174,23 @@ description: Army and navy compositions of major powers in 1444.
   document.getElementById('highlightArmy').addEventListener('click',()=>highlightTop(ARMIES_1444,'army-rows'));
   document.getElementById('highlightNavy').addEventListener('click',()=>highlightTop(NAVIES_1444,'navy-rows'));
 
-  const YEARS=Object.keys(SAMOGITIA_BY_YEAR);
+  // ---------- Tabs ----------
+  const tabs = document.querySelectorAll('.tabs button');
+  const panels = {
+    armies: document.getElementById('tab-armies'),
+    navies: document.getElementById('tab-navies'),
+  };
+  tabs.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      tabs.forEach(b=>b.classList.remove('active'));
+      btn.classList.add('active');
+      Object.values(panels).forEach(p=>p.hidden=true);
+      panels[btn.dataset.tab].hidden=false;
+    });
+  });
+
+  // ---------- Chart ----------
+  const YEARS = Object.keys(SAMOGITIA_BY_YEAR);
 
   function hslColor(i,total,sat=70,light=45){
     const hue=(i*360/total)%360;
@@ -186,9 +206,9 @@ description: Army and navy compositions of major powers in 1444.
     const series=YEARS.map(y=>{
       if(r.name==='Samogitia'){
         const v=SAMOGITIA_BY_YEAR[y];
-        return v?(v.inf+v.cav+v.art):null;
+        return v ? (v.inf+v.cav+v.art) : null;
       }
-      return y===YEARS[0]?r.total:null;
+      return y===YEARS[0] ? r.total : null;
     });
     datasets.push({label:`${r.name} Army`,data:series,borderColor:color,backgroundColor:color,hidden:true});
   });
@@ -211,15 +231,13 @@ description: Army and navy compositions of major powers in 1444.
     }
   });
 
+  // Toggle all
   const toggleBtn=document.getElementById('toggleAllBtn');
-
-  function isAllHidden(){
-    return evoChart.data.datasets.every(ds=>ds.hidden===true);
-  }
+  function isAllHidden(){ return evoChart.data.datasets.every(ds=>ds.hidden===true); }
   function setAllHidden(hidden){
     evoChart.data.datasets.forEach(ds=>{ds.hidden=hidden;});
     evoChart.update();
-    toggleBtn.textContent=hidden?'Show all':'Hide all';
+    toggleBtn.textContent = hidden ? 'Show all' : 'Hide all';
   }
   function toggleAll(){
     const shouldShow=isAllHidden();
