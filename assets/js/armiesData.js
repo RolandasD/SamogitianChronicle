@@ -29,13 +29,15 @@ export const SAMOGITIA_ARMY_BY_YEAR = {
   "1447": { inf: 15000, cav: 9000, art: 6000 }, // Jan 1447
   "1450": { inf: 30000, cav: 18000, art: 12000 }, // three new 5/3/2 regiments
   "1453": { inf: 45000, cav: 27000, art: 18000 }, // Aug expansions (IW/BD/GL to 10/6/4)
-  // training begins in 1454; no new counts provided, carry forward 1453 levels:
   "1454": { inf: 45000, cav: 27000, art: 18000 },
   "1455": { inf: 45000, cav: 27000, art: 18000 },
-  // 1456 totals provided:
   "1456": { inf: 55000, cav: 33000, art: 22000 },
-  // 1457 not explicitly changed; keep 1456 unless you have updates:
   "1457": { inf: 55000, cav: 33000, art: 22000 },
+
+  // NEW
+  "1462": { inf: 55000, cav: 33000, art: 22000 }, // pre-muster status quo
+  "1463": { inf: 60000, cav: 36000, art: 24000 }, // 2 Oct — Pagan Fear expands to 10/6/4
+  "1464": { inf: 90000, cav: 54000, art: 36000 }, // 8 Feb + 1 Jun grand musters (all six at 15/9/6)
 };
 
 // you already have this from last step
@@ -123,6 +125,32 @@ export const ARMIES_1456 = [
   { name: "Muscovy",       inf: 4000,  cav: 5000,  art: 0,     total: 9000 },
   { name: "Poland",        inf: 3000,  cav: 1000,  art: 0,     total: 4000 },
 ];
+// NEW — 1462
+export const ARMIES_1462 = [
+  { name: "Samogitia",     inf: 55000, cav: 33000, art: 22000, total: 110000 },
+  { name: "Ottomans",      inf: 32174, cav: 12923, art: 0,     total: 45097  },
+  { name: "Mamluks",       inf: 32000, cav: 11000, art: 0,     total: 43000  },
+  { name: "Austria",       inf: 24929, cav: 7000,  art: 0,     total: 31929  },
+  { name: "France",        inf: 20033, cav: 10000, art: 0,     total: 30033  },
+  { name: "Venice",        inf: 16990, cav: 3990,  art: 0,     total: 20980  },
+  { name: "England",       inf: 10959, cav: 8000,  art: 0,     total: 18959  },
+  { name: "Qara Qoyunlu",  inf: 12889, cav: 5000,  art: 0,     total: 17889  },
+  { name: "Castile",       inf: 15000, cav: 2000,  art: 0,     total: 17000  },
+  { name: "Denmark",       inf: 8000,  cav: 6000,  art: 0,     total: 14000  },
+  { name: "Morocco",       inf: 9801,  cav: 4000,  art: 0,     total: 13801  },
+  { name: "Aragon",        inf: 8000,  cav: 4000,  art: 1000,  total: 13000  },
+  { name: "Bohemia",       inf: 13000, cav: 0,     art: 0,     total: 13000  },
+  { name: "Naples",        inf: 8564,  cav: 4000,  art: 0,     total: 12564  },
+  { name: "Kazan",         inf: 6845,  cav: 5334,  art: 0,     total: 12179  },
+  { name: "Burgundy",      inf: 6348,  cav: 5000,  art: 0,     total: 11348  },
+  { name: "Scotland",      inf: 8000,  cav: 3000,  art: 0,     total: 11000  },
+  { name: "Albania",       inf: 9000,  cav: 2000,  art: 0,     total: 11000  },
+  { name: "Great Horde",   inf: 5944,  cav: 5000,  art: 0,     total: 10944  },
+  { name: "Nogai",         inf: 5450,  cav: 5000,  art: 0,     total: 10450  },
+  { name: "Trier",         inf: 6000,  cav: 4000,  art: 0,     total: 10000  },
+  { name: "Hungary",       inf: 10000, cav: 0,     art: 0,     total: 10000  },
+  { name: "Portugal",      inf: 6000,  cav: 3000,  art: 0,     total: 9000   },
+];
 
 // (optional) handy index for charts/tables
 export const ARMIES_BY_YEAR = {
@@ -130,4 +158,7 @@ export const ARMIES_BY_YEAR = {
   1447: ARMIES_1447,
   1453: ARMIES_1453,
   1456: ARMIES_1456,
+  // NEW
+  1462: ARMIES_1462,
 };
+

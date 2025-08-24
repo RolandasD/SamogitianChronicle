@@ -26,15 +26,15 @@ export const SAMOGITIA_NAVY_BY_YEAR = {
   "1445": { heavy: 0,  light: 0,  galley: 0,  trans: 0  },
   "1446": { heavy: 0,  light: 0,  galley: 0,  trans: 0  },
   "1453": { heavy: 0,  light: 0,  galley: 0,  trans: 0  },
-  // 1454 (last change that year: 1 Dec — 12/25/11/0)
   "1454": { heavy: 12, light: 25, galley: 11, trans: 0  },
-  // 1455 (last change that year: 21 Dec — 12/28/48/20)
   "1455": { heavy: 12, light: 28, galley: 48, trans: 20 },
-  // 1456 (last change that year: 5 Sep — 16/31/51/20)
   "1456": { heavy: 16, light: 31, galley: 51, trans: 20 },
-  // 1457 (split into two fleets; combined strength unchanged on 1 Jan)
   "1457": { heavy: 16, light: 31, galley: 51, trans: 20 },
+
+  // NEW
+  "1462": { heavy: 18, light: 32, galley: 51, trans: 20 },
 };
+
 
 // NEW — 1453 snapshot set (unchanged from your file)
 export const NAVIES_1453 = [
@@ -78,6 +78,28 @@ export const NAVIES_1456 = [
   { name: "Crimea",    heavy: 0,  light: 4,  galley: 5,  trans: 4,  total: 13  },
   { name: "Holland",   heavy: 1,  light: 10, galley: 0,  trans: 2,  total: 13  },
 ];
+// NEW — 1462
+export const NAVIES_1462 = [
+  { name: "Samogitia", heavy: 18, light: 32, galley: 51, trans: 20, total: 121 },
+  { name: "France",    heavy: 2,  light: 14, galley: 6,  trans: 7,  total: 29  },
+  { name: "Ottomans",  heavy: 1,  light: 5,  galley: 10, trans: 11, total: 27  },
+  { name: "Venice",    heavy: 0,  light: 9,  galley: 8,  trans: 7,  total: 24  },
+  { name: "Genoa",     heavy: 0,  light: 8,  galley: 12, trans: 4,  total: 24  },
+  { name: "Mamluks",   heavy: 2,  light: 3,  galley: 6,  trans: 11, total: 22  },
+  { name: "Denmark",   heavy: 1,  light: 3,  galley: 11, trans: 6,  total: 21  },
+  { name: "The Papal State", heavy: 0, light: 4, galley: 9, trans: 7, total: 20 },
+  { name: "Castile",   heavy: 2,  light: 7,  galley: 0,  trans: 9,  total: 18  },
+  { name: "Lubeck",    heavy: 0,  light: 9,  galley: 3,  trans: 4,  total: 16  },
+  { name: "Naples",    heavy: 0,  light: 10, galley: 2,  trans: 4,  total: 16  },
+  { name: "Ragusa",    heavy: 0,  light: 7,  galley: 5,  trans: 4,  total: 16  },
+  { name: "Portugal",  heavy: 3,  light: 7,  galley: 0,  trans: 5,  total: 15  },
+  { name: "Aragon",    heavy: 0,  light: 4,  galley: 4,  trans: 7,  total: 15  },
+  { name: "England",   heavy: 4,  light: 3,  galley: 0,  trans: 7,  total: 14  },
+  { name: "Crimea",    heavy: 0,  light: 4,  galley: 5,  trans: 4,  total: 13  },
+  { name: "Holland",   heavy: 1,  light: 10, galley: 0,  trans: 2,  total: 13  },
+  { name: "Austria",   heavy: 0,  light: 1,  galley: 3,  trans: 8,  total: 12  },
+  { name: "Scotland",  heavy: 7,  light: 0,  galley: 0,  trans: 5,  total: 12  },
+];
 
 // Split on 1 Jan 1457
 export const SAMOGITIA_NAVY_FLEETS_1457 = [
@@ -112,10 +134,19 @@ export const NAVAL_LEDGER = [
   { date: "1456-05-04", note: "Royal Navy expanded", heavy: 15, light: 30, galley: 50, trans: 20 },
   { date: "1456-09-05", note: "3 flagships built (HMS Death/Fear/Agony) & joined; Royal Navy expanded", heavy: 16, light: 31, galley: 51, trans: 20 },
   { date: "1457-01-01", note: "Navy split: Royal Navy (Klaipėda) & Baltic Fleet (Riga)", heavy: 16, light: 31, galley: 51, trans: 20 },
+
+  // NEW
+  { date: "1458-06-12", note: "Western Baltic victory vs Gotland — captured 1 ship", heavy: 16, light: 32, galley: 51, trans: 20 },
+  { date: "1459-03-24", note: "Gulf of Finland victory — captured 2 ships",        heavy: 18, light: 32, galley: 51, trans: 20 },
+  { date: "1459-03-25", note: "Gulf of Finland pursuit — enemy flotilla destroyed", heavy: 18, light: 32, galley: 51, trans: 20 },
+  { date: "1462-01-01", note: "Fleet status at year start",                          heavy: 18, light: 32, galley: 51, trans: 20 },
 ];
+
 
 export const NAVIES_BY_YEAR = {
   1444: NAVIES_1444,
   1453: NAVIES_1453,
   1456: NAVIES_1456,
+  // NEW
+  1462: NAVIES_1462,
 };
