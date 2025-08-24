@@ -1,4 +1,4 @@
-const CACHE_NAME = 'samogitian-cache-v1';
+const CACHE_NAME = 'samogitian-cache-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
@@ -16,7 +16,8 @@ const ASSETS_TO_CACHE = [
   '/assets/js/militaryData.js',
   '/maps/heartland.png',
   '/maps/world.png',
-  '/maps/region.png'
+  '/maps/region.png',
+  '/maps/regions.geojson'
 ];
 
 self.addEventListener('install', event => {
