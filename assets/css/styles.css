@@ -98,4 +98,5 @@ canvas{
 .site-nav .links a.active{background:var(--accent);color:#fff;}
 @media (max-width:720px){.site-nav .links{gap:.4rem;}}
 
+h1{font-family:Georgia,serif;color:var(--accent);}
 h2{font-family:Georgia,serif;color:var(--accent);}
