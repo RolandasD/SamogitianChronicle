@@ -5,65 +5,127 @@ description: "1449–1456 — Swedish Independence, Renaissance, the Royal Navy,
 ---
 
 <style>
-  .page{max-width:1200px;margin:0 auto;padding:0 1rem 2.5rem}
-  .hdr{margin:1.25rem 0}
-  .hdr h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
-  .hdr .sub{color:var(--muted,#666)}
-  .grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
-  @media (max-width:780px){.grid{grid-template-columns:1fr}.aside{position:static}}
+  :root{
+    --accent:#8b0000;
+    --gold1:#c8a94d; --gold2:#e7d387; --gold3:#b08a2e;
+    --ink:#1b1b1b;
+  }
+
+  .page-chapter{max-width:1200px;margin:0 auto;padding:0 1rem 2.5rem}
+  .chapter-header{margin:1.25rem 0 1.25rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+  .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .1rem}
+  .chapter-header .subtitle{color:var(--muted,#666);margin:0}
+
+  .chapter-badge{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;
+    background:radial-gradient(120% 120% at 30% 30%, var(--gold2), var(--gold1) 60%, var(--gold3));
+    box-shadow:0 2px 6px rgba(0,0,0,.15), inset 0 1px 2px rgba(255,255,255,.4);
+    border:1px solid rgba(0,0,0,.15)}
+  .chapter-badge svg{width:24px;height:24px;fill:#4b2d0f;filter:drop-shadow(0 1px 0 rgba(255,255,255,.25))}
+
+  .chapter-grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
+  @media (max-width:780px){.chapter-grid{grid-template-columns:1fr}.chapter-aside{position:static}}
 
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
   .prose p{margin:.8rem 0}
-  .prose blockquote{margin:1rem 0;padding:.75rem 1rem;border-left:3px solid var(--line,#ddd);background:linear-gradient(90deg,#fafafa,transparent)}
+  .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
+  .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left;white-space:nowrap}
   .muted{color:var(--muted,#666)}
-  .table-container{overflow:auto}
-  table{border-collapse:collapse;width:100%;margin:1rem 0}
-  th,td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left;white-space:nowrap}
 
-  .chip{display:inline-flex;gap:.35rem;align-items:center;border:1px solid var(--line,#e5e5e5);border-radius:999px;padding:.2rem .55rem;font-size:.85rem}
-  .stat{font-weight:700}
+  /* Pull-quote */
+  .pull-quote{margin:1.2rem 0;padding:1rem 1.25rem;border:1px solid var(--line,#e5e5e5);
+    border-radius:.75rem;background:linear-gradient(180deg,rgba(139,0,0,.06),transparent);position:relative;font-style:italic}
+  .pull-quote:before{content:"“";position:absolute;left:.5rem;top:-.35rem;font-size:2.75rem;color:var(--accent);opacity:.2;font-family:ui-serif,Georgia,serif}
 
-  .aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
-  .card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
-  .card h3{margin:0 0 .5rem;font-size:1rem}
-  .card img{width:100%;height:auto;border-radius:.5rem}
-  .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
-  .facts dt{color:var(--muted,#666)} .facts dd{margin:0;font-weight:600}
+  /* Illuminated drop cap */
+  .prose .illuminated:first-letter{
+    float:left;font-size:3.2em;line-height:.92;margin:.02em .18em 0 0;font-weight:700;
+    font-family:ui-serif,Georgia,"Times New Roman",serif;color:#3a2a14;
+    padding:.08em .18em .02em .18em;border:1px solid rgba(0,0,0,.15);border-radius:.15rem;
+    background:linear-gradient(140deg,var(--gold2),var(--gold1) 50%,var(--gold3)),
+              repeating-linear-gradient(45deg, rgba(255,255,255,.15) 0 2px, rgba(255,255,255,0) 2px 4px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -1px 0 rgba(0,0,0,.06);
+  }
 
+  /* Prologue parchment */
+  .prologue{
+    border:1px solid rgba(0,0,0,.12);border-radius:.75rem;padding:1rem;
+    background:
+      linear-gradient(180deg, rgba(120,84,34,.08), rgba(255,255,255,.55)),
+      url('{{ "/assets/textures/parchment.jpg" | relative_url }}');
+    background-size:cover;background-position:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.6);
+    color:var(--ink)
+  }
+  .prologue h2{font-size:1.05rem;margin:0 0 .35rem;color:#5a4931;letter-spacing:.02em;text-transform:uppercase}
+  .prologue p{margin:.65rem 0}
+  .prologue .sig{margin-top:.5rem;color:#6b5a3a;font-style:italic}
+
+  /* Small peace image */
   .figure-sm{max-width:520px;margin:0 auto 1rem}
   .figure-sm img{width:100%;height:auto;border-radius:.5rem}
   .figure-sm figcaption{font-size:.9rem;color:var(--muted,#666);text-align:center;margin-top:.35rem}
 
+  .chip{display:inline-flex;gap:.35rem;align-items:center;border:1px solid var(--line,#e5e5e5);border-radius:999px;padding:.2rem .55rem;font-size:.85rem}
+  .stat{font-weight:700}
+
+  .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
+  .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
+  .aside-card h3{margin:0 0 .5rem;font-size:1rem}
+  .aside-card img{width:100%;height:auto;border-radius:.5rem}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
+  .facts dt{color:var(--muted,#666)} .facts dd{margin:0;font-weight:600}
+
   @media (prefers-color-scheme: dark){
-    .prose blockquote{background:rgba(255,255,255,.04)}
-    .card{background:#101010;border-color:#2a2a2a}
+    .aside-card{background:#101010;border-color:#2a2a2a}
+    .prologue{background:
+      linear-gradient(180deg, rgba(139,0,0,.18), rgba(0,0,0,.45)),
+      url('{{ "/assets/textures/parchment.jpg" | relative_url }}'); background-blend-mode:overlay;
+    }
   }
 </style>
 
-<main class="page">
-  <header class="hdr">
-    <h1>Chapter 3: Lion of the North</h1>
-    <p class="sub">1449–1456 — Swedish Independence, Renaissance, the Royal Navy, and the Imperial Crown</p>
+<main class="page-chapter">
+  <header class="chapter-header">
+    <span class="chapter-badge" aria-hidden="true">
+      <!-- Lion/crown mark to echo the title -->
+      <svg viewBox="0 0 24 24" role="img" aria-label="Lion">
+        <path d="M4 10l2-3 3 2 3-2 3 2 3-2 2 3-2 8H6l-2-8zm5 8a3 3 0 006 0H9zM7 6l5-3 5 3-5 2-5-2z"/>
+      </svg>
+    </span>
+    <div>
+      <h1>Chapter 3: Lion of the North</h1>
+      <p class="subtitle">1449–1456 — Swedish Independence, Renaissance, the Royal Navy, and the Imperial Crown</p>
+    </div>
   </header>
 
-  <section class="grid">
+  <section class="chapter-grid">
     <article class="prose">
 
-      <h2>1449 — A Promise to Sweden</h2>
-      <p>
-        On <strong>15 November 1449</strong> a messenger from Stockholm reached the court at dusk. Sweden sought friends
-        for a bid at freedom; Samogitia answered before the wax had cooled on the seal. By <strong>1 December 1449</strong>,
-        our banners moved with theirs in the <em>War of Swedish Independence</em>.
+      <!-- Prologue -->
+      <section class="prologue">
+        <h2>Prologue: When the Sea Learned Our Name</h2>
+        <p>They say the gulls of Klaipėda wheeled differently the day our first masts rose. Not for fear—gulls fear nothing—but for surprise: a land realm had found its sea legs. In the logbooks of that spring, a clerk wrote, “The wind is ours as much as theirs.”</p>
+        <p class="sig">— <em>Chronicle of Varniai</em>, “On the Raising of the Royal Navy”</p>
+      </section>
+
+      <!-- Main narrative with illuminated drop cap -->
+      <p class="illuminated">
+        On <strong>15 November 1449</strong>, Sweden’s quiet plea reached Medininkai. Before the wax cooled, we gave our word.
+        By <strong>1 December</strong> our standards moved with theirs in the <em>War of Swedish Independence</em>. What followed
+        was not a rush of glory so much as a long, deliberate stride—the measured step of a realm deciding what it would be.
       </p>
-      <blockquote>“Let the Baltic learn that we are not merely watchers of storms. We are the wind.” — Attributed to
-      a court orator in Medininkai, winter 1449</blockquote>
+
+      <div class="pull-quote">
+        “Let the Baltic learn that we are not merely watchers of storms. We are the wind.”
+        <div class="muted">— Attributed to a court orator, winter 1449</div>
+      </div>
 
       <h2>1450 — Three New Standards</h2>
       <p>
-        The realm did not prepare with speeches alone. By <strong>January 1450</strong> three new regiments joined the line,
-        each mustering <span class="chip"><span class="stat">5k</span>/<span class="stat">3k</span>/<span class="stat">2k</span></span>:
+        Preparation came in steel and drill. By <strong>January 1450</strong> three new regiments joined the line, each
+        mustering <span class="chip"><span class="stat">5k</span>/<span class="stat">3k</span>/<span class="stat">2k</span></span>:
       </p>
       <ul>
         <li><strong>Royal Force</strong> — <em>Gintautas Tyzenhaus</em></li>
@@ -72,13 +134,11 @@ description: "1449–1456 — Swedish Independence, Renaissance, the Royal Navy,
       </ul>
       <p>
         With <em>Iron Wolf</em>, <em>Black Death</em>, and <em>Green Legion</em> already blooded, Samogitia now carried a true
-        army of maneuver—six standards, one purpose.
+        army of maneuver—six banners that could strike as one or wheel as three.
       </p>
 
       <h2>1452 — Winter Campaigns in the North</h2>
-      <p>
-        The ice did not blunt us. Three winter battles against the Kalmar belligerents set the tone for the war:
-      </p>
+      <p>The ice did not blunt us. Three winter actions set the tone for the war:</p>
       <div class="table-container">
         <table>
           <thead>
@@ -96,58 +156,48 @@ description: "1449–1456 — Swedish Independence, Renaissance, the Royal Navy,
           </tbody>
         </table>
       </div>
-      <blockquote>
-        “They marched where swans froze mid-flight.” — Captain’s letter from the Øresund front
+      <blockquote class="pull-quote" style="margin-top:1rem">
+        “They marched where swans froze mid-flight.”
+        <div class="muted">— Captain’s letter from the Øresund front</div>
       </blockquote>
 
-      <h2>1453 — Peace, Renaissance, and a Crown</h2>
+      <h2>1453 — Peace, Renaissance, and an Imperial Crown</h2>
       <p>
-        <strong>17 February 1453:</strong> Denmark yielded: ten years of reparations and <strong>345</strong> ducats;
-        Samogitia gained <strong>+2.0</strong> prestige (Denmark <strong>−2.0</strong>).
+        <strong>17 February:</strong> Denmark yielded ten years of reparations and <strong>345</strong> ducats; our ledger marked
+        <strong>+2.0</strong> prestige (Denmark <strong>−2.0</strong>). On <strong>1 March</strong> we <strong>embraced the Renaissance</strong>;
+        on <strong>9 March</strong> we <em>curtailed noble privileges</em>. At last, on <strong>14 April</strong> the bells out-rang the gulls:
+        the sovereigns were crowned <strong>Emperor and Empress of Samogitia</strong>.
       </p>
 
       <figure class="figure-sm">
         <a href="{{ "/assets/images/peace-denmark-1453.png" | relative_url }}">
           <img src="{{ "/assets/images/peace-denmark-1453.png" | relative_url }}" alt="Peace with Denmark, 17 February 1453" loading="lazy">
         </a>
-        <figcaption>Peace instrument from Denmark, 17 Feb 1453 — gold and amends for the new Baltic power.</figcaption>
+        <figcaption>Peace instrument from Denmark — gold and amends for the new Baltic power.</figcaption>
       </figure>
-
-      <p>
-        <strong>1 March 1453:</strong> the court embraced the <strong>Renaissance</strong>, drawing scholars and
-        surveyors to the capital. <strong>9 March 1453:</strong> noble privileges were <em>curtailed</em>, and the
-        crown’s hand steadied upon the tiller. <strong>14 April 1453:</strong> the bells out-rang the gulls as our
-        sovereigns were crowned <strong>Emperor and Empress of Samogitia</strong>.
-      </p>
 
       <h3>Armies Recast — August 1453</h3>
       <p>
-        The veteran corps—<em>Iron Wolf</em>, <em>Black Death</em>, and <em>Green Legion</em>—each expanded to
-        <span class="chip"><span class="stat">10k</span>/<span class="stat">6k</span>/<span class="stat">4k</span></span>
-        on <strong>18 August</strong>, the heartbeat of a new imperial field army.
+        The veteran triad—<em>Iron Wolf</em>, <em>Black Death</em>, <em>Green Legion</em>—each expanded to
+        <span class="chip"><span class="stat">10k</span>/<span class="stat">6k</span>/<span class="stat">4k</span></span> on <strong>18 August</strong>.
+        The field host thumped like a single drum.
       </p>
 
-      <h2>1454 — The Sea Opens</h2>
+      <h2>1454 — Mass Drill & the Birth of a Navy</h2>
       <p>
-        On <strong>January 1454</strong> mass training began across all banners—the old drill made new with
-        Renaissance methods. Then, on <strong>8 May</strong>, masts rose in Klaipėda:
-        <strong>twelve heavy ships</strong> crewed up under <em>Mindaugas Olshanski</em>, and the
-        <strong>Royal Navy</strong> was born.
-      </p>
-      <p>
-        The fleet grew with startling speed. Where we had been a land power pressed to the shore, by year’s end
-        the quays counted not just heavies but screens and oar-fleets. Below, the naval ledger tracks every step:
+        <strong>January 1454:</strong> the great training began—new manuals, new cadence, new steel. Then, on
+        <strong>8 May</strong>, masts rose in Klaipėda: <strong>12 heavy ships</strong> crewed up under
+        <em>Mindaugas Olshanski</em>, and the <strong>Royal Navy</strong> was born. The sea had been a border; now it was a road.
       </p>
 
+      <h3>Naval Ledger, 1454–1456</h3>
       <div class="table-container">
         <table>
           <thead>
-            <tr>
-              <th>Date</th><th>Heavy</th><th>Light</th><th>Galley</th><th>Transport</th><th>Note</th>
-            </tr>
+            <tr><th>Date</th><th>Heavy</th><th>Light</th><th>Galley</th><th>Transport</th><th>Note</th></tr>
           </thead>
           <tbody>
-            <tr><td>8 May 1454</td><td>12</td><td>0</td><td>0</td><td>0</td><td>Royal Navy formed at Klaipėda (Olshanski)</td></tr>
+            <tr><td>8 May 1454</td><td>12</td><td>0</td><td>0</td><td>0</td><td>Royal Navy formed at Klaipėda (Adm. M. Olshanski)</td></tr>
             <tr><td>11 Oct 1454</td><td>12</td><td>24</td><td>0</td><td>0</td><td>Light screen established</td></tr>
             <tr><td>1 Dec 1454</td><td>12</td><td>25</td><td>11</td><td>0</td><td>Galleys commissioned for coastal war</td></tr>
 
@@ -157,60 +207,72 @@ description: "1449–1456 — Swedish Independence, Renaissance, the Royal Navy,
             <tr><td>27 Sep 1455</td><td>12</td><td>28</td><td>36</td><td>20</td><td>Light screen reinforced; transports to 20</td></tr>
             <tr><td>21 Dec 1455</td><td>12</td><td>28</td><td>48</td><td>20</td><td>Year’s end fleet — 12/28/48/20</td></tr>
 
-            <tr><td>20 Jan 1456</td><td colspan="4">—</td><td><em>Pagan Fear</em> commander Tarvydas Korybut dies; replaced by Daugvilas Jogailaitis</td></tr>
+            <tr><td>20 Jan 1456</td><td colspan="4">—</td><td><em>Pagan Fear</em> commander Tarvydas Korybut dies; Daugvilas Jogailaitis takes command</td></tr>
             <tr><td>9 Feb 1456</td><td>12</td><td>30</td><td>48</td><td>20</td><td>Light screen grows</td></tr>
             <tr><td>31 Mar 1456</td><td>12</td><td>30</td><td>50</td><td>20</td><td>Galley arm strengthened</td></tr>
             <tr><td>4 May 1456</td><td>15</td><td>30</td><td>50</td><td>20</td><td>Heavy line reinforced</td></tr>
-            <tr><td>21 May 1456</td><td colspan="4">—</td><td><em>Royal Force</em> (G. Tyzenhaus) expands to <span class="chip">10k/6k/4k</span></td></tr>
-            <tr><td>1 Aug 1456</td><td colspan="4">—</td><td><em>Iron Legion</em> (L. Olshanski) expands to <span class="chip">10k/6k/4k</span></td></tr>
-            <tr><td>5 Sep 1456</td><td>16</td><td>31</td><td>51</td><td>20</td><td>Three flagships commissioned: <em>HMS Death</em> (Heavy), <em>HMS Fear</em> (Light), <em>HMS Agony</em> (Galley)</td></tr>
+            <tr><td>21 May 1456</td><td colspan="4">—</td><td><em>Royal Force</em> expanded to <span class="chip">10k/6k/4k</span> (G. Tyzenhaus)</td></tr>
+            <tr><td>1 Aug 1456</td><td colspan="4">—</td><td><em>Iron Legion</em> expanded to <span class="chip">10k/6k/4k</span> (L. Olshanski)</td></tr>
+            <tr><td>5 Sep 1456</td><td>16</td><td>31</td><td>51</td><td>20</td><td>Flagships commissioned: <em>HMS Death</em> (Heavy), <em>HMS Fear</em> (Light), <em>HMS Agony</em> (Galley)</td></tr>
           </tbody>
         </table>
       </div>
 
-      <h3>What the Navy Changed</h3>
-      <p>
-        The first twelve heavies gave us a mailed fist; the screens made it swift. Galleys bit into shallows and
-        channels the heavies dared not. And with transports came reach: a promise that Samogitia’s armies would no
-        longer be bounded by bridges.
-      </p>
-      <blockquote>“A crown is safest when it floats.” — Admiral Mindaugas Olshanski, to the dockyard guilds</blockquote>
+      <div class="pull-quote">
+        “A crown is safest when it floats.”
+        <div class="muted">— Admiral Mindaugas Olshanski, to the dockyard guilds</div>
+      </div>
 
       <h2>1456 — Steel and Oath Renewed</h2>
       <p>
-        The deaths of captains often write the margins of history. On <strong>20 January 1456</strong>,
-        <em>Tarvydas Korybut</em> fell from the rolls; <em>Daugvilas Jogailaitis</em> took command of
-        <em>Pagan Fear</em>. The same year, <em>Royal Force</em> and <em>Iron Legion</em> swelled to
-        <span class="chip"><span class="stat">10k</span>/<span class="stat">6k</span>/<span class="stat">4k</span></span>,
-        aligning with the great triad of 1453. By autumn the fleet carried three flagships—<em>Death</em>, <em>Fear</em>, and
-        <em>Agony</em>—names to make a harbor quiet.
+        Change of command writes history in fine print. On <strong>20 January</strong> <em>Tarvydas Korybut</em> passed from the rolls;
+        <em>Daugvilas Jogailaitis</em> took <em>Pagan Fear</em>. In the same year, <em>Royal Force</em> and <em>Iron Legion</em> swelled to
+        <span class="chip"><span class="stat">10k</span>/<span class="stat">6k</span>/<span class="stat">4k</span></span>, aligning with the triad of 1453.
+        By autumn three flagships—<em>Death</em>, <em>Fear</em>, and <em>Agony</em>—made the roadstead quiet.
       </p>
       <p class="muted">
-        End-of-year tallies: Army <strong>55,000 / 33,000 / 22,000</strong>. Navy <strong>16 / 31 / 51 / 20</strong>
+        End-of-year tallies (1456): Army <strong>55,000 / 33,000 / 22,000</strong>. Navy <strong>16 / 31 / 51 / 20</strong>
         (heavy / light / galley / transport).
       </p>
 
+      <h2>1457 — Two Blades to the Sea</h2>
+      <p>
+        At first light on <strong>1 January 1457</strong> the navy split for reach and readiness:
+        the <strong>Royal Navy</strong> under <em>Mindaugas Olshanski</em> remained at <em>Klaipėda</em>,
+        bearing the flagship <em>HMS Death</em>, while the new <strong>Baltic Fleet</strong> under
+        <em>Aras Tyzenhaus</em> sailed to <em>Riga</em> with <em>HMS Fear</em> and <em>HMS Agony</em>.
+      </p>
+      <div class="table-container">
+        <table>
+          <thead><tr><th>Fleet (Base)</th><th>Heavy</th><th>Light</th><th>Galley</th><th>Transport</th><th>Flagship(s)</th></tr></thead>
+          <tbody>
+            <tr><td>Royal Navy (Klaipėda)</td><td>7</td><td>16</td><td>26</td><td>0</td><td>HMS Death</td></tr>
+            <tr><td>Baltic Fleet (Riga)</td><td>9</td><td>15</td><td>25</td><td>20</td><td>HMS Fear, HMS Agony</td></tr>
+          </tbody>
+        </table>
+      </div>
+
       <hr>
       <p class="muted">
-        <strong>Summary:</strong> Backed Swedish Independence (1449); winter victories vs Norway & Denmark (1452);
-        peace with Denmark (17 Feb 1453); embraced Renaissance (1 Mar 1453); curtailed noble privileges (9 Mar 1453);
-        Imperial coronation (14 Apr 1453); veteran corps expanded (18 Aug 1453). Navy founded (8 May 1454) and rapidly
-        expanded through 1455–1456; commander change in Pagan Fear (20 Jan 1456); Royal Force & Iron Legion upgraded; three
-        flagships commissioned (5 Sep 1456).
+        <strong>Summary:</strong> Backed Swedish Independence (1449) and fought winter victories (1452); peace with Denmark (17 Feb 1453);
+        embraced Renaissance (1 Mar 1453); curtailed noble privileges (9 Mar 1453); Imperial coronation (14 Apr 1453);
+        triad expanded (18 Aug 1453). Mass training (1454); Royal Navy founded (8 May 1454) and enlarged through 1455–1456;
+        commander change in <em>Pagan Fear</em> (20 Jan 1456); <em>Royal Force</em> & <em>Iron Legion</em> upgraded; three flagships launched (5 Sep 1456);
+        navy split into two operational fleets (1 Jan 1457).
       </p>
     </article>
 
-    <aside class="aside">
-      <!-- Only the relevant map for this chapter -->
-      <div class="card">
+    <aside class="chapter-aside">
+      <!-- No 1444 maps here; show the 1448 regional stage and navy context -->
+      <div class="aside-card">
         <h3>Region (1448)</h3>
         <a href="{{ "/assets/maps/region1448.png" | relative_url }}">
           <img src="{{ "/assets/maps/region1448.png" | relative_url }}" alt="Region after 1448 conquests">
         </a>
-        <p class="muted">The stage for Swedish Independence and the Baltic naval build-up.</p>
+        <p class="muted" style="margin:.5rem 0 0">The stage for Swedish Independence and the Baltic naval build-up.</p>
       </div>
 
-      <div class="card">
+      <div class="aside-card">
         <h3>Royal Navy — Klaipėda</h3>
         <dl class="facts">
           <dt>Admiral</dt><dd>Mindaugas Olshanski</dd>
@@ -220,7 +282,7 @@ description: "1449–1456 — Swedish Independence, Renaissance, the Royal Navy,
         </dl>
       </div>
 
-      <div class="card">
+      <div class="aside-card">
         <h3>Fleet Totals (End of Year)</h3>
         <table>
           <thead><tr><th>Year</th><th>H</th><th>L</th><th>G</th><th>T</th></tr></thead>
@@ -232,25 +294,25 @@ description: "1449–1456 — Swedish Independence, Renaissance, the Royal Navy,
         </table>
       </div>
 
-      <div class="card">
-        <h3>Key Command & Changes</h3>
-        <dl class="facts">
-          <dt>Field Armies</dt><dd>Iron Wolf • Black Death • Green Legion</dd>
-          <dt>Added (1450)</dt><dd>Royal Force • Pagan Fear • Iron Legion</dd>
-          <dt>Upgrades</dt><dd>Triad to 10k/6k/4k (Aug 1453)</dd>
-          <dt>1456</dt><dd>Royal Force & Iron Legion to 10k/6k/4k</dd>
-          <dt>Pagan Fear</dt><dd>Jogailaitis replaces Korybut (20 Jan 1456)</dd>
-        </dl>
+      <div class="aside-card">
+        <h3>1457 Fleet Disposition</h3>
+        <table>
+          <thead><tr><th>Fleet</th><th>H</th><th>L</th><th>G</th><th>T</th></tr></thead>
+          <tbody>
+            <tr><td>Royal Navy (Klaipėda)</td><td>7</td><td>16</td><td>26</td><td>0</td></tr>
+            <tr><td>Baltic Fleet (Riga)</td><td>9</td><td>15</td><td>25</td><td>20</td></tr>
+          </tbody>
+        </table>
       </div>
 
-      <div class="card">
+      <div class="aside-card">
         <h3>Named Armies (1456)</h3>
         <ul style="padding-left:1.1rem;margin:.25rem 0">
           <li>Iron Wolf — 10k / 6k / 4k</li>
           <li>Black Death — 10k / 6k / 4k</li>
           <li>Green Legion — 10k / 6k / 4k</li>
           <li>Royal Force — 10k / 6k / 4k</li>
-          <li>Pagan Fear — 5k / 3k / 2k (Jogailaitis)</li>
+          <li>Pagan Fear — 5k / 3k / 2k (D. Jogailaitis)</li>
           <li>Iron Legion — 10k / 6k / 4k</li>
         </ul>
       </div>
