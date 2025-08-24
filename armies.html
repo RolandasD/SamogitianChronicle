@@ -1,39 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Armies of Samogitia</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Overview of the armies fielded by Samogitia.">
-  <meta property="og:title" content="Armies of Samogitia">
-  <meta property="og:description" content="Overview of the armies fielded by Samogitia.">
-    <meta property="og:url" content="https://rolandasd.github.io/SamogitianChronicle/armies.html">
-    <link rel="stylesheet" href="assets/css/styles.css">
-  </head>
-  <body>
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("nav.html")
-      .then(r => r.text())
-      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
-  </script>
-  <main class="container">
-    <h1>Armies of Samogitia</h1>
-    <section>
-      <h2>Armies of the World 1444</h2>
-      <table id="armies-table">
-        <thead>
-          <tr><th>Nation</th><th>Infantry</th><th>Cavalry</th><th>Artillery</th><th>Total</th></tr>
-        </thead>
-        <tbody></tbody>
-      </table>
-    </section>
-    <section>
-      <h2>Samogitian Army Over Time</h2>
-      <canvas id="armies-chart"></canvas>
-    </section>
-  </main>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
-  <script type="module" src="assets/js/armiesPage.js"></script>
-</body>
-</html>
+---
+layout: default
+title: Armies of Samogitia
+description: Overview of the armies fielded by Samogitia.
+---
+
+<main class="container">
+  <h1>Armies of Samogitia</h1>
+  <section>
+    <h2>Armies of the World 1444</h2>
+    <table id="armies-table">
+      <thead>
+        <tr><th>Nation</th><th>Infantry</th><th>Cavalry</th><th>Artillery</th><th>Total</th></tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </section>
+  <section>
+    <h2>Samogitian Army Over Time</h2>
+    <canvas id="armies-chart"></canvas>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<script type="module" src="assets/js/armiesPage.js"></script>

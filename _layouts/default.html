@@ -16,12 +16,7 @@
   <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
 </head>
 <body>
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("{{ '/nav.html' | relative_url }}")
-      .then(r => r.text())
-      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
-  </script>
+  {% include nav.html %}
   {{ content }}
 </body>
 </html>

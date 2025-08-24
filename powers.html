@@ -1,15 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Powers of 1444</title>
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <link rel="stylesheet" href="assets/css/styles.css">
-  <meta name="description" content="Army and navy compositions of major powers in 1444.">
-  <meta property="og:title" content="Powers of 1444">
-  <meta property="og:description" content="Army and navy compositions of major powers in 1444.">
-  <meta property="og:url" content="https://rolandasd.github.io/SamogitianChronicle/powers.html">
-  <style>
+---
+layout: default
+title: Powers of 1444
+description: Army and navy compositions of major powers in 1444.
+---
+
+<style>
     /* Page-specific styles for Powers */
     .container{max-width:1200px;}
     .grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
@@ -20,220 +15,210 @@
     .toolbar button:hover{background:#f6f6f6;}
     .highlight{background:#fffbdd;}
     th.sortable{cursor:pointer;}
-  </style>
-</head>
-<body>
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("nav.html")
-      .then(r => r.text())
-      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
-  </script>
+</style>
 
-  <header class="banner">
-    <h1>Powers of 1444</h1>
-    <p>Army and Navy compositions at the dawn of the age</p>
-  </header>
+<header class="banner">
+  <h1>Powers of 1444</h1>
+  <p>Army and Navy compositions at the dawn of the age</p>
+</header>
 
-  <main class="container">
-    <section class="grid">
-      <!-- Army Table -->
-      <article class="card">
-        <h2>Army Composition (Infantry / Cavalry / Artillery)</h2>
-        <div class="toolbar">
-          <button id="highlightArmy" type="button">Top Army</button>
-        </div>
-        <table id="army-table">
-          <thead>
-            <tr>
-              <th>Country</th>
-              <th>Total</th>
-              <th>Inf</th>
-              <th>Cav</th>
-              <th>Art</th>
-            </tr>
-          </thead>
-          <tbody id="army-rows"></tbody>
-        </table>
-        <p class="muted">Totals = Infantry + Cavalry + Artillery</p>
-      </article>
-
-      <!-- Navy Table -->
-      <article class="card">
-        <h2>Navy Composition (Heavy / Light / Galley / Transport)</h2>
-        <div class="toolbar">
-          <button id="highlightNavy" type="button">Top Navy</button>
-        </div>
-        <table id="navy-table">
-          <thead>
-            <tr>
-              <th>Country</th>
-              <th>Total</th>
-              <th>Heavy</th>
-              <th>Light</th>
-              <th>Galley</th>
-              <th>Transport</th>
-            </tr>
-          </thead>
-          <tbody id="navy-rows"></tbody>
-        </table>
-        <p class="muted">Totals = Heavy + Light + Galleys + Transports</p>
-      </article>
-    </section>
-
-    <!-- Samogitia named armies (optional helper table) -->
-    <section class="card" style="margin-top:1rem;">
-      <h2>Samogitia Armies (1444–1446)</h2>
-      <table>
-        <thead>
-          <tr><th>Year</th><th>Name</th><th>Commander</th><th>Inf</th><th>Cav</th><th>Art</th><th>Total</th></tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1444</td><td><em>—</em></td><td><em>—</em></td>
-            <td>5,000</td><td>1,000</td><td>0</td><td>6,000</td>
-          </tr>
-          <tr>
-            <td>1445</td><td>Iron Wolf</td><td>Daugvilas Tyzenhaus</td>
-            <td>5,000</td><td>3,000</td><td>2,000</td><td>10,000</td>
-          </tr>
-          <tr>
-            <td>1446</td><td>Black Death</td><td>Kantibutas Giedraiciai</td>
-            <td>5,000</td><td>3,000</td><td>2,000</td><td>10,000</td>
-          </tr>
-          <tr>
-            <td colspan="3"><strong>1446 Combined</strong></td>
-            <td><strong>10,000</strong></td>
-            <td><strong>6,000</strong></td>
-            <td><strong>4,000</strong></td>
-            <td><strong>20,000</strong></td>
-          </tr>
-        </tbody>
-      </table>
-      <p class="muted">Combined totals assume both armies are active in 1446.</p>
-    </section>
-
-    <!-- Interactive Chart -->
-    <section class="card" style="margin-top:2rem;">
-      <h2>Evolution of Armies & Navies</h2>
-
-      <!-- Toggle all -->
+<main class="container">
+  <section class="grid">
+    <!-- Army Table -->
+    <article class="card">
+      <h2>Army Composition (Infantry / Cavalry / Artillery)</h2>
       <div class="toolbar">
-        <button id="toggleAllBtn" type="button">Show all</button>
+        <button id="highlightArmy" type="button">Top Army</button>
       </div>
+      <table id="army-table">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Total</th>
+            <th>Inf</th>
+            <th>Cav</th>
+            <th>Art</th>
+          </tr>
+        </thead>
+        <tbody id="army-rows"></tbody>
+      </table>
+      <p class="muted">Totals = Infantry + Cavalry + Artillery</p>
+    </article>
 
-      <canvas id="evolutionChart"></canvas>
-      <p class="muted">Interactive: Hover for values, click legend to toggle individual countries, or use “Toggle all”.</p>
-    </section>
+    <!-- Navy Table -->
+    <article class="card">
+      <h2>Navy Composition (Heavy / Light / Galley / Transport)</h2>
+      <div class="toolbar">
+        <button id="highlightNavy" type="button">Top Navy</button>
+      </div>
+      <table id="navy-table">
+        <thead>
+          <tr>
+            <th>Country</th>
+            <th>Total</th>
+            <th>Heavy</th>
+            <th>Light</th>
+            <th>Galley</th>
+            <th>Transport</th>
+          </tr>
+        </thead>
+        <tbody id="navy-rows"></tbody>
+      </table>
+      <p class="muted">Totals = Heavy + Light + Galleys + Transports</p>
+    </article>
+  </section>
 
-    <a class="back" href="index.html">← Back to Chronicle Index</a>
-  </main>
-  
-  <!-- Chart.js -->
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script type="module">
-    import { ARMIES_1444, NAVIES_1444, SAMOGITIA_BY_YEAR } from './assets/js/militaryData.js';
+  <!-- Samogitia named armies (optional helper table) -->
+  <section class="card" style="margin-top:1rem;">
+    <h2>Samogitia Armies (1444–1446)</h2>
+    <table>
+      <thead>
+        <tr><th>Year</th><th>Name</th><th>Commander</th><th>Inf</th><th>Cav</th><th>Art</th><th>Total</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>1444</td><td><em>—</em></td><td><em>—</em></td>
+          <td>5,000</td><td>1,000</td><td>0</td><td>6,000</td>
+        </tr>
+        <tr>
+          <td>1445</td><td>Iron Wolf</td><td>Daugvilas Tyzenhaus</td>
+          <td>5,000</td><td>3,000</td><td>2,000</td><td>10,000</td>
+        </tr>
+        <tr>
+          <td>1446</td><td>Black Death</td><td>Kantibutas Giedraiciai</td>
+          <td>5,000</td><td>3,000</td><td>2,000</td><td>10,000</td>
+        </tr>
+        <tr>
+          <td colspan="3"><strong>1446 Combined</strong></td>
+          <td><strong>10,000</strong></td>
+          <td><strong>6,000</strong></td>
+          <td><strong>4,000</strong></td>
+          <td><strong>20,000</strong></td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="muted">Combined totals assume both armies are active in 1446.</p>
+  </section>
 
-    function renderTable(data,tbodyId,cols){
-      const tbody=document.getElementById(tbodyId);
-      tbody.innerHTML='';
-      data.forEach(r=>{
-        const tr=document.createElement('tr');
-        tr.innerHTML=`<td>${r.name}</td><td>${r.total}</td>`+cols.map(c=>`<td>${r[c]}</td>`).join('');
-        tbody.appendChild(tr);
-      });
-    }
+  <!-- Interactive Chart -->
+  <section class="card" style="margin-top:2rem;">
+    <h2>Evolution of Armies &amp; Navies</h2>
 
-    function makeSortable(tableId,tbodyId,data,cols){
-      const table=document.getElementById(tableId);
-      table.querySelectorAll('th').forEach((th,i)=>{
-        th.classList.add('sortable');
-        let asc=true;
-        th.addEventListener('click',()=>{
-          const key=i===0?'name':i===1?'total':cols[i-2];
-          data.sort((a,b)=>{
-            if(a[key]<b[key]) return asc?-1:1;
-            if(a[key]>b[key]) return asc?1:-1;
-            return 0;
-          });
-          asc=!asc;
-          renderTable(data,tbodyId,cols);
+    <!-- Toggle all -->
+    <div class="toolbar">
+      <button id="toggleAllBtn" type="button">Show all</button>
+    </div>
+
+    <canvas id="evolutionChart"></canvas>
+    <p class="muted">Interactive: Hover for values, click legend to toggle individual countries, or use “Toggle all”.</p>
+  </section>
+
+  <a class="back" href="index.html">← Back to Chronicle Index</a>
+</main>
+
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script type="module">
+  import { ARMIES_1444, NAVIES_1444, SAMOGITIA_BY_YEAR } from './assets/js/militaryData.js';
+
+  function renderTable(data,tbodyId,cols){
+    const tbody=document.getElementById(tbodyId);
+    tbody.innerHTML='';
+    data.forEach(r=>{
+      const tr=document.createElement('tr');
+      tr.innerHTML=`<td>${r.name}</td><td>${r.total}</td>`+cols.map(c=>`<td>${r[c]}</td>`).join('');
+      tbody.appendChild(tr);
+    });
+  }
+
+  function makeSortable(tableId,tbodyId,data,cols){
+    const table=document.getElementById(tableId);
+    table.querySelectorAll('th').forEach((th,i)=>{
+      th.classList.add('sortable');
+      let asc=true;
+      th.addEventListener('click',()=>{
+        const key=i===0?'name':i===1?'total':cols[i-2];
+        data.sort((a,b)=>{
+          if(a[key]<b[key]) return asc?-1:1;
+          if(a[key]>b[key]) return asc?1:-1;
+          return 0;
         });
+        asc=!asc;
+        renderTable(data,tbodyId,cols);
       });
-    }
-
-    function highlightTop(data,tbodyId){
-      const max=Math.max(...data.map(r=>r.total));
-      const rows=document.getElementById(tbodyId).rows;
-      Array.from(rows).forEach(row=>{
-        row.classList.toggle('highlight',parseInt(row.cells[1].textContent)===max);
-      });
-    }
-
-    renderTable(ARMIES_1444,'army-rows',['inf','cav','art']);
-    renderTable(NAVIES_1444,'navy-rows',['heavy','light','galley','trans']);
-    makeSortable('army-table','army-rows',ARMIES_1444,['inf','cav','art']);
-    makeSortable('navy-table','navy-rows',NAVIES_1444,['heavy','light','galley','trans']);
-    document.getElementById('highlightArmy').addEventListener('click',()=>highlightTop(ARMIES_1444,'army-rows'));
-    document.getElementById('highlightNavy').addEventListener('click',()=>highlightTop(NAVIES_1444,'navy-rows'));
-
-    const YEARS=Object.keys(SAMOGITIA_BY_YEAR);
-
-    function hslColor(i,total,sat=70,light=45){
-      const hue=(i*360/total)%360;
-      return `hsl(${hue},${sat}%,${light}%)`;
-    }
-
-    const datasets=[];
-    let armyIndex=0;
-    let navyIndex=0;
-
-    ARMIES_1444.forEach(r=>{
-      const color=hslColor(armyIndex++,ARMIES_1444.length,70,40);
-      const series=YEARS.map(y=>{
-        if(r.name==='Samogitia'){
-          const v=SAMOGITIA_BY_YEAR[y];
-          return v?(v.inf+v.cav+v.art):null;
-        }
-        return y===YEARS[0]?r.total:null;
-      });
-      datasets.push({label:`${r.name} Army`,data:series,borderColor:color,backgroundColor:color,hidden:true});
     });
+  }
 
-    NAVIES_1444.forEach(r=>{
-      const color=hslColor(navyIndex++,NAVIES_1444.length,65,35);
-      datasets.push({label:`${r.name} Navy`,data:[r.total,...YEARS.slice(1).map(()=>null)],borderColor:color,backgroundColor:color,hidden:true});
+  function highlightTop(data,tbodyId){
+    const max=Math.max(...data.map(r=>r.total));
+    const rows=document.getElementById(tbodyId).rows;
+    Array.from(rows).forEach(row=>{
+      row.classList.toggle('highlight',parseInt(row.cells[1].textContent)===max);
     });
+  }
 
-    const ctx=document.getElementById('evolutionChart').getContext('2d');
-    const evoChart=new Chart(ctx,{
-      type:'line',
-      data:{labels:YEARS,datasets},
-      options:{
-        responsive:true,
-        interaction:{mode:'nearest',intersect:false},
-        plugins:{legend:{display:true}},
-        elements:{line:{tension:0.25}},
-        scales:{y:{beginAtZero:true}}
+  renderTable(ARMIES_1444,'army-rows',['inf','cav','art']);
+  renderTable(NAVIES_1444,'navy-rows',['heavy','light','galley','trans']);
+  makeSortable('army-table','army-rows',ARMIES_1444,['inf','cav','art']);
+  makeSortable('navy-table','navy-rows',NAVIES_1444,['heavy','light','galley','trans']);
+  document.getElementById('highlightArmy').addEventListener('click',()=>highlightTop(ARMIES_1444,'army-rows'));
+  document.getElementById('highlightNavy').addEventListener('click',()=>highlightTop(NAVIES_1444,'navy-rows'));
+
+  const YEARS=Object.keys(SAMOGITIA_BY_YEAR);
+
+  function hslColor(i,total,sat=70,light=45){
+    const hue=(i*360/total)%360;
+    return `hsl(${hue},${sat}%,${light}%)`;
+  }
+
+  const datasets=[];
+  let armyIndex=0;
+  let navyIndex=0;
+
+  ARMIES_1444.forEach(r=>{
+    const color=hslColor(armyIndex++,ARMIES_1444.length,70,40);
+    const series=YEARS.map(y=>{
+      if(r.name==='Samogitia'){
+        const v=SAMOGITIA_BY_YEAR[y];
+        return v?(v.inf+v.cav+v.art):null;
       }
+      return y===YEARS[0]?r.total:null;
     });
+    datasets.push({label:`${r.name} Army`,data:series,borderColor:color,backgroundColor:color,hidden:true});
+  });
 
-    const toggleBtn=document.getElementById('toggleAllBtn');
+  NAVIES_1444.forEach(r=>{
+    const color=hslColor(navyIndex++,NAVIES_1444.length,65,35);
+    datasets.push({label:`${r.name} Navy`,data:[r.total,...YEARS.slice(1).map(()=>null)],borderColor:color,backgroundColor:color,hidden:true});
+  });
 
-    function isAllHidden(){
-      return evoChart.data.datasets.every(ds=>ds.hidden===true);
+  const ctx=document.getElementById('evolutionChart').getContext('2d');
+  const evoChart=new Chart(ctx,{
+    type:'line',
+    data:{labels:YEARS,datasets},
+    options:{
+      responsive:true,
+      interaction:{mode:'nearest',intersect:false},
+      plugins:{legend:{display:true}},
+      elements:{line:{tension:0.25}},
+      scales:{y:{beginAtZero:true}}
     }
-    function setAllHidden(hidden){
-      evoChart.data.datasets.forEach(ds=>{ds.hidden=hidden;});
-      evoChart.update();
-      toggleBtn.textContent=hidden?'Show all':'Hide all';
-    }
-    function toggleAll(){
-      const shouldShow=isAllHidden();
-      setAllHidden(!shouldShow?true:false);
-    }
-    toggleBtn.textContent='Show all';
-    toggleBtn.addEventListener('click',toggleAll);
-  </script>
-</body>
-</html>
+  });
+
+  const toggleBtn=document.getElementById('toggleAllBtn');
+
+  function isAllHidden(){
+    return evoChart.data.datasets.every(ds=>ds.hidden===true);
+  }
+  function setAllHidden(hidden){
+    evoChart.data.datasets.forEach(ds=>{ds.hidden=hidden;});
+    evoChart.update();
+    toggleBtn.textContent=hidden?'Show all':'Hide all';
+  }
+  function toggleAll(){
+    const shouldShow=isAllHidden();
+    setAllHidden(!shouldShow?true:false);
+  }
+  toggleBtn.textContent='Show all';
+  toggleBtn.addEventListener('click',toggleAll);
+</script>
