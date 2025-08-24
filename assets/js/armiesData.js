@@ -155,7 +155,7 @@ export const ARMIES_1462 = [
   { name: "Portugal",      inf: 6000,  cav: 3000,  art: 0,     total: 9000   },
 ];
 export const ARMIES_1467 = [
-  { name: "Lithuania",    inf: 124000, cav: 56000, art: 44000, total: 224000 },
+  { name: "Samogitia",    inf: 124000, cav: 56000, art: 44000, total: 224000 },
   { name: "Ottomans",     inf: 31255,  cav: 14000, art: 0,     total: 45255  },
   { name: "Mamluks",      inf: 30000,  cav: 11000, art: 0,     total: 41000  },
   { name: "France",       inf: 23059,  cav: 10000, art: 0,     total: 33059  },

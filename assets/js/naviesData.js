@@ -108,7 +108,7 @@ export const NAVIES_1462 = [
   { name: "Scotland",  heavy: 7,  light: 0,  galley: 0,  trans: 5,  total: 12  },
 ];
 export const NAVIES_1467 = [
-  { name: "Lithuania",    heavy: 31, light: 40, galley: 60, trans: 30, total: 161 },
+  { name: "Samogitia",    heavy: 31, light: 40, galley: 60, trans: 30, total: 161 },
   { name: "Ottomans",     heavy: 1,  light: 6,  galley: 12, trans: 12, total: 31  },
   { name: "France",       heavy: 2,  light: 14, galley: 6,  trans: 7,  total: 29  },
   { name: "Venice",       heavy: 0,  light: 13, galley: 8,  trans: 7,  total: 28  },
@@ -143,7 +143,7 @@ export const SAMOGITIA_NAVY_FLEETS_1457 = [
     heavy: 9, light: 15, galley: 25, trans: 20, total: 69
   }
 ];
-export const LITHUANIA_NAVY_FLEETS_1465 = [
+export const SAMOGITIA_NAVY_FLEETS_1465 = [
   {
     name: "Dream Fleet",
     leader: "Vilhelmas Svyriskis",
