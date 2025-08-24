@@ -123,13 +123,13 @@ description: Evolution of Samogitia's military and navy over time.
     return v?(v.inf+v.cav+v.art):0;
   });
   const NAVY_TOTAL = YEARS.map(y=>{
-    const v=SAMOGITIA_BY_YEAR[y];
-    return v?(v.heavy+v.light+v.galley+v.transport):0;
-  });
+   const v=SAMOGITIA_BY_YEAR[y];
+   return v ? (v.heavy + v.light + v.galley + v.trans) : 0;
+});
   const NAVY_HEAVY = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.heavy||0);
   const NAVY_LIGHT = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.light||0);
   const NAVY_GALLEY = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.galley||0);
-  const NAVY_TRANSPORT = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.transport||0);
+  const NAVY_TRANSPORT = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.trans||0);
 
   const ctxArmy=document.getElementById('armyEvolutionChart').getContext('2d');
   new Chart(ctxArmy,{
@@ -145,12 +145,7 @@ description: Evolution of Samogitia's military and navy over time.
     options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
   });
 
-  const col={
-    heavy:'hsl(210,65%,45%)',
-    light:'hsl(200,65%,45%)',
-    galley:'hsl(220,65%,45%)',
-    transport:'hsl(190,65%,45%)'
-  };
+  const col={ heavy:'hsl(210,65%,45%)', light:'hsl(200,65%,45%)', galley:'hsl(220,65%,45%)', trans:'hsl(190,65%,45%)' };
 
   const ctxNavy=document.getElementById('navyBreakdownChart').getContext('2d');
   new Chart(ctxNavy,{
@@ -161,7 +156,7 @@ description: Evolution of Samogitia's military and navy over time.
         { label:'Heavy',     data:NAVY_HEAVY,     borderColor:col.heavy,     backgroundColor:'hsla(210,65%,70%,0.25)', tension:0.25, pointRadius:4 },
         { label:'Light',     data:NAVY_LIGHT,     borderColor:col.light,     backgroundColor:'hsla(200,65%,70%,0.25)', tension:0.25, pointRadius:4 },
         { label:'Galley',    data:NAVY_GALLEY,    borderColor:col.galley,    backgroundColor:'hsla(220,65%,70%,0.25)', tension:0.25, pointRadius:4 },
-        { label:'Transport', data:NAVY_TRANSPORT, borderColor:col.transport, backgroundColor:'hsla(190,65%,70%,0.25)', tension:0.25, pointRadius:4 }
+        { label:'Transport', data:NAVY_TRANSPORT, borderColor:col.trans, backgroundColor:'hsla(190,65%,70%,0.25)', tension:0.25, pointRadius:4 }
       ]
     },
     options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
