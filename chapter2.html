@@ -5,10 +5,22 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
 ---
 
 <style>
+  :root{
+    --accent:#8b0000;
+    --gold1:#c8a94d; --gold2:#e7d387; --gold3:#b08a2e;
+    --ink:#1b1b1b;
+  }
+
   .page-chapter{max-width:1200px;margin:0 auto;padding:0 1rem 2.5rem}
-  .chapter-header{margin:1.25rem 0 1.25rem}
-  .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
-  .chapter-header .subtitle{color:var(--muted,#666)}
+  .chapter-header{margin:1.25rem 0 1.25rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+  .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .1rem}
+  .chapter-header .subtitle{color:var(--muted,#666);margin:0}
+
+  .chapter-badge{display:inline-flex;align-items:center;justify-content:center;width:40px;height:40px;border-radius:999px;
+    background:radial-gradient(120% 120% at 30% 30%, var(--gold2), var(--gold1) 60%, var(--gold3));
+    box-shadow:0 2px 6px rgba(0,0,0,.15), inset 0 1px 2px rgba(255,255,255,.4);
+    border:1px solid rgba(0,0,0,.15)}
+  .chapter-badge svg{width:24px;height:24px;fill:#4b2d0f;filter:drop-shadow(0 1px 0 rgba(255,255,255,.25))}
 
   .chapter-grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
   @media (max-width:780px){.chapter-grid{grid-template-columns:1fr}.chapter-aside{position:static}}
@@ -17,271 +29,161 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
   .prose p{margin:.8rem 0}
-  .prose blockquote{margin:1rem 0;padding:.75rem 1rem;border-left:3px solid var(--line,#ddd);background:linear-gradient(90deg,#fafafa,transparent)}
-  .prose hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem 0}
   .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
   .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
   .muted{color:var(--muted,#666)}
 
-  /* Drop cap for the first main paragraph */
-  .prose .dropcap:first-letter{
-    float:left;font-size:3.2em;line-height:.9;padding-right:.08em;margin-top:.05em;font-weight:700;
-    font-family:ui-serif,Georgia,"Times New Roman",serif
+  /* Pull-quote */
+  .pull-quote{margin:1.2rem 0;padding:1rem 1.25rem;border:1px solid var(--line,#e5e5e5);
+    border-radius:.75rem;background:linear-gradient(180deg,rgba(139,0,0,.06),transparent);position:relative;font-style:italic}
+  .pull-quote:before{content:"“";position:absolute;left:.5rem;top:-.35rem;font-size:2.75rem;color:var(--accent);opacity:.2;font-family:ui-serif,Georgia,serif}
+
+  /* Illuminated drop cap */
+  .prose .illuminated:first-letter{
+    float:left;font-size:3.2em;line-height:.92;margin:.02em .18em 0 0;font-weight:700;
+    font-family:ui-serif,Georgia,"Times New Roman",serif;color:#3a2a14;
+    padding:.08em .18em .02em .18em;border:1px solid rgba(0,0,0,.15);border-radius:.15rem;
+    background:linear-gradient(140deg,var(--gold2),var(--gold1) 50%,var(--gold3)),
+              repeating-linear-gradient(45deg, rgba(255,255,255,.15) 0 2px, rgba(255,255,255,0) 2px 4px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -1px 0 rgba(0,0,0,.06);
   }
 
-  /* Prologue vignette */
+  /* Prologue parchment */
   .prologue{
-    border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:1rem;background:linear-gradient(180deg,rgba(139,0,0,.05),transparent);
-    margin:.25rem 0 1.25rem
+    border:1px solid rgba(0,0,0,.12);border-radius:.75rem;padding:1rem;
+    background:
+      linear-gradient(180deg, rgba(120,84,34,.08), rgba(255,255,255,.55)),
+      url('{{ "/assets/textures/parchment.jpg" | relative_url }}');
+    background-size:cover;background-position:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.6);
+    color:var(--ink)
   }
-  .prologue h2{font-size:1.05rem;margin:0 0 .35rem;color:var(--muted,#666);letter-spacing:.02em;text-transform:uppercase}
-  .prologue p{font-style:italic;margin:.65rem 0}
-  .prologue .sig{margin-top:.5rem;font-style:normal;color:var(--muted,#666);font-size:.95rem}
+  .prologue h2{font-size:1.05rem;margin:0 0 .35rem;color:#5a4931;letter-spacing:.02em;text-transform:uppercase}
+  .prologue p{margin:.65rem 0}
+  .prologue .sig{margin-top:.5rem;color:#6b5a3a;font-style:italic}
 
-  /* Small media figure for the peace screenshot */
+  /* Small peace image */
   .figure-sm{max-width:520px;margin:0 auto 1rem}
   .figure-sm img{width:100%;height:auto;border-radius:.5rem}
   .figure-sm figcaption{font-size:.9rem;color:var(--muted,#666);text-align:center;margin-top:.35rem}
 
-  /* Chips */
   .chip{display:inline-flex;gap:.35rem;align-items:center;border:1px solid var(--line,#e5e5e5);border-radius:999px;padding:.2rem .55rem;font-size:.85rem}
   .stat{font-weight:700}
 
-  /* Sidebar */
   .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
   .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
   .aside-card h3{margin:0 0 .5rem;font-size:1rem}
   .aside-card img{width:100%;height:auto;border-radius:.5rem}
   .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
   .facts dt{color:var(--muted,#666)} .facts dd{margin:0;font-weight:600}
-  .aside-list{padding-left:1.1rem;margin:.25rem 0} .aside-list li{margin:.25rem 0}
 
   @media (prefers-color-scheme: dark){
-    .prose blockquote{background:rgba(255,255,255,.04)}
     .aside-card{background:#101010;border-color:#2a2a2a}
-    .prologue{background:linear-gradient(180deg,rgba(139,0,0,.18),transparent)}
+    .prologue{background:
+      linear-gradient(180deg, rgba(139,0,0,.18), rgba(0,0,0,.45)),
+      url('{{ "/assets/textures/parchment.jpg" | relative_url }}'); background-blend-mode:overlay;
+    }
   }
 </style>
 
 <main class="page-chapter">
   <header class="chapter-header">
-    <h1>Chapter 2: Iron Wolf</h1>
-    <p class="subtitle">1445–1448 — Naming, expansion, War of the Orders, and elevation to a Kingdom</p>
+    <span class="chapter-badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" role="img" aria-label="Wolf">
+        <path d="M3 12c4-1 6-5 6-5s3 3 6 3c2 0 4-1 6-3-1 4-3 7-6 8l1 3-3-2-3 2 1-3c-3-1-6-3-8-5Z"/>
+      </svg>
+    </span>
+    <div>
+      <h1>Chapter 2: Iron Wolf</h1>
+      <p class="subtitle">1445–1448 — Naming, expansion, War of the Orders, and elevation to a Kingdom</p>
+    </div>
   </header>
 
   <section class="chapter-grid">
     <article class="prose">
 
-      <!-- PROLOGUE VIGNETTE -->
+      <!-- Prologue -->
       <section class="prologue">
         <h2>Prologue: The Naming, Summer 1445</h2>
-        <p>
-          Cloister bells rolled across the parade square and the banners smelled of fresh dye. A hush took the ranks as
-          the herald’s voice climbed the walls: <em>Geležinis Vilkas</em>—the Iron Wolf. The name landed like a mailed fist:
-          not boast, but burden. Tyzenhaus said nothing. He only touched the standard once, as if testing the heat of iron.
-        </p>
-        <p>
-          That afternoon the line wheeled on a single beat of the drum, and the dust rose in a perfect crescent. The
-          grooms swore the horses felt it too—the moment when men and mount moved like hinges of the same door.
-        </p>
-        <p class="sig">— From the <em>Chronicle of Varniai</em>, “On the Banners of the Year 1445”</p>
+        <p>Cloister bells rolled across the parade square and the banners smelled of fresh dye… <em>Geležinis Vilkas</em>—the Iron Wolf. The name landed like a mailed fist: not boast, but burden.</p>
+        <p>That afternoon the line wheeled on a single beat of the drum; the dust rose in a perfect crescent…</p>
+        <p class="sig">— <em>Chronicle of Varniai</em>, “On the Banners of the Year 1445”</p>
       </section>
 
-      <!-- MAIN NARRATIVE with drop cap -->
-      <p class="dropcap">
-        When the court named our field host <strong>Iron Wolf</strong> in the summer of 1445, it was more than ceremony.
-        It was a promise: that Samogitia would not merely endure between taller shadows, but stand with its own.
-      </p>
+      <!-- Main narrative with illuminated drop cap -->
+      <p class="illuminated">When the court named our field host <strong>Iron Wolf</strong> in the summer of 1445, it was more than ceremony. It was a promise…</p>
 
-      <blockquote>
+      <div class="pull-quote">
         “Name a thing not for what it is, but for what you demand it become.”
-        <br><span class="muted">— Sister Agnė of Varniai to the treasurer, on the cost of new standards</span>
-      </blockquote>
+        <div class="muted">— Sister Agnė of Varniai</div>
+      </div>
 
       <h2>1445 — The Naming of the Iron Wolf</h2>
-      <p>
-        The army grew to <strong>10,000</strong>—<strong>5,000 infantry</strong>, <strong>3,000 cavalry</strong>, and
-        <strong>2,000 artillery</strong>. Tyzenhaus drilled the line until it moved like a hinge; scouts sounded river fords;
-        smithies beat a cadence that matched the march. Logistics were scripture: rye, oats, salt, and boots—always boots.
-      </p>
+      <p>The army grew to <strong>10,000</strong> (5k/3k/2k)… Logistics were scripture: rye, oats, salt, and boots—always boots.</p>
 
       <h2>1446 — A Second Claw, and a Son</h2>
-      <p>
-        In <strong>January 1446</strong> the crown raised a second regiment, the <strong>Black Death</strong>, under
-        <strong>Kantibutas Giedraiciai</strong> (<span class="chip">5k/3k/2k</span>). The realm, too, gained an heir:
-        <strong>Rolandas</strong>, born <strong>19 February</strong> (<span class="chip">4/2/2</span>)—on the very day of the
-        royal marriage to <strong>Ausra</strong>. Bells and bootsteps shared the streets; a dynasty and a drillbook turned their pages together.
-      </p>
-      <p>
-        On <strong>26 April</strong>, Poland chose a Jagiellon and bound itself in a union with Lithuania under
-        <strong>Kazimierz Jagiellon</strong> (<span class="chip">4/4/1</span>), with <strong>August</strong> as heir. Samogitia read the wind, and on
-        <strong>15 May</strong> named <strong>Poland</strong> a rival. The board was set; the pieces woke.
-      </p>
+      <p>In <strong>January 1446</strong> the crown raised <strong>Black Death</strong> under <strong>Kantibutas Giedraiciai</strong> <span class="chip">5k/3k/2k</span>. On <strong>19 Feb</strong>, heir <strong>Rolandas</strong> <span class="chip">4/2/2</span> was born—the day of the royal marriage to <strong>Ausra</strong>.</p>
+      <p><strong>26 Apr</strong> Poland–Lithuania PU under <strong>Kazimierz Jagiellon</strong> <span class="chip">4/4/1</span> (heir: August). <strong>15 May</strong> we declared <strong>Poland</strong> our rival.</p>
 
-      <!-- ORDER OF BATTLE (main column) -->
+      <!-- Order of Battle -->
       <h2 id="order-of-battle">Order of Battle (1445–1447)</h2>
       <div class="table-container">
         <table>
-          <thead>
-            <tr><th>Year</th><th>Army</th><th>Commander</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
-          </thead>
+          <thead><tr><th>Year</th><th>Army</th><th>Commander</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr></thead>
           <tbody>
-            <tr>
-              <td>1445</td><td>Iron Wolf</td><td>Daugvilas Tyzenhaus</td>
-              <td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td>
-            </tr>
-            <tr>
-              <td>1446 (Jan)</td><td>Black Death</td><td>Kantibutas Giedraiciai</td>
-              <td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td>
-            </tr>
-            <tr>
-              <td>1447 (Jan)</td><td>Green Legion</td><td>Tomas Gostautas</td>
-              <td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td>
-            </tr>
-            <tr>
-              <td colspan="3"><strong>Combined by Jan 1447</strong></td>
-              <td><strong>30,000</strong></td>
-              <td><strong>15,000</strong></td>
-              <td><strong>9,000</strong></td>
-              <td><strong>6,000</strong></td>
-            </tr>
+            <tr><td>1445</td><td>Iron Wolf</td><td>Daugvilas Tyzenhaus</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
+            <tr><td>1446 (Jan)</td><td>Black Death</td><td>Kantibutas Giedraiciai</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
+            <tr><td>1447 (Jan)</td><td>Green Legion</td><td>Tomas Gostautas</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
+            <tr><td colspan="3"><strong>Combined by Jan 1447</strong></td><td><strong>30,000</strong></td><td><strong>15,000</strong></td><td><strong>9,000</strong></td><td><strong>6,000</strong></td></tr>
           </tbody>
         </table>
       </div>
 
       <h2>1447–1448 — War of the Orders</h2>
-      <p>
-        On <strong>4 June 1447</strong> the banners rose and the messengers rode. Samogitia declared war upon the
-        <strong>Livonian Order</strong> and the <strong>Teutonic Order</strong>. Their muster drew in
-        <em>Mecklenburg, Riga, and Stettin</em>. Our opening strength stood at
-        <strong>15,000 infantry, 9,000 cavalry, 6,000 artillery</strong>; the enemy gathered <strong>25,000 infantry</strong>
-        and <strong>8,000 cavalry</strong>. They leaned on old walls. We trusted new steel.
-      </p>
+      <p>Declared <strong>4 Jun 1447</strong> against Livonian &amp; Teutonic Orders (with Mecklenburg, Riga, Stettin). Our opening: <strong>15k/9k/6k</strong>; enemy: <strong>25k/8k</strong>…</p>
 
-      <h3>First Stroke — The Battle of Mitau (15 June 1447)</h3>
-      <p>
-        Tyzenhaus seized the river crossings at dusk and struck before the Orders could cohere. With
-        <strong>10,000/6,000/4,000</strong>, Samogitia fell upon a divided host of <strong>7,000/3,000/0</strong>.
-        The fight was brief and terminal; enemy banners were trampled into marsh-grass. Our line held perfect dressing—
-        <strong>no casualties</strong>. The Iron Wolf bared its teeth.
-      </p>
+      <h3>Mitau — 15 Jun 1447</h3><p>Our <strong>10k/6k/4k</strong> vs <strong>7k/3k/0</strong>: annihilation; <strong>no casualties</strong>.</p>
+      <h3>Reval — 24 Aug 1447</h3><p><strong>5k/3k/2k</strong> vs <strong>1k</strong>: annihilation.</p>
+      <h3>Narwa — 15 Sep 1447</h3><p><strong>5k/3k/2k</strong> vs <strong>1k</strong>: annihilation.</p>
+      <h3>Stargard — 23 Nov 1447</h3><p><strong>5k/3k/2k</strong> vs <strong>6k/2k/0</strong>: victory; losses <strong>6</strong>.</p>
+      <h3>Sieradz — 31 Dec 1447</h3><p><strong>5k/3k/2k</strong> vs <strong>6k/3k/0</strong>: victory; losses <strong>7</strong>.</p>
 
-      <h3>The Baltic Gate — Reval (24 August 1447)</h3>
-      <p>
-        Giedraiciai drove a fast column—<strong>5,000/3,000/2,000</strong>—through forest roads, catching a garrison of
-        <strong>1,000</strong> before relief could ride. The gate to the sea opened with scarcely a scratch; the enemy were
-        <strong>annihilated</strong>. A city’s harbor heard a new tongue shouting orders.
-      </p>
+      <h3>Peace — 28 Jan 1448</h3>
+      <p>Livonian Order fully annexed; Riga and ten Teutonic provinces ceded (Memel, Insterburg, Königsberg, Ermland, Ortelsburg, Marienburg, Danzig, Tuchel, Kulm, Ostroede). <strong>+170</strong> ducats; <strong>+9.2</strong> prestige; <strong>+5.1 AE</strong>; <strong>+0.01</strong> inflation.</p>
 
-      <h3>Icewind River — Narwa (15 September 1447)</h3>
-      <p>
-        The same spearpoint swept east. On the banks at Narwa the Black Death repeated the lesson:
-        <strong>5,000/3,000/2,000</strong> against <strong>1,000</strong>; the foe unmade, the road cleared. The columns slept with
-        their boots on and their helmets for pillows.
-      </p>
-
-      <h3>Autumn Thunder — Stargard (23 November 1447)</h3>
-      <p>
-        As leaves burned gold, the Orders massed a truer force at Stargard—<strong>6,000/2,000/0</strong>. We met them with
-        <strong>5,000/3,000/2,000</strong>. The guns spoke; the horse rolled their flank. Victory cost us <strong>six souls</strong>;
-        the enemy was <strong>swept from the field</strong>. Tyzenhaus’ note in the margin: “Courage is logistics arriving on time.”
-      </p>
-
-      <h3>Year’s End — Sieradz (31 December 1447)</h3>
-      <p>
-        Snow fell as the <strong>Green Legion</strong> proved its steel: <strong>5,000/3,000/2,000</strong> broke
-        <strong>6,000/3,000/0</strong>. Seven names entered the roll of honor; the foe’s roll ended. The year closed on iron.
-      </p>
-
-      <h3>Peace of 28 January 1448</h3>
-      <p>
-        Couriers carried terms through the winter dark. The Livonian Order bowed to <strong>full annexation</strong>;
-        <strong>Riga</strong> itself came to Samogitia; and from the Teutonic Order there fell to us
-        <em>Memel, Insterburg, Königsberg, Ermland, Ortelsburg, Marienburg, Danzig, Tuchel, Kulm, Ostroede</em>.
-        The treasury counted <strong>170</strong> ducats; prestige rose <strong>+9.2</strong>; the price in the balance
-        of fear was <strong>5.1 AE</strong> and <strong>0.01</strong> inflation. The ledger closed; the maps changed.
-      </p>
-
-      <!-- Smaller peace screenshot -->
       <figure class="figure-sm">
-        <a href="{{ "/assets/images/peace-1448.png" | relative_url }}">
-          <img src="{{ "/assets/images/peace-1448.png" | relative_url }}" alt="Peace deal of 28 January 1448 — terms and effects" loading="lazy">
-        </a>
+        <a href="{{ "/assets/images/peace-1448.png" | relative_url }}"><img src="{{ "/assets/images/peace-1448.png" | relative_url }}" alt="Peace deal of 28 January 1448 — terms and effects" loading="lazy"></a>
         <figcaption>Instrument of peace concluding the War of the Orders, 28 January 1448.</figcaption>
       </figure>
 
-      <!-- Compact ledger -->
-      <div class="table-container" aria-label="Campaign ledger">
-        <table>
-          <thead><tr><th>Gain / Effect</th><th>Value</th></tr></thead>
-          <tbody>
-            <tr><td>Provinces</td><td>Riga; Memel; Insterburg; Königsberg; Ermland; Ortelsburg; Marienburg; Danzig; Tuchel; Kulm; Ostroede</td></tr>
-            <tr><td>Annexation</td><td>Livonian Order (full)</td></tr>
-            <tr><td>Gold</td><td>170 ducats</td></tr>
-            <tr><td>Prestige</td><td>+9.2</td></tr>
-            <tr><td>Aggressive Expansion</td><td>+5.1 AE</td></tr>
-            <tr><td>Inflation</td><td>+0.01</td></tr>
-          </tbody>
-        </table>
-      </div>
-
       <h2>Crown &amp; Culture (1448)</h2>
-      <p>
-        On <strong>7 March 1448</strong>, church-bells and crowd-roars announced the <strong>Kingdom of Samogitia</strong>.
-        On <strong>13 April</strong>, we claimed <strong>Baltic Cultural Hegemony</strong>—a promise to keep the sea’s tongue and memory.
-        Diplomacy followed banners: <strong>1 June</strong> sealed a <strong>Royal Marriage with Brandenburg</strong>. Quays deepened,
-        roads were metalled, granaries widened; by year’s turn to <strong>1449</strong>, our gaze was steady and forward.
-      </p>
-
-      <blockquote>
-        “We built with timber, but we measured with time. Kingdoms are carpentry.”
-        <br><span class="muted">— Guildmaster Stasys, on the great works after the war</span>
-      </blockquote>
+      <p><strong>7 Mar:</strong> Kingdom of Samogitia; <strong>13 Apr:</strong> Baltic Cultural Hegemony; <strong>1 Jun:</strong> Royal Marriage with Brandenburg. Great works continue through 1449.</p>
 
       <hr>
-      <p class="muted">
-        <strong>Summary:</strong> 1446—Black Death raised; heir Rolandas (4/2/2); marriage to Ausra; Poland–Lithuania PU under
-        Kazimierz (4/4/1); rivalry vs Poland. 1447—Green Legion raised; victories at Mitau, Reval, Narwa, Stargard, Sieradz.
-        1448—Peace and annexations; Kingdom proclaimed; Baltic hegemony; marriage with Brandenburg; great works to 1449.
-      </p>
+      <p class="muted"><strong>Summary:</strong> 1446—Black Death; heir Rolandas (4/2/2); marriage to Ausra; Poland–Lithuania PU (Kazimierz 4/4/1). 1447—Green Legion; five victories. 1448—Peace; Kingdom; Hegemony; Brandenburg; works to 1449.</p>
     </article>
 
     <aside class="chapter-aside">
-      <!-- 1444 baseline maps -->
       <div class="aside-card">
         <h3>Heartland (1444)</h3>
-        <a href="{{ "/assets/maps/heartland.png" | relative_url }}">
-          <img src="{{ "/assets/maps/heartland.png" | relative_url }}" alt="Samogitia heartland, 1444">
-        </a>
+        <a href="{{ "/assets/maps/heartland.png" | relative_url }}"><img src="{{ "/assets/maps/heartland.png" | relative_url }}" alt="Samogitia heartland, 1444"></a>
         <p class="muted" style="margin:.5rem 0 0">Core provinces and immediate surroundings.</p>
       </div>
-
       <div class="aside-card">
         <h3>Region (1444)</h3>
-        <a href="{{ "/assets/maps/region.png" | relative_url }}">
-          <img src="{{ "/assets/maps/region.png" | relative_url }}" alt="Regional map, 1444">
-        </a>
+        <a href="{{ "/assets/maps/region.png" | relative_url }}"><img src="{{ "/assets/maps/region.png" | relative_url }}" alt="Regional map, 1444"></a>
         <p class="muted" style="margin:.5rem 0 0">Baltic neighborhood and trade access.</p>
       </div>
-
       <div class="aside-card">
         <h3>World (1444)</h3>
-        <a href="{{ "/assets/maps/world.png" | relative_url }}">
-          <img src="{{ "/assets/maps/world.png" | relative_url }}" alt="World map, 1444">
-        </a>
+        <a href="{{ "/assets/maps/world.png" | relative_url }}"><img src="{{ "/assets/maps/world.png" | relative_url }}" alt="World map, 1444"></a>
         <p class="muted" style="margin:.5rem 0 0">Wider geopolitical context.</p>
       </div>
-
-      <!-- Post-war map -->
       <div class="aside-card">
         <h3>Region (1448)</h3>
-        <a href="{{ "/assets/maps/region1448.png" | relative_url }}">
-          <img src="{{ "/assets/maps/region1448.png" | relative_url }}" alt="Region after conquests, 1448">
-        </a>
+        <a href="{{ "/assets/maps/region1448.png" | relative_url }}"><img src="{{ "/assets/maps/region1448.png" | relative_url }}" alt="Region after conquests, 1448"></a>
         <p class="muted" style="margin:.5rem 0 0">Territory following the War of the Orders.</p>
       </div>
-
-      <!-- Key Command -->
       <div class="aside-card">
         <h3>Key Command</h3>
         <dl class="facts">
@@ -290,8 +192,6 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
           <dt>General (1447)</dt><dd>Tomas Gostautas — Green Legion</dd>
         </dl>
       </div>
-
-      <!-- Court & House -->
       <div class="aside-card">
         <h3>House &amp; Succession</h3>
         <dl class="facts">
@@ -300,18 +200,14 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
           <dt>Dynasty</dt><dd>—</dd>
         </dl>
       </div>
-
-      <!-- Foreign Affairs -->
       <div class="aside-card">
         <h3>Foreign Affairs</h3>
         <dl class="facts">
           <dt>26 Apr 1446</dt><dd>Poland–Lithuania PU (Kazimierz 4/4/1; heir August)</dd>
-          <dt>15 May 1446</dt><dd>Rivalry declared vs Poland</dd>
+          <dt>15 May 1446</dt><dd>Rivalry vs Poland</dd>
           <dt>1 Jun 1448</dt><dd>Royal Marriage — Brandenburg</dd>
         </dl>
       </div>
-
-      <!-- War Tally -->
       <div class="aside-card">
         <h3>War of the Orders — Tally</h3>
         <dl class="facts">
