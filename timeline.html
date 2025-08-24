@@ -6,6 +6,7 @@ description: Key events shaping Samogitia.
 
 <style>
   .timeline-container{max-width:800px;margin:2rem auto;padding:0 1rem;}
+  .controls{display:flex;gap:.5rem;align-items:center;margin-bottom:1rem;flex-wrap:wrap;}
   .timeline{position:relative;padding-left:2rem;border-left:2px solid var(--line);}
   .timeline-item{position:relative;margin:1rem 0;padding-left:1rem;}
   .timeline-year{font-weight:700;color:#4b0000;}
@@ -19,16 +20,69 @@ description: Key events shaping Samogitia.
 </header>
 
 <main class="timeline-container">
+  <div class="controls">
+    <label>Start <input type="range" id="startYear"></label>
+    <span id="startVal"></span>
+    <label>End <input type="range" id="endYear"></label>
+    <span id="endVal"></span>
+    <button id="resetRange" type="button">Reset</button>
+  </div>
   <div id="timeline" class="timeline"></div>
 </main>
 
 <script type="module">
   import { TIMELINE_EVENTS } from "./assets/js/timelineData.js";
   const container = document.getElementById('timeline');
-  [...TIMELINE_EVENTS].sort((a,b)=>a.year-b.year).forEach(ev=>{
-    const item=document.createElement('div');
-    item.className='timeline-item';
-    item.innerHTML=`<span class="timeline-year">${ev.year}</span><div class="timeline-content">${ev.event}</div>`;
-    container.appendChild(item);
+  const startInput = document.getElementById('startYear');
+  const endInput = document.getElementById('endYear');
+  const startVal = document.getElementById('startVal');
+  const endVal = document.getElementById('endVal');
+  const resetBtn = document.getElementById('resetRange');
+
+  const years = TIMELINE_EVENTS.map(e=>e.year);
+  const minYear = Math.min(...years);
+  const maxYear = Math.max(...years);
+
+  startInput.min = endInput.min = minYear;
+  startInput.max = endInput.max = maxYear;
+  startInput.value = minYear;
+  endInput.value = maxYear;
+
+  function render(){
+    const start = parseInt(startInput.value);
+    const end = parseInt(endInput.value);
+    startVal.textContent = start;
+    endVal.textContent = end;
+    container.innerHTML='';
+    TIMELINE_EVENTS.filter(ev=>ev.year>=start && ev.year<=end)
+      .sort((a,b)=>a.year-b.year)
+      .forEach(ev=>{
+        const item=document.createElement('div');
+        item.className='timeline-item';
+        item.innerHTML=`<span class="timeline-year">${ev.year}</span><div class="timeline-content">${ev.event}</div>`;
+        container.appendChild(item);
+      });
+  }
+
+  startInput.addEventListener('input',()=>{
+    if(parseInt(startInput.value)>parseInt(endInput.value)){
+      endInput.value=startInput.value;
+    }
+    render();
   });
+
+  endInput.addEventListener('input',()=>{
+    if(parseInt(endInput.value)<parseInt(startInput.value)){
+      startInput.value=endInput.value;
+    }
+    render();
+  });
+
+  resetBtn.addEventListener('click',()=>{
+    startInput.value=minYear;
+    endInput.value=maxYear;
+    render();
+  });
+
+  render();
 </script>
