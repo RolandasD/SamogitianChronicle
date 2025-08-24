@@ -1,46 +1,50 @@
 [
   {
-    "title": "Armies of Samogitia",
+    "title": "armies",
     "url": "armies.html"
   },
   {
-    "title": "Chapter I – The Dawn of Samogitia (1444)",
+    "title": "chapter1",
     "url": "chapter1.html"
   },
   {
-    "title": "Chapter II — Expansion & The First War (1445–1446) | Chronicle of Samogitia",
+    "title": "chapter2",
     "url": "chapter2.html"
   },
   {
-    "title": "Treasury & Economy",
+    "title": "chronicle",
+    "url": "chronicle.html"
+  },
+  {
+    "title": "economy",
     "url": "economy.html"
   },
   {
-    "title": "The Chronicle of Samogitia",
+    "title": "index",
     "url": "index.html"
   },
   {
-    "title": "Atlas of Eastern Europe",
+    "title": "maps",
     "url": "maps.html"
   },
   {
-    "title": "Royal Navy",
+    "title": "navies",
     "url": "navies.html"
   },
   {
-    "title": "Powers of 1444",
+    "title": "powers",
     "url": "powers.html"
   },
   {
-    "title": "Rulers & Advisors",
+    "title": "rulers",
     "url": "rulers.html"
   },
   {
-    "title": "Samogitia — Military & Navy Evolution",
+    "title": "samogitia",
     "url": "samogitia.html"
   },
   {
-    "title": "Historical Timeline",
+    "title": "timeline",
     "url": "timeline.html"
   }
 ]
