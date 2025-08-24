@@ -20,12 +20,6 @@
 
 <script>
   (function(){
-    const here = location.pathname.replace(/\/+(?:index\.html)?$/, '').split('/').pop() || 'index.html';
-    document.querySelectorAll('.site-nav .links a').forEach(a => {
-      const link = a.getAttribute('href').replace(/\/+(?:index\.html)?$/, '').split('/').pop();
-      if(link === here){
-  // Highlight the active link
-  (function(){
     const here = location.pathname.replace(/\/+$/,'');
     document.querySelectorAll('.site-nav .links a').forEach(a=>{
       const link = a.getAttribute('href').replace(/\/+$/,'');
@@ -65,4 +59,5 @@
 </script>
   <script src="assets/js/theme.js" defer></script>
   <script src="assets/js/navToggle.js" defer></script>
+=======
 
