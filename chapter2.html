@@ -1,165 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Chapter II — Expansion & The First War (1445–1446) | Chronicle of Samogitia</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Chapter II details Samogitia’s early expansion and pre-war build-up, including the Iron Wolf and Black Death armies, and succession events in 1446." />
-  <style>
-    :root{
-      --ink:#222; --muted:#666; --accent:#8b0000; --card:#fff; --bg:#f7f7f7; --line:#e6e6e6;
-    }
-    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,"Apple Color Emoji","Segoe UI Emoji";line-height:1.6}
-    /* Top nav (client-include fallback) */
-    nav#site-nav{background:#fff;border-bottom:1px solid var(--line)}
-    nav#site-nav .fallback{display:flex;flex-wrap:wrap;gap:.8rem;padding:.6rem 1rem;list-style:none;margin:0}
-    nav#site-nav .fallback a{color:#333;text-decoration:none;padding:.2rem .45rem;border-radius:8px}
-    nav#site-nav .fallback a[aria-current="page"]{background:#f4eaea}
-    nav#site-nav .fallback a:hover{background:#f0f0f0}
-    /* Banner */
-    .banner{background:linear-gradient(90deg,var(--accent),#b22222);color:#fff;text-align:center;padding:2.4rem 1rem}
-    .banner h1{margin:0;font-size:clamp(1.6rem,2vw+1rem,2.4rem);letter-spacing:.4px}
-    .banner p{margin:.4rem 0 0 0;opacity:.9}
-    /* Layout */
-    .wrap{max-width:1100px;margin:0 auto;padding:1.25rem}
-    main{display:grid;grid-template-columns:1fr 320px;gap:1.25rem}
-    @media (max-width: 980px){ main{grid-template-columns:1fr} }
-    /* Cards */
-    .card{background:var(--card);border:1px solid var(--line);border-radius:14px;box-shadow:0 1px 2px rgba(0,0,0,.04);padding:1rem}
-    .card h2,.card h3{margin:.1rem 0 .6rem 0}
-    .kicker{font-size:.9rem;letter-spacing:.05em;text-transform:uppercase;color:#b94c4c}
-    .muted{color:var(--muted)}
-    /* Timeline */
-    .timeline{border-left:3px solid var(--line);margin-left:.4rem;padding-left:1rem}
-    .event{margin:1rem 0}
-    .event time{font-weight:600}
-    /* Definition lists */
-    dl{display:grid;grid-template-columns:auto 1fr;gap:.4rem .8rem;margin:.6rem 0}
-    dt{color:var(--muted)}
-    dd{margin:0}
-    /* Tables */
-    table{width:100%;border-collapse:collapse}
-    th,td{padding:.5rem;border-bottom:1px solid var(--line);text-align:left}
-    th{background:#faf7f7}
-    /* Badges */
-    .badge{display:inline-block;font-size:.8rem;padding:.1rem .5rem;border:1px solid var(--line);border-radius:999px}
-    .ok{background:#edf7ed;border-color:#cfe7cf}
-    footer{color:var(--muted);font-size:.95rem;padding:2rem 0}
-    code.inline{background:#f3f3f3;border:1px solid #e5e5e5;padding:.05rem .35rem;border-radius:5px}
-  </style>
-</head>
-<body>
+---
+layout: default
+title: "Chapter 2: Iron Wolf"
+description: "1445–1446 — Naming and expansion"
+---
 
-  <!-- Shared navigation include (client-side). -->
-  <nav id="site-nav" data-src="/partials/nav.html">
-    <ul class="fallback">
-      <li><a href="index.html">Index</a></li>
-      <li><a href="chapter-1.html">Chapter I</a></li>
-      <li><a href="chapter-2.html" aria-current="page"><strong>Chapter II</strong></a></li>
-      <li><a href="military-records.html">Military Records</a></li>
-      <li><a href="military-graph.html">Military Graph</a></li>
-      <li><a href="data.html">Data</a></li>
-    </ul>
-  </nav>
+<style>
+  .page-chapter{max-width:1200px;margin:0 auto;padding:0 1rem 2.5rem}
+  .chapter-header{margin:1.25rem 0 1.25rem}
+  .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
+  .chapter-header .subtitle{color:var(--muted,#666)}
 
-  <header class="banner">
-    <h1>Chapter II — Expansion & The First War (1445–1446)</h1>
-    <p class="muted">From cautious growth to open conflict: armies named and succession secured.</p>
+  /* Force two columns; collapse only on small screens */
+  .chapter-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
+    gap:1.5rem;align-items:start
+  }
+  @media (max-width:780px){
+    .chapter-grid{grid-template-columns:1fr}
+    .chapter-aside{position:static}
+  }
+
+  .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
+  .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
+  .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
+  .prose p{margin:.8rem 0}
+  .prose img{max-width:100%;height:auto;border-radius:.5rem;display:block;margin:1rem auto}
+  .prose figure{margin:1.25rem 0;text-align:center}
+  .prose figcaption{font-size:.9rem;color:var(--muted,#666)}
+  .prose blockquote{margin:1rem 0;padding:.75rem 1rem;border-left:3px solid var(--line,#ddd);background:linear-gradient(90deg,#fafafa,transparent)}
+  .prose hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem 0}
+
+  .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
+  .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
+  .aside-card h3{margin:0 0 .5rem;font-size:1rem}
+  .aside-card img{width:100%;height:auto;border-radius:.5rem}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
+  .facts dt{color:var(--muted,#666)}
+  .facts dd{margin:0;font-weight:600}
+  .aside-list{padding-left:1.1rem;margin:.25rem 0}
+  .aside-list li{margin:.25rem 0}
+
+  @media (prefers-color-scheme: dark){
+    .prose blockquote{background:rgba(255,255,255,.04)}
+    .aside-card{background:#101010;border-color:#2a2a2a}
+  }
+</style>
+
+<main class="page-chapter">
+  <header class="chapter-header">
+    <h1>Chapter 2: Iron Wolf</h1>
+    <p class="subtitle">1445–1446 — Naming and expansion</p>
   </header>
 
-  <div class="wrap">
-    <main>
-      <!-- Narrative core -->
-      <article class="card">
-        <p class="kicker">Overview</p>
-        <h2>Mandate to Grow</h2>
-        <p>
-          Following the consolidation of power after 1444, Samogitia shifted from ad-hoc levies toward a structured
-          field presence. In <strong>June 1445</strong>, the realm formalized its main field army as
-          <strong>Iron Wolf</strong> under <strong>Daugvilas Tyzenhaus</strong>, reorganized to
-          <strong>5,000 / 3,000 / 2,000</strong> (Inf/Cav/Art).
-        </p>
+  <section class="chapter-grid">
+    <article class="prose">
+      <p>
+        In June 1445, the field army is formally named <strong>Iron Wolf</strong>.
+        Doctrine tightens, logistics improve, and a second army is planned to spread risk and extend reach.
+      </p>
 
-        <!-- Confirmed chronology only -->
-        <section class="card" style="margin-top:1rem">
-          <h3>Chronology (1445–1446)</h3>
-          <div class="timeline">
-            <div class="event">
-              <time datetime="1445-06">June 1445</time> — <strong>Iron Wolf</strong> designated and reorganized to 5k/3k/2k under <strong>Daugvilas Tyzenhaus</strong>.
-            </div>
-            <div class="event">
-              <time datetime="1446-01">January 1446</time> — Second field army formed: <strong>Black Death</strong> (5k/3k/2k) under <strong>Kantibutas Giedraiciai</strong>.
-            </div>
-            <div class="event">
-              <time datetime="1446-02-19">19 February 1446</time> — <strong>Heir born:</strong> Rolandas (stats <strong>4 / 2 / 2</strong>). <strong>Royal marriage:</strong> Ausra.
-            </div>
-          </div>
-        </section>
-      </article>
+      <h2>1445 — Iron Wolf Established</h2>
+      <p>Strength rises to <strong>10,000</strong>: <strong>5,000 infantry</strong>, <strong>3,000 cavalry</strong>, <strong>2,000 artillery</strong>.</p>
 
-      <!-- Sidebar -->
-      <aside>
-        <section class="card">
-          <h3>Key Command</h3>
-          <p><strong>Iron Wolf</strong> — Field army</p>
-          <dl>
-            <dt>Commander</dt><dd><strong>Daugvilas Tyzenhaus</strong></dd>
-            <dt>Strength (June 1445)</dt><dd>5,000 / 3,000 / 2,000</dd>
-            <dt>Doctrine</dt><dd>Shock cavalry with early artillery support</dd>
-          </dl>
-        </section>
+      <h2>1446 — Second Army Raised</h2>
+      <p>
+        The second army, <strong>Black Death</strong>, mirrors Iron Wolf’s composition and allows dual-column operations:
+        one column screens and raids; the other advances with guns to reduce forts.
+      </p>
 
-        <section class="event card" style="margin-top:1rem" id="oob-black-death-1446">
-          <h3>Order of Battle — “Black Death” (January 1446)</h3>
-          <dl>
-            <dt>Commander</dt><dd>Kantibutas Giedraiciai</dd>
-            <dt>Designation</dt><dd>Black Death — Field Army</dd>
-            <dt>Composition</dt><dd>5,000 Infantry · 3,000 Cavalry · 2,000 Artillery</dd>
-          </dl>
-        </section>
+      <h3>Operational Effects</h3>
+      <ul>
+        <li>Two independent columns enable flanking and parallel sieges.</li>
+        <li>Artillery appears, enabling faster fort reductions.</li>
+        <li>Command structure formalized under Tyzenhaus and Giedraiciai.</li>
+      </ul>
 
-        <section class="card" style="margin-top:1rem" id="dynasty-1446">
-          <h3>House &amp; Succession (1446)</h3>
-          <dl>
-            <dt>Heir</dt><dd><strong>Rolandas</strong> — born 19 Feb 1446 — <span class="badge">ADM 4</span> <span class="badge">DIP 2</span> <span class="badge">MIL 2</span></dd>
-            <dt>Consort</dt><dd><strong>Ausra</strong> — married 19 Feb 1446</dd>
-          </dl>
-        </section>
+      <hr>
+      <p class="muted">
+        Data: 1445 — 5k/3k/2k; 1446 — 5k/3k/2k; Combined 1446 — 20k total.
+      </p>
+    </article>
 
-        <section class="card" style="margin-top:1rem">
-          <h3>Cross-References</h3>
-          <ul>
-            <li><a href="chapter-1.html">Chapter I — The Dawn of Samogitia</a></li>
-            <li><a href="military-records.html">Military Records</a></li>
-            <li><a href="military-graph.html">Military Graph</a></li>
-            <li><a href="data.html">Data Appendix</a></li>
-          </ul>
-        </section>
-      </aside>
-    </main>
+    <aside class="chapter-aside">
+      <!-- Map -->
+      <div class="aside-card">
+        <h3>Baltic, 1445–1446</h3>
+        <img src="/assets/maps/baltic-trade.png" alt="Baltic trade and routes, 1445–1446">
+        <p class="muted" style="margin:.5rem 0 0">Trade nodes and routes relevant to operations.</p>
+      </div>
 
-    <footer class="wrap">
-      <p>Prev: <a href="chapter-1.html">Chapter I — The Dawn</a> · Next: <span class="muted">Chapter III (to be added)</span></p>
-      <p class="muted">Chronicle of Samogitia — Living Edition.</p>
-    </footer>
-  </div>
+      <!-- Key Command -->
+      <div class="aside-card">
+        <h3>Key Command</h3>
+        <dl class="facts">
+          <dt>Field Marshal</dt><dd>Daugvilas Tyzenhaus</dd>
+          <dt>General</dt><dd>Kantibutas Giedraiciai</dd>
+          <dt>Doctrine</dt><dd>Dual-column ops</dd>
+        </dl>
+      </div>
 
-  <script>
-    // Client-side include for shared navigation: replace fallback with /partials/nav.html if found.
-    (async () => {
-      const nav = document.getElementById('site-nav');
-      if (!nav) return;
-      const src = nav.getAttribute('data-src');
-      if (!src) return;
-      try{
-        const res = await fetch(src, { cache: "no-cache" });
-        if(res.ok){
-          nav.innerHTML = await res.text();
-        }
-      }catch(e){
-        // keep fallback
-      }
-    })();
-  </script>
-</body>
-</html>
+      <!-- Order of Battle -->
+      <div class="aside-card">
+        <h3>Order of Battle</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr><th>Year</th><th>Army</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1445</td><td>Iron Wolf</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
+              <tr><td>1446</td><td>Black Death</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
+              <tr><td colspan="2"><strong>1446 Combined</strong></td><td><strong>20,000</strong></td><td><strong>10,000</strong></td><td><strong>6,000</strong></td><td><strong>4,000</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- House & Succession -->
+      <div class="aside-card">
+        <h3>House &amp; Succession</h3>
+        <dl class="facts">
+          <dt>Ruling House</dt><dd>—</dd>
+          <dt>Heir</dt><dd>—</dd>
+          <dt>Regency</dt><dd>—</dd>
+          <dt>Diplomatic Ties</dt><dd>—</dd>
+        </dl>
+        <p class="muted" style="margin:.5rem 0 0">Fill with your dynasty details when ready.</p>
+      </div>
+
+      <!-- References -->
+      <div class="aside-card">
+        <h3>References</h3>
+        <ul class="aside-list">
+          <li><a href="/powers.html">Powers of 1444</a></li>
+          <li><a href="/samogitia.html">Samogitia — Evolution</a></li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+</main>

@@ -1,0 +1,26 @@
+---
+layout: default
+title: Treasury & Economy
+description: Track the treasury and economic status of Samogitia.
+---
+
+<main class="container">
+  <h1>Treasury & Economy</h1>
+  <section>
+    <h2>Yearly Finances</h2>
+    <div class="table-container">
+      <table id="economy-table">
+        <thead>
+          <tr><th>Year</th><th>Income</th><th>Expenses</th></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </section>
+  <section>
+    <h2>Income vs Expenses</h2>
+    <canvas id="economy-chart"></canvas>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/chart.js" defer></script>
+<script type="module" src="assets/js/economyPage.js"></script>

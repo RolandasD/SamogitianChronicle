@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ page.title }}</title>
+  {% if page.description or site.description %}
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <meta property="og:description" content="{{ page.description | default: site.description }}">
+  {% endif %}
+  <meta property="og:title" content="{{ page.title }}">
+  <meta property="og:url" content="{{ page.url | absolute_url }}">
+  {% if page.image or site.image %}
+  <meta property="og:image" content="{{ page.image | default: site.image | absolute_url }}">
+  {% endif %}
+  <link rel="canonical" href="{{ page.url | absolute_url }}">
+  <meta property="og:site_name" content="{{ site.title }}">
+  <meta property="og:type" content="website">
+  <link rel="stylesheet" href="{{ '/assets/css/styles.css' | relative_url }}">
+  {% if page.chapter_css %}
+  <link rel="stylesheet" href="{{ ('/assets/css/chapters/' | append: page.chapter_css) | relative_url }}">
+  {% endif %}
+  {% if page.include_chapter_styles %}
+  {% assign chapters = site.pages | where_exp:"p","p.path contains 'chapter'" | sort:"path" %}
+  {% for chapter in chapters %}
+  {% assign css = chapter.path | replace: '.html','' | split:'/' | last | prepend: '/assets/css/chapters/' | append: '.css' %}
+  <link rel="stylesheet" href="{{ css | relative_url }}">
+  {% endfor %}
+  {% endif %}
+</head>
+<body>
+  {% include nav.html %}
+  {{ content }}
+</body>
+</html>

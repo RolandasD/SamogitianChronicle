@@ -1,234 +1,142 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Chapter I – The Dawn of Samogitia (1444)</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <style>
-    :root{
-      --ink:#222; --muted:#666; --accent:#8b0000;
-      --card:#ffffff; --bg:#f7f7f7; --line:#e6e6e6;
-    }
-    html,body{margin:0;background:var(--bg);color:var(--ink);font-family:"Helvetica Neue",Helvetica,Arial,sans-serif;line-height:1.6}
+---
+layout: default
+title: "Chapter 1: Dawn over Samogitia"
+description: "1444 — The first formations"
+---
 
-    /* Banner */
-    .banner{background:linear-gradient(90deg,var(--accent),#b22222);color:#fff;text-align:center;padding:2rem 1rem}
-    .banner h1{margin:0;font-family:Georgia,serif;font-size:2rem}
-    .banner p{margin:.4rem 0 0;font-style:italic;color:#f2f2f2}
+<style>
+  .page-chapter{max-width:1200px;margin:0 auto;padding:0 1rem 2.5rem}
+  .chapter-header{margin:1.25rem 0 1.25rem}
+  .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
+  .chapter-header .subtitle{color:var(--muted,#666)}
 
-    /* Layout */
-    .container{max-width:1100px;margin:2rem auto;padding:0 1rem}
-    .layout{display:grid;grid-template-columns:2fr 1fr;gap:1.25rem}
-    @media (max-width: 900px){.layout{grid-template-columns:1fr}}
+  /* Force two columns on most desktops; only collapse on small screens */
+  .chapter-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
+    gap:1.5rem;align-items:start
+  }
+  @media (max-width:780px){
+    .chapter-grid{grid-template-columns:1fr}
+    .chapter-aside{position:static}
+  }
 
-    .card{background:var(--card);border:1px solid var(--line);border-radius:.6rem;box-shadow:0 1px 4px rgba(0,0,0,.05);padding:1rem}
-    .card h2{font-family:Georgia,serif;font-size:1.15rem;color:var(--accent);margin:0 0 .75rem}
-    .card p{margin:.6rem 0}
+  .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
+  .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
+  .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
+  .prose p{margin:.8rem 0}
+  .prose img{max-width:100%;height:auto;border-radius:.5rem;display:block;margin:1rem auto}
+  .prose figure{margin:1.25rem 0;text-align:center}
+  .prose figcaption{font-size:.9rem;color:var(--muted,#666)}
+  .prose blockquote{margin:1rem 0;padding:.75rem 1rem;border-left:3px solid var(--line,#ddd);background:linear-gradient(90deg,#fafafa,transparent)}
+  .prose hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem 0}
+  .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
+  .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
+  .prose code{background:#f6f6f6;border:1px solid #eee;border-radius:.25rem;padding:.1rem .3rem}
 
-    /* Facts grid */
-    .facts{display:grid;grid-template-columns:1fr 1fr;gap:.4rem .8rem;font-size:.95rem}
-    .facts dt{color:var(--muted)}
-    .facts dd{margin:0;font-weight:600}
-    @media (max-width: 640px){.facts{grid-template-columns:1fr}}
+  .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
+  .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
+  .aside-card h3{margin:0 0 .5rem;font-size:1rem}
+  .aside-card img{width:100%;height:auto;border-radius:.5rem}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
+  .facts dt{color:var(--muted,#666)}
+  .facts dd{margin:0;font-weight:600}
+  .aside-list{padding-left:1.1rem;margin:.25rem 0}
+  .aside-list li{margin:.25rem 0}
 
-    /* Table */
-    table{width:100%;border-collapse:collapse;font-size:.95rem;background:#fcfcfc;border:1px solid var(--line);border-radius:.4rem;overflow:hidden}
-    th,td{padding:.5rem .6rem;border-bottom:1px solid var(--line)}
-    th{background:#f2e6e6;color:#4b0000;text-align:left;font-weight:700}
-    tr:last-child td{border-bottom:0}
+  @media (prefers-color-scheme: dark){
+    .prose code{background:#1f1f1f;border-color:#2a2a2a}
+    .prose blockquote{background:rgba(255,255,255,.04)}
+    .aside-card{background:#101010;border-color:#2a2a2a}
+  }
+</style>
 
-    /* Chips / labels */
-    .chips{display:flex;flex-wrap:wrap;gap:.4rem;margin:.5rem 0}
-    .chip{border:1px solid var(--line);padding:.2rem .5rem;border-radius:999px;font-size:.85rem;background:#fff}
-    .chip--danger{background:#fde7e7;border-color:#f3c9c9;color:#680000}
-
-    /* Sidebar */
-    .sidebar{position:sticky;top:1rem;align-self:start}
-    .map{margin:0 0 .8rem}
-    .map a{display:block;text-decoration:none;color:inherit}
-    .map img{width:100%;height:auto;display:block;border-radius:.5rem;border:1px solid var(--line);box-shadow:0 1px 4px rgba(0,0,0,.06)}
-    .map small{display:block;margin-top:.35rem;color:var(--muted)}
-
-    /* TOC */
-    .toc{list-style:none;margin:0;padding:0}
-    .toc li{margin:.25rem 0}
-    .toc a{text-decoration:none;color:#333}
-    .toc a:hover{text-decoration:underline}
-
-    /* Timeline list */
-    .timeline{list-style:none;padding:0;margin:0}
-    .timeline li{padding:.5rem .6rem;border-left:3px solid #e6e6e6;margin:.4rem 0 .4rem .3rem}
-    .timeline time{font-weight:700;color:#4b0000;margin-right:.4rem}
-
-    /* Back link */
-    .back{display:inline-block;margin:1rem 0 0;text-decoration:none;color:var(--accent);font-weight:700}
-    .back:hover{text-decoration:underline}
-  </style>
-</head>
-<body>
-  <!-- Shared static nav -->
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("nav.html").then(r=>r.text()).then(html=>{
-      document.getElementById("nav-placeholder").innerHTML = html;
-    });
-  </script>
-
-  <header class="banner">
-    <h1>Chapter I – The Dawn of Samogitia</h1>
-    <p>Year 1444 — a candle flame defying the winds of empires.</p>
+<main class="page-chapter">
+  <header class="chapter-header">
+    <h1>Chapter 1: Dawn over Samogitia</h1>
+    <p class="subtitle">1444 — The first formations</p>
   </header>
 
-  <main class="container">
-    <section class="layout">
-      <!-- MAIN COLUMN -->
-      <div class="main">
+  <section class="chapter-grid">
+    <article class="prose">
+      <p>
+        At the opening of 1444, Samogitia fields a modest but organized force. The army is a single field formation
+        that later earns the name <em>Iron Wolf</em>, yet here it is simply the core of a fledgling state’s defense.
+      </p>
 
-        <!-- Prologue -->
-        <article class="card" id="prologue">
-          <h2>Prologue</h2>
-          <p>
-            The year <strong>1444</strong> marked the birth of Samogitia’s fragile independence.
-            Where once the land was a marcher province, battered between the ambitions of Lithuanians and Teutonic crusaders,
-            a new ducal banner was raised in <em>Žemaitija</em>. The youth who bore it, <strong>Rolandas Drungilas</strong>, was scarcely fifteen.
-            To many he seemed more a symbol than a sovereign — a flickering flame before Baltic storms.
-            Yet that flame would kindle the idea of a realm determined to govern itself, no longer a pawn in the hands of others.
-          </p>
-        </article>
-
-        <!-- The State in 1444 -->
-        <article class="card" id="core">
-          <h2>The State in 1444</h2>
-          <p>
-            Samogitia began with a single province, <em>Žemaitija</em>, a land of forests, rivers, and fiercely independent peasants.
-            The ducal court was little more than a fortified manor surrounded by timber walls, but it carried weight:
-            it was the first time a <strong>Samogitian ruler</strong> could style himself as duke in his own right, not as vassal.
-            The nobles of the new court styled their house as <strong>Drungilas</strong>, claiming descent from warrior families who had
-            resisted the crusader knights for generations.
-          </p>
-          <dl class="facts">
-            <dt>Ruler</dt><dd>Duke Rolandas Drungilas, age 15</dd>
-            <dt>Capital</dt><dd>Žemaitija</dd>
-            <dt>Dynasty</dt><dd>House Drungilas (founded 1444)</dd>
-            <dt>Character</dt><dd>Just; Entrepreneurial spirit</dd>
-          </dl>
-        </article>
-
-        <!-- The Iron Wolf -->
-        <article class="card" id="ironwolf">
-          <h2>The Iron Wolf</h2>
-          <p>
-            To defend the newborn duchy, a single host was raised: the <strong>Iron Wolf</strong>.
-            Its name recalled the old legends of Vilnius, where a dream of a wolf howling like iron foretold the rise of a city.
-            The Samogitians took the symbol for themselves, a reminder that even iron can sing when forged in fire.
-          </p>
-          <table>
-            <thead>
-              <tr><th>Army</th><th>Composition</th><th>Commander</th></tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td>Iron Wolf — 6,000</td>
-                <td>5,000 Infantry · 1,000 Cavalry · 0 Artillery</td>
-                <td>Daugvilas Tyzenhaus</td>
-              </tr>
-            </tbody>
-          </table>
-          <p>
-            The commander, <strong>Daugvilas Tyzenhaus</strong>, was a veteran of skirmishes against Livonian raiders.
-            He drilled the infantry in shield‑wall and spear formations, while the cavalry remained the pride of Samogitian nobility.
-            No artillery could be afforded, but the Iron Wolf’s reputation lay not in guns, but in the iron discipline of its ranks.
-          </p>
-          <div class="chips">
-            <span class="chip"><strong>Navy:</strong> none (landlocked)</span>
-            <span class="chip chip--danger"><strong>Rivals:</strong> Teutonic Order</span>
-            <span class="chip chip--danger"><strong>Rivals:</strong> Livonian Order</span>
-            <span class="chip"><strong>Allies:</strong> none</span>
-          </div>
-        </article>
-
-        <!-- Diplomacy -->
-        <article class="card" id="diplomacy">
-          <h2>Perilous Diplomacy</h2>
-          <p>
-            Samogitia entered the stage without allies. To the west lay the <strong>Teutonic Order</strong>,
-            still commanding castles and ports despite decades of decline. To the north, the <strong>Livonian Order</strong>
-            eyed Žemaitija as unfinished business from the wars of the previous century.
-            To the east, <strong>Lithuania</strong> — once overlord — regarded the young duchy with suspicion.
-            Every border was a danger, and the Iron Wolf was both shield and bargaining chip in diplomacy.
-          </p>
-          <p>
-            Envoys carried words of peace, but behind them rode the knowledge that Samogitia was small.
-            Its strength lay in stubbornness: its people had never bent easily to foreign swords.
-          </p>
-        </article>
-
-        <!-- Culture & Economy -->
-        <article class="card" id="culture">
-          <h2>Life in the Duchy</h2>
-          <p>
-            Beyond courts and campaigns, Samogitia in 1444 was a land of farmers and fishermen,
-            villages clustered around wooden churches, and proud families clinging to traditions older than crowns.
-            Oral tales of wolves, spirits, and rivers mixed with the rituals of Christianity recently planted by foreign missionaries.
-            The duchy’s economy rested on <strong>grain, timber, and amber</strong>, traded in modest quantities with merchants from Riga and Prussia.
-          </p>
-          <p>
-            The new ducal household sought to centralize authority, but governance remained personal,
-            negotiated with village elders and local boyars. Rule was fragile, but it carried legitimacy in the eyes of common folk:
-            they called Rolandas <em>“our duke”</em> — not Lithuania’s, not the Order’s, but their own.
-          </p>
-        </article>
-
-        <!-- Timeline -->
-        <article class="card" id="timeline">
-          <h2>Timeline — 1444</h2>
-          <ul class="timeline">
-            <li><time>Nov 1444</time> Founding of the Duchy of Samogitia under Duke Rolandas Drungilas.</li>
-            <li><time>Nov 1444</time> Muster of the <strong>Iron Wolf</strong> (5,000 infantry, 1,000 cavalry) under Daugvilas Tyzenhaus.</li>
-            <li><time>Dec 1444</time> First envoys dispatched to Lithuania and the Orders; no alliances secured.</li>
-          </ul>
-        </article>
-
-        <a class="back" href="index.html">← Back to Chronicle Index</a>
+      <h2>Order of Battle, 1444</h2>
+      <p>The standing force totals <strong>6,000</strong> men: <strong>5,000 infantry</strong>, <strong>1,000 cavalry</strong>, and <strong>0 artillery</strong>.</p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Formation</th><th>Commander</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Field Army (proto-“Iron Wolf”)</td>
+              <td>Daugvilas Tyzenhaus</td>
+              <td>6,000</td><td>5,000</td><td>1,000</td><td>0</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
 
-      <!-- SIDEBAR -->
-      <aside class="sidebar">
-        <div class="card">
-          <h2>Navigate</h2>
-          <ul class="toc">
-            <li><a href="#prologue">Prologue</a></li>
-            <li><a href="#core">The State in 1444</a></li>
-            <li><a href="#ironwolf">The Iron Wolf</a></li>
-            <li><a href="#diplomacy">Perilous Diplomacy</a></li>
-            <li><a href="#culture">Life in the Duchy</a></li>
-            <li><a href="#timeline">Timeline — 1444</a></li>
-          </ul>
-        </div>
+      <h2>Position &amp; Priorities</h2>
+      <p>
+        Hemmed in by larger neighbors, Samogitia’s first priorities are simple:
+        defend the heartland, stabilize the coast, and cultivate ties with Lithuania.
+      </p>
 
-        <div class="card">
-          <h2>Maps</h2>
-          <figure class="map">
-            <a href="maps/heartland.png" target="_blank">
-              <img src="maps/heartland.png" alt="Heartland map: Žemaitija" />
-              <small>Heartland: Žemaitija (the sole province).</small>
-            </a>
-          </figure>
-          <figure class="map">
-            <a href="maps/region.png" target="_blank">
-              <img src="maps/region.png" alt="Regional neighbors" />
-              <small>Neighbors: Lithuania, Teutonic Order, Livonian Order.</small>
-            </a>
-          </figure>
-          <figure class="map">
-            <a href="maps/world.png" target="_blank">
-              <img src="maps/world.png" alt="Europe 1444" />
-              <small>Europe, 1444: Ottomans rising; HRE fragmented.</small>
-            </a>
-          </figure>
-        </div>
-      </aside>
-    </section>
-  </main>
-</body>
-</html>
+      <blockquote>
+        “A spine of infantry, a sting of horse — and patience.”
+      </blockquote>
+
+      <h3>Constraints</h3>
+      <ul>
+        <li>No gun artillery in 1444; siege capacity is limited.</li>
+        <li>Manpower must be conserved — early losses hurt.</li>
+        <li>Diplomacy is as important as drill.</li>
+      </ul>
+
+      <hr>
+      <p class="muted">Data: 1444 — 5k inf, 1k cav, 0 art (total 6k).</p>
+    </article>
+
+    <aside class="chapter-aside">
+      <div class="aside-card">
+        <h3>Samogitia, 1444</h3>
+        <a href="/assets/maps/samogitia-1444-full.jpg">
+          <img src="/assets/maps/samogitia-1444.jpg" alt="Map of Samogitia, 1444">
+        </a>
+        <p class="muted" style="margin:.5rem 0 0">Borders and nearby powers at the start.</p>
+      </div>
+
+      <div class="aside-card">
+        <h3>Key Facts</h3>
+        <dl class="facts">
+          <dt>Capital</dt><dd>Medininkai</dd>
+          <dt>Army</dt><dd>6,000 (5k/1k/0)</dd>
+          <dt>Doctrine</dt><dd>Infantry core</dd>
+          <dt>Allies</dt><dd>—</dd>
+        </dl>
+      </div>
+
+      <div class="aside-card">
+        <h3>Notes</h3>
+        <ul class="aside-list">
+          <li>Preserve manpower in early wars.</li>
+          <li>Scout coastal routes and ports.</li>
+          <li>Lay groundwork for artillery adoption.</li>
+        </ul>
+      </div>
+
+      <div class="aside-card">
+        <h3>References</h3>
+        <ul class="aside-list">
+          <li><a href="/powers.html">Powers of 1444</a></li>
+          <li><a href="/samogitia.html">Samogitia — Evolution</a></li>
+        </ul>
+      </div>
+    </aside>
+  </section>
+</main>

@@ -1,112 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>The Chronicle of Samogitia</title>
-  <style>
-    body {
-      margin: 0;
-      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-      background: #f9f9f9;
-      color: #222;
-      line-height: 1.7;
-    }
-    .banner {
-      background: linear-gradient(to right, #8b0000, #b22222);
-      color: white;
-      padding: 3em 1em;
-      text-align: center;
-    }
-    .banner h1 {
-      font-family: Georgia, serif;
-      font-size: 3em;
-      margin: 0;
-    }
-    .banner p {
-      font-size: 1.2em;
-      color: #f0f0f0;
-      margin-top: 0.5em;
-      font-style: italic;
-    }
-    .container {
-      max-width: 900px;
-      margin: 3em auto;
-      padding: 0 2em;
-    }
-    h2 {
-      font-family: Georgia, serif;
-      font-size: 1.5em;
-      margin-bottom: 0.8em;
-      color: #8b0000;
-    }
-    .section {
-      margin-bottom: 3em;
-    }
-    ul {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 1em;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-    a {
-      display: block;
-      padding: 1em;
-      border-radius: 8px;
-      background: #fff;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
-      text-decoration: none;
-      color: #222;
-      font-weight: 500;
-      transition: all 0.2s ease;
-    }
-    a:hover {
-      background: #8b0000;
-      color: white;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-  </style>
-</head>
-<body>
-<body>
-  <body>
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("nav.html")
-      .then(r => r.text())
-      .then(html => document.getElementById("nav-placeholder").innerHTML = html);
-  </script>
+---
+layout: default
+title: The Chronicle of Samogitia
+description: Forged in wars and shadows, a kingdom awakens in Samogitia.
+---
 
-  <!-- your page content follows -->
+<style>
+    /* Page-specific styles for the index */
+    .container{max-width:900px;margin:3em auto;padding:0 2em;}
+    .section{margin-bottom:3em;}
+    h2{font-size:1.5em;margin-bottom:.8em;}
+    ul{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:1em;list-style:none;padding:0;margin:0;}
+    a{display:block;padding:1em;border-radius:8px;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,0.08);text-decoration:none;color:#222;font-weight:500;transition:all .2s ease;}
+    a:hover{background:var(--accent);color:#fff;box-shadow:0 4px 12px rgba(0,0,0,0.15);}
+</style>
 
-  <div class="banner">
-    <h1>The Chronicle of Samogitia</h1>
-    <p>Forged in wars and shadows, a kingdom awakens in Samogitia.</p>
+<div class="banner">
+  <h1>The Chronicle of Samogitia</h1>
+  <p>Forged in wars and shadows, a kingdom awakens in Samogitia.</p>
+</div>
+
+<div class="container">
+  <div class="section">
+    <h2>Chapters</h2>
+    <ul>
+      <li><a href="chronicle.html">Full Chronicle (continuous)</a></li>
+      <li><a href="chapter1.html">Chapter I – The Dawn of Samogitia</a></li>
+      <li><a href="chapter2.html">Chapter II – Expansion &amp; The First War</a></li>
+    </ul>
   </div>
 
-  <div class="container">
-    <div class="section">
-      <h2>Chapters</h2>
-      <ul>
-        <li><a href="chapter1.html">Chapter I – The Dawn of Samogitia</a></li>
-        <li><a href="#">Chapter II – (to be written)</a></li>
-      </ul>
-    </div>
-
-    <div class="section">
-      <h2>Data & Records</h2>
-      <ul>
-        <li><a href="powers.html">Great Powers – Armies, Navies & Evolution</a></li>
-        <!-- NEW entry -->
-        <li><a href="samogitia.html">Samogitia — Military & Navy Evolution</a></li>
-        <li><a href="armies.html">Armies of Samogitia</a></li>
-        <li><a href="navies.html">Royal Navy</a></li>
-        <li><a href="rulers.html">Rulers & Advisors</a></li>
-        <li><a href="economy.html">Treasury & Economy</a></li>
-        <li><a href="maps.html">Atlas of Eastern Europe</a></li>
-      </ul>
-    </div>
+  <div class="section">
+    <h2>Data &amp; Records</h2>
+    <ul>
+      <li><a href="powers.html">Great Powers – Armies, Navies &amp; Evolution</a></li>
+      <!-- NEW entry -->
+      <li><a href="samogitia.html">Samogitia — Military &amp; Navy Evolution</a></li>
+      <li><a href="armies.html">Armies of Samogitia</a></li>
+      <li><a href="navies.html">Royal Navy</a></li>
+      <li><a href="rulers.html">Rulers &amp; Advisors</a></li>
+      <li><a href="economy.html">Treasury &amp; Economy</a></li>
+      <li><a href="maps.html">Atlas of Eastern Europe</a></li>
+      <li><a href="timeline.html">Historical Timeline</a></li>
+    </ul>
   </div>
-</body>
-</html>
+</div>
