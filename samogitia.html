@@ -1,209 +1,340 @@
 ---
 layout: default
-title: Samogitia — Military & Navy Evolution
-description: Evolution of Samogitia's military and navy over time.
+title: Samogitia — Full Military & Economy
+description: A unified dashboard of Samogitia’s armies, navy, maps and (optional) economy over time.
 ---
 
 <style>
-  /* Page-specific styles for Samogitia evolution */
-  .container{max-width:1000px;}
-  .card{margin-bottom:1.5rem;}
-  canvas{height:420px!important;}
+  /* Layout */
+  .page{max-width:1200px;margin:0 auto;padding:0 1rem 2.25rem}
+  .banner h1{margin:.25rem 0 .35rem}
+  .grid{display:grid;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
+  @media (max-width: 860px){.grid{grid-template-columns:1fr}}
+  .card{background:#fff;border:1px solid var(--line,#e6e6e6);border-radius:.75rem;padding:1rem}
+  @media (prefers-color-scheme: dark){.card{background:#0f0f0f;border-color:#232323}}
+
+  /* Sidebar */
+  .aside{position:sticky;top:calc(var(--nav-h,4rem) + 1rem);height:fit-content}
+  .aside .card{padding:.85rem}
+  .aside h3{margin:.15rem 0 .5rem;font-size:1rem}
+  .aside img{width:100%;height:auto;border-radius:.5rem}
+  .muted{color:var(--muted,#666);font-size:.95rem}
+
+  /* Helpers */
+  .toolbar{display:flex;gap:.5rem;align-items:center;margin:.25rem 0 .75rem}
+  .toolbar select,.toolbar button{border:1px solid var(--line,#dcdcdc);background:#fff;border-radius:.5rem;padding:.45rem .6rem;font-weight:600;cursor:pointer}
+  .toolbar button:hover{background:#f6f6f6}
+  @media (prefers-color-scheme: dark){.toolbar select,.toolbar button{background:#141414;border-color:#2a2a2a}}
+
+  .kpis{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:.75rem;margin:.5rem 0 1rem}
+  @media (max-width:700px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}}
+  .kpi{border:1px solid var(--line,#e6e6e6);border-radius:.65rem;padding:.75rem .9rem}
+  .kpi h4{margin:0 0 .2rem;font-size:.95rem;color:var(--muted,#666)}
+  .kpi strong{font-size:1.25rem}
+
+  .table-container{overflow:auto}
+  table{border-collapse:collapse;width:100%}
+  th,td{border:1px solid var(--line,#e6e6e6);padding:.5rem .6rem;text-align:left;white-space:nowrap}
+  th{background:var(--table-head,#fafafa)}
+  @media (prefers-color-scheme: dark){th{background:#131313}}
+
+  canvas{height:420px !important}
+
+  .chip{display:inline-flex;gap:.35rem;align-items:center;border:1px solid var(--line,#e5e5e5);border-radius:999px;padding:.15rem .5rem;font-size:.8rem}
+  .stack{display:flex;flex-wrap:wrap;gap:.4rem}
 </style>
 
-<header class="banner">
-  <h1>Samogitia — Military & Navy Evolution</h1>
-  <p>The first standing forces of Samogitia</p>
+<header class="banner page">
+  <h1>Samogitia — Full Chronicle (Forces & Economy)</h1>
+  <p class="muted">Unified view of Samogitia’s armies, navy, maps and (optional) economy.</p>
 </header>
 
-<main class="container">
+<main class="page grid">
+  <!-- MAIN COLUMN -->
+  <section class="main">
+    <!-- Year & KPIs -->
+    <article class="card">
+      <div class="toolbar">
+        <label>Year: <select id="yearSel"></select></label>
+        <span class="muted" id="yearNote"></span>
+      </div>
+      <div class="kpis">
+        <div class="kpi"><h4>Army Total</h4><strong id="kpiArmy">—</strong><div class="stack muted" id="kpiArmyParts"></div></div>
+        <div class="kpi"><h4>Navy Total</h4><strong id="kpiNavy">—</strong><div class="stack muted" id="kpiNavyParts"></div></div>
+        <div class="kpi"><h4>Named Regiments</h4><strong id="kpiUnits">—</strong><div class="muted" style="font-size:.9rem">if data available</div></div>
+        <div class="kpi"><h4>Economy</h4><strong id="kpiEco">—</strong><div class="muted" style="font-size:.9rem">if data available</div></div>
+      </div>
+    </article>
 
-  <!-- 1444 baseline -->
-  <section class="card">
-    <h2>Armies of 1444</h2>
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Army</th>
-            <th>Commander</th>
-            <th>Total</th>
-            <th>Inf</th>
-            <th>Cav</th>
-            <th>Art</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Field Army (later “Iron Wolf”)</td>
-            <td>Daugvilas Tyzenhaus</td>
-            <td>6,000</td>
-            <td>5,000</td>
-            <td>1,000</td>
-            <td>0</td>
-          </tr>
-        </tbody>
-      </table>
+    <!-- Named regiments per year (optional) -->
+    <article class="card" id="namedCard" hidden>
+      <h2>Named Regiments</h2>
+      <div class="table-container">
+        <table>
+          <thead><tr><th>Name</th><th>Commander</th><th>Inf</th><th>Cav</th><th>Art</th><th>Total</th></tr></thead>
+          <tbody id="namedRows"></tbody>
+          <tfoot><tr><th colspan="2">Combined</th><th id="nInf">0</th><th id="nCav">0</th><th id="nArt">0</th><th id="nTot">0</th></tr></tfoot>
+        </table>
+      </div>
+    </article>
+
+    <!-- Army evolution -->
+    <article class="card">
+      <h2>Army Evolution</h2>
+      <canvas id="armyEvolution"></canvas>
+      <p class="muted">Hover for named units per year (if available).</p>
+    </article>
+
+    <!-- Navy evolution & breakdown -->
+    <article class="card">
+      <h2>Navy Evolution</h2>
+      <canvas id="navyEvolution"></canvas>
+    </article>
+
+    <article class="card">
+      <h2>Navy Composition Breakdown</h2>
+      <canvas id="navyBreakdown"></canvas>
+    </article>
+
+    <!-- Economy (optional) -->
+    <article class="card" id="ecoCard" hidden>
+      <h2>Economy</h2>
+      <div class="toolbar">
+        <span class="muted">Income / Expenses over time (if provided)</span>
+      </div>
+      <canvas id="ecoChart"></canvas>
+      <div class="table-container" style="margin-top:.75rem">
+        <table>
+          <thead><tr><th>Year</th><th>Income</th><th>Expenses</th><th>Balance</th><th>Treasury</th></tr></thead>
+          <tbody id="ecoRows"></tbody>
+        </table>
+      </div>
+    </article>
+  </section>
+
+  <!-- SIDEBAR -->
+  <aside class="aside">
+    <div class="card">
+      <h3>Heartland (1444)</h3>
+      <a href="{{ "/assets/maps/heartland.png" | relative_url }}">
+        <img src="{{ "/assets/maps/heartland.png" | relative_url }}" alt="Samogitia heartland, 1444">
+      </a>
+      <p class="muted">Core provinces and immediate surroundings.</p>
     </div>
-    <p class="muted">A structured field army existed in 1444; it was formally named <em>Iron Wolf</em> in June 1445.</p>
-  </section>
-
-  <!-- 1445–1446 named armies -->
-  <section class="card">
-    <h2>Armies of 1445–1446</h2>
-    <div class="table-container">
-      <table>
-        <thead>
-          <tr>
-            <th>Year</th>
-            <th>Army</th>
-            <th>Commander</th>
-            <th>Total</th>
-            <th>Inf</th>
-            <th>Cav</th>
-            <th>Art</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>1445 (June)</td>
-            <td>Iron Wolf</td>
-            <td>Daugvilas Tyzenhaus</td>
-            <td>10,000</td>
-            <td>5,000</td>
-            <td>3,000</td>
-            <td>2,000</td>
-          </tr>
-          <tr>
-            <td>1446</td>
-            <td>Black Death</td>
-            <td>Kantibutas Giedraiciai</td>
-            <td>10,000</td>
-            <td>5,000</td>
-            <td>3,000</td>
-            <td>2,000</td>
-          </tr>
-          <tr>
-            <td colspan="3"><strong>1446 Combined</strong></td>
-            <td><strong>20,000</strong></td>
-            <td><strong>10,000</strong></td>
-            <td><strong>6,000</strong></td>
-            <td><strong>4,000</strong></td>
-          </tr>
-        </tbody>
-      </table>
+    <div class="card">
+      <h3>Region (1444)</h3>
+      <a href="{{ "/assets/maps/region.png" | relative_url }}">
+        <img src="{{ "/assets/maps/region.png" | relative_url }}" alt="Region, 1444">
+      </a>
+      <p class="muted">Baltic neighborhood and trade routes.</p>
     </div>
-    <p class="muted">Combined totals assume both armies are active in 1446.</p>
-  </section>
-
-  <!-- Evolution charts -->
-  <section class="card">
-    <h2>Samogitian Military Evolution</h2>
-    <canvas id="armyEvolutionChart"></canvas>
-  </section>
-
-  <section class="card">
-    <h2>Samogitian Navy Evolution</h2>
-    <canvas id="navyEvolutionChart"></canvas>
-  </section>
-
-  <section class="card">
-    <h2>Navy Composition Breakdown</h2>
-    <canvas id="navyBreakdownChart"></canvas>
-  </section>
+    <div class="card">
+      <h3>World (1444)</h3>
+      <a href="{{ "/assets/maps/world.png" | relative_url }}">
+        <img src="{{ "/assets/maps/world.png" | relative_url }}" alt="World, 1444">
+      </a>
+      <p class="muted">Wider geopolitical context.</p>
+    </div>
+    <div class="card">
+      <h3>Region (1448)</h3>
+      <a href="{{ "/assets/maps/region1448.png" | relative_url }}">
+        <img src="{{ "/assets/maps/region1448.png" | relative_url }}" alt="Region after 1448 conquests">
+      </a>
+      <p class="muted">Territory after War of the Orders.</p>
+    </div>
+  </aside>
 </main>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<!-- Charts -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module">
-  import { SAMOGITIA_BY_YEAR, SAMOGITIA_NAMED_ARMIES_BY_YEAR } from './assets/js/militaryData.js';
+  // --- Load military data (cache-busted) ---
+  const milMod = await import('{{ "/assets/js/militaryData.js" | relative_url }}?v={{ site.time | date: "%s" }}')
+    .catch(()=>({}));
 
-  const YEARS = Object.keys(SAMOGITIA_BY_YEAR);
+  const SAMOGITIA_BY_YEAR = milMod.SAMOGITIA_BY_YEAR || {};
+  const NAMED = milMod.SAMOGITIA_NAMED_ARMIES_BY_YEAR || null;
 
-  // --- Totals for charts ---
+  // --- (Optional) economy data ---
+  let ECON = null;
+  try {
+    const econMod = await import('{{ "/assets/js/economyData.js" | relative_url }}?v={{ site.time | date: "%s" }}');
+    ECON = econMod.SAMOGITIA_ECONOMY_BY_YEAR || null;
+  } catch(e) { /* optional */ }
+
+  // --- Years & helpers ---
+  const YEARS = Object.keys(SAMOGITIA_BY_YEAR).sort((a,b)=>+a-+b);
+  const nf = (n)=> (n==null? '0' : (+n).toLocaleString());
+
+  // DOM refs
+  const yearSel = document.getElementById('yearSel');
+  const yearNote = document.getElementById('yearNote');
+  const kpiArmy = document.getElementById('kpiArmy');
+  const kpiNavy = document.getElementById('kpiNavy');
+  const kpiArmyParts = document.getElementById('kpiArmyParts');
+  const kpiNavyParts = document.getElementById('kpiNavyParts');
+  const kpiUnits = document.getElementById('kpiUnits');
+  const kpiEco = document.getElementById('kpiEco');
+
+  // Fill year select (default to latest)
+  yearSel.innerHTML = YEARS.map(y=>`<option value="${y}">${y}</option>`).join('');
+  yearSel.value = YEARS[YEARS.length-1];
+
+  function updateKPIsFor(year){
+    const v = SAMOGITIA_BY_YEAR[year] || {};
+    const aTot = (v.inf||0)+(v.cav||0)+(v.art||0);
+    const nTot = (v.heavy||0)+(v.light||0)+(v.galley||0)+(v.trans||0);
+
+    kpiArmy.textContent = nf(aTot);
+    kpiNavy.textContent = nf(nTot);
+
+    kpiArmyParts.innerHTML = [
+      `<span class="chip">Inf ${nf(v.inf||0)}</span>`,
+      `<span class="chip">Cav ${nf(v.cav||0)}</span>`,
+      `<span class="chip">Art ${nf(v.art||0)}</span>`
+    ].join(' ');
+
+    kpiNavyParts.innerHTML = [
+      `<span class="chip">Heavy ${nf(v.heavy||0)}</span>`,
+      `<span class="chip">Light ${nf(v.light||0)}</span>`,
+      `<span class="chip">Galley ${nf(v.galley||0)}</span>`,
+      `<span class="chip">Trans ${nf(v.trans||0)}</span>`
+    ].join(' ');
+
+    // Named regiments count (if present)
+    const list = NAMED?.[year] || null;
+    kpiUnits.textContent = list ? nf(list.length) : '—';
+
+    // Economy quick badge (if present)
+    if (ECON?.[year]) {
+      const e = ECON[year];
+      const bal = (e.income||0) - (e.expenses||0);
+      kpiEco.textContent = `${nf(bal)} (net)`;
+    } else {
+      kpiEco.textContent = '—';
+    }
+
+    yearNote.textContent = list ? 'Showing named regiments for selected year.' : '';
+  }
+
+  // ----- Named regiments table (optional) -----
+  const namedCard = document.getElementById('namedCard');
+  const namedRows = document.getElementById('namedRows');
+  const nInf = document.getElementById('nInf');
+  const nCav = document.getElementById('nCav');
+  const nArt = document.getElementById('nArt');
+  const nTot = document.getElementById('nTot');
+
+  function renderNamed(year){
+    if (!NAMED?.[year]) { namedCard.hidden = true; return; }
+    namedCard.hidden = false;
+
+    const arr = NAMED[year];
+    let ti=0, tc=0, ta=0;
+
+    namedRows.innerHTML = arr.map(u=>{
+      const tot = (u.inf||0)+(u.cav||0)+(u.art||0);
+      ti += u.inf||0; tc += u.cav||0; ta += u.art||0;
+      return `<tr>
+        <td>${u.name}</td><td>${u.commander||'—'}</td>
+        <td>${nf(u.inf||0)}</td><td>${nf(u.cav||0)}</td><td>${nf(u.art||0)}</td>
+        <td>${nf(tot)}</td></tr>`;
+    }).join('');
+
+    nInf.textContent = nf(ti);
+    nCav.textContent = nf(tc);
+    nArt.textContent = nf(ta);
+    nTot.textContent = nf(ti+tc+ta);
+  }
+
+  // ----- Charts -----
   const ARMY_TOTAL = YEARS.map(y=>{
-    const v=SAMOGITIA_BY_YEAR[y];
-    return v?(v.inf+v.cav+v.art):0;
+    const v=SAMOGITIA_BY_YEAR[y]; return v?(v.inf+v.cav+v.art):0;
   });
   const NAVY_TOTAL = YEARS.map(y=>{
-    const v=SAMOGITIA_BY_YEAR[y];
-    // FIX: the key is 'trans' (not 'transport')
-    return v?(v.heavy+v.light+v.galley+v.trans):0;
+    const v=SAMOGITIA_BY_YEAR[y]; return v?(v.heavy+v.light+v.galley+v.trans):0;
   });
-
   const NAVY_HEAVY = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.heavy||0);
   const NAVY_LIGHT = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.light||0);
   const NAVY_GALLEY = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.galley||0);
-  const NAVY_TRANSPORT = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.trans||0);
+  const NAVY_TRANS  = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.trans||0);
 
-  // Helper to format numbers with separators
-  const nf = (n)=> (n==null? '0' : n.toLocaleString());
-
-  // Build tooltip lines for a given year from named regiments
-  function regimentLines(year){
-    const arr = SAMOGITIA_NAMED_ARMIES_BY_YEAR[year] || [];
+  function linesForNamed(year){
+    const arr = NAMED?.[year] || [];
     if (!arr.length) return ['—'];
-    return arr.map(u=>{
-      const cmd = u.commander && u.commander !== '—' ? ` — ${u.commander}` : '';
-      return `• ${u.name}${cmd}: ${nf(u.inf)}/${nf(u.cav)}/${nf(u.art)}`;
-    });
+    return arr.map(u=>`• ${u.name}${u.commander&&u.commander!=='—'?' — '+u.commander:''}: ${nf(u.inf)}/${nf(u.cav)}/${nf(u.art)}`);
   }
 
-  // --- Army Evolution (with named regiments tooltip) ---
-  const ctxArmy=document.getElementById('armyEvolutionChart').getContext('2d');
-  new Chart(ctxArmy,{
+  const armyCtx = document.getElementById('armyEvolution').getContext('2d');
+  new Chart(armyCtx,{
     type:'line',
-    data:{
-      labels:YEARS,
-      datasets:[
-        {label:'Army (total)',data:ARMY_TOTAL,borderColor:'hsl(0,70%,45%)',backgroundColor:'hsla(0,70%,45%,0.25)',tension:0.25}
-      ]
-    },
+    data:{labels:YEARS,datasets:[{label:'Army (total)',data:ARMY_TOTAL,borderColor:'hsl(0,70%,45%)',backgroundColor:'hsla(0,70%,45%,.2)',tension:.25}]},
     options:{
       responsive:true,
-      plugins:{
-        legend:{display:true},
-        tooltip:{
-          callbacks:{
-            // Add named regiments under the total line item
-            afterBody:(items)=>{
-              if(!items?.length) return;
-              const year = items[0].label;
-              const lines = regimentLines(year);
-              // insert a blank line before details for readability
-              return [' ', ...lines];
-            }
-          }
-        }
-      },
+      plugins:{legend:{display:true},tooltip:{callbacks:{afterBody:(items)=>{const y=items?.[0]?.label; return y?[' ', ...linesForNamed(y)]:undefined;}}}},
       scales:{y:{beginAtZero:true}}
     }
   });
 
-  // --- Navy Evolution (unchanged visuals, but fixed keys) ---
-  const ctxNavyEvo=document.getElementById('navyEvolutionChart').getContext('2d');
-  new Chart(ctxNavyEvo,{
+  const navyCtx = document.getElementById('navyEvolution').getContext('2d');
+  new Chart(navyCtx,{
+    type:'line',
+    data:{labels:YEARS,datasets:[{label:'Navy (total)',data:NAVY_TOTAL,borderColor:'hsl(210,65%,45%)',backgroundColor:'hsla(210,65%,45%,.2)',tension:.25}]},
+    options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
+  });
+
+  const navyBreak = document.getElementById('navyBreakdown').getContext('2d');
+  new Chart(navyBreak,{
     type:'line',
     data:{labels:YEARS,datasets:[
-      {label:'Navy (total)',data:NAVY_TOTAL,borderColor:'hsl(210,65%,45%)',backgroundColor:'hsla(210,65%,45%,0.25)',tension:0.25}
+      {label:'Heavy',data:NAVY_HEAVY,borderColor:'hsl(210,65%,45%)',backgroundColor:'hsla(210,65%,70%,.25)',tension:.25,pointRadius:3},
+      {label:'Light',data:NAVY_LIGHT,borderColor:'hsl(200,65%,45%)',backgroundColor:'hsla(200,65%,70%,.25)',tension:.25,pointRadius:3},
+      {label:'Galley',data:NAVY_GALLEY,borderColor:'hsl(220,65%,45%)',backgroundColor:'hsla(220,65%,70%,.25)',tension:.25,pointRadius:3},
+      {label:'Transport',data:NAVY_TRANS,borderColor:'hsl(190,65%,45%)',backgroundColor:'hsla(190,65%,70%,.25)',tension:.25,pointRadius:3},
     ]},
     options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
   });
 
-  // --- Navy breakdown (fixed transport key) ---
-  const ctxNavy=document.getElementById('navyBreakdownChart').getContext('2d');
-  new Chart(ctxNavy,{
-    type:'line',
-    data:{
-      labels:YEARS,
-      datasets:[
-        { label:'Heavy',     data:NAVY_HEAVY,     borderColor:'hsl(210,65%,45%)', backgroundColor:'hsla(210,65%,70%,0.25)', tension:0.25, pointRadius:4 },
-        { label:'Light',     data:NAVY_LIGHT,     borderColor:'hsl(200,65%,45%)', backgroundColor:'hsla(200,65%,70%,0.25)', tension:0.25, pointRadius:4 },
-        { label:'Galley',    data:NAVY_GALLEY,    borderColor:'hsl(220,65%,45%)', backgroundColor:'hsla(220,65%,70%,0.25)', tension:0.25, pointRadius:4 },
-        { label:'Transport', data:NAVY_TRANSPORT, borderColor:'hsl(190,65%,45%)', backgroundColor:'hsla(190,65%,70%,0.25)', tension:0.25, pointRadius:4 }
-      ]
-    },
-    options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
+  // ----- Economy (optional) -----
+  const ecoCard = document.getElementById('ecoCard');
+  const ecoRows = document.getElementById('ecoRows');
+  const ecoCtx = document.getElementById('ecoChart')?.getContext('2d');
+
+  function renderEconomy(){
+    if (!ECON) { ecoCard.hidden = true; return; }
+    const EY = Object.keys(ECON).sort((a,b)=>+a-+b);
+    const inc = EY.map(y=>ECON[y]?.income||0);
+    const exp = EY.map(y=>ECON[y]?.expenses||0);
+    const bal = EY.map((_,i)=>inc[i]-exp[i]);
+
+    ecoCard.hidden = false;
+
+    new Chart(ecoCtx,{
+      type:'line',
+      data:{labels:EY,datasets:[
+        {label:'Income',data:inc,borderColor:'hsl(130,55%,45%)',backgroundColor:'hsla(130,55%,45%,.2)',tension:.25},
+        {label:'Expenses',data:exp,borderColor:'hsl(0,70%,50%)',backgroundColor:'hsla(0,70%,50%,.18)',tension:.25},
+        {label:'Balance',data:bal,borderColor:'hsl(45,80%,45%)',backgroundColor:'hsla(45,80%,45%,.18)',tension:.25},
+      ]},
+      options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
+    });
+
+    ecoRows.innerHTML = EY.map(y=>{
+      const e = ECON[y]||{};
+      const b = (e.income||0)-(e.expenses||0);
+      return `<tr><td>${y}</td><td>${nf(e.income||0)}</td><td>${nf(e.expenses||0)}</td><td>${nf(b)}</td><td>${nf(e.treasury||0)}</td></tr>`;
+    }).join('');
+  }
+
+  // Initial render
+  const initialYear = yearSel.value;
+  updateKPIsFor(initialYear);
+  renderNamed(initialYear);
+  renderEconomy();
+
+  // Change year
+  yearSel.addEventListener('change', e=>{
+    updateKPIsFor(e.target.value);
+    renderNamed(e.target.value);
   });
 </script>
-
