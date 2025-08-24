@@ -10,7 +10,7 @@ description: "1445–1446 — Naming and expansion"
   .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
   .chapter-header .subtitle{color:var(--muted,#666)}
 
-  /* Force two columns; collapse only on small screens */
+  /* Two columns; collapse only on small screens */
   .chapter-grid{
     display:grid !important;
     grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
@@ -30,6 +30,9 @@ description: "1445–1446 — Naming and expansion"
   .prose figcaption{font-size:.9rem;color:var(--muted,#666)}
   .prose blockquote{margin:1rem 0;padding:.75rem 1rem;border-left:3px solid var(--line,#ddd);background:linear-gradient(90deg,#fafafa,transparent)}
   .prose hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem 0}
+  .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
+  .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
+  .prose code{background:#f6f6f6;border:1px solid #eee;border-radius:.25rem;padding:.1rem .3rem}
 
   .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
   .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
@@ -61,13 +64,42 @@ description: "1445–1446 — Naming and expansion"
       </p>
 
       <h2>1445 — Iron Wolf Established</h2>
-      <p>Strength rises to <strong>10,000</strong>: <strong>5,000 infantry</strong>, <strong>3,000 cavalry</strong>, <strong>2,000 artillery</strong>.</p>
+      <p>
+        Strength rises to <strong>10,000</strong>: <strong>5,000 infantry</strong>, <strong>3,000 cavalry</strong>, <strong>2,000 artillery</strong>.
+      </p>
 
       <h2>1446 — Second Army Raised</h2>
       <p>
-        The second army, <strong>Black Death</strong>, mirrors Iron Wolf’s composition and allows dual-column operations:
-        one column screens and raids; the other advances with guns to reduce forts.
+        The second army, <strong>Black Death</strong>, mirrors Iron Wolf’s composition and enables true dual-column operations:
+        one column screens and raids while the other advances with guns to reduce forts.
       </p>
+
+      <!-- Moved here: Order of Battle in main content -->
+      <h2 id="order-of-battle">Order of Battle (1445–1446)</h2>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Year</th><th>Army</th><th>Commander</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1445</td><td>Iron Wolf</td><td>Daugvilas Tyzenhaus</td>
+              <td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td>
+            </tr>
+            <tr>
+              <td>1446</td><td>Black Death</td><td>Kantibutas Giedraiciai</td>
+              <td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td>
+            </tr>
+            <tr>
+              <td colspan="3"><strong>1446 Combined</strong></td>
+              <td><strong>20,000</strong></td>
+              <td><strong>10,000</strong></td>
+              <td><strong>6,000</strong></td>
+              <td><strong>4,000</strong></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
       <h3>Operational Effects</h3>
       <ul>
@@ -98,23 +130,6 @@ description: "1445–1446 — Naming and expansion"
           <dt>General</dt><dd>Kantibutas Giedraiciai</dd>
           <dt>Doctrine</dt><dd>Dual-column ops</dd>
         </dl>
-      </div>
-
-      <!-- Order of Battle -->
-      <div class="aside-card">
-        <h3>Order of Battle</h3>
-        <div class="table-container">
-          <table>
-            <thead>
-              <tr><th>Year</th><th>Army</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
-            </thead>
-            <tbody>
-              <tr><td>1445</td><td>Iron Wolf</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
-              <tr><td>1446</td><td>Black Death</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
-              <tr><td colspan="2"><strong>1446 Combined</strong></td><td><strong>20,000</strong></td><td><strong>10,000</strong></td><td><strong>6,000</strong></td><td><strong>4,000</strong></td></tr>
-            </tbody>
-          </table>
-        </div>
       </div>
 
       <!-- House & Succession -->
