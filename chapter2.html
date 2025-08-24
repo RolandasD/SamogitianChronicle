@@ -10,8 +10,17 @@ description: "1445–1446 — Naming and expansion"
   .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
   .chapter-header .subtitle{color:var(--muted,#666)}
 
-  .chapter-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1.5rem;align-items:start}
-  @media (max-width:1024px){.chapter-grid{grid-template-columns:1fr}}
+  /* Force two columns; collapse only on small screens */
+  .chapter-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
+    gap:1.5rem;align-items:start
+  }
+  @media (max-width:780px){
+    .chapter-grid{grid-template-columns:1fr}
+    .chapter-aside{position:static}
+  }
+
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
@@ -21,11 +30,8 @@ description: "1445–1446 — Naming and expansion"
   .prose figcaption{font-size:.9rem;color:var(--muted,#666)}
   .prose blockquote{margin:1rem 0;padding:.75rem 1rem;border-left:3px solid var(--line,#ddd);background:linear-gradient(90deg,#fafafa,transparent)}
   .prose hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem 0}
-  .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
-  .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
-  .prose code{background:#f6f6f6;border:1px solid #eee;border-radius:.25rem;padding:.1rem .3rem}
 
-  .chapter-aside{position:sticky;top:5.75rem;height:fit-content}
+  .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
   .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
   .aside-card h3{margin:0 0 .5rem;font-size:1rem}
   .aside-card img{width:100%;height:auto;border-radius:.5rem}
@@ -36,7 +42,6 @@ description: "1445–1446 — Naming and expansion"
   .aside-list li{margin:.25rem 0}
 
   @media (prefers-color-scheme: dark){
-    .prose code{background:#1f1f1f;border-color:#2a2a2a}
     .prose blockquote{background:rgba(255,255,255,.04)}
     .aside-card{background:#101010;border-color:#2a2a2a}
   }
@@ -51,43 +56,18 @@ description: "1445–1446 — Naming and expansion"
   <section class="chapter-grid">
     <article class="prose">
       <p>
-        In June 1445 the field army receives its formal name: <strong>Iron Wolf</strong>.
+        In June 1445, the field army is formally named <strong>Iron Wolf</strong>.
         Doctrine tightens, logistics improve, and a second army is planned to spread risk and extend reach.
       </p>
 
       <h2>1445 — Iron Wolf Established</h2>
       <p>Strength rises to <strong>10,000</strong>: <strong>5,000 infantry</strong>, <strong>3,000 cavalry</strong>, <strong>2,000 artillery</strong>.</p>
 
-      <h2>1446 — “Black Death” Raised</h2>
-      <p>The second army, <strong>Black Death</strong>, mirrors Iron Wolf’s composition:</p>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr><th>Year</th><th>Army</th><th>Commander</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1445 (June)</td>
-              <td>Iron Wolf</td>
-              <td>Daugvilas Tyzenhaus</td>
-              <td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td>
-            </tr>
-            <tr>
-              <td>1446</td>
-              <td>Black Death</td>
-              <td>Kantibutas Giedraiciai</td>
-              <td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td>
-            </tr>
-            <tr>
-              <td colspan="3"><strong>1446 Combined</strong></td>
-              <td><strong>20,000</strong></td>
-              <td><strong>10,000</strong></td>
-              <td><strong>6,000</strong></td>
-              <td><strong>4,000</strong></td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <h2>1446 — Second Army Raised</h2>
+      <p>
+        The second army, <strong>Black Death</strong>, mirrors Iron Wolf’s composition and allows dual-column operations:
+        one column screens and raids; the other advances with guns to reduce forts.
+      </p>
 
       <h3>Operational Effects</h3>
       <ul>
@@ -97,38 +77,59 @@ description: "1445–1446 — Naming and expansion"
       </ul>
 
       <hr>
-
       <p class="muted">
-        Data source (site records): Samogitia 1445 — 5k/3k/2k; 1446 — 5k/3k/2k; Combined 1446 — 20k total.
+        Data: 1445 — 5k/3k/2k; 1446 — 5k/3k/2k; Combined 1446 — 20k total.
       </p>
     </article>
 
     <aside class="chapter-aside">
+      <!-- Map -->
       <div class="aside-card">
         <h3>Baltic, 1445–1446</h3>
         <img src="/assets/maps/baltic-trade.png" alt="Baltic trade and routes, 1445–1446">
         <p class="muted" style="margin:.5rem 0 0">Trade nodes and routes relevant to operations.</p>
       </div>
 
+      <!-- Key Command -->
       <div class="aside-card">
-        <h3>Key Facts</h3>
+        <h3>Key Command</h3>
         <dl class="facts">
-          <dt>Armies (1446)</dt><dd>20,000 combined</dd>
-          <dt>Command</dt><dd>Tyzenhaus / Giedraiciai</dd>
-          <dt>Artillery</dt><dd>4,000 combined</dd>
-          <dt>Focus</dt><dd>Dual-column ops</dd>
+          <dt>Field Marshal</dt><dd>Daugvilas Tyzenhaus</dd>
+          <dt>General</dt><dd>Kantibutas Giedraiciai</dd>
+          <dt>Doctrine</dt><dd>Dual-column ops</dd>
         </dl>
       </div>
 
+      <!-- Order of Battle -->
       <div class="aside-card">
-        <h3>Notes</h3>
-        <ul class="aside-list">
-          <li>Protect guns; avoid attrition.</li>
-          <li>Secure supply along rivers.</li>
-          <li>Coordinate sieges with cavalry screens.</li>
-        </ul>
+        <h3>Order of Battle</h3>
+        <div class="table-container">
+          <table>
+            <thead>
+              <tr><th>Year</th><th>Army</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1445</td><td>Iron Wolf</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
+              <tr><td>1446</td><td>Black Death</td><td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td></tr>
+              <tr><td colspan="2"><strong>1446 Combined</strong></td><td><strong>20,000</strong></td><td><strong>10,000</strong></td><td><strong>6,000</strong></td><td><strong>4,000</strong></td></tr>
+            </tbody>
+          </table>
+        </div>
       </div>
 
+      <!-- House & Succession -->
+      <div class="aside-card">
+        <h3>House &amp; Succession</h3>
+        <dl class="facts">
+          <dt>Ruling House</dt><dd>—</dd>
+          <dt>Heir</dt><dd>—</dd>
+          <dt>Regency</dt><dd>—</dd>
+          <dt>Diplomatic Ties</dt><dd>—</dd>
+        </dl>
+        <p class="muted" style="margin:.5rem 0 0">Fill with your dynasty details when ready.</p>
+      </div>
+
+      <!-- References -->
       <div class="aside-card">
         <h3>References</h3>
         <ul class="aside-list">
