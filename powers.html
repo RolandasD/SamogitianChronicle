@@ -34,8 +34,11 @@ description: Army and navy compositions of major powers in 1444.
   <article id="tab-armies" class="card">
     <h2>Army Composition (Infantry / Cavalry / Artillery)</h2>
     <div class="toolbar">
-      <button id="highlightArmy" type="button">Top Army</button>
-    </div>
+  <label>Year:
+    <select id="army-year"></select>
+  </label>
+  <button id="highlightArmy" type="button">Top Army</button>
+</div>
     <div class="table-container">
       <table id="army-table">
         <thead>
@@ -56,9 +59,12 @@ description: Army and navy compositions of major powers in 1444.
   <!-- Navies Tab -->
   <article id="tab-navies" class="card" hidden>
     <h2>Navy Composition (Heavy / Light / Galley / Transport)</h2>
-    <div class="toolbar">
-      <button id="highlightNavy" type="button">Top Navy</button>
-    </div>
+   <div class="toolbar">
+  <label>Year:
+    <select id="navy-year"></select>
+  </label>
+  <button id="highlightNavy" type="button">Top Navy</button>
+</div>
     <div class="table-container">
       <table id="navy-table">
         <thead>
@@ -127,44 +133,90 @@ description: Army and navy compositions of major powers in 1444.
 <!-- Chart.js -->
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module">
+  const mod = await import('{{ "/assets/js/militaryData.js" | relative_url }}?v={{ site.time | date: "%s" }}');
+  const { ARMIES_1444, NAVIES_1444, SAMOGITIA_BY_YEAR, ARMIES_BY_YEAR, NAVIES_BY_YEAR } = mod;
   import { ARMIES_1444, NAVIES_1444, SAMOGITIA_BY_YEAR } from './assets/js/militaryData.js';
 
   // ---------- Render helpers ----------
-  function renderTable(data, tbodyId, cols){
-    const tbody = document.getElementById(tbodyId);
-    tbody.innerHTML = '';
-    data.forEach(r=>{
-      const tr=document.createElement('tr');
-      tr.innerHTML = `<td>${r.name}</td><td>${r.total}</td>` + cols.map(c=>`<td>${r[c]}</td>`).join('');
-      tbody.appendChild(tr);
-    });
-  }
+  // after the dynamic import line above...
+function renderTable(data, tbodyId, cols){
+  const tbody = document.getElementById(tbodyId);
+  tbody.innerHTML = '';
+  data.forEach(r=>{
+    const tr=document.createElement('tr');
+    tr.innerHTML = `<td>${r.name}</td><td>${r.total}</td>` + cols.map(c=>`<td>${r[c]}</td>`).join('');
+    tbody.appendChild(tr);
+  });
+}
 
-  function makeSortable(tableId, tbodyId, data, cols){
-    const table=document.getElementById(tableId);
-    table.querySelectorAll('th').forEach((th,i)=>{
-      th.classList.add('sortable');
-      let asc=true;
-      th.addEventListener('click',()=>{
-        const key = i===0 ? 'name' : i===1 ? 'total' : cols[i-2];
-        data.sort((a,b)=>{
-          if(a[key] < b[key]) return asc ? -1 : 1;
-          if(a[key] > b[key]) return asc ? 1 : -1;
-          return 0;
-        });
-        asc=!asc;
-        renderTable(data,tbodyId,cols);
-      });
-    });
-  }
+// pure, non-mutating sort helper
+function sortByKey(data, key, asc=true){
+  return [...data].sort((a,b)=>{
+    if (a[key]<b[key]) return asc?-1:1;
+    if (a[key]>b[key]) return asc? 1:-1;
+    return 0;
+  });
+}
 
-  function highlightTop(data, tbodyId){
-    const max = Math.max(...data.map(r=>r.total));
-    const rows = document.getElementById(tbodyId).rows;
-    Array.from(rows).forEach(row=>{
-      row.classList.toggle('highlight', parseInt(row.cells[1].textContent,10)===max);
+function makeSortable(tableId, tbodyId, getData, cols){
+  const table=document.getElementById(tableId);
+  table.querySelectorAll('th').forEach((th,i)=>{
+    th.classList.add('sortable');
+    let asc=true;
+    th.addEventListener('click',()=>{
+      const key = i===0 ? 'name' : i===1 ? 'total' : cols[i-2];
+      const sorted = sortByKey(getData(), key, asc);
+      asc = !asc;
+      renderTable(sorted, tbodyId, cols);
     });
-  }
+  });
+}
+
+function highlightTop(data, tbodyId){
+  const max = Math.max(...data.map(r=>r.total));
+  const rows = document.getElementById(tbodyId).rows;
+  Array.from(rows).forEach(row=>{
+    row.classList.toggle('highlight', parseInt(row.cells[1].textContent,10)===max);
+  });
+}
+
+// ----- Year pickers -----
+const armyYears = Object.keys(ARMIES_BY_YEAR).sort();
+const navyYears = Object.keys(NAVIES_BY_YEAR).sort();
+
+const armyYearSel = document.getElementById('army-year');
+const navyYearSel = document.getElementById('navy-year');
+armyYearSel.innerHTML = armyYears.map(y=>`<option value="${y}">${y}</option>`).join('');
+navyYearSel.innerHTML = navyYears.map(y=>`<option value="${y}">${y}</option>`).join('');
+
+// current “views”
+let currentArmyYear = armyYears[0]; // default 1444
+let currentNavyYear = navyYears[0];
+
+function getArmyData(){ return ARMIES_BY_YEAR[currentArmyYear] || []; }
+function getNavyData(){ return NAVIES_BY_YEAR[currentNavyYear] || []; }
+
+function renderArmies(){ renderTable(getArmyData(),'army-rows',['inf','cav','art']); }
+function renderNavies(){ renderTable(getNavyData(),'navy-rows',['heavy','light','galley','trans']); }
+
+// initial renders
+renderArmies();
+renderNavies();
+
+// sorting that respects the current year
+makeSortable('army-table','army-rows', getArmyData, ['inf','cav','art']);
+makeSortable('navy-table','navy-rows', getNavyData, ['heavy','light','galley','trans']);
+
+// highlight buttons use current year’s data
+document.getElementById('highlightArmy').addEventListener('click',()=>highlightTop(getArmyData(),'army-rows'));
+document.getElementById('highlightNavy').addEventListener('click',()=>highlightTop(getNavyData(),'navy-rows'));
+
+// wire up selects
+armyYearSel.addEventListener('change', (e)=>{ currentArmyYear = e.target.value; renderArmies(); });
+navyYearSel.addEventListener('change', (e)=>{ currentNavyYear = e.target.value; renderNavies(); });
+
+// ---------- existing chart code can stay as-is ----------
+
 
   // ---------- Tables ----------
   renderTable(ARMIES_1444,'army-rows',['inf','cav','art']);
