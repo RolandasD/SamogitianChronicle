@@ -10,7 +10,7 @@ description: "1444 — The first formations"
   .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
   .chapter-header .subtitle{color:var(--muted,#666)}
 
-  /* Force two columns on most desktops; only collapse on small screens */
+  /* Two columns; collapse only on small screens */
   .chapter-grid{
     display:grid !important;
     grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
@@ -104,11 +104,27 @@ description: "1444 — The first formations"
 
     <aside class="chapter-aside">
       <div class="aside-card">
-        <h3>Samogitia, 1444</h3>
-        <a href="/assets/maps/samogitia-1444-full.jpg">
-          <img src="/assets/maps/samogitia-1444.jpg" alt="Map of Samogitia, 1444">
+        <h3>Heartland (1444)</h3>
+        <a href="{{ "/assets/maps/heartland.png" | relative_url }}">
+          <img src="{{ "/assets/maps/heartland.png" | relative_url }}" alt="Samogitia heartland, 1444">
         </a>
-        <p class="muted" style="margin:.5rem 0 0">Borders and nearby powers at the start.</p>
+        <p class="muted" style="margin:.5rem 0 0">Core provinces and immediate surroundings.</p>
+      </div>
+
+      <div class="aside-card">
+        <h3>Region (1444)</h3>
+        <a href="{{ "/assets/maps/region.png" | relative_url }}">
+          <img src="{{ "/assets/maps/region.png" | relative_url }}" alt="Regional map, 1444">
+        </a>
+        <p class="muted" style="margin:.5rem 0 0">Baltic neighborhood and trade access.</p>
+      </div>
+
+      <div class="aside-card">
+        <h3>World (1444)</h3>
+        <a href="{{ "/assets/maps/world.png" | relative_url }}">
+          <img src="{{ "/assets/maps/world.png" | relative_url }}" alt="World map, 1444">
+        </a>
+        <p class="muted" style="margin:.5rem 0 0">Wider geopolitical context.</p>
       </div>
 
       <div class="aside-card">
@@ -119,23 +135,6 @@ description: "1444 — The first formations"
           <dt>Doctrine</dt><dd>Infantry core</dd>
           <dt>Allies</dt><dd>—</dd>
         </dl>
-      </div>
-
-      <div class="aside-card">
-        <h3>Notes</h3>
-        <ul class="aside-list">
-          <li>Preserve manpower in early wars.</li>
-          <li>Scout coastal routes and ports.</li>
-          <li>Lay groundwork for artillery adoption.</li>
-        </ul>
-      </div>
-
-      <div class="aside-card">
-        <h3>References</h3>
-        <ul class="aside-list">
-          <li><a href="/powers.html">Powers of 1444</a></li>
-          <li><a href="/samogitia.html">Samogitia — Evolution</a></li>
-        </ul>
       </div>
     </aside>
   </section>
