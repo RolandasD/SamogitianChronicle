@@ -2,21 +2,36 @@
 layout: default
 title: "Full Chronicle"
 description: "All chapters combined in one continuous page."
-include_chapter_styles: true
 ---
+
+<style>
+  .page-chronicle{max-width:1100px;margin:0 auto;padding:0 1rem 2.5rem}
+  .page-chronicle .banner{margin-bottom:1rem}
+  .page-chronicle .chapter{
+    max-width:72ch;margin:0 auto;padding:1rem 0 2rem
+  }
+  .page-chronicle .chapter h1{
+    font-size:clamp(1.5rem,2vw + 1rem,2rem);
+    line-height:1.25;margin:.25rem 0 .5rem
+  }
+  .page-chronicle .chapter :is(h2,h3){scroll-margin-top:5rem}
+  .page-chronicle .chapter img{max-width:100%;height:auto;border-radius:.5rem}
+  .page-chronicle hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem auto;width:min(72ch,100%)}
+</style>
 
 <header class="banner">
   <h1>Full Chronicle</h1>
   <p>All chapters presented sequentially.</p>
 </header>
 
-<main class="container">
+<main class="page-chronicle">
   {% assign chapters = site.pages | where_exp:"p","p.path contains 'chapter'" | sort:"path" %}
   {% for chapter in chapters %}
     <article class="chapter">
+      <!-- Title from each chapter, then its content -->
+      {% if chapter.title %}<h1>{{ chapter.title }}</h1>{% endif %}
       {{ chapter.content }}
     </article>
-    {% unless forloop.last %}<hr>
-    {% endunless %}
+    {% unless forloop.last %}<hr>{% endunless %}
   {% endfor %}
 </main>
