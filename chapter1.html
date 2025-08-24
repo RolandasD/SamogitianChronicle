@@ -5,10 +5,26 @@ description: "1444 — The first formations"
 ---
 
 <style>
+  :root{
+    --accent:#8b0000;
+    --gold1:#c8a94d; --gold2:#e7d387; --gold3:#b08a2e;
+    --ink:#1b1b1b; --parch: #f7f3ea;
+  }
+
   .page-chapter{max-width:1200px;margin:0 auto;padding:0 1rem 2.5rem}
-  .chapter-header{margin:1.25rem 0 1.25rem}
-  .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
-  .chapter-header .subtitle{color:var(--muted,#666)}
+  .chapter-header{margin:1.25rem 0 1.25rem;display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+  .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .1rem}
+  .chapter-header .subtitle{color:var(--muted,#666);margin:0}
+
+  /* Chapter badge */
+  .chapter-badge{
+    display:inline-flex;align-items:center;justify-content:center;
+    width:40px;height:40px;border-radius:999px;
+    background:radial-gradient(120% 120% at 30% 30%, var(--gold2), var(--gold1) 60%, var(--gold3));
+    box-shadow:0 2px 6px rgba(0,0,0,.15), inset 0 1px 2px rgba(255,255,255,.4);
+    border:1px solid rgba(0,0,0,.15)
+  }
+  .chapter-badge svg{width:24px;height:24px;fill:#4b2d0f;filter:drop-shadow(0 1px 0 rgba(255,255,255,.25))}
 
   .chapter-grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
   @media (max-width:780px){.chapter-grid{grid-template-columns:1fr}.chapter-aside{position:static}}
@@ -18,36 +34,46 @@ description: "1444 — The first formations"
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
   .prose p{margin:.8rem 0}
   .prose img{max-width:100%;height:auto;border-radius:.5rem;display:block;margin:1rem auto}
-  .prose figure{margin:1.25rem 0;text-align:center}
-  .prose figcaption{font-size:.9rem;color:var(--muted,#666)}
-  .prose blockquote{margin:1rem 0;padding:.75rem 1rem;border-left:3px solid var(--line,#ddd);background:linear-gradient(90deg,#fafafa,transparent)}
   .prose hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem 0}
   .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
   .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
   .prose .muted{color:var(--muted,#666)}
 
-  /* Drop cap for first main paragraph */
-  .prose .dropcap:first-letter{
-    float:left;
-    font-size:3.3em;
-    line-height:.9;
-    padding-right:.08em;
-    margin-top:.05em;
-    font-weight:700;
-    font-family: ui-serif, Georgia, "Times New Roman", serif;
+  /* Pull-quote */
+  .pull-quote{
+    margin:1.2rem 0;padding:1rem 1.25rem;border:1px solid var(--line,#e5e5e5);
+    border-radius:.75rem;background:linear-gradient(180deg,rgba(139,0,0,.06),transparent);
+    position:relative;font-style:italic
+  }
+  .pull-quote:before{
+    content:"“"; position:absolute; left:.5rem; top:-.35rem;
+    font-size:2.75rem; line-height:1; color:var(--accent); opacity:.2; font-family:ui-serif,Georgia,serif;
   }
 
-  /* Prologue vignette */
-  .prologue{
-    border:1px solid var(--line,#e5e5e5);
-    border-radius:.75rem;
-    padding:1rem 1rem 1rem;
-    background:linear-gradient(180deg, rgba(139,0,0,.05), transparent);
-    margin: .25rem 0 1.25rem;
+  /* Illuminated drop cap */
+  .prose .illuminated:first-letter{
+    float:left;font-size:3.25em;line-height:.92;margin:.02em .18em 0 0;
+    font-weight:700;font-family:ui-serif,Georgia,"Times New Roman",serif;color:#3a2a14;
+    padding:.08em .18em .02em .18em;border:1px solid rgba(0,0,0,.15);border-radius:.15rem;
+    background:
+      linear-gradient(140deg,var(--gold2),var(--gold1) 50%,var(--gold3)),
+      repeating-linear-gradient(45deg, rgba(255,255,255,.15) 0 2px, rgba(255,255,255,0) 2px 4px);
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6), inset 0 -1px 0 rgba(0,0,0,.06);
   }
-  .prologue h2{font-size:1.05rem;margin:0 0 .35rem;color:var(--muted,#666);letter-spacing:.02em;text-transform:uppercase}
-  .prologue p{font-style:italic;margin:.65rem 0}
-  .prologue .sig{margin-top:.5rem;font-style:normal;color:var(--muted,#666);font-size:.95rem}
+
+  /* Prologue with parchment */
+  .prologue{
+    border:1px solid rgba(0,0,0,.12);border-radius:.75rem;padding:1rem 1rem 1rem;
+    background:
+      linear-gradient(180deg, rgba(120,84,34,.08), rgba(255,255,255,.55)),
+      url('{{ "/assets/textures/parchment.jpg" | relative_url }}');
+    background-size:cover; background-position:center;
+    box-shadow:0 3px 12px rgba(0,0,0,.07), inset 0 1px 0 rgba(255,255,255,.6);
+    color:var(--ink,#1b1b1b)
+  }
+  .prologue h2{font-size:1.05rem;margin:0 0 .35rem;color:#5a4931;letter-spacing:.02em;text-transform:uppercase}
+  .prologue p{margin:.65rem 0}
+  .prologue .sig{margin-top:.5rem;color:#6b5a3a;font-style:italic}
 
   .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
   .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
@@ -55,201 +81,116 @@ description: "1444 — The first formations"
   .aside-card img{width:100%;height:auto;border-radius:.5rem}
   .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
   .facts dt{color:var(--muted,#666)} .facts dd{margin:0;font-weight:600}
-  .aside-list{padding-left:1.1rem;margin:.25rem 0} .aside-list li{margin:.25rem 0}
 
   @media (prefers-color-scheme: dark){
-    .prose blockquote{background:rgba(255,255,255,.04)}
     .aside-card{background:#101010;border-color:#2a2a2a}
-    .prologue{background:linear-gradient(180deg, rgba(139,0,0,.18), transparent)}
+    .prologue{background:
+      linear-gradient(180deg, rgba(139,0,0,.18), rgba(0,0,0,.45)),
+      url('{{ "/assets/textures/parchment.jpg" | relative_url }}'); background-blend-mode:overlay;
+    }
   }
 </style>
 
 <main class="page-chapter">
   <header class="chapter-header">
-    <h1>Chapter 1: Dawn over Samogitia</h1>
-    <p class="subtitle">1444 — The first formations</p>
+    <span class="chapter-badge" aria-hidden="true">
+      <!-- Heraldic wolf badge (inline SVG) -->
+      <svg viewBox="0 0 24 24" role="img" aria-label="Wolf">
+        <path d="M3 12c4-1 6-5 6-5s3 3 6 3c2 0 4-1 6-3-1 4-3 7-6 8l1 3-3-2-3 2 1-3c-3-1-6-3-8-5Z"/>
+      </svg>
+    </span>
+    <div>
+      <h1>Chapter 1: Dawn over Samogitia</h1>
+      <p class="subtitle">1444 — The first formations</p>
+    </div>
   </header>
 
   <section class="chapter-grid">
     <article class="prose">
 
-      <!-- PROLOGUE VIGNETTE -->
-      <section class="prologue">
+      <!-- PROLOGUE VIGNETTE (parchment) -->
+      <section class="prologue" aria-label="Prologue vignette">
         <h2>A Soldier’s Note, Winter 1444</h2>
-        <p>
-          We woke to frost on the cart-linens and a red sky over the pines. The bells of Medininkai counted Lauds, and
-          the horses steamed like kettles. Marshal Tyzenhaus rode the line without a trumpet—only a nod for the captains,
-          and for us a look that measured boots, straps, eyes.
-        </p>
-        <p>
-          They say great kingdoms live by their banners. We live by our boots. The Nemunas keeps our secrets; the
-          forests keep our paths. When the Orders boast of their cannon, we sharpen axes and build causeways through
-          marsh that would swallow an army with a single misstep.
-        </p>
-        <p>
-          Tonight the quartermaster writes that we are six thousand souls. Tomorrow the chaplain will say the number is
-          seven thousand, for he counts the saints as well. I count the men beside me—Matas with the scar on his cheek,
-          Jurgis who sings, Andrius who prays before he eats—and I think: if we must be an anvil, let us be the one that
-          breaks hammers.
-        </p>
-        <p class="sig">— Anonymous pikeman of the Medininkai watch, copied later into the <em>Book of Campfires</em></p>
+        <p>We woke to frost on the cart-linens and a red sky over the pines… Tyzenhaus rode the line without a trumpet; only a nod for the captains, and for us a look that measured boots, straps, eyes.</p>
+        <p>They say great kingdoms live by their banners. We live by our boots. When the Orders boast of their cannon, we sharpen axes and build causeways through marsh that would swallow an army with a single misstep.</p>
+        <p>Tonight the quartermaster writes that we are six thousand souls. Tomorrow the chaplain will say seven thousand—for he counts the saints. I count the men beside me… and think: if we must be anvil, let us be the one that breaks hammers.</p>
+        <p class="sig">— Anonymous pikeman, copied later into the <em>Book of Campfires</em></p>
       </section>
 
-      <!-- MAIN NARRATIVE (with drop cap on first paragraph) -->
-      <p class="dropcap">
-        Dawn breaks over pine and peat, over dunes that hold the sea at arm’s length and over river-mist that threads
-        the valleys of Žemaitija. Traders on the Nemunas talk of empires; fishermen talk of weather; the court at
-        <strong>Medininkai</strong> talks of survival. Between larger crowns and older Orders, Samogitia steps into the year
-        <strong>1444</strong> with a small, disciplined heart.
+      <!-- MAIN NARRATIVE (illuminated drop cap) -->
+      <p class="illuminated">
+        Dawn breaks over pine and peat, over dunes that hold the sea at arm’s length and over river-mist that threads the valleys of Žemaitija…
+        Between larger crowns and older Orders, Samogitia steps into the year <strong>1444</strong> with a small, disciplined heart.
       </p>
 
-      <blockquote>
+      <div class="pull-quote">
         “A young kingdom is a blade of grass in spring—soft in the hand, and yet with the strength to split stone.”
-        <br><span class="muted">— <em>Chronicle of Varniai</em>, compiled c. 1480 (court scribe, anonymous)</span>
-      </blockquote>
+        <div class="muted">— <em>Chronicle of Varniai</em>, c. 1480</div>
+      </div>
 
       <h2>The Land &amp; the People</h2>
-      <p>
-        The heartland is forest-thick and water-latticed. To the west lie dunes and amber beaches; to the east,
-        riverways and marsh-guarded villages where riders can vanish at a trot. The old fires of the Baltic faith
-        still glow in customs and songs even as churches ring the hours—two histories braided into one people.
-      </p>
-      <p>
-        Grain is modest, timber is ample, iron is precious; horses are lean and enduring. Messengers range the
-        forest-roads under banners stitched in the cloisters of Varniai and borne by hands that remember older gods.
-        This is the temper of Samogitia—sinew before luxury, duty before display.
-      </p>
+      <p>The heartland is forest-thick and water-latticed… This is the temper of Samogitia—sinew before luxury, duty before display.</p>
 
       <h2>Order of Battle, 1444</h2>
-      <p>
-        The standing force totals <strong>6,000</strong> men: <strong>5,000 infantry</strong>, <strong>1,000 cavalry</strong>,
-        and <strong>0 artillery</strong>. It is a single field formation—tight, frugal, and ready—commanded by
-        <strong>Daugvilas Tyzenhaus</strong>.
-      </p>
-
+      <p>The standing force totals <strong>6,000</strong> ( <strong>5,000 infantry</strong>, <strong>1,000 cavalry</strong>, <strong>0 artillery</strong> ), commanded by <strong>Daugvilas Tyzenhaus</strong>.</p>
       <div class="table-container">
         <table>
           <thead>
-            <tr><th>Formation</th><th>Commander</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
+          <tr><th>Formation</th><th>Commander</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
           </thead>
           <tbody>
-            <tr>
-              <td>Field Army (proto-“Iron Wolf”)</td>
-              <td>Daugvilas Tyzenhaus</td>
-              <td>6,000</td><td>5,000</td><td>1,000</td><td>0</td>
-            </tr>
+          <tr>
+            <td>Field Army (proto-“Iron Wolf”)</td><td>Daugvilas Tyzenhaus</td>
+            <td>6,000</td><td>5,000</td><td>1,000</td><td>0</td>
+          </tr>
           </tbody>
         </table>
       </div>
 
       <h3>Doctrine &amp; Drill</h3>
-      <p>
-        Without guns, siege is patience and persuasion. The infantry is the spine: shield-lines drilled to pivot around
-        a standard as if around a hinge; pikes held like fences that walk forward. Cavalry rides light—farm-bred horses,
-        leather tack, lances that can be repaired by a village smith. Supply is as careful as any catechism: rye for the
-        men, oats for the mounts, salt for the winter. Tyzenhaus’ maxim is simple: <em>“A small army must move as one mind.”</em>
-      </p>
+      <p>Without guns, siege is patience and persuasion… Tyzenhaus’ maxim: <em>“A small army must move as one mind.”</em></p>
 
-      <blockquote>
+      <div class="pull-quote">
         “We will be fewer than those who come for us. Then we must be earlier, steadier, and truer.”
-        <br><span class="muted">— Daugvilas Tyzenhaus, instructions to captains, winter 1443/44</span>
-      </blockquote>
-
-      <h2>Position &amp; Priorities</h2>
-      <p>
-        Hemmed in by larger neighbors and the Orders to the north and west, our early aims are practical and sharp:
-        hold the heartland, keep the roads open to market towns, watch the coast and the river mouths, and keep the
-        ledger balanced enough to feed the line through spring mud. We patrol borders not to provoke but to be counted.
-      </p>
-
-      <div class="table-container">
-        <table>
-          <thead><tr><th>Priority</th><th>Intent</th><th>Measure of Success</th></tr></thead>
-          <tbody>
-            <tr><td>Defend the heartland</td><td>Fortify crossings; drill militia</td><td>Winter stores intact; no towns lost</td></tr>
-            <tr><td>Stabilize trade</td><td>Escort caravans; clear bandit dens</td><td>Market tolls rise; roads kept open</td></tr>
-            <tr><td>Cultivate ties</td><td>Courteous embassies; measured pledges</td><td>Border calm; information flows</td></tr>
-            <tr><td>Husband manpower</td><td>Skirmish over siege; pick ground</td><td>Losses light; veterans retained</td></tr>
-          </tbody>
-        </table>
+        <div class="muted">— Daugvilas Tyzenhaus, winter 1443/44</div>
       </div>
 
-      <h2>Faces of the Field Army</h2>
-      <p>
-        <strong>Daugvilas Tyzenhaus</strong> walks the line before dawn, counting pikeheads the way a merchant counts
-        coin. He is not beloved; he is trusted. Between sermons and saddle-sores, the captains learn his habits:
-        strike into fog, never into glare; speak softly to scouts; eat last.
-      </p>
-      <p>
-        The rankers are sons of foresters and fishermen. They learn to cut fascines for marsh causeways, to lash sleighs
-        under wagons when ruts freeze, to march by stars when clouds swallow the moon. A Samogitian soldier’s pay is lean
-        and promptly delivered; his honor is the difference between a village that keeps its seed corn and one that does not.
-      </p>
+      <h2>Position &amp; Priorities</h2>
+      <p>Hold the heartland, keep the roads, watch the river mouths, and keep the ledger balanced enough to feed the line through spring mud.</p>
 
-      <blockquote>
-        “If we must be an anvil, then let us be the one that breaks hammers.”
-        <br><span class="muted">— saying attributed to a Žemaitijan standard-bearer, recorded later in the <em>Book of Campfires</em></span>
-      </blockquote>
+      <h2>Faces of the Field Army</h2>
+      <p>Tyzenhaus walks the line counting pikeheads as a merchant counts coin… The rankers are sons of foresters and fishermen…</p>
 
       <h2>Limits that Shape Us</h2>
       <ul>
-        <li><strong>No field artillery:</strong> walls are negotiated, not battered. Raids deny foraging; screens deny approach.</li>
-        <li><strong>Every casualty counts:</strong> a small pool of trained men means retreats are tactical, not shameful.</li>
-        <li><strong>Diplomacy is logistics by other means:</strong> a stable border feeds the army as surely as granaries do.</li>
+        <li><strong>No field artillery:</strong> walls are negotiated, not battered.</li>
+        <li><strong>Every casualty counts:</strong> retreats are tactical, not shameful.</li>
+        <li><strong>Diplomacy is logistics by other means:</strong> stable borders feed the army.</li>
       </ul>
 
       <h2>Signals of a Coming Name</h2>
-      <p>
-        In the sermons of the chaplain and the jokes of the farriers one hears a phrase begin to travel: <em>Geležinis Vilkas</em>,
-        <em>the Iron Wolf</em>. The formation is not yet so named, but the men have already given it a shape in their stories.
-        When the time comes to write banners, the words will already be waiting to be stitched.
-      </p>
-
-      <blockquote>
-        “Name a thing for what you wish it to be, not for what it is.”
-        <br><span class="muted">— Sister Agnė of Varniai, letter to the treasurer on the cost of new standards</span>
-      </blockquote>
-
-      <h2>Ledger &amp; Lifeblood</h2>
-      <p>
-        The winter accounts show salt bought dear and horses shod twice. Timber goes out, flax comes in; the smith’s
-        charcoal is the most carefully guarded pile in the town. We cannot afford pageantry; we can afford durability.
-        What parades we keep are saved for the saints’ days and the day before marching.
-      </p>
+      <p><em>Geležinis Vilkas</em>, the Iron Wolf, is already whispered… When banners are stitched, the words will be waiting.</p>
 
       <hr>
-      <p class="muted">
-        <strong>Data, 1444:</strong> 6,000 total — 5,000 infantry, 1,000 cavalry, 0 artillery. One field army
-        under Daugvilas Tyzenhaus, quartered from Medininkai. Siege capacity limited; doctrine favors maneuver and
-        economy of force. The name <em>“Iron Wolf”</em> has not yet been granted—only spoken.
-      </p>
+      <p class="muted"><strong>Data, 1444:</strong> 6,000 total — 5,000 infantry, 1,000 cavalry, 0 artillery. One field army under Tyzenhaus; doctrine favors maneuver and economy of force.</p>
     </article>
 
     <aside class="chapter-aside">
       <div class="aside-card">
         <h3>Heartland (1444)</h3>
-        <a href="{{ "/assets/maps/heartland.png" | relative_url }}">
-          <img src="{{ "/assets/maps/heartland.png" | relative_url }}" alt="Samogitia heartland, 1444">
-        </a>
+        <a href="{{ "/assets/maps/heartland.png" | relative_url }}"><img src="{{ "/assets/maps/heartland.png" | relative_url }}" alt="Samogitia heartland, 1444"></a>
         <p class="muted" style="margin:.5rem 0 0">Core provinces and immediate surroundings.</p>
       </div>
-
       <div class="aside-card">
         <h3>Region (1444)</h3>
-        <a href="{{ "/assets/maps/region.png" | relative_url }}">
-          <img src="{{ "/assets/maps/region.png" | relative_url }}" alt="Regional map, 1444">
-        </a>
+        <a href="{{ "/assets/maps/region.png" | relative_url }}"><img src="{{ "/assets/maps/region.png" | relative_url }}" alt="Regional map, 1444"></a>
         <p class="muted" style="margin:.5rem 0 0">Baltic neighborhood and trade access.</p>
       </div>
-
       <div class="aside-card">
         <h3>World (1444)</h3>
-        <a href="{{ "/assets/maps/world.png" | relative_url }}">
-          <img src="{{ "/assets/maps/world.png" | relative_url }}" alt="World map, 1444">
-        </a>
+        <a href="{{ "/assets/maps/world.png" | relative_url }}"><img src="{{ "/assets/maps/world.png" | relative_url }}" alt="World map, 1444"></a>
         <p class="muted" style="margin:.5rem 0 0">Wider geopolitical context.</p>
       </div>
-
       <div class="aside-card">
         <h3>Key Facts</h3>
         <dl class="facts">
