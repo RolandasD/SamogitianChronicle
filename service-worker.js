@@ -12,6 +12,7 @@ const ASSETS_TO_CACHE = [
   '/powers.html',
   '/rulers.html',
   '/samogitia.html',
+  '/timeline.html',
   '/assets/css/styles.css',
   '/assets/js/militaryData.js',
   '/maps/heartland.png',
