@@ -32,6 +32,25 @@ const ASSETS_TO_CACHE = [
   `${BASE_PATH}maps/world.png`,
   `${BASE_PATH}maps/region.png`,
   `${BASE_PATH}maps/regions.geojson`
+=======
+  '/',
+  '/index.html',
+  '/armies.html',
+  '/chapter1.html',
+  '/chapter2.html',
+  '/economy.html',
+  '/maps.html',
+  '/navies.html',
+  '/powers.html',
+  '/rulers.html',
+  '/samogitia.html',
+  '/timeline.html',
+  '/assets/css/styles.css',
+  '/assets/js/militaryData.js',
+  '/maps/heartland.png',
+  '/maps/world.png',
+  '/maps/region.png',
+  '/maps/regions.geojson'
 ];
 
 self.addEventListener('install', event => {
