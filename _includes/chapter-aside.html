@@ -1,0 +1,67 @@
+{% comment %}
+Expected front matter (any are optional):
+
+maps:
+  - title: "Samogitia, 1444"
+    img: "/assets/maps/samogitia-1444.jpg"
+    caption: "Borders and neighbors"
+    link: "/assets/maps/samogitia-1444-full.jpg"
+
+facts:
+  - label: "Capital"    # left column
+    value: "Medininkai" # right column
+  - label: "Population"
+    value: "~250k"
+
+sidebar_md: |
+  **Campaign goals**
+  - Consolidate Baltic coast
+  - Alliance with Lithuania
+
+links:
+  - text: "EU4 Wiki — Samogitia"
+    href: "https://eu4.paradoxwikis.com/Samogitia"
+{% endcomment %}
+
+{% if page.maps %}
+  {% for m in page.maps %}
+    <div class="aside-card">
+      {% if m.title %}<h3>{{ m.title }}</h3>{% endif %}
+      {% if m.link %}
+        <a href="{{ m.link }}"><img src="{{ m.img }}" alt="{{ m.title | default: 'Map' }}"></a>
+      {% else %}
+        <img src="{{ m.img }}" alt="{{ m.title | default: 'Map' }}">
+      {% endif %}
+      {% if m.caption %}<p class="muted" style="margin:.5rem 0 0">{{ m.caption }}</p>{% endif %}
+    </div>
+  {% endfor %}
+{% endif %}
+
+{% if page.facts %}
+  <div class="aside-card">
+    <h3>Key Facts</h3>
+    <dl class="facts">
+      {% for f in page.facts %}
+        <dt>{{ f.label }}</dt><dd>{{ f.value }}</dd>
+      {% endfor %}
+    </dl>
+  </div>
+{% endif %}
+
+{% if page.sidebar_md %}
+  <div class="aside-card">
+    <h3>Notes</h3>
+    <div class="prose-sm">{{ page.sidebar_md | markdownify }}</div>
+  </div>
+{% endif %}
+
+{% if page.links %}
+  <div class="aside-card">
+    <h3>References</h3>
+    <ul class="aside-list">
+      {% for l in page.links %}
+        <li><a href="{{ l.href }}">{{ l.text }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endif %}
