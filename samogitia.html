@@ -114,51 +114,96 @@ description: Evolution of Samogitia's military and navy over time.
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script type="module">
-  import { SAMOGITIA_BY_YEAR } from './assets/js/militaryData.js';
+  import { SAMOGITIA_BY_YEAR, SAMOGITIA_NAMED_ARMIES_BY_YEAR } from './assets/js/militaryData.js';
 
   const YEARS = Object.keys(SAMOGITIA_BY_YEAR);
+
+  // --- Totals for charts ---
   const ARMY_TOTAL = YEARS.map(y=>{
     const v=SAMOGITIA_BY_YEAR[y];
     return v?(v.inf+v.cav+v.art):0;
   });
   const NAVY_TOTAL = YEARS.map(y=>{
-   const v=SAMOGITIA_BY_YEAR[y];
-   return v ? (v.heavy + v.light + v.galley + v.trans) : 0;
-});
+    const v=SAMOGITIA_BY_YEAR[y];
+    // FIX: the key is 'trans' (not 'transport')
+    return v?(v.heavy+v.light+v.galley+v.trans):0;
+  });
+
   const NAVY_HEAVY = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.heavy||0);
   const NAVY_LIGHT = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.light||0);
   const NAVY_GALLEY = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.galley||0);
   const NAVY_TRANSPORT = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.trans||0);
 
+  // Helper to format numbers with separators
+  const nf = (n)=> (n==null? '0' : n.toLocaleString());
+
+  // Build tooltip lines for a given year from named regiments
+  function regimentLines(year){
+    const arr = SAMOGITIA_NAMED_ARMIES_BY_YEAR[year] || [];
+    if (!arr.length) return ['—'];
+    return arr.map(u=>{
+      const cmd = u.commander && u.commander !== '—' ? ` — ${u.commander}` : '';
+      return `• ${u.name}${cmd}: ${nf(u.inf)}/${nf(u.cav)}/${nf(u.art)}`;
+    });
+  }
+
+  // --- Army Evolution (with named regiments tooltip) ---
   const ctxArmy=document.getElementById('armyEvolutionChart').getContext('2d');
   new Chart(ctxArmy,{
     type:'line',
-    data:{labels:YEARS,datasets:[{label:'Army',data:ARMY_TOTAL,borderColor:'hsl(0,70%,45%)',backgroundColor:'hsla(0,70%,45%,0.25)',tension:0.25}]},
-    options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
+    data:{
+      labels:YEARS,
+      datasets:[
+        {label:'Army (total)',data:ARMY_TOTAL,borderColor:'hsl(0,70%,45%)',backgroundColor:'hsla(0,70%,45%,0.25)',tension:0.25}
+      ]
+    },
+    options:{
+      responsive:true,
+      plugins:{
+        legend:{display:true},
+        tooltip:{
+          callbacks:{
+            // Add named regiments under the total line item
+            afterBody:(items)=>{
+              if(!items?.length) return;
+              const year = items[0].label;
+              const lines = regimentLines(year);
+              // insert a blank line before details for readability
+              return [' ', ...lines];
+            }
+          }
+        }
+      },
+      scales:{y:{beginAtZero:true}}
+    }
   });
 
+  // --- Navy Evolution (unchanged visuals, but fixed keys) ---
   const ctxNavyEvo=document.getElementById('navyEvolutionChart').getContext('2d');
   new Chart(ctxNavyEvo,{
     type:'line',
-    data:{labels:YEARS,datasets:[{label:'Navy',data:NAVY_TOTAL,borderColor:'hsl(210,65%,45%)',backgroundColor:'hsla(210,65%,45%,0.25)',tension:0.25}]},
+    data:{labels:YEARS,datasets:[
+      {label:'Navy (total)',data:NAVY_TOTAL,borderColor:'hsl(210,65%,45%)',backgroundColor:'hsla(210,65%,45%,0.25)',tension:0.25}
+    ]},
     options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
   });
 
-  const col={ heavy:'hsl(210,65%,45%)', light:'hsl(200,65%,45%)', galley:'hsl(220,65%,45%)', trans:'hsl(190,65%,45%)' };
-
+  // --- Navy breakdown (fixed transport key) ---
   const ctxNavy=document.getElementById('navyBreakdownChart').getContext('2d');
   new Chart(ctxNavy,{
     type:'line',
     data:{
       labels:YEARS,
       datasets:[
-        { label:'Heavy',     data:NAVY_HEAVY,     borderColor:col.heavy,     backgroundColor:'hsla(210,65%,70%,0.25)', tension:0.25, pointRadius:4 },
-        { label:'Light',     data:NAVY_LIGHT,     borderColor:col.light,     backgroundColor:'hsla(200,65%,70%,0.25)', tension:0.25, pointRadius:4 },
-        { label:'Galley',    data:NAVY_GALLEY,    borderColor:col.galley,    backgroundColor:'hsla(220,65%,70%,0.25)', tension:0.25, pointRadius:4 },
-        { label:'Transport', data:NAVY_TRANSPORT, borderColor:col.trans, backgroundColor:'hsla(190,65%,70%,0.25)', tension:0.25, pointRadius:4 }
+        { label:'Heavy',     data:NAVY_HEAVY,     borderColor:'hsl(210,65%,45%)', backgroundColor:'hsla(210,65%,70%,0.25)', tension:0.25, pointRadius:4 },
+        { label:'Light',     data:NAVY_LIGHT,     borderColor:'hsl(200,65%,45%)', backgroundColor:'hsla(200,65%,70%,0.25)', tension:0.25, pointRadius:4 },
+        { label:'Galley',    data:NAVY_GALLEY,    borderColor:'hsl(220,65%,45%)', backgroundColor:'hsla(220,65%,70%,0.25)', tension:0.25, pointRadius:4 },
+        { label:'Transport', data:NAVY_TRANSPORT, borderColor:'hsl(190,65%,45%)', backgroundColor:'hsla(190,65%,70%,0.25)', tension:0.25, pointRadius:4 }
       ]
     },
     options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
   });
 </script>
+

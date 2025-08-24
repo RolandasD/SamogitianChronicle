@@ -42,4 +42,43 @@ export {
   NAVIES_1453,
   NAVIES_BY_YEAR
 };
+// === New: show named regiments per year for tooltip/detail UIs ===
+export const SAMOGITIA_NAMED_ARMIES_BY_YEAR = {
+  "1444": [
+    { name: "Field Army (proto–Iron Wolf)", commander: "Daugvilas Tyzenhaus", inf: 5000, cav: 1000, art: 0 }
+  ],
+  "1445": [
+    { name: "Iron Wolf", commander: "Daugvilas Tyzenhaus", inf: 5000, cav: 3000, art: 2000 }
+  ],
+  "1446": [
+    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",   inf: 5000, cav: 3000, art: 2000 },
+    { name: "Black Death", commander: "Kantibutas Giedraiciai", inf: 5000, cav: 3000, art: 2000 }
+  ],
+  "1447": [
+    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",   inf: 5000, cav: 3000, art: 2000 },
+    { name: "Black Death", commander: "Kantibutas Giedraiciai", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Green Legion", commander: "Tomas Gostautas",       inf: 5000, cav: 3000, art: 2000 }
+  ],
+  // You told me 1450 adds three more 5k/3k/2k regiments
+  "1450": [
+    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",   inf: 5000, cav: 3000, art: 2000 },
+    { name: "Black Death", commander: "Kantibutas Giedraiciai", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Green Legion", commander: "Tomas Gostautas",       inf: 5000, cav: 3000, art: 2000 },
+    { name: "Regiment IV",  commander: "—", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Regiment V",   commander: "—", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Regiment VI",  commander: "—", inf: 5000, cav: 3000, art: 2000 }
+  ],
+  // By 1453 totals equal 9x(5k/3k/2k) → add three more placeholders
+  "1453": [
+    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",   inf: 5000, cav: 3000, art: 2000 },
+    { name: "Black Death", commander: "Kantibutas Giedraiciai", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Green Legion", commander: "Tomas Gostautas",       inf: 5000, cav: 3000, art: 2000 },
+    { name: "Regiment IV",  commander: "—", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Regiment V",   commander: "—", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Regiment VI",  commander: "—", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Regiment VII", commander: "—", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Regiment VIII", commander: "—", inf: 5000, cav: 3000, art: 2000 },
+    { name: "Regiment IX",  commander: "—", inf: 5000, cav: 3000, art: 2000 }
+  ]
+};
 
