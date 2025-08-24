@@ -10,8 +10,17 @@ description: "1444 — The first formations"
   .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
   .chapter-header .subtitle{color:var(--muted,#666)}
 
-  .chapter-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1.5rem;align-items:start}
-  @media (max-width:1024px){.chapter-grid{grid-template-columns:1fr}}
+  /* Force two columns on most desktops; only collapse on small screens */
+  .chapter-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
+    gap:1.5rem;align-items:start
+  }
+  @media (max-width:780px){
+    .chapter-grid{grid-template-columns:1fr}
+    .chapter-aside{position:static}
+  }
+
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
@@ -25,7 +34,7 @@ description: "1444 — The first formations"
   .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
   .prose code{background:#f6f6f6;border:1px solid #eee;border-radius:.25rem;padding:.1rem .3rem}
 
-  .chapter-aside{position:sticky;top:5.75rem;height:fit-content}
+  .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
   .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
   .aside-card h3{margin:0 0 .5rem;font-size:1rem}
   .aside-card img{width:100%;height:auto;border-radius:.5rem}
@@ -66,10 +75,7 @@ description: "1444 — The first formations"
             <tr>
               <td>Field Army (proto-“Iron Wolf”)</td>
               <td>Daugvilas Tyzenhaus</td>
-              <td>6,000</td>
-              <td>5,000</td>
-              <td>1,000</td>
-              <td>0</td>
+              <td>6,000</td><td>5,000</td><td>1,000</td><td>0</td>
             </tr>
           </tbody>
         </table>
@@ -93,16 +99,15 @@ description: "1444 — The first formations"
       </ul>
 
       <hr>
-
-      <p class="muted">
-        Data source (site records): Samogitia 1444 — 5,000 infantry, 1,000 cavalry, 0 artillery (total 6,000).
-      </p>
+      <p class="muted">Data: 1444 — 5k inf, 1k cav, 0 art (total 6k).</p>
     </article>
 
     <aside class="chapter-aside">
       <div class="aside-card">
         <h3>Samogitia, 1444</h3>
-        <img src="/assets/maps/samogitia-1444.jpg" alt="Map of Samogitia, 1444">
+        <a href="/assets/maps/samogitia-1444-full.jpg">
+          <img src="/assets/maps/samogitia-1444.jpg" alt="Map of Samogitia, 1444">
+        </a>
         <p class="muted" style="margin:.5rem 0 0">Borders and nearby powers at the start.</p>
       </div>
 
