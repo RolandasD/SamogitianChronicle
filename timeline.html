@@ -1,45 +1,34 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <title>Historical Timeline</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="assets/css/styles.css" />
-  <style>
-    .timeline-container{max-width:800px;margin:2rem auto;padding:0 1rem;}
-    .timeline{position:relative;padding-left:2rem;border-left:2px solid var(--line);}
-    .timeline-item{position:relative;margin:1rem 0;padding-left:1rem;}
-    .timeline-year{font-weight:700;color:#4b0000;}
-    .timeline-content{display:none;position:absolute;left:1rem;top:1.5rem;background:#fff;border:1px solid var(--line);padding:.5rem;border-radius:.3rem;box-shadow:0 2px 4px rgba(0,0,0,.1);}
-    .timeline-item:hover .timeline-content{display:block;}
-  </style>
-</head>
-<body>
-  <div id="nav-placeholder"></div>
-  <script>
-    fetch("nav.html").then(r=>r.text()).then(html=>{
-      document.getElementById("nav-placeholder").innerHTML = html;
-    });
-  </script>
+---
+layout: default
+title: Historical Timeline
+description: Key events shaping Samogitia.
+---
 
-  <header class="banner">
-    <h1>Historical Timeline</h1>
-    <p>Key events shaping Samogitia.</p>
-  </header>
+<style>
+  .timeline-container{max-width:800px;margin:2rem auto;padding:0 1rem;}
+  .timeline{position:relative;padding-left:2rem;border-left:2px solid var(--line);}
+  .timeline-item{position:relative;margin:1rem 0;padding-left:1rem;}
+  .timeline-year{font-weight:700;color:#4b0000;}
+  .timeline-content{display:none;position:absolute;left:1rem;top:1.5rem;background:#fff;border:1px solid var(--line);padding:.5rem;border-radius:.3rem;box-shadow:0 2px 4px rgba(0,0,0,.1);}
+  .timeline-item:hover .timeline-content{display:block;}
+</style>
 
-  <main class="timeline-container">
-    <div id="timeline" class="timeline"></div>
-  </main>
+<header class="banner">
+  <h1>Historical Timeline</h1>
+  <p>Key events shaping Samogitia.</p>
+</header>
 
-  <script type="module">
-    import { TIMELINE_EVENTS } from "./assets/js/timelineData.js";
-    const container = document.getElementById('timeline');
-    [...TIMELINE_EVENTS].sort((a,b)=>a.year-b.year).forEach(ev=>{
-      const item=document.createElement('div');
-      item.className='timeline-item';
-      item.innerHTML=`<span class="timeline-year">${ev.year}</span><div class="timeline-content">${ev.event}</div>`;
-      container.appendChild(item);
-    });
-  </script>
-</body>
-</html>
+<main class="timeline-container">
+  <div id="timeline" class="timeline"></div>
+</main>
+
+<script type="module">
+  import { TIMELINE_EVENTS } from "./assets/js/timelineData.js";
+  const container = document.getElementById('timeline');
+  [...TIMELINE_EVENTS].sort((a,b)=>a.year-b.year).forEach(ev=>{
+    const item=document.createElement('div');
+    item.className='timeline-item';
+    item.innerHTML=`<span class="timeline-year">${ev.year}</span><div class="timeline-content">${ev.event}</div>`;
+    container.appendChild(item);
+  });
+</script>
