@@ -9,8 +9,19 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
   .chapter-header{margin:1.25rem 0 1.25rem}
   .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
   .chapter-header .subtitle{color:var(--muted,#666)}
-  .chapter-grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
-  @media (max-width:780px){.chapter-grid{grid-template-columns:1fr}.chapter-aside{position:static}}
+
+  /* Two columns; collapse on small screens */
+  .chapter-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
+    gap:1.5rem;align-items:start
+  }
+  @media (max-width:780px){
+    .chapter-grid{grid-template-columns:1fr}
+    .chapter-aside{position:static}
+  }
+
+  /* Prose */
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
@@ -19,8 +30,18 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
   .prose hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem 0}
   .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
   .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
+  .muted{color:var(--muted,#666)}
+
+  /* Small media figure for the peace screenshot */
+  .figure-sm{max-width:520px;margin:0 auto 1rem}
+  .figure-sm img{width:100%;height:auto;border-radius:.5rem}
+  .figure-sm figcaption{font-size:.9rem;color:var(--muted,#666);text-align:center;margin-top:.35rem}
+
+  /* Chips */
   .chip{display:inline-flex;gap:.35rem;align-items:center;border:1px solid var(--line,#e5e5e5);border-radius:999px;padding:.2rem .55rem;font-size:.85rem}
   .stat{font-weight:700}
+
+  /* Sidebar */
   .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
   .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
   .aside-card h3{margin:0 0 .5rem;font-size:1rem}
@@ -28,6 +49,7 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
   .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
   .facts dt{color:var(--muted,#666)} .facts dd{margin:0;font-weight:600}
   .aside-list{padding-left:1.1rem;margin:.25rem 0} .aside-list li{margin:.25rem 0}
+
   @media (prefers-color-scheme: dark){
     .prose blockquote{background:rgba(255,255,255,.04)}
     .aside-card{background:#101010;border-color:#2a2a2a}
@@ -42,35 +64,33 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
 
   <section class="chapter-grid">
     <article class="prose">
+
       <p>
-        In June 1445 the field army is formally named <strong>Iron Wolf</strong>.
-        Doctrine tightens, logistics improve, and plans form to field a second column.
+        When the court named our field host <strong>Iron Wolf</strong> in the summer of 1445, it was more than ceremony.
+        It was a promise: that Samogitia would not merely endure between taller shadows, but stand with its own.
       </p>
 
-      <h2>1445 — Iron Wolf Established</h2>
-      <p>Strength rises to <strong>10,000</strong>: <strong>5,000 infantry</strong>, <strong>3,000 cavalry</strong>, <strong>2,000 artillery</strong>.</p>
-
-      <h2>1446 — Expansion &amp; Dynasty</h2>
+      <h2>1445 — The Naming of the Iron Wolf</h2>
       <p>
-        <strong>January 1446:</strong> a second regimented army, <em>Black Death</em>, is raised under
-        <strong>Kantibutas Giedraiciai</strong> (<span class="chip">OOB <span class="stat">5k</span>/<span class="stat">3k</span>/<span class="stat">2k</span></span>).
-      </p>
-      <p>
-        <strong>19 February 1446:</strong> an heir, <strong>Rolandas</strong>, is born
-        (<span class="chip">stats <span class="stat">4</span>/<span class="stat">2</span>/<span class="stat">2</span></span>).
-        On the same day, a marriage is concluded with <strong>Ausra</strong>.
-      </p>
-      <p>
-        <strong>26 April 1446:</strong> Poland selects a Jagiellon to succeed Władysław III and enters a
-        <em>personal union</em> with Lithuania. Both realms are ruled by <strong>Kazimierz Jagiellon</strong>
-        (<span class="chip">stats <span class="stat">4</span>/<span class="stat">4</span>/<span class="stat">1</span></span>),
-        with heir <strong>August Jagiellon</strong>.
-      </p>
-      <p>
-        <strong>15 May 1446:</strong> Samogitia declares <strong>Poland</strong> as a <em>rival</em>, formalizing
-        the shift from caution to competition in the Vistula basin.
+        The army grew to <strong>10,000</strong>—<strong>5,000 infantry</strong>, <strong>3,000 cavalry</strong>, and
+        <strong>2,000 artillery</strong>. Daugvilas Tyzenhaus drilled the line until it moved like a hinge; scouts
+        ranged the river fords; smithies answered the cadence of marching feet.
       </p>
 
+      <h2>1446 — A Second Claw, and a Son</h2>
+      <p>
+        In <strong>January 1446</strong> the crown raised a second regiment, the <strong>Black Death</strong>, under
+        <strong>Kantibutas Giedraiciai</strong> (<span class="chip">5k/3k/2k</span>). The realm, too, gained an heir:
+        <strong>Rolandas</strong>, born <strong>19 February</strong> (<span class="chip">4/2/2</span>), the very day of the
+        royal marriage to <strong>Ausra</strong>. Fortune smiled on the house as the drill yards thundered.
+      </p>
+      <p>
+        In the wider theater, <strong>26 April</strong> bound Poland and Lithuania in a personal union under
+        <strong>Kazimierz Jagiellon</strong> (<span class="chip">4/4/1</span>)—with <strong>August</strong> as heir. Samogitia read
+        the wind and, on <strong>15 May</strong>, named <strong>Poland</strong> a rival. The board was set.
+      </p>
+
+      <!-- ORDER OF BATTLE -->
       <h2 id="order-of-battle">Order of Battle (1445–1447)</h2>
       <div class="table-container">
         <table>
@@ -101,78 +121,87 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
         </table>
       </div>
 
-      <h2>War of the Orders (1447–1448)</h2>
+      <h2>1447–1448 — War of the Orders</h2>
       <p>
-        <strong>4 June 1447:</strong> War declared on the <strong>Livonian Order</strong> and the
-        <strong>Teutonic Order</strong>. Enemy coalition: Livonian Order, Mecklenburg, Riga, Stettin, Teutonic Order.
+        On <strong>4 June 1447</strong>, banners unfurled and messengers rode: Samogitia declared war upon the
+        <strong>Livonian Order</strong> and the <strong>Teutonic Order</strong>. Their muster drew in
+        <em>Mecklenburg, Riga, and Stettin</em>. Our opening strength stood at
+        <strong>15,000 infantry, 9,000 cavalry, 6,000 artillery</strong>; the enemy gathered <strong>25,000 infantry</strong>
+        and <strong>8,000 cavalry</strong>. Where they leaned on old walls, we trusted to new steel.
       </p>
 
-      <div class="table-container">
-        <table>
-          <thead><tr><th></th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr></thead>
-          <tbody>
-            <tr><td><strong>Samogitia (initial)</strong></td><td>30,000</td><td>15,000</td><td>9,000</td><td>6,000</td></tr>
-            <tr><td><strong>Enemy (initial)</strong></td><td>33,000</td><td>25,000</td><td>8,000</td><td>0</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <h3>First Stroke — The Battle of Mitau (15 June 1447)</h3>
+      <p>
+        Tyzenhaus seized the crossings at dusk and struck before the Orders could cohere. With
+        <strong>10,000/6,000/4,000</strong>, Samogitia fell upon a divided host of <strong>7,000/3,000/0</strong>.
+        The fight was brief and terminal; enemy banners were trampled into the marsh-grass. Our line held perfect
+        dressing—<strong>no casualties</strong>.
+      </p>
 
-      <h3>Major Battles</h3>
-      <div class="table-container">
-        <table>
-          <thead>
-            <tr>
-              <th>Date</th><th>Battle</th>
-              <th>Samogitia (Inf/Cav/Art)</th>
-              <th>Enemy (Inf/Cav/Art)</th>
-              <th>Outcome</th><th>Casualties (us)</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr><td>15 Jun 1447</td><td>Mitau</td><td>10,000 / 6,000 / 4,000</td><td>7,000 / 3,000 / 0</td><td>Enemies annihilated</td><td>0</td></tr>
-            <tr><td>24 Aug 1447</td><td>Reval</td><td>5,000 / 3,000 / 2,000</td><td>1,000 / 0 / 0</td><td>Enemies annihilated</td><td>0</td></tr>
-            <tr><td>15 Sep 1447</td><td>Narwa</td><td>5,000 / 3,000 / 2,000</td><td>1,000 / 0 / 0</td><td>Enemies annihilated</td><td>0</td></tr>
-            <tr><td>23 Nov 1447</td><td>Stargard</td><td>5,000 / 3,000 / 2,000</td><td>6,000 / 2,000 / 0</td><td>Enemies annihilated</td><td>6</td></tr>
-            <tr><td>31 Dec 1447</td><td>Sieradz</td><td>5,000 / 3,000 / 2,000</td><td>6,000 / 3,000 / 0</td><td>Enemies annihilated</td><td>7</td></tr>
-          </tbody>
-        </table>
-      </div>
+      <h3>The Baltic Gate — Reval (24 August 1447)</h3>
+      <p>
+        To the north, Giedraiciai drove a light, fast column—<strong>5,000/3,000/2,000</strong>—through forest roads,
+        catching a local garrison (<strong>1,000</strong>) before relief could ride. The gate to the sea opened with scarcely
+        a scratch; again the enemy were <strong>annihilated</strong>.
+      </p>
 
-      <!-- Peace terms + screenshot -->
+      <h3>Icewind River — Narwa (15 September 1447)</h3>
+      <p>
+        The same spearpoint swept east. On the banks at Narwa, the Black Death repeated the lesson:
+        <strong>5,000/3,000/2,000</strong> against <strong>1,000</strong>, the foe unmade, the road cleared.
+      </p>
+
+      <h3>Autumn Thunder — Stargard (23 November 1447)</h3>
+      <p>
+        As leaves burned gold, the Orders massed a truer force at Stargard—<strong>6,000/2,000/0</strong>. We met them
+        with <strong>5,000/3,000/2,000</strong>. The guns spoke; the horse rolled their flank. Victory cost us
+        <strong>six souls</strong>, and the enemy once more was <strong>swept from the field</strong>.
+      </p>
+
+      <h3>Year’s End — Sieradz (31 December 1447)</h3>
+      <p>
+        Snow fell as the <strong>Green Legion</strong> proved its steel: <strong>5,000/3,000/2,000</strong> broke
+        <strong>6,000/3,000/0</strong>. Seven names entered the roll of honor; the foe’s roll ended.
+      </p>
+
       <h3>Peace of 28 January 1448</h3>
-      <ul>
-        <li><strong>Full annexation</strong> of the Livonian Order.</li>
-        <li><strong>Riga</strong> cedes <strong>Riga</strong> to Samogitia.</li>
-        <li><strong>Teutonic Order</strong> cedes <em>Memel, Insterburg, Königsberg, Ermland, Ortelsburg, Marienburg, Danzig, Tuchel, Kulm, Ostroede</em> to Samogitia.</li>
-        <li>Livonian Order pays <strong>170.0</strong> ducats; loses <strong>150</strong> Splendor.</li>
-        <li>Samogitia gains <strong>9.2</strong> Prestige; suffers <strong>5.1</strong> AE; <strong>+0.01</strong> inflation.</li>
-      </ul>
-      <figure>
+      <p>
+        The winter couriers carried terms to every court in the Baltic. The Livonian Order bowed to
+        <strong>full annexation</strong>; <strong>Riga</strong> itself came to Samogitia; and from the Teutonic Order
+        there fell to us <em>Memel, Insterburg, Königsberg, Ermland, Ortelsburg, Marienburg, Danzig, Tuchel, Kulm, Ostroede</em>.
+        The treasury counted <strong>170</strong> ducats; prestige rose <strong>+9.2</strong>; the price in the
+        balance of fear was a modest <strong>5.1 AE</strong> and <strong>0.01</strong> inflation.
+      </p>
+
+      <!-- Smaller peace screenshot -->
+      <figure class="figure-sm">
         <a href="{{ "/assets/images/peace-1448.png" | relative_url }}">
-          <img src="{{ "/assets/images/peace-1448.png" | relative_url }}" alt="Peace deal of 28 January 1448 — terms and effects">
+          <img src="{{ "/assets/images/peace-1448.png" | relative_url }}" alt="Peace deal of 28 January 1448 — terms and effects" loading="lazy">
         </a>
-        <figcaption>Peace settlement ending the War of the Orders, 28 Jan 1448.</figcaption>
+        <figcaption>Instrument of peace concluding the War of the Orders, 28 January 1448.</figcaption>
       </figure>
 
-      <p><strong>28 January 1448:</strong> Peace treaty concluded. War ended in decisive victory.</p>
-
-      <!-- ELEVATION & CULTURE -->
-      <h2>Elevation and Diplomacy (1448)</h2>
-      <ul>
-        <li><strong>7 March 1448:</strong> Proclaimed the <strong>Kingdom of Samogitia</strong>.</li>
-        <li><strong>13 April 1448:</strong> Claimed <strong>Baltic Cultural Hegemony</strong>.</li>
-        <li><strong>1 June 1448:</strong> Entered a <strong>Royal Marriage</strong> with <strong>Brandenburg</strong>.</li>
-      </ul>
+      <h2>Crown & Culture (1448)</h2>
+      <p>
+        On <strong>7 March 1448</strong>, amidst church-bells and the roar of the crowd, the sovereigns
+        proclaimed the <strong>Kingdom of Samogitia</strong>. A month later, on <strong>13 April</strong>, we laid claim
+        to <strong>Baltic Cultural Hegemony</strong>: a pledge to steward the tongue and memory of the sea-lapped north.
+        Diplomacy followed the banners—on <strong>1 June</strong>, a <strong>Royal Marriage with Brandenburg</strong>
+        bound new ties in iron and in ink.
+      </p>
 
       <h2>Development Drive (1448–1449)</h2>
-      <p>Throughout 1448 and into 1449, the realm undertook extensive development projects across core provinces.</p>
+      <p>
+        The hammers did not still when the drums ceased. Granaries widened, roads were metalled, and river quays
+        deepened for broader keels. Guilds found patrons; the musters found grain. By the turn of <strong>1449</strong>,
+        the realm looked outward not with hunger, but with readiness.
+      </p>
 
       <hr>
       <p class="muted">
-        1446: Black Death raised (Jan); Heir Rolandas 4/2/2 &amp; marriage to Ausra (19 Feb);
-        Poland–Lithuania PU under Kazimierz 4/4/1 (26 Apr); Rivalry vs Poland (15 May).<br>
-        1447: Green Legion formed (Jan); War of the Orders begins (4 Jun); Mitau, Reval, Narwa, Stargard, Sieradz victories.<br>
-        1448: Peace (28 Jan); Kingdom (7 Mar); Baltic Hegemony (13 Apr); RM Brandenburg (1 Jun). 1448–1449: development push.
+        <strong>Summary:</strong> 1446—Black Death raised; heir Rolandas (4/2/2); marriage to Ausra; Poland–Lithuania PU under
+        Kazimierz (4/4/1); rivalry vs Poland. 1447—Green Legion raised; victories at Mitau, Reval, Narwa, Stargard, Sieradz.
+        1448—Peace and annexations; Kingdom proclaimed; Baltic hegemony; marriage with Brandenburg; great works to 1449.
       </p>
     </article>
 
@@ -180,27 +209,35 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
       <!-- 1444 baseline maps -->
       <div class="aside-card">
         <h3>Heartland (1444)</h3>
-        <a href="{{ "/assets/maps/heartland.png" | relative_url }}"><img src="{{ "/assets/maps/heartland.png" | relative_url }}" alt="Samogitia heartland, 1444"></a>
-        <p class="muted" style="margin:.5rem 0 0">Baseline terrain & holdings.</p>
+        <a href="{{ "/assets/maps/heartland.png" | relative_url }}">
+          <img src="{{ "/assets/maps/heartland.png" | relative_url }}" alt="Samogitia heartland, 1444">
+        </a>
+        <p class="muted" style="margin:.5rem 0 0">Core provinces and immediate surroundings.</p>
       </div>
 
       <div class="aside-card">
         <h3>Region (1444)</h3>
-        <a href="{{ "/assets/maps/region.png" | relative_url }}"><img src="{{ "/assets/maps/region.png" | relative_url }}" alt="Regional map, 1444"></a>
-        <p class="muted" style="margin:.5rem 0 0">Baltic neighbors and trade.</p>
+        <a href="{{ "/assets/maps/region.png" | relative_url }}">
+          <img src="{{ "/assets/maps/region.png" | relative_url }}" alt="Regional map, 1444">
+        </a>
+        <p class="muted" style="margin:.5rem 0 0">Baltic neighborhood and trade access.</p>
       </div>
 
       <div class="aside-card">
         <h3>World (1444)</h3>
-        <a href="{{ "/assets/maps/world.png" | relative_url }}"><img src="{{ "/assets/maps/world.png" | relative_url }}" alt="World map, 1444"></a>
+        <a href="{{ "/assets/maps/world.png" | relative_url }}">
+          <img src="{{ "/assets/maps/world.png" | relative_url }}" alt="World map, 1444">
+        </a>
         <p class="muted" style="margin:.5rem 0 0">Wider geopolitical context.</p>
       </div>
 
-      <!-- NEW: post-war map -->
+      <!-- Post-war map -->
       <div class="aside-card">
         <h3>Region (1448)</h3>
-        <a href="{{ "/assets/maps/region1448.png" | relative_url }}"><img src="{{ "/assets/maps/region1448.png" | relative_url }}" alt="Regional map after conquests, 1448"></a>
-        <p class="muted" style="margin:.5rem 0 0">Territory after the War of the Orders, 1448.</p>
+        <a href="{{ "/assets/maps/region1448.png" | relative_url }}">
+          <img src="{{ "/assets/maps/region1448.png" | relative_url }}" alt="Region after conquests, 1448">
+        </a>
+        <p class="muted" style="margin:.5rem 0 0">Territory following the War of the Orders.</p>
       </div>
 
       <!-- Key Command -->
@@ -213,7 +250,17 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
         </dl>
       </div>
 
-      <!-- Foreign Affairs Summary -->
+      <!-- Court & House -->
+      <div class="aside-card">
+        <h3>House &amp; Succession</h3>
+        <dl class="facts">
+          <dt>Heir</dt><dd>Rolandas <span class="chip">4/2/2</span></dd>
+          <dt>Consort</dt><dd>Ausra <span class="chip">19 Feb 1446</span></dd>
+          <dt>Dynasty</dt><dd>—</dd>
+        </dl>
+      </div>
+
+      <!-- Foreign Affairs -->
       <div class="aside-card">
         <h3>Foreign Affairs</h3>
         <dl class="facts">
@@ -223,13 +270,13 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
         </dl>
       </div>
 
-      <!-- War Summary -->
+      <!-- War Tally -->
       <div class="aside-card">
-        <h3>War of the Orders — Summary</h3>
+        <h3>War of the Orders — Tally</h3>
         <dl class="facts">
           <dt>Battles</dt><dd>5</dd>
-          <dt>Our casualties</dt><dd>13</dd>
-          <dt>Enemy outcome</dt><dd>All forces annihilated in each battle</dd>
+          <dt>Our losses</dt><dd>13</dd>
+          <dt>Enemy</dt><dd>Annihilated in each engagement</dd>
         </dl>
       </div>
     </aside>
