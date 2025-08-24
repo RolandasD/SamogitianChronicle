@@ -9,7 +9,7 @@ export const ARMIES_1444 = [
   { name: "Poland",    inf: 8000,  cav: 3000, art: 0, total: 11000 },
   { name: "Uzbek",     inf: 8000,  cav: 2000, art: 0, total: 10000 },
   { name: "Morocco",   inf: 7000,  cav: 3000, art: 0, total: 10000 },
-  { name: "Castille",  inf: 8000,  cav: 2000, art: 0, total: 10000 },
+  { name: "Castile",  inf: 8000,  cav: 2000, art: 0, total: 10000 },
   { name: "Bohemia",   inf: 8000,  cav: 2000, art: 0, total: 10000 },
   { name: "England",   inf: 8000,  cav: 2000, art: 0, total: 10000 },
   { name: "Kazan",     inf: 7000,  cav: 2000, art: 0, total: 9000 },
