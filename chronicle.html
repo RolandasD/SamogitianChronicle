@@ -1,0 +1,21 @@
+---
+layout: default
+title: "Full Chronicle"
+description: "All chapters combined in one continuous page."
+---
+
+<header class="banner">
+  <h1>Full Chronicle</h1>
+  <p>All chapters presented sequentially.</p>
+</header>
+
+<main class="container">
+  {% assign chapters = site.pages | where_exp:"p","p.path contains 'chapter'" | sort:"path" %}
+  {% for chapter in chapters %}
+    <article class="chapter">
+      {{ chapter.content }}
+    </article>
+    {% unless forloop.last %}<hr>
+    {% endunless %}
+  {% endfor %}
+</main>
