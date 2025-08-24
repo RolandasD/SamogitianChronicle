@@ -10,7 +10,7 @@ description: "All chapters combined in one continuous page."
 </header>
 
 <main class="container">
-  {% assign chapters = site.pages | where_exp:"p","p.path contains 'chapter'" | sort:"path" %}
+  {% assign chapters = site.chapters | sort: 'order' %}
   {% for chapter in chapters %}
     <article class="chapter">
       {{ chapter.content }}
