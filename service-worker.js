@@ -2,7 +2,6 @@ const CACHE_NAME = 'samogitian-cache-v2';
 const ASSETS_TO_CACHE = [
   '/',
   '/index.html',
-  '/nav.html',
   '/armies.html',
   '/chapter1.html',
   '/chapter2.html',
