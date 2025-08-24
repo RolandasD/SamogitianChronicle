@@ -1,7 +1,7 @@
 ---
 layout: default
 title: "Chapter 2: Iron Wolf"
-description: "1445–1446 — Naming and expansion"
+description: "1445–1447 — Naming, expansion, and a third regiment"
 ---
 
 <style>
@@ -9,8 +9,18 @@ description: "1445–1446 — Naming and expansion"
   .chapter-header{margin:1.25rem 0 1.25rem}
   .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
   .chapter-header .subtitle{color:var(--muted,#666)}
-  .chapter-grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
-  @media (max-width:780px){.chapter-grid{grid-template-columns:1fr}.chapter-aside{position:static}}
+
+  /* Two columns; collapse only on small screens */
+  .chapter-grid{
+    display:grid !important;
+    grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
+    gap:1.5rem;align-items:start
+  }
+  @media (max-width:780px){
+    .chapter-grid{grid-template-columns:1fr}
+    .chapter-aside{position:static}
+  }
+
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
@@ -19,6 +29,7 @@ description: "1445–1446 — Naming and expansion"
   .prose hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem 0}
   .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
   .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
+
   .chip{display:inline-flex;gap:.35rem;align-items:center;border:1px solid var(--line,#e5e5e5);border-radius:999px;padding:.2rem .55rem;font-size:.85rem}
   .stat{font-weight:700}
 
@@ -29,6 +40,7 @@ description: "1445–1446 — Naming and expansion"
   .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
   .facts dt{color:var(--muted,#666)} .facts dd{margin:0;font-weight:600}
   .aside-list{padding-left:1.1rem;margin:.25rem 0} .aside-list li{margin:.25rem 0}
+
   @media (prefers-color-scheme: dark){
     .prose blockquote{background:rgba(255,255,255,.04)}
     .aside-card{background:#101010;border-color:#2a2a2a}
@@ -38,7 +50,7 @@ description: "1445–1446 — Naming and expansion"
 <main class="page-chapter">
   <header class="chapter-header">
     <h1>Chapter 2: Iron Wolf</h1>
-    <p class="subtitle">1445–1446 — Naming and expansion</p>
+    <p class="subtitle">1445–1447 — Naming, expansion, and a third regiment</p>
   </header>
 
   <section class="chapter-grid">
@@ -72,7 +84,8 @@ description: "1445–1446 — Naming and expansion"
         from caution to competition in the Vistula basin.
       </p>
 
-      <h2 id="order-of-battle">Order of Battle (1445–1446)</h2>
+      <!-- ORDER OF BATTLE (updated to include Green Legion) -->
+      <h2 id="order-of-battle">Order of Battle (1445–1447)</h2>
       <div class="table-container">
         <table>
           <thead>
@@ -88,22 +101,19 @@ description: "1445–1446 — Naming and expansion"
               <td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td>
             </tr>
             <tr>
-              <td colspan="3"><strong>1446 Combined</strong></td>
-              <td><strong>20,000</strong></td>
-              <td><strong>10,000</strong></td>
+              <td>1447 (Jan)</td><td>Green Legion</td><td>Tomas Gostautas</td>
+              <td>10,000</td><td>5,000</td><td>3,000</td><td>2,000</td>
+            </tr>
+            <tr>
+              <td colspan="3"><strong>Combined by Jan 1447</strong></td>
+              <td><strong>30,000</strong></td>
+              <td><strong>15,000</strong></td>
+              <td><strong>9,000</strong></td>
               <td><strong>6,000</strong></td>
-              <td><strong>4,000</strong></td>
             </tr>
           </tbody>
         </table>
       </div>
-
-      <h2>Prelude to 1447 — New Regiment</h2>
-      <p>
-        <strong>January 1447:</strong> a third regimented army, <em>Green Legion</em>, is formed under
-        <strong>Tomas Gostautas</strong> (<span class="chip">OOB <span class="stat">5k</span>/<span class="stat">3k</span>/<span class="stat">2k</span></span>).
-        This lifts the combined field strength to <strong>30,000</strong> (Inf <strong>15k</strong>, Cav <strong>9k</strong>, Art <strong>6k</strong>).
-      </p>
 
       <h3>Operational Effects</h3>
       <ul>
@@ -115,7 +125,7 @@ description: "1445–1446 — Naming and expansion"
       <hr>
       <p class="muted">
         1446: Black Death raised (Jan); Heir Rolandas 4/2/2 &amp; marriage to Ausra (19 Feb); Poland–Lithuania PU under Kazimierz 4/4/1 (26 Apr);
-        Rivalry declared vs Poland (15 May). 1447: Green Legion formed under Tomas Gostautas (Jan) 5k/3k/2k.
+        Rivalry declared vs Poland (15 May). 1447: Green Legion formed (Jan) under Tomas Gostautas, OOB 5k/3k/2k.
       </p>
     </article>
 
