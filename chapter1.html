@@ -9,8 +9,10 @@ description: "1444 — The first formations"
   .chapter-header{margin:1.25rem 0 1.25rem}
   .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
   .chapter-header .subtitle{color:var(--muted,#666)}
+
   .chapter-grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
   @media (max-width:780px){.chapter-grid{grid-template-columns:1fr}.chapter-aside{position:static}}
+
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
@@ -23,6 +25,30 @@ description: "1444 — The first formations"
   .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
   .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
   .prose .muted{color:var(--muted,#666)}
+
+  /* Drop cap for first main paragraph */
+  .prose .dropcap:first-letter{
+    float:left;
+    font-size:3.3em;
+    line-height:.9;
+    padding-right:.08em;
+    margin-top:.05em;
+    font-weight:700;
+    font-family: ui-serif, Georgia, "Times New Roman", serif;
+  }
+
+  /* Prologue vignette */
+  .prologue{
+    border:1px solid var(--line,#e5e5e5);
+    border-radius:.75rem;
+    padding:1rem 1rem 1rem;
+    background:linear-gradient(180deg, rgba(139,0,0,.05), transparent);
+    margin: .25rem 0 1.25rem;
+  }
+  .prologue h2{font-size:1.05rem;margin:0 0 .35rem;color:var(--muted,#666);letter-spacing:.02em;text-transform:uppercase}
+  .prologue p{font-style:italic;margin:.65rem 0}
+  .prologue .sig{margin-top:.5rem;font-style:normal;color:var(--muted,#666);font-size:.95rem}
+
   .chapter-aside{position:sticky;top:calc(var(--nav-h,4rem) + 1.25rem);height:fit-content}
   .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
   .aside-card h3{margin:0 0 .5rem;font-size:1rem}
@@ -30,9 +56,11 @@ description: "1444 — The first formations"
   .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
   .facts dt{color:var(--muted,#666)} .facts dd{margin:0;font-weight:600}
   .aside-list{padding-left:1.1rem;margin:.25rem 0} .aside-list li{margin:.25rem 0}
+
   @media (prefers-color-scheme: dark){
     .prose blockquote{background:rgba(255,255,255,.04)}
     .aside-card{background:#101010;border-color:#2a2a2a}
+    .prologue{background:linear-gradient(180deg, rgba(139,0,0,.18), transparent)}
   }
 </style>
 
@@ -44,9 +72,33 @@ description: "1444 — The first formations"
 
   <section class="chapter-grid">
     <article class="prose">
-      <p>
-        Dawn breaks over pine and peat, over dunes that hold the sea at arm’s length and over river-mist that threads the
-        valleys of Žemaitija. Traders on the Nemunas talk of empires; fishermen talk of weather; the court at
+
+      <!-- PROLOGUE VIGNETTE -->
+      <section class="prologue">
+        <h2>A Soldier’s Note, Winter 1444</h2>
+        <p>
+          We woke to frost on the cart-linens and a red sky over the pines. The bells of Medininkai counted Lauds, and
+          the horses steamed like kettles. Marshal Tyzenhaus rode the line without a trumpet—only a nod for the captains,
+          and for us a look that measured boots, straps, eyes.
+        </p>
+        <p>
+          They say great kingdoms live by their banners. We live by our boots. The Nemunas keeps our secrets; the
+          forests keep our paths. When the Orders boast of their cannon, we sharpen axes and build causeways through
+          marsh that would swallow an army with a single misstep.
+        </p>
+        <p>
+          Tonight the quartermaster writes that we are six thousand souls. Tomorrow the chaplain will say the number is
+          seven thousand, for he counts the saints as well. I count the men beside me—Matas with the scar on his cheek,
+          Jurgis who sings, Andrius who prays before he eats—and I think: if we must be an anvil, let us be the one that
+          breaks hammers.
+        </p>
+        <p class="sig">— Anonymous pikeman of the Medininkai watch, copied later into the <em>Book of Campfires</em></p>
+      </section>
+
+      <!-- MAIN NARRATIVE (with drop cap on first paragraph) -->
+      <p class="dropcap">
+        Dawn breaks over pine and peat, over dunes that hold the sea at arm’s length and over river-mist that threads
+        the valleys of Žemaitija. Traders on the Nemunas talk of empires; fishermen talk of weather; the court at
         <strong>Medininkai</strong> talks of survival. Between larger crowns and older Orders, Samogitia steps into the year
         <strong>1444</strong> with a small, disciplined heart.
       </p>
