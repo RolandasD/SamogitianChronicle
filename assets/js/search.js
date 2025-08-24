@@ -11,6 +11,7 @@
 
     const resultsBox = document.createElement('div');
     resultsBox.className = 'search-results';
+    resultsBox.setAttribute('role', 'listbox');
     resultsBox.style.position = 'absolute';
     resultsBox.style.background = '#fff';
     resultsBox.style.border = '1px solid #ccc';
@@ -39,6 +40,7 @@
           link.textContent = match.title;
           link.style.display = 'block';
           link.style.padding = '4px 8px';
+          link.setAttribute('role', 'option');
           resultsBox.appendChild(link);
         }
       });
