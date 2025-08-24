@@ -21,7 +21,7 @@ description: A unified dashboard of Samogitia’s armies, navy, maps and (option
   .muted{color:var(--muted,#666);font-size:.95rem}
 
   /* Helpers */
-  .toolbar{display:flex;gap:.5rem;align-items:center;margin:.25rem 0 .75rem}
+  .toolbar{display:flex;gap:.5rem;align-items:center;margin:.25rem 0 .75rem;flex-wrap:wrap}
   .toolbar select,.toolbar button{border:1px solid var(--line,#dcdcdc);background:#fff;border-radius:.5rem;padding:.45rem .6rem;font-weight:600;cursor:pointer}
   .toolbar button:hover{background:#f6f6f6}
   @media (prefers-color-scheme: dark){.toolbar select,.toolbar button{background:#141414;border-color:#2a2a2a}}
@@ -85,21 +85,48 @@ description: A unified dashboard of Samogitia’s armies, navy, maps and (option
       <p class="muted">Hover for named units per year (if available).</p>
     </article>
 
-    <!-- NEW: Army composition breakdown -->
+    <!-- Army composition (stacked) -->
     <article class="card">
       <h2>Army Composition Breakdown</h2>
       <canvas id="armyBreakdown"></canvas>
     </article>
 
-    <!-- Navy evolution & breakdown -->
+    <!-- Navy evolution -->
     <article class="card">
       <h2>Navy Evolution</h2>
       <canvas id="navyEvolution"></canvas>
     </article>
 
+    <!-- Navy composition (stacked) -->
     <article class="card">
       <h2>Navy Composition Breakdown</h2>
       <canvas id="navyBreakdown"></canvas>
+    </article>
+
+    <!-- Naval Ledger -->
+    <article class="card">
+      <h2>Naval Ledger (1454–1456)</h2>
+      <div class="toolbar">
+        <label>Filter year:
+          <select id="ledgerYear">
+            <option value="all">All</option>
+          </select>
+        </label>
+        <button id="ledgerExport" type="button">Export CSV</button>
+      </div>
+      <div class="table-container">
+        <table id="ledgerTable">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Heavy</th><th>Light</th><th>Galley</th><th>Trans</th>
+              <th>Δ H</th><th>Δ L</th><th>Δ G</th><th>Δ T</th>
+              <th>Note</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
     </article>
 
     <!-- Economy (optional) -->
@@ -261,11 +288,12 @@ description: A unified dashboard of Samogitia’s armies, navy, maps and (option
     const v=SAMOGITIA_BY_YEAR[y]; return v?(v.heavy+v.light+v.galley+v.trans):0;
   });
 
-  // NEW: army composition arrays
+  // Army composition arrays
   const ARMY_INF = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.inf||0);
   const ARMY_CAV = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.cav||0);
   const ARMY_ART = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.art||0);
 
+  // Navy composition arrays
   const NAVY_HEAVY = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.heavy||0);
   const NAVY_LIGHT = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.light||0);
   const NAVY_GALLEY = YEARS.map(y=>SAMOGITIA_BY_YEAR[y]?.galley||0);
@@ -277,6 +305,7 @@ description: A unified dashboard of Samogitia’s armies, navy, maps and (option
     return arr.map(u=>`• ${u.name}${u.commander&&u.commander!=='—'?' — '+u.commander:''}: ${nf(u.inf)}/${nf(u.cav)}/${nf(u.art)}`);
   }
 
+  // Army Evolution (line)
   const armyCtx = document.getElementById('armyEvolution').getContext('2d');
   new Chart(armyCtx,{
     type:'line',
@@ -288,31 +317,31 @@ description: A unified dashboard of Samogitia’s armies, navy, maps and (option
     }
   });
 
-  // --- Army Composition Breakdown (STACKED BAR) ---
-const armyBreakCtx = document.getElementById('armyBreakdown').getContext('2d');
-new Chart(armyBreakCtx, {
-  // change to 'line' and add 'fill:true' in datasets if you prefer stacked area
-  type: 'bar',
-  data: {
-    labels: YEARS,
-    datasets: [
-      { label:'Infantry',  data: ARMY_INF, backgroundColor:'hsla(0,70%,45%,.65)',  borderColor:'hsl(0,70%,45%)',  borderWidth:1, stack:'army' },
-      { label:'Cavalry',   data: ARMY_CAV, backgroundColor:'hsla(25,70%,45%,.65)', borderColor:'hsl(25,70%,45%)', borderWidth:1, stack:'army' },
-      { label:'Artillery', data: ARMY_ART, backgroundColor:'hsla(45,80%,45%,.65)', borderColor:'hsl(45,80%,45%)', borderWidth:1, stack:'army' },
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { display: true } },
-    interaction: { mode: 'index', intersect: false },
-    scales: {
-      x: { stacked: true },
-      y: { stacked: true, beginAtZero: true }
+  // Army Composition Breakdown (STACKED BAR)
+  const armyBreakCtx = document.getElementById('armyBreakdown').getContext('2d');
+  new Chart(armyBreakCtx, {
+    // switch to 'line' with fill:true per dataset if you prefer stacked area
+    type: 'bar',
+    data: {
+      labels: YEARS,
+      datasets: [
+        { label:'Infantry',  data: ARMY_INF, backgroundColor:'hsla(0,70%,45%,.65)',  borderColor:'hsl(0,70%,45%)',  borderWidth:1, stack:'army' },
+        { label:'Cavalry',   data: ARMY_CAV, backgroundColor:'hsla(25,70%,45%,.65)', borderColor:'hsl(25,70%,45%)', borderWidth:1, stack:'army' },
+        { label:'Artillery', data: ARMY_ART, backgroundColor:'hsla(45,80%,45%,.65)', borderColor:'hsl(45,80%,45%)', borderWidth:1, stack:'army' },
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true } },
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        x: { stacked: true },
+        y: { stacked: true, beginAtZero: true }
+      }
     }
-  }
-});
+  });
 
-
+  // Navy Evolution (line)
   const navyCtx = document.getElementById('navyEvolution').getContext('2d');
   new Chart(navyCtx,{
     type:'line',
@@ -320,31 +349,122 @@ new Chart(armyBreakCtx, {
     options:{responsive:true,plugins:{legend:{display:true}},scales:{y:{beginAtZero:true}}}
   });
 
-  // --- Navy Composition Breakdown (STACKED BAR) ---
-const navyBreak = document.getElementById('navyBreakdown').getContext('2d');
-new Chart(navyBreak, {
-  // change to 'line' and add 'fill:true' in datasets if you prefer stacked area
-  type: 'bar',
-  data: {
-    labels: YEARS,
-    datasets: [
-      { label:'Heavy',     data: NAVY_HEAVY, backgroundColor:'hsla(210,65%,45%,.65)', borderColor:'hsl(210,65%,45%)', borderWidth:1, stack:'navy' },
-      { label:'Light',     data: NAVY_LIGHT, backgroundColor:'hsla(200,65%,45%,.65)', borderColor:'hsl(200,65%,45%)', borderWidth:1, stack:'navy' },
-      { label:'Galley',    data: NAVY_GALLEY,backgroundColor:'hsla(220,65%,45%,.65)', borderColor:'hsl(220,65%,45%)', borderWidth:1, stack:'navy' },
-      { label:'Transport', data: NAVY_TRANS, backgroundColor:'hsla(190,65%,45%,.65)', borderColor:'hsl(190,65%,45%)', borderWidth:1, stack:'navy' },
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: { legend: { display: true } },
-    interaction: { mode: 'index', intersect: false },
-    scales: {
-      x: { stacked: true },
-      y: { stacked: true, beginAtZero: true }
+  // Navy Composition Breakdown (STACKED BAR)
+  const navyBreak = document.getElementById('navyBreakdown').getContext('2d');
+  new Chart(navyBreak, {
+    // switch to 'line' with fill:true per dataset if you prefer stacked area
+    type: 'bar',
+    data: {
+      labels: YEARS,
+      datasets: [
+        { label:'Heavy',     data: NAVY_HEAVY, backgroundColor:'hsla(210,65%,45%,.65)', borderColor:'hsl(210,65%,45%)', borderWidth:1, stack:'navy' },
+        { label:'Light',     data: NAVY_LIGHT, backgroundColor:'hsla(200,65%,45%,.65)', borderColor:'hsl(200,65%,45%)', borderWidth:1, stack:'navy' },
+        { label:'Galley',    data: NAVY_GALLEY,backgroundColor:'hsla(220,65%,45%,.65)', borderColor:'hsl(220,65%,45%)', borderWidth:1, stack:'navy' },
+        { label:'Transport', data: NAVY_TRANS, backgroundColor:'hsla(190,65%,45%,.65)', borderColor:'hsl(190,65%,45%)', borderWidth:1, stack:'navy' },
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { display: true } },
+      interaction: { mode: 'index', intersect: false },
+      scales: {
+        x: { stacked: true },
+        y: { stacked: true, beginAtZero: true }
+      }
     }
-  }
-});
+  });
 
+  // ----- Naval Ledger (data + renderer) -----
+  const NAVAL_LEDGER = [
+    // 1454
+    { date: '1454-05-08', heavy:12, light: 0, galley: 0, trans: 0,  note: 'Royal Navy formed at Klaipėda (Adm. Mindaugas Olshanski): 12 heavies' },
+    { date: '1454-10-11', heavy:12, light:24, galley: 0, trans: 0,  note: 'Light screen established' },
+    { date: '1454-12-01', heavy:12, light:25, galley:11, trans: 0,  note: 'Galleys commissioned for coastal war' },
+
+    // 1455
+    { date: '1455-02-25', heavy:12, light:25, galley:23, trans: 0,  note: 'Second oar squadron' },
+    { date: '1455-05-01', heavy:12, light:25, galley:35, trans: 0,  note: 'Third oar squadron' },
+    { date: '1455-07-31', heavy:12, light:25, galley:36, trans:11,  note: 'First transports (11)' },
+    { date: '1455-09-27', heavy:12, light:28, galley:36, trans:20,  note: 'Light screen reinforced; transports to 20' },
+    { date: '1455-12-21', heavy:12, light:28, galley:48, trans:20,  note: 'Year-end fleet' },
+
+    // 1456
+    { date: '1456-02-09', heavy:12, light:30, galley:48, trans:20,  note: 'Light screen grows' },
+    { date: '1456-03-31', heavy:12, light:30, galley:50, trans:20,  note: 'Galley arm strengthened' },
+    { date: '1456-05-04', heavy:15, light:30, galley:50, trans:20,  note: 'Heavy line reinforced' },
+    { date: '1456-09-05', heavy:16, light:31, galley:51, trans:20,  note: 'Flagships: HMS Death (Heavy), HMS Fear (Light), HMS Agony (Galley)' },
+  ];
+
+  const ledgerTableBody = document.querySelector('#ledgerTable tbody');
+  const ledgerYearSel = document.getElementById('ledgerYear');
+  const ledgerExportBtn = document.getElementById('ledgerExport');
+
+  // Sort ledger by date (ascending)
+  NAVAL_LEDGER.sort((a,b)=> a.date.localeCompare(b.date));
+
+  // Populate year filter
+  const ledgerYears = Array.from(new Set(NAVAL_LEDGER.map(e=>e.date.slice(0,4)))).sort();
+  ledgerYearSel.innerHTML = `<option value="all">All</option>` + ledgerYears.map(y=>`<option value="${y}">${y}</option>`).join('');
+
+  // Helper for sign
+  const s = (n)=> (n===0 ? '0' : (n>0? `+${n}` : `${n}`));
+
+  function renderLedger(year='all'){
+    const rows = NAVAL_LEDGER
+      .filter(e => year==='all' ? true : e.date.startsWith(year))
+      .sort((a,b)=> a.date.localeCompare(b.date));
+
+    ledgerTableBody.innerHTML = '';
+
+    let prev = null;
+    rows.forEach(e=>{
+      const dH = prev ? e.heavy - prev.heavy : 0;
+      const dL = prev ? e.light - prev.light : 0;
+      const dG = prev ? e.galley - prev.galley : 0;
+      const dT = prev ? e.trans - prev.trans : 0;
+
+      const tr = document.createElement('tr');
+      tr.innerHTML = `
+        <td>${e.date}</td>
+        <td>${e.heavy.toLocaleString()}</td>
+        <td>${e.light.toLocaleString()}</td>
+        <td>${e.galley.toLocaleString()}</td>
+        <td>${e.trans.toLocaleString()}</td>
+        <td>${s(dH)}</td>
+        <td>${s(dL)}</td>
+        <td>${s(dG)}</td>
+        <td>${s(dT)}</td>
+        <td>${e.note||''}</td>
+      `;
+      ledgerTableBody.appendChild(tr);
+      prev = e;
+    });
+  }
+
+  function exportLedgerCSV(){
+    const year = ledgerYearSel.value || 'all';
+    const filt = NAVAL_LEDGER
+      .filter(e => year==='all' ? true : e.date.startsWith(year))
+      .sort((a,b)=> a.date.localeCompare(b.date));
+    const header = ['Date','Heavy','Light','Galley','Trans','Note'];
+    const lines = [header.join(',')].concat(
+      filt.map(e => [e.date, e.heavy, e.light, e.galley, e.trans, `"${(e.note||'').replace(/"/g,'""')}"`].join(','))
+    );
+    const blob = new Blob([lines.join('\n')], {type: 'text/csv;charset=utf-8;'});
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = year==='all' ? 'naval_ledger_1454-1456.csv' : `naval_ledger_${year}.csv`;
+    document.body.appendChild(a);
+    a.click();
+    requestAnimationFrame(()=>{ URL.revokeObjectURL(url); a.remove(); });
+  }
+
+  ledgerYearSel.addEventListener('change', (e)=> renderLedger(e.target.value));
+  ledgerExportBtn.addEventListener('click', exportLedgerCSV);
+
+  // Initial ledger render
+  renderLedger('all');
 
   // ----- Economy (optional) -----
   const ecoCard = document.getElementById('ecoCard');
