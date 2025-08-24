@@ -1,104 +1,137 @@
 ---
-layout: chapter
-title: Chapter I – The Dawn of Samogitia (1444)
-description: Chronicles Samogitia's dawn in 1444 with key events and early facts.
-chapter_css: chapter1.css
+layout: default
+title: "Chapter 1: Dawn over Samogitia"
+description: "1444 — The first formations"
 ---
 
-<header class="banner">
-  <h1>Chapter I – The Dawn of Samogitia</h1>
-  <p>Year 1444 — a candle flame defying the winds of empires.</p>
-</header>
+<style>
+  .page-chapter{max-width:1200px;margin:0 auto;padding:0 1rem 2.5rem}
+  .chapter-header{margin:1.25rem 0 1.25rem}
+  .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
+  .chapter-header .subtitle{color:var(--muted,#666)}
 
-<main class="container">
-  <section class="layout">
-    <!-- MAIN COLUMN -->
-    <div class="main">
+  .chapter-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1.5rem;align-items:start}
+  @media (max-width:1024px){.chapter-grid{grid-template-columns:1fr}}
+  .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
+  .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
+  .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
+  .prose p{margin:.8rem 0}
+  .prose img{max-width:100%;height:auto;border-radius:.5rem;display:block;margin:1rem auto}
+  .prose figure{margin:1.25rem 0;text-align:center}
+  .prose figcaption{font-size:.9rem;color:var(--muted,#666)}
+  .prose blockquote{margin:1rem 0;padding:.75rem 1rem;border-left:3px solid var(--line,#ddd);background:linear-gradient(90deg,#fafafa,transparent)}
+  .prose hr{border:0;border-top:1px solid var(--line,#e3e3e3);margin:2rem 0}
+  .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
+  .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
+  .prose code{background:#f6f6f6;border:1px solid #eee;border-radius:.25rem;padding:.1rem .3rem}
 
-      <!-- Prologue -->
-      <article class="card" id="prologue">
-        <h2>Prologue</h2>
-        <p>
-          The year <strong>1444</strong> marked the birth of Samogitia’s fragile independence.
-          Where once the land was a marcher province, battered between the ambitions of Lithuanians and Teutonic crusaders,
-          a new ducal banner was raised in <em>Žemaitija</em>. The youth who bore it, <strong>Rolandas Drungilas</strong>, was scarcely fifteen.
-          To many he seemed more a symbol than a sovereign — a flickering flame before Baltic storms.
-          Yet that flame would kindle the idea of a realm determined to govern itself, no longer a pawn in the hands of others.
-        </p>
-      </article>
+  .chapter-aside{position:sticky;top:5.75rem;height:fit-content}
+  .aside-card{background:#fff;border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:.9rem;margin-bottom:1rem}
+  .aside-card h3{margin:0 0 .5rem;font-size:1rem}
+  .aside-card img{width:100%;height:auto;border-radius:.5rem}
+  .facts{display:grid;grid-template-columns:1fr 1fr;gap:.35rem .75rem;font-size:.95rem}
+  .facts dt{color:var(--muted,#666)}
+  .facts dd{margin:0;font-weight:600}
+  .aside-list{padding-left:1.1rem;margin:.25rem 0}
+  .aside-list li{margin:.25rem 0}
 
-      <!-- The State in 1444 -->
-      <article class="card" id="core">
-        <h2>The State in 1444</h2>
-        <p>
-          Samogitia began with a single province, <em>Žemaitija</em>, a land of forests, rivers, and fiercely independent peasants.
-          The ducal court was little more than a fortified manor surrounded by timber walls, but it carried weight:
-          it was the first time a <strong>Samogitian ruler</strong> could style himself as duke in his own right, not as vassal.
-          The nobles of the new court styled their house as <strong>Drungilas</strong>, claiming descent from warrior families who had
-          resisted the crusader knights for generations.
-        </p>
-        <dl class="facts">
-          <dt>Capital</dt><dd>Žemaitija</dd>
-          <dt>Population</dt><dd>~60,000</dd>
-          <dt>Religion</dt><dd>Romuva (pagan) / Catholic minority</dd>
-          <dt>Government</dt><dd>Duchy</dd>
-        </dl>
-      </article>
+  @media (prefers-color-scheme: dark){
+    .prose code{background:#1f1f1f;border-color:#2a2a2a}
+    .prose blockquote{background:rgba(255,255,255,.04)}
+    .aside-card{background:#101010;border-color:#2a2a2a}
+  }
+</style>
 
-      <!-- Military Forces -->
-      <article class="card" id="forces">
-        <h2>Military Forces</h2>
-        <p>The armies of Samogitia were modest but disciplined.</p>
-        <div class="chips">
-          <span class="chip">5k Infantry</span>
-          <span class="chip">1k Cavalry</span>
-          <span class="chip chip--danger">0 Artillery</span>
-        </div>
-      </article>
+<main class="page-chapter">
+  <header class="chapter-header">
+    <h1>Chapter 1: Dawn over Samogitia</h1>
+    <p class="subtitle">1444 — The first formations</p>
+  </header>
 
-      <!-- Timeline -->
-      <article class="card" id="timeline">
-        <h2>Timeline of 1444</h2>
-        <ul class="timeline">
-          <li><time>Jan</time> Rolandas Drungilas crowned as Duke of Samogitia.</li>
-          <li><time>Mar</time> First diplomatic envoy sent to Poland.</li>
-          <li><time>May</time> Fortifications improved around Žemaitija.</li>
-          <li><time>Aug</time> Small skirmish with Livonian Order on northern border.</li>
-          <li><time>Oct</time> Harvest festival celebrates first year of independence.</li>
-        </ul>
-      </article>
+  <section class="chapter-grid">
+    <article class="prose">
+      <p>
+        At the opening of 1444, Samogitia fields a modest but organized force. The army is a single field formation
+        that later earns the name <em>Iron Wolf</em>, yet here it is simply the core of a fledgling state’s defense.
+      </p>
 
-    </div>
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-      <nav>
-        <h2>Contents</h2>
-        <ul class="toc">
-          <li><a href="#prologue">Prologue</a></li>
-          <li><a href="#core">The State in 1444</a></li>
-          <li><a href="#forces">Military Forces</a></li>
-          <li><a href="#timeline">Timeline of 1444</a></li>
-        </ul>
-      </nav>
-      <div class="map">
-        <a href="maps/heartland.png" target="_blank">
-          <img src="maps/heartland.png" alt="Heartland map: Žemaitija" />
-          <small>Heartland: Žemaitija (the sole province).</small>
-        </a>
+      <h2>Order of Battle, 1444</h2>
+      <p>The standing force totals <strong>6,000</strong> men: <strong>5,000 infantry</strong>, <strong>1,000 cavalry</strong>, and <strong>0 artillery</strong>.</p>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr><th>Formation</th><th>Commander</th><th>Total</th><th>Inf</th><th>Cav</th><th>Art</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Field Army (proto-“Iron Wolf”)</td>
+              <td>Daugvilas Tyzenhaus</td>
+              <td>6,000</td>
+              <td>5,000</td>
+              <td>1,000</td>
+              <td>0</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
-      <figure class="map">
-        <a href="maps/region.png" target="_blank">
-          <img src="maps/region.png" alt="Regional neighbors" />
-          <small>Neighbors: Lithuania, Teutonic Order, Livonian Order.</small>
-        </a>
-      </figure>
-      <figure class="map">
-        <a href="maps/world.png" target="_blank">
-          <img src="maps/world.png" alt="Europe 1444" />
-          <small>Europe, 1444: Ottomans rising; HRE fragmented.</small>
-        </a>
-      </figure>
+
+      <h2>Position &amp; Priorities</h2>
+      <p>
+        Hemmed in by larger neighbors, Samogitia’s first priorities are simple:
+        defend the heartland, stabilize the coast, and cultivate ties with Lithuania.
+      </p>
+
+      <blockquote>
+        “A spine of infantry, a sting of horse — and patience.”
+      </blockquote>
+
+      <h3>Constraints</h3>
+      <ul>
+        <li>No gun artillery in 1444; siege capacity is limited.</li>
+        <li>Manpower must be conserved — early losses hurt.</li>
+        <li>Diplomacy is as important as drill.</li>
+      </ul>
+
+      <hr>
+
+      <p class="muted">
+        Data source (site records): Samogitia 1444 — 5,000 infantry, 1,000 cavalry, 0 artillery (total 6,000).
+      </p>
+    </article>
+
+    <aside class="chapter-aside">
+      <div class="aside-card">
+        <h3>Samogitia, 1444</h3>
+        <img src="/assets/maps/samogitia-1444.jpg" alt="Map of Samogitia, 1444">
+        <p class="muted" style="margin:.5rem 0 0">Borders and nearby powers at the start.</p>
+      </div>
+
+      <div class="aside-card">
+        <h3>Key Facts</h3>
+        <dl class="facts">
+          <dt>Capital</dt><dd>Medininkai</dd>
+          <dt>Army</dt><dd>6,000 (5k/1k/0)</dd>
+          <dt>Doctrine</dt><dd>Infantry core</dd>
+          <dt>Allies</dt><dd>—</dd>
+        </dl>
+      </div>
+
+      <div class="aside-card">
+        <h3>Notes</h3>
+        <ul class="aside-list">
+          <li>Preserve manpower in early wars.</li>
+          <li>Scout coastal routes and ports.</li>
+          <li>Lay groundwork for artillery adoption.</li>
+        </ul>
+      </div>
+
+      <div class="aside-card">
+        <h3>References</h3>
+        <ul class="aside-list">
+          <li><a href="/powers.html">Powers of 1444</a></li>
+          <li><a href="/samogitia.html">Samogitia — Evolution</a></li>
+        </ul>
+      </div>
     </aside>
   </section>
 </main>
