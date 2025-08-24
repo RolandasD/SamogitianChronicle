@@ -38,6 +38,9 @@ export const SAMOGITIA_ARMY_BY_YEAR = {
   "1462": { inf: 55000, cav: 33000, art: 22000 }, // pre-muster status quo
   "1463": { inf: 60000, cav: 36000, art: 24000 }, // 2 Oct — Pagan Fear expands to 10/6/4
   "1464": { inf: 90000, cav: 54000, art: 36000 }, // 8 Feb + 1 Jun grand musters (all six at 15/9/6)
+"1465": { inf: 90000, cav: 54000, art: 36000 }, // no change to army this year
+  "1466": { inf: 124000, cav: 56000, art: 44000 }, // PF & RF to 32/10/10 (others at 15/9/6)
+  "1467": { inf: 124000, cav: 56000, art: 44000 }, // carried into 1467
 };
 
 // you already have this from last step
@@ -151,14 +154,35 @@ export const ARMIES_1462 = [
   { name: "Hungary",       inf: 10000, cav: 0,     art: 0,     total: 10000  },
   { name: "Portugal",      inf: 6000,  cav: 3000,  art: 0,     total: 9000   },
 ];
-
+export const ARMIES_1467 = [
+  { name: "Lithuania",    inf: 124000, cav: 56000, art: 44000, total: 224000 },
+  { name: "Ottomans",     inf: 31255,  cav: 14000, art: 0,     total: 45255  },
+  { name: "Mamluks",      inf: 30000,  cav: 11000, art: 0,     total: 41000  },
+  { name: "France",       inf: 23059,  cav: 10000, art: 0,     total: 33059  },
+  { name: "Austria",      inf: 24623,  cav: 7000,  art: 0,     total: 31623  },
+  { name: "Qara Qoyunlu", inf: 10822,  cav: 6918,  art: 0,     total: 17740  },
+  { name: "Kazan",        inf: 10844,  cav: 6000,  art: 0,     total: 16844  },
+  { name: "Morocco",      inf: 10000,  cav: 6000,  art: 0,     total: 16000  },
+  { name: "Crimea",       inf: 7000,   cav: 6000,  art: 0,     total: 13000  },
+  { name: "Naples",       inf: 9000,   cav: 4000,  art: 0,     total: 13000  },
+  { name: "Aragon",       inf: 8000,   cav: 4000,  art: 1000,  total: 13000  },
+  { name: "Bohemia",      inf: 13000,  cav: 0,     art: 0,     total: 13000  },
+  { name: "Burgundy",     inf: 6893,   cav: 5000,  art: 0,     total: 11893  },
+  { name: "Great Horde",  inf: 6000,   cav: 5000,  art: 0,     total: 11000  },
+  { name: "Nogai",        inf: 6000,   cav: 5000,  art: 0,     total: 11000  },
+  { name: "Albania",      inf: 9000,   cav: 2000,  art: 0,     total: 11000  },
+  { name: "England",      inf: 3432,   cav: 6971,  art: 0,     total: 10403  },
+  { name: "Uzbek",        inf: 5000,   cav: 5000,  art: 0,     total: 10000  },
+  { name: "Hungary",      inf: 10000,  cav: 0,     art: 0,     total: 10000  },
+  { name: "Portugal",     inf: 6000,   cav: 3000,  art: 0,     total: 9000   },
+];
 // (optional) handy index for charts/tables
 export const ARMIES_BY_YEAR = {
   1444: ARMIES_1444,
   1447: ARMIES_1447,
   1453: ARMIES_1453,
   1456: ARMIES_1456,
-  // NEW
   1462: ARMIES_1462,
+  1467: ARMIES_1467, // NEW
 };
 

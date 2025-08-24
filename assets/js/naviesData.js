@@ -30,9 +30,16 @@ export const SAMOGITIA_NAVY_BY_YEAR = {
   "1455": { heavy: 12, light: 28, galley: 48, trans: 20 },
   "1456": { heavy: 16, light: 31, galley: 51, trans: 20 },
   "1457": { heavy: 16, light: 31, galley: 51, trans: 20 },
+"1458": { heavy: 16, light: 31, galley: 51, trans: 20 },
+"1459": { heavy: 16, light: 31, galley: 51, trans: 20 },
+"1460": { heavy: 16, light: 31, galley: 51, trans: 20 },
+"1461": { heavy: 16, light: 31, galley: 51, trans: 20 },
 
   // NEW
   "1462": { heavy: 18, light: 32, galley: 51, trans: 20 },
+  "1465": { heavy: 30, light: 40, galley: 60, trans: 30 }, // Dream Fleet formed; RN/BF adjusted
+  "1466": { heavy: 30, light: 40, galley: 60, trans: 30 }, // no change recorded
+  "1467": { heavy: 31, light: 40, galley: 60, trans: 30 }, // +1 heavy by 1467
 };
 
 
@@ -100,7 +107,25 @@ export const NAVIES_1462 = [
   { name: "Austria",   heavy: 0,  light: 1,  galley: 3,  trans: 8,  total: 12  },
   { name: "Scotland",  heavy: 7,  light: 0,  galley: 0,  trans: 5,  total: 12  },
 ];
-
+export const NAVIES_1467 = [
+  { name: "Lithuania",    heavy: 31, light: 40, galley: 60, trans: 30, total: 161 },
+  { name: "Ottomans",     heavy: 1,  light: 6,  galley: 12, trans: 12, total: 31  },
+  { name: "France",       heavy: 2,  light: 14, galley: 6,  trans: 7,  total: 29  },
+  { name: "Venice",       heavy: 0,  light: 13, galley: 8,  trans: 7,  total: 28  },
+  { name: "Genoa",        heavy: 0,  light: 8,  galley: 12, trans: 4,  total: 24  },
+  { name: "Mamluks",      heavy: 2,  light: 3,  galley: 6,  trans: 11, total: 22  },
+  { name: "Denmark",      heavy: 1,  light: 3,  galley: 11, trans: 7,  total: 22  },
+  { name: "Aragon",       heavy: 0,  light: 8,  galley: 4,  trans: 7,  total: 19  },
+  { name: "Lubeck",       heavy: 0,  light: 10, galley: 4,  trans: 4,  total: 18  },
+  { name: "Papal State",  heavy: 0,  light: 1,  galley: 9,  trans: 7,  total: 17  },
+  { name: "Naples",       heavy: 0,  light: 10, galley: 2,  trans: 4,  total: 16  },
+  { name: "Ragusa",       heavy: 0,  light: 7,  galley: 5,  trans: 4,  total: 16  },
+  { name: "Portugal",     heavy: 3,  light: 7,  galley: 0,  trans: 5,  total: 15  },
+  { name: "Crimea",       heavy: 0,  light: 4,  galley: 5,  trans: 4,  total: 13  },
+  { name: "Holland",      heavy: 1,  light: 10, galley: 0,  trans: 2,  total: 13  },
+  { name: "Morocco",      heavy: 2,  light: 4,  galley: 0,  trans: 6,  total: 12  },
+  { name: "Austria",      heavy: 0,  light: 1,  galley: 3,  trans: 8,  total: 12  },
+];
 // Split on 1 Jan 1457
 export const SAMOGITIA_NAVY_FLEETS_1457 = [
   {
@@ -116,6 +141,29 @@ export const SAMOGITIA_NAVY_FLEETS_1457 = [
     base: "Riga",
     flagship: "HMS Fear & HMS Agony",
     heavy: 9, light: 15, galley: 25, trans: 20, total: 69
+  }
+];
+export const LITHUANIA_NAVY_FLEETS_1465 = [
+  {
+    name: "Dream Fleet",
+    leader: "Vilhelmas Svyriskis",
+    base: "Visby (Gotland)",
+    flagship: null,
+    heavy: 11, light: 8,  galley: 9,  trans: 0,  total: 28
+  },
+  {
+    name: "Royal Navy",
+    leader: "Mindaugas Olshanski",
+    base: "Klaipėda",
+    flagship: "HMS Death",
+    heavy: 8,  light: 18, galley: 26, trans: 0,  total: 52
+  },
+  {
+    name: "Baltic Fleet",
+    leader: "Aras Tyzenhaus",
+    base: "Riga",
+    flagship: "HMS Fear & HMS Agony",
+    heavy: 11, light: 14, galley: 25, trans: 30, total: 80
   }
 ];
 
@@ -140,6 +188,7 @@ export const NAVAL_LEDGER = [
   { date: "1459-03-24", note: "Gulf of Finland victory — captured 2 ships",        heavy: 18, light: 32, galley: 51, trans: 20 },
   { date: "1459-03-25", note: "Gulf of Finland pursuit — enemy flotilla destroyed", heavy: 18, light: 32, galley: 51, trans: 20 },
   { date: "1462-01-01", note: "Fleet status at year start",                          heavy: 18, light: 32, galley: 51, trans: 20 },
+{ date: "1465-11-23", note: "Dream Fleet created at Visby under explorer Vilhelmas Svyriskis; fleets reorganized", heavy: 30, light: 40, galley: 60, trans: 30 },
 ];
 
 
@@ -147,6 +196,6 @@ export const NAVIES_BY_YEAR = {
   1444: NAVIES_1444,
   1453: NAVIES_1453,
   1456: NAVIES_1456,
-  // NEW
   1462: NAVIES_1462,
+  1467: NAVIES_1467, // NEW
 };

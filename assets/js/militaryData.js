@@ -4,7 +4,8 @@ import {
   ARMIES_1447,
   ARMIES_1453,
   ARMIES_1456,
-  ARMIES_1462,             // NEW
+  ARMIES_1462,   // existing
+  ARMIES_1467,   // NEW
   ARMIES_BY_YEAR,
   SAMOGITIA_ARMY_BY_YEAR
 } from './armiesData.js';
@@ -13,10 +14,12 @@ import {
   NAVIES_1444,
   NAVIES_1453,
   NAVIES_1456,
-  NAVIES_1462,             // NEW
+  NAVIES_1462,   // existing
+  NAVIES_1467,   // NEW
   NAVIES_BY_YEAR,
   SAMOGITIA_NAVY_BY_YEAR,
   SAMOGITIA_NAVY_FLEETS_1457,
+  LITHUANIA_NAVY_FLEETS_1465, // NEW
   NAVAL_LEDGER
 } from './naviesData.js';
 
@@ -43,12 +46,14 @@ export {
   ARMIES_1447,
   ARMIES_1453,
   ARMIES_1456,
-  ARMIES_1462,             // NEW
+  ARMIES_1462,
+  ARMIES_1467,   // NEW
   ARMIES_BY_YEAR,
   NAVIES_1444,
   NAVIES_1453,
   NAVIES_1456,
-  NAVIES_1462,             // NEW
+  NAVIES_1462,
+  NAVIES_1467,   // NEW
   NAVIES_BY_YEAR
 };
 
@@ -121,23 +126,33 @@ export const SAMOGITIA_NAMED_ARMIES_BY_YEAR = {
     { name: "Iron Legion",  commander: "Lingvenis Olshanski",    inf: 10000, cav: 6000, art: 4000 },
   ],
 
-  // NEW — 2 Oct 1463: Pagan Fear expands
-  "1463": [
-    { name: "Iron Wolf",    commander: "Daugvilas Tyzenhaus",   inf: 10000, cav: 6000, art: 4000 },
-    { name: "Black Death",  commander: "Kantibutas Giedraiciai", inf: 10000, cav: 6000, art: 4000 },
-    { name: "Green Legion", commander: "Tomas Gostautas",        inf: 10000, cav: 6000, art: 4000 },
-    { name: "Royal Force",  commander: "Gintautas Tyzenhaus",    inf: 10000, cav: 6000, art: 4000 },
-    { name: "Pagan Fear",   commander: "Daugvilas Jogailaitis",  inf: 10000, cav: 6000, art: 4000 }, // expanded 2 Oct
-    { name: "Iron Legion",  commander: "Lingvenis Olshanski",    inf: 10000, cav: 6000, art: 4000 },
-  ],
-
-  // NEW — 8 Feb & 1 Jun 1464: all six to 15/9/6 by mid-year
-  "1464": [
+  // NEW — no composition change in 1465
+  "1465": [
     { name: "Iron Wolf",    commander: "Daugvilas Tyzenhaus",   inf: 15000, cav: 9000, art: 6000 },
     { name: "Black Death",  commander: "Kantibutas Giedraiciai", inf: 15000, cav: 9000, art: 6000 },
-    { name: "Green Legion", commander: "Tomas Gostautas",        inf: 15000, cav: 9000, art: 6000 }, // 1 Jun
+    { name: "Green Legion", commander: "Tomas Gostautas",        inf: 15000, cav: 9000, art: 6000 },
     { name: "Royal Force",  commander: "Gintautas Tyzenhaus",    inf: 15000, cav: 9000, art: 6000 },
     { name: "Pagan Fear",   commander: "Daugvilas Jogailaitis",  inf: 15000, cav: 9000, art: 6000 },
+    { name: "Iron Legion",  commander: "Lingvenis Olshanski",    inf: 15000, cav: 9000, art: 6000 },
+  ],
+
+  // NEW — 2 Oct 1463 already reflected earlier; 17 May 1466 expansions:
+  "1466": [
+    { name: "Iron Wolf",    commander: "Daugvilas Tyzenhaus",   inf: 15000, cav: 9000, art: 6000 },
+    { name: "Black Death",  commander: "Kantibutas Giedraiciai", inf: 15000, cav: 9000, art: 6000 },
+    { name: "Green Legion", commander: "Tomas Gostautas",        inf: 15000, cav: 9000, art: 6000 },
+    { name: "Royal Force",  commander: "Gintautas Tyzenhaus",    inf: 32000, cav: 10000, art: 10000 }, // expanded 17 May
+    { name: "Pagan Fear",   commander: "Daugvilas Jogailaitis",  inf: 32000, cav: 10000, art: 10000 }, // expanded 17 May
+    { name: "Iron Legion",  commander: "Lingvenis Olshanski",    inf: 15000, cav: 9000, art: 6000 },
+  ],
+
+  // NEW — 1467 (same lineup as 1466)
+  "1467": [
+    { name: "Iron Wolf",    commander: "Daugvilas Tyzenhaus",   inf: 15000, cav: 9000, art: 6000 },
+    { name: "Black Death",  commander: "Kantibutas Giedraiciai", inf: 15000, cav: 9000, art: 6000 },
+    { name: "Green Legion", commander: "Tomas Gostautas",        inf: 15000, cav: 9000, art: 6000 },
+    { name: "Royal Force",  commander: "Gintautas Tyzenhaus",    inf: 32000, cav: 10000, art: 10000 },
+    { name: "Pagan Fear",   commander: "Daugvilas Jogailaitis",  inf: 32000, cav: 10000, art: 10000 },
     { name: "Iron Legion",  commander: "Lingvenis Olshanski",    inf: 15000, cav: 9000, art: 6000 },
   ],
 };
