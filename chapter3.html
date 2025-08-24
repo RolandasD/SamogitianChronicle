@@ -11,6 +11,7 @@ description: "1449–1453 — Swedish Independence, Baltic wars, and the Imperia
   .hdr .sub{color:var(--muted,#666)}
   .grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
   @media (max-width:780px){.grid{grid-template-columns:1fr}.aside{position:static}}
+
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
@@ -31,9 +32,7 @@ description: "1449–1453 — Swedish Independence, Baltic wars, and the Imperia
   .figure-sm img{width:100%;height:auto;border-radius:.5rem}
   .figure-sm figcaption{font-size:.9rem;color:var(--muted,#666);text-align:center;margin-top:.35rem}
 
-  @media (prefers-color-scheme: dark){
-    .card{background:#101010;border-color:#2a2a2a}
-  }
+  @media (prefers-color-scheme: dark){.card{background:#101010;border-color:#2a2a2a}}
 </style>
 
 <main class="page">
@@ -122,26 +121,18 @@ description: "1449–1453 — Swedish Independence, Baltic wars, and the Imperia
       <p class="muted">
         1449: backed Swedish Independence (15 Nov), joined war (1 Dec). 1450: raised Royal Force, Pagan Fear, Iron Legion.
         1452: three winter victories (Norway & Denmark). 1453: peace with Denmark (17 Feb); embraced Renaissance (1 Mar);
-        curtailed noble privileges (9 Mar); Imperial coronation (14 Apr); August expansions to 10k/6k/4k for the three veteran armies.
+        curtailed noble privileges (9 Mar); Imperial coronation (14 Apr); August expansions to 10k/6k/4k for the veteran armies.
       </p>
     </article>
 
     <aside class="aside">
-      <div class="card">
-        <h3>Heartland (1444)</h3>
-        <a href="{{ "/assets/maps/heartland.png" | relative_url }}"><img src="{{ "/assets/maps/heartland.png" | relative_url }}" alt="Heartland, 1444"></a>
-      </div>
-      <div class="card">
-        <h3>Region (1444)</h3>
-        <a href="{{ "/assets/maps/region.png" | relative_url }}"><img src="{{ "/assets/maps/region.png" | relative_url }}" alt="Region, 1444"></a>
-      </div>
-      <div class="card">
-        <h3>World (1444)</h3>
-        <a href="{{ "/assets/maps/world.png" | relative_url }}"><img src="{{ "/assets/maps/world.png" | relative_url }}" alt="World, 1444"></a>
-      </div>
+      <!-- Only the relevant map for this chapter -->
       <div class="card">
         <h3>Region (1448)</h3>
-        <a href="{{ "/assets/maps/region1448.png" | relative_url }}"><img src="{{ "/assets/maps/region1448.png" | relative_url }}" alt="Region after 1448 conquests"></a>
+        <a href="{{ "/assets/maps/region1448.png" | relative_url }}">
+          <img src="{{ "/assets/maps/region1448.png" | relative_url }}" alt="Region after 1448 conquests">
+        </a>
+        <p class="muted">Territory after the War of the Orders, the stage for campaigns of 1449–1453.</p>
       </div>
     </aside>
   </section>
