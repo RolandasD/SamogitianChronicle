@@ -10,18 +10,9 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
   .chapter-header h1{font-size:clamp(1.8rem,2vw+1.2rem,2.5rem);line-height:1.2;margin:.25rem 0 .35rem}
   .chapter-header .subtitle{color:var(--muted,#666)}
 
-  /* Two columns; collapse on small screens */
-  .chapter-grid{
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);
-    gap:1.5rem;align-items:start
-  }
-  @media (max-width:780px){
-    .chapter-grid{grid-template-columns:1fr}
-    .chapter-aside{position:static}
-  }
+  .chapter-grid{display:grid !important;grid-template-columns:minmax(0,1fr) clamp(260px,28vw,380px);gap:1.5rem;align-items:start}
+  @media (max-width:780px){.chapter-grid{grid-template-columns:1fr}.chapter-aside{position:static}}
 
-  /* Prose */
   .prose{max-width:72ch;line-height:1.75;font-size:1.05rem}
   .prose h2{font-size:1.35rem;margin:1.6rem 0 .6rem;line-height:1.3}
   .prose h3{font-size:1.15rem;margin:1.1rem 0 .5rem}
@@ -31,6 +22,21 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
   .prose table{border-collapse:collapse;width:100%;margin:1rem 0}
   .prose th,.prose td{border:1px solid var(--line,#e5e5e5);padding:.5rem .6rem;text-align:left}
   .muted{color:var(--muted,#666)}
+
+  /* Drop cap for the first main paragraph */
+  .prose .dropcap:first-letter{
+    float:left;font-size:3.2em;line-height:.9;padding-right:.08em;margin-top:.05em;font-weight:700;
+    font-family:ui-serif,Georgia,"Times New Roman",serif
+  }
+
+  /* Prologue vignette */
+  .prologue{
+    border:1px solid var(--line,#e5e5e5);border-radius:.75rem;padding:1rem;background:linear-gradient(180deg,rgba(139,0,0,.05),transparent);
+    margin:.25rem 0 1.25rem
+  }
+  .prologue h2{font-size:1.05rem;margin:0 0 .35rem;color:var(--muted,#666);letter-spacing:.02em;text-transform:uppercase}
+  .prologue p{font-style:italic;margin:.65rem 0}
+  .prologue .sig{margin-top:.5rem;font-style:normal;color:var(--muted,#666);font-size:.95rem}
 
   /* Small media figure for the peace screenshot */
   .figure-sm{max-width:520px;margin:0 auto 1rem}
@@ -53,6 +59,7 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
   @media (prefers-color-scheme: dark){
     .prose blockquote{background:rgba(255,255,255,.04)}
     .aside-card{background:#101010;border-color:#2a2a2a}
+    .prologue{background:linear-gradient(180deg,rgba(139,0,0,.18),transparent)}
   }
 </style>
 
@@ -65,32 +72,53 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
   <section class="chapter-grid">
     <article class="prose">
 
-      <p>
+      <!-- PROLOGUE VIGNETTE -->
+      <section class="prologue">
+        <h2>Prologue: The Naming, Summer 1445</h2>
+        <p>
+          Cloister bells rolled across the parade square and the banners smelled of fresh dye. A hush took the ranks as
+          the herald’s voice climbed the walls: <em>Geležinis Vilkas</em>—the Iron Wolf. The name landed like a mailed fist:
+          not boast, but burden. Tyzenhaus said nothing. He only touched the standard once, as if testing the heat of iron.
+        </p>
+        <p>
+          That afternoon the line wheeled on a single beat of the drum, and the dust rose in a perfect crescent. The
+          grooms swore the horses felt it too—the moment when men and mount moved like hinges of the same door.
+        </p>
+        <p class="sig">— From the <em>Chronicle of Varniai</em>, “On the Banners of the Year 1445”</p>
+      </section>
+
+      <!-- MAIN NARRATIVE with drop cap -->
+      <p class="dropcap">
         When the court named our field host <strong>Iron Wolf</strong> in the summer of 1445, it was more than ceremony.
         It was a promise: that Samogitia would not merely endure between taller shadows, but stand with its own.
       </p>
 
+      <blockquote>
+        “Name a thing not for what it is, but for what you demand it become.”
+        <br><span class="muted">— Sister Agnė of Varniai to the treasurer, on the cost of new standards</span>
+      </blockquote>
+
       <h2>1445 — The Naming of the Iron Wolf</h2>
       <p>
         The army grew to <strong>10,000</strong>—<strong>5,000 infantry</strong>, <strong>3,000 cavalry</strong>, and
-        <strong>2,000 artillery</strong>. Daugvilas Tyzenhaus drilled the line until it moved like a hinge; scouts
-        ranged the river fords; smithies answered the cadence of marching feet.
+        <strong>2,000 artillery</strong>. Tyzenhaus drilled the line until it moved like a hinge; scouts sounded river fords;
+        smithies beat a cadence that matched the march. Logistics were scripture: rye, oats, salt, and boots—always boots.
       </p>
 
       <h2>1446 — A Second Claw, and a Son</h2>
       <p>
         In <strong>January 1446</strong> the crown raised a second regiment, the <strong>Black Death</strong>, under
         <strong>Kantibutas Giedraiciai</strong> (<span class="chip">5k/3k/2k</span>). The realm, too, gained an heir:
-        <strong>Rolandas</strong>, born <strong>19 February</strong> (<span class="chip">4/2/2</span>), the very day of the
-        royal marriage to <strong>Ausra</strong>. Fortune smiled on the house as the drill yards thundered.
+        <strong>Rolandas</strong>, born <strong>19 February</strong> (<span class="chip">4/2/2</span>)—on the very day of the
+        royal marriage to <strong>Ausra</strong>. Bells and bootsteps shared the streets; a dynasty and a drillbook turned their pages together.
       </p>
       <p>
-        In the wider theater, <strong>26 April</strong> bound Poland and Lithuania in a personal union under
-        <strong>Kazimierz Jagiellon</strong> (<span class="chip">4/4/1</span>)—with <strong>August</strong> as heir. Samogitia read
-        the wind and, on <strong>15 May</strong>, named <strong>Poland</strong> a rival. The board was set.
+        On <strong>26 April</strong>, Poland chose a Jagiellon and bound itself in a union with Lithuania under
+        <strong>Kazimierz Jagiellon</strong> (<span class="chip">4/4/1</span>), with <strong>August</strong> as heir. Samogitia read the wind, and on
+        <strong>15 May</strong> named <strong>Poland</strong> a rival. The board was set; the pieces woke.
       </p>
 
-      <!-- ORDER OF BATTLE -->
+      <!-- ORDER OF BATTLE (main column) -->
       <h2 id="order-of-battle">Order of Battle (1445–1447)</h2>
       <div class="table-container">
         <table>
@@ -123,54 +151,55 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
 
       <h2>1447–1448 — War of the Orders</h2>
       <p>
-        On <strong>4 June 1447</strong>, banners unfurled and messengers rode: Samogitia declared war upon the
+        On <strong>4 June 1447</strong> the banners rose and the messengers rode. Samogitia declared war upon the
         <strong>Livonian Order</strong> and the <strong>Teutonic Order</strong>. Their muster drew in
         <em>Mecklenburg, Riga, and Stettin</em>. Our opening strength stood at
         <strong>15,000 infantry, 9,000 cavalry, 6,000 artillery</strong>; the enemy gathered <strong>25,000 infantry</strong>
-        and <strong>8,000 cavalry</strong>. Where they leaned on old walls, we trusted to new steel.
+        and <strong>8,000 cavalry</strong>. They leaned on old walls. We trusted new steel.
       </p>
 
       <h3>First Stroke — The Battle of Mitau (15 June 1447)</h3>
       <p>
-        Tyzenhaus seized the crossings at dusk and struck before the Orders could cohere. With
+        Tyzenhaus seized the river crossings at dusk and struck before the Orders could cohere. With
         <strong>10,000/6,000/4,000</strong>, Samogitia fell upon a divided host of <strong>7,000/3,000/0</strong>.
-        The fight was brief and terminal; enemy banners were trampled into the marsh-grass. Our line held perfect
-        dressing—<strong>no casualties</strong>.
+        The fight was brief and terminal; enemy banners were trampled into marsh-grass. Our line held perfect dressing—
+        <strong>no casualties</strong>. The Iron Wolf bared its teeth.
       </p>
 
       <h3>The Baltic Gate — Reval (24 August 1447)</h3>
       <p>
-        To the north, Giedraiciai drove a light, fast column—<strong>5,000/3,000/2,000</strong>—through forest roads,
-        catching a local garrison (<strong>1,000</strong>) before relief could ride. The gate to the sea opened with scarcely
-        a scratch; again the enemy were <strong>annihilated</strong>.
+        Giedraiciai drove a fast column—<strong>5,000/3,000/2,000</strong>—through forest roads, catching a garrison of
+        <strong>1,000</strong> before relief could ride. The gate to the sea opened with scarcely a scratch; the enemy were
+        <strong>annihilated</strong>. A city’s harbor heard a new tongue shouting orders.
       </p>
 
       <h3>Icewind River — Narwa (15 September 1447)</h3>
       <p>
-        The same spearpoint swept east. On the banks at Narwa, the Black Death repeated the lesson:
-        <strong>5,000/3,000/2,000</strong> against <strong>1,000</strong>, the foe unmade, the road cleared.
+        The same spearpoint swept east. On the banks at Narwa the Black Death repeated the lesson:
+        <strong>5,000/3,000/2,000</strong> against <strong>1,000</strong>; the foe unmade, the road cleared. The columns slept with
+        their boots on and their helmets for pillows.
       </p>
 
       <h3>Autumn Thunder — Stargard (23 November 1447)</h3>
       <p>
-        As leaves burned gold, the Orders massed a truer force at Stargard—<strong>6,000/2,000/0</strong>. We met them
-        with <strong>5,000/3,000/2,000</strong>. The guns spoke; the horse rolled their flank. Victory cost us
-        <strong>six souls</strong>, and the enemy once more was <strong>swept from the field</strong>.
+        As leaves burned gold, the Orders massed a truer force at Stargard—<strong>6,000/2,000/0</strong>. We met them with
+        <strong>5,000/3,000/2,000</strong>. The guns spoke; the horse rolled their flank. Victory cost us <strong>six souls</strong>;
+        the enemy was <strong>swept from the field</strong>. Tyzenhaus’ note in the margin: “Courage is logistics arriving on time.”
       </p>
 
       <h3>Year’s End — Sieradz (31 December 1447)</h3>
       <p>
         Snow fell as the <strong>Green Legion</strong> proved its steel: <strong>5,000/3,000/2,000</strong> broke
-        <strong>6,000/3,000/0</strong>. Seven names entered the roll of honor; the foe’s roll ended.
+        <strong>6,000/3,000/0</strong>. Seven names entered the roll of honor; the foe’s roll ended. The year closed on iron.
       </p>
 
       <h3>Peace of 28 January 1448</h3>
       <p>
-        The winter couriers carried terms to every court in the Baltic. The Livonian Order bowed to
-        <strong>full annexation</strong>; <strong>Riga</strong> itself came to Samogitia; and from the Teutonic Order
-        there fell to us <em>Memel, Insterburg, Königsberg, Ermland, Ortelsburg, Marienburg, Danzig, Tuchel, Kulm, Ostroede</em>.
-        The treasury counted <strong>170</strong> ducats; prestige rose <strong>+9.2</strong>; the price in the
-        balance of fear was a modest <strong>5.1 AE</strong> and <strong>0.01</strong> inflation.
+        Couriers carried terms through the winter dark. The Livonian Order bowed to <strong>full annexation</strong>;
+        <strong>Riga</strong> itself came to Samogitia; and from the Teutonic Order there fell to us
+        <em>Memel, Insterburg, Königsberg, Ermland, Ortelsburg, Marienburg, Danzig, Tuchel, Kulm, Ostroede</em>.
+        The treasury counted <strong>170</strong> ducats; prestige rose <strong>+9.2</strong>; the price in the balance
+        of fear was <strong>5.1 AE</strong> and <strong>0.01</strong> inflation. The ledger closed; the maps changed.
       </p>
 
       <!-- Smaller peace screenshot -->
@@ -181,21 +210,33 @@ description: "1445–1448 — Naming, expansion, War of the Orders, and elevatio
         <figcaption>Instrument of peace concluding the War of the Orders, 28 January 1448.</figcaption>
       </figure>
 
-      <h2>Crown & Culture (1448)</h2>
+      <!-- Compact ledger -->
+      <div class="table-container" aria-label="Campaign ledger">
+        <table>
+          <thead><tr><th>Gain / Effect</th><th>Value</th></tr></thead>
+          <tbody>
+            <tr><td>Provinces</td><td>Riga; Memel; Insterburg; Königsberg; Ermland; Ortelsburg; Marienburg; Danzig; Tuchel; Kulm; Ostroede</td></tr>
+            <tr><td>Annexation</td><td>Livonian Order (full)</td></tr>
+            <tr><td>Gold</td><td>170 ducats</td></tr>
+            <tr><td>Prestige</td><td>+9.2</td></tr>
+            <tr><td>Aggressive Expansion</td><td>+5.1 AE</td></tr>
+            <tr><td>Inflation</td><td>+0.01</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>Crown &amp; Culture (1448)</h2>
       <p>
-        On <strong>7 March 1448</strong>, amidst church-bells and the roar of the crowd, the sovereigns
-        proclaimed the <strong>Kingdom of Samogitia</strong>. A month later, on <strong>13 April</strong>, we laid claim
-        to <strong>Baltic Cultural Hegemony</strong>: a pledge to steward the tongue and memory of the sea-lapped north.
-        Diplomacy followed the banners—on <strong>1 June</strong>, a <strong>Royal Marriage with Brandenburg</strong>
-        bound new ties in iron and in ink.
+        On <strong>7 March 1448</strong>, church-bells and crowd-roars announced the <strong>Kingdom of Samogitia</strong>.
+        On <strong>13 April</strong>, we claimed <strong>Baltic Cultural Hegemony</strong>—a promise to keep the sea’s tongue and memory.
+        Diplomacy followed banners: <strong>1 June</strong> sealed a <strong>Royal Marriage with Brandenburg</strong>. Quays deepened,
+        roads were metalled, granaries widened; by year’s turn to <strong>1449</strong>, our gaze was steady and forward.
       </p>
 
-      <h2>Development Drive (1448–1449)</h2>
-      <p>
-        The hammers did not still when the drums ceased. Granaries widened, roads were metalled, and river quays
-        deepened for broader keels. Guilds found patrons; the musters found grain. By the turn of <strong>1449</strong>,
-        the realm looked outward not with hunger, but with readiness.
-      </p>
+      <blockquote>
+        “We built with timber, but we measured with time. Kingdoms are carpentry.”
+        <br><span class="muted">— Guildmaster Stasys, on the great works after the war</span>
+      </blockquote>
 
       <hr>
       <p class="muted">
