@@ -43,6 +43,7 @@ export {
   NAVIES_BY_YEAR
 };
 // === New: show named regiments per year for tooltip/detail UIs ===
+// Add/update this block
 export const SAMOGITIA_NAMED_ARMIES_BY_YEAR = {
   "1444": [
     { name: "Field Army (proto–Iron Wolf)", commander: "Daugvilas Tyzenhaus", inf: 5000, cav: 1000, art: 0 }
@@ -51,34 +52,31 @@ export const SAMOGITIA_NAMED_ARMIES_BY_YEAR = {
     { name: "Iron Wolf", commander: "Daugvilas Tyzenhaus", inf: 5000, cav: 3000, art: 2000 }
   ],
   "1446": [
-    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",   inf: 5000, cav: 3000, art: 2000 },
-    { name: "Black Death", commander: "Kantibutas Giedraiciai", inf: 5000, cav: 3000, art: 2000 }
+    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",    inf: 5000, cav: 3000, art: 2000 },
+    { name: "Black Death", commander: "Kantibutas Giedraiciai",  inf: 5000, cav: 3000, art: 2000 }
   ],
   "1447": [
-    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",   inf: 5000, cav: 3000, art: 2000 },
-    { name: "Black Death", commander: "Kantibutas Giedraiciai", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Green Legion", commander: "Tomas Gostautas",       inf: 5000, cav: 3000, art: 2000 }
+    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",    inf: 5000, cav: 3000, art: 2000 },
+    { name: "Black Death", commander: "Kantibutas Giedraiciai",  inf: 5000, cav: 3000, art: 2000 },
+    { name: "Green Legion", commander: "Tomas Gostautas",        inf: 5000, cav: 3000, art: 2000 }
   ],
-  // You told me 1450 adds three more 5k/3k/2k regiments
   "1450": [
-    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",   inf: 5000, cav: 3000, art: 2000 },
-    { name: "Black Death", commander: "Kantibutas Giedraiciai", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Green Legion", commander: "Tomas Gostautas",       inf: 5000, cav: 3000, art: 2000 },
-    { name: "Regiment IV",  commander: "—", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Regiment V",   commander: "—", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Regiment VI",  commander: "—", inf: 5000, cav: 3000, art: 2000 }
+    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",    inf: 5000, cav: 3000, art: 2000 },
+    { name: "Black Death", commander: "Kantibutas Giedraiciai",  inf: 5000, cav: 3000, art: 2000 },
+    { name: "Green Legion", commander: "Tomas Gostautas",        inf: 5000, cav: 3000, art: 2000 },
+    { name: "Royal Force", commander: "Gintautas Tyzenhaus",     inf: 5000, cav: 3000, art: 2000 },
+    { name: "Pagan Fear",  commander: "Tarvydas Korybut",        inf: 5000, cav: 3000, art: 2000 },
+    { name: "Iron Legion", commander: "Lingvenis Olshanski",     inf: 5000, cav: 3000, art: 2000 }
   ],
-  // By 1453 totals equal 9x(5k/3k/2k) → add three more placeholders
+  // January 1453: still nine at 5/3/2 each
   "1453": [
-    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",   inf: 5000, cav: 3000, art: 2000 },
-    { name: "Black Death", commander: "Kantibutas Giedraiciai", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Green Legion", commander: "Tomas Gostautas",       inf: 5000, cav: 3000, art: 2000 },
-    { name: "Regiment IV",  commander: "—", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Regiment V",   commander: "—", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Regiment VI",  commander: "—", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Regiment VII", commander: "—", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Regiment VIII", commander: "—", inf: 5000, cav: 3000, art: 2000 },
-    { name: "Regiment IX",  commander: "—", inf: 5000, cav: 3000, art: 2000 }
+    { name: "Iron Wolf",   commander: "Daugvilas Tyzenhaus",    inf: 10000, cav: 6000, art: 4000 }, // Aug-expanded
+    { name: "Black Death", commander: "Kantibutas Giedraiciai",  inf: 10000, cav: 6000, art: 4000 }, // Aug-expanded
+    { name: "Green Legion", commander: "Tomas Gostautas",        inf: 10000, cav: 6000, art: 4000 }, // Aug-expanded
+    { name: "Royal Force", commander: "Gintautas Tyzenhaus",     inf: 5000,  cav: 3000, art: 2000 },
+    { name: "Pagan Fear",  commander: "Tarvydas Korybut",        inf: 5000,  cav: 3000, art: 2000 },
+    { name: "Iron Legion", commander: "Lingvenis Olshanski",     inf: 5000,  cav: 3000, art: 2000 },
   ]
 };
+
 
